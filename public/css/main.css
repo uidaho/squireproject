@@ -1,0 +1,598 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/*
+======================================
+Rows
+======================================
+*/
+
+.row
+{
+	background: #eef8ff;
+	padding: 20px 0 20px 0;
+}
+
+/*
+======================================
+Custom Styles
+======================================
+*/
+
+body
+{
+	background: #8eb9d3;
+	background: -webkit-radial-gradient(#8eb9d3, #c1e7ff) fixed;
+	background: -moz-radial-gradient(#8eb9d3, #c1e7ff) fixed;
+	background: radial-gradient(#8eb9d3, #c1e7ff) fixed;
+	color: #5a5a5a;
+	font: 300 16px/22px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body.index-body {
+	background: -webkit-radial-gradient(#c1e7ff, #8eb9d3) fixed;
+	background: -moz-radial-gradient(#c1e7ff, #8eb9d3) fixed;
+	background: radial-gradient(#c1e7ff, #8eb9d3) fixed;
+}
+
+/*
+======================================
+Grid
+======================================
+*/
+
+*, *:before, *:after
+{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.col-1-3
+{
+	width: 33.33%;
+}
+
+.col-2-3
+{
+	width: 66.66%;
+}
+
+.col-1-2
+{
+	width: 50%
+}
+
+.col-1-3, .col-1-2, .col-2-3
+{
+	display: inline-block;
+	vertical-align: top;
+}
+
+.grid, .col-1-3, .col-1-2, .col-2-3
+{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.container, .grid
+{
+	margin: 0 auto;
+	width: 1000px;
+}
+
+.container
+{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.grid
+{
+	text-align: center;
+}
+
+/*
+======================================
+Typography
+======================================
+*/
+
+h3
+{
+	font: 400 80px/90px "Shadows Into Light", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h4
+{
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+h5
+{
+	font-size: 20px;
+	line-height: 30px;
+	text-decoration: underline;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+strong
+{
+	font-weight: 600;
+}
+
+/*
+======================================
+Home
+======================================
+*/
+
+.home-header
+{
+	text-align: center;
+}
+
+.large-logo
+{
+	font: 400 120px/100% "Shadows Into Light", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin-top: 27%;
+}
+
+.tagline
+{
+	font-size: 20px;
+	line-height: 27px;
+}
+
+.teaser img
+{
+	border-radius: 5px;
+	display: block;
+	margin-bottom: 22px;
+	max-width: 100%;
+}
+
+/*
+======================================
+Register
+======================================
+*/
+
+input, label
+{
+	display: block;
+	text-align: left;
+}
+
+label
+{
+	font-size: 15px;
+	padding-bottom: 10px;
+	margin: 0 20px 0 20px;
+}
+
+.register-title
+{
+	font-size: 40px;
+	padding: 20px 0 40px 0;
+}
+
+.register input, .login input
+{
+	width: 200px;
+}
+
+.account-action .btn
+{
+	float: left;
+	margin: 0 20px 0 20px;
+}
+
+.account-action input
+{
+	display: inline;
+}
+
+.register-form
+{
+	background: #fff;
+	border-radius: 5px;
+	border: 2px solid #dfe2ef;
+	height: 350px;
+}
+
+.register-why
+{
+	background: #fff;
+	border-radius: 5px;
+	border: 2px solid #dfe2ef;
+	height: 350px;
+}
+
+ul.join-points
+{
+	width: 350px;
+	margin: auto;
+	list-style: disc;
+}
+
+.join-points li
+{
+	text-align: left;
+	list-style-position: inside;
+}
+
+.register-main
+{
+	padding-top: 200px;
+}
+
+.already-member
+{
+	display: block;
+	font-size: 12px;
+}
+
+/*
+======================================
+Login
+======================================
+*/
+
+.login-main
+{
+	padding-top: 175px;
+}
+
+.login-form
+{
+	background: #fff;
+	border-radius: 5px;
+	border: 2px solid #dfe2ef;
+	height: 250px;
+}
+
+.login-form h5
+{
+	padding-top: 25px;
+}
+
+/*
+======================================
+About Page
+======================================
+*/
+
+.mini-background
+{
+	background: #fff;
+	border-radius: 5px;
+	border: 2px solid #dfe2ef;
+	min-height: 250px;
+}
+
+.mini-background h5
+{
+	font-size: 40px;
+	padding: 20px 0 40px 0;
+}
+
+.mini-background ul.join-points
+{
+	width: 400px;
+	margin: auto;
+	list-style: disc;
+}
+
+/*
+======================================
+Clearfix
+======================================
+*/
+
+.group:before, .group:after
+{
+	content: "";
+	display: table;
+}
+
+.group:after
+{
+	clear: both;
+}
+
+.group
+{
+	clear: both;
+	*zoom: 1;
+}
+
+/*
+======================================
+Navigation
+======================================
+*/
+
+.nav
+{
+	text-align: right;
+}
+
+.nav li
+{
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.nav li:last-child
+{
+	margin-right: 0;
+}
+
+/*
+======================================
+Links
+======================================
+*/
+
+a
+{
+	text-decoration: none;
+}
+
+.primary-header a, .primary-footer a, .project-teaser a
+{
+	color: #5a5a5a;
+}
+
+/*
+======================================
+Primary header
+======================================
+*/
+
+header h3.logo
+{
+	margin: 0 auto;
+}
+
+.logo
+{
+	float: left;
+	border-bottom: 4px solid #5a5a5a;
+}
+
+nav.nav-primary
+{
+	letter-spacing: .5px;
+	font-weight: 600;
+	padding-top: 40px;
+}
+
+/*
+======================================
+Primary main
+======================================
+*/
+
+.primary-main
+{
+	min-height: 800px;
+}
+
+/*
+======================================
+Primary footer
+======================================
+*/
+
+.primary-footer
+{
+	font-size: 15px;
+	line-height: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.primary-footer small
+{
+	float: left;
+}
+
+/*
+======================================
+Projects Page
+======================================
+*/
+
+.project-main .col-1-3
+{
+	width: 30%;
+}
+
+.project-teaser img
+{
+	border-radius: 5px;
+	display: block;
+	margin: 10px 10px 15px 0;
+	max-width: 100%;
+}
+
+.project-teaser p
+{
+	text-align: left;
+	font-size: 12px;
+	line-height: 14px;
+	min-height: 40px;
+}
+
+.team-count
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.project-teaser
+{
+	border: 1px solid rgba(188, 188, 188, 0.7);
+	border-radius: 10px;
+	background-color: rgba(188, 188, 188, 0.1);
+	margin: 40px 20px 0 0;
+}
+
+.search-textbox
+{
+	width: 500px;
+	font-size: 17px;
+	height: 29px;
+}
+
+.project-search
+{
+	margin-top: 20px;
+	margin-left: 20px;
+	text-align: left;
+	display: inline-block;
+}
+
+.project-search li
+{
+	display: inline-block;
+	text-align: right;
+}
+
+.project-sort
+{
+	margin-left: 100px;
+	height: 30px;
+	width: 100px;
+	border-radius: 3px;
+	box-shadow: 0px 1px 3px #888888;
+}
+
+/*
+======================================
+Button
+======================================
+*/
+
+.btn
+{
+	display: inline-block;
+	margin: 0 0 10px 0;
+}
+
+.btn-reg
+{
+	border-radius: 5px;
+	border: 1px solid #dfe2ef;
+	padding: 20px 30px;
+	background: #5a5a5a;
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.btn-default
+{
+	width: 60px;
+	background: #5a5a5a;
+	margin-bottom: 10px;
+}
+
+.btn-search
+{
+	height: 30px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+	padding-top: 10px;
+	position: relative;
+	display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+	display: none;
+	position: absolute;
+	text-align: left;
+	padding-left: 10px;
+	background-color: #f9f9f9;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+	color: black;
+	padding-top: 5px;
+	display: block;
+}
+
+.dropdown-content:last-child {
+	padding-bottom: 5px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+	display: block;
+	width: 100%;
+}
+
+.username-btn {
+	color: #000000;
+	font-size: 18px;
+	font-weight: 600;
+}
