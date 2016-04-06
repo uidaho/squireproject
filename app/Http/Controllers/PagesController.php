@@ -14,7 +14,7 @@ class PagesController extends Controller
 	 */
 	public function home()
 	{
-		return view('pages.index');                 //resources/views/pages/index.blade.php
+		return view('pages.register');                 //resources/views/pages/index.blade.php
 	}
 
 	public function register()
