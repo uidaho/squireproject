@@ -33,3 +33,8 @@ Route::group(['middleware' => ['web']], function() {
 
     Route::get('projectfinder', 'PagesController@projectfinder');
 });
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+});
