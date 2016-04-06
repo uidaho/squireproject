@@ -1,4 +1,10 @@
-@extends('layouts.layout')
+@extends('layouts.main_layout')
+
+@section('head')
+
+    <title>About</title>
+
+@endsection
 
 @section('mainBody')
 

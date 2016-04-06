@@ -1,10 +1,13 @@
-@extends('layouts.layout')
+@extends('layouts.main_layout')
 
 @section('head')
     <!-- Redirect to main page if user is already logged in -->
     @unless(Auth::guest())
         <script>window.location.href = "projectfinder";</script>
     @endunless
+
+    <title>Login</title>
+
 @endsection
 
 @section('mainBody')
@@ -43,7 +46,9 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                         @endif
-
+                    </label>
+                    <label>
+                        <a class="btn" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                     </label>
                 </fieldset>
                 <fieldset class="account-action group">
@@ -51,7 +56,6 @@
                     <label>
                         <input type="checkbox" name="remember"> Remember Me
                     </label>
-
                 </fieldset>
             </form>
 
