@@ -14,17 +14,7 @@ class PagesController extends Controller
 	 */
 	public function home()
 	{
-		return view('pages.register');                 //resources/views/pages/index.blade.php
-	}
-
-	public function register()
-	{
-		return view('pages.register');             //resources/views/pages/register.blade.php
-	}
-
-	public function login()
-	{
-		return view('pages.login');                 //resources/views/pages/login.blade.php
+		return view('pages.index');                 //resources/views/pages/index.blade.php
 	}
 
 	public function about()
@@ -36,4 +26,19 @@ class PagesController extends Controller
 	{
 		return view('pages.projectfinder');         //resources/views/pages/projectfinder.blade.php
 	}
+
+	/*public function register()
+	{
+		return view('pages.register');             //resources/views/pages/register.blade.php
+	}
+
+	public function login()
+	{
+		return view('pages.login');                 //resources/views/pages/login.blade.php
+	}*/
+
+	/*public function reset()
+	{
+		return view('passwords.reset');
+	}*/
 }

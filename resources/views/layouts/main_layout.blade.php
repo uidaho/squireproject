@@ -2,9 +2,10 @@
 <html lang="en">
 
     <head>
-        @yield('head')
         <meta charset="utf-8">
-        <title>Register</title>
+
+        @yield('head')
+
         <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
         <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
 
@@ -25,13 +26,13 @@
                 <div class="dropdown">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="login">Login</a></li>
-                        <li><a href="register">Register</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
                     @else
                         <a class="username-btn">{{ Auth::user()->username }}</a>
                         <div class="dropdown-content">
-                            <a href="profile">Profile</a>
-                            <a href="logout">Logout</a>
+                            <a href="/profile">Profile</a>
+                            <a href="/logout">Logout</a>
                         </div>
                     @endif
                 </div>
@@ -40,9 +41,9 @@
             <nav class="nav nav-primary">
                 <ul>
                     <li><a href="">Home</a></li><!--
-			        --><li><a href="projectfinder">Explore</a></li><!--
+			        --><li><a href="/projectfinder">Explore</a></li><!--
 			        --><li><a href="">Start a project</a></li><!--
-			        --><li><a href="about">About us</a></li>
+			        --><li><a href="/about">About us</a></li>
                 </ul>
             </nav>
 
@@ -59,16 +60,14 @@
             <nav class="nav">
                 <ul>
                     <li><a href="">Home</a></li><!--
-			        --><li><a href="projectfinder">Explore</a></li><!--
+			        --><li><a href="/projectfinder">Explore</a></li><!--
 			        --><li><a href="">Start a project</a></li><!--
-			        --><li><a href="about">About us</a></li><!--
+			        --><li><a href="/about">About us</a></li><!--
 			        --><li><a href="">Contact us</a></li>
                 </ul>
             </nav>
 
         </footer>
-
-        <script src="assets/javascripts/jsmain.js"></script>
 
     </body>
 </html>

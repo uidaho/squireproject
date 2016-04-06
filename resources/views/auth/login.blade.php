@@ -21,7 +21,7 @@
 
         <div class="col-1-3">
 
-            <form class="login-form" action="{{ url('login') }}" method="POST">
+            <form class="login-form" action="{{ url('/login') }}" method="POST">
                 {!! csrf_field() !!}
 
                 <h5>Login</h5>

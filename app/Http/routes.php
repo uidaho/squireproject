@@ -17,6 +17,9 @@
  */
 
 Route::group(['middleware' => ['web']], function() {
+    /*
+     * Routes to pages with authentication
+     */
     Route::auth();
 
     /*
@@ -25,12 +28,11 @@ Route::group(['middleware' => ['web']], function() {
 
     Route::get('/', 'PagesController@home');
 
-    Route::get('register', 'PagesController@register');
-
-    Route::get('login', 'PagesController@login');
-
     Route::get('about', 'PagesController@about');
 
     Route::get('projectfinder', 'PagesController@projectfinder');
-});
 
+    //Route::get('register', 'PagesController@register');
+    //Route::get('login', 'PagesController@login');
+    //Route::get('reset', 'PagesContorller@reset');
+});
