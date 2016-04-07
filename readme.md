@@ -18,7 +18,7 @@ Thank you for considering contributing to the Squire Project! If you are a membe
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Squire Project, please send an e-mail to admin@squireproject.com. All security vulnerabilities will be promptly addressed.
 
 ## License
 
