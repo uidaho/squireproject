@@ -2,16 +2,16 @@
 
 @section('head')
 
-    <title>A Project Page</title>
+    <title>{{ $project->title }}</title>
 
-@endsection
+@stop
 
 @section('mainBody')
-
-<main class="primary-main">
-    <section class="container">
-        <p>This is a paragraph.</p>
-    </section>
-</main>
-
+    <main class="container">
+        <div class="project-page">
+            <img src="/images/projects/product1.jpg" alt="Project Image" width="50%" height=50% border="1px">
+            <h4 style="clear:left">{{ $project->title }} by {{ $project->author  }}</h4>
+            <p>{{ $project->description }}</p>
+        </div>
+    </main>
 @stop

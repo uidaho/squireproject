@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Project;
 use Illuminate\Http\Request;
 
 
@@ -28,7 +29,7 @@ class PagesController extends Controller
 	}
 
 	public function project($id) {
-        return view('pages.project', ['id' => $id]);
+        return view('pages.project', ['project' => Project::find($id)]);
     }
 
 	/*public function register()

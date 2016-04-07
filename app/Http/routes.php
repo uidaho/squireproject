@@ -25,4 +25,4 @@ Route::get('/', 'PagesController@home');
 Route::get('about', 'PagesController@about');
 Route::get('projectfinder', 'PagesController@projectfinder');
 
-Route::get('/project/{id}', 'PagesController@project');
+Route::get('/project/{title}', 'PagesController@project');

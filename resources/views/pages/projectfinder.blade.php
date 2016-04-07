@@ -31,7 +31,7 @@
     <section class="grid">
 
         <div class="col-1-3 project-teaser">
-            <a href="project/some-id">
+            <a href="project/1">
                 <img src="/images/projects/product1.jpg" alt="Project Image">
                 <h4>Squire Ultra</h4>
                 <p>Cross platform group IDE and super computer.</p>
