@@ -24,7 +24,3 @@ Route::auth();
 Route::get('/', 'PagesController@home');
 Route::get('about', 'PagesController@about');
 Route::get('projectfinder', 'PagesController@projectfinder');
-
-//Route::get('register', 'PagesController@register');
-//Route::get('login', 'PagesController@login');
-//Route::get('reset', 'PagesContorller@reset');
