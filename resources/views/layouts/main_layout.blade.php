@@ -18,7 +18,7 @@
         <header class="primary-header container group">
 
             <h3 class="logo">
-                <a href="projectfinder">sQuire</a>
+                <a href="/projectfinder">sQuire</a>
             </h3>
 
             <!-- Login & Logout Area -->
