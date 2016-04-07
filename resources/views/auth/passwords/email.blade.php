@@ -24,19 +24,17 @@
                 @endif
 
                 <fieldset class="login">
-                    <label class="{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label>
                         Email Address
                         <input type="email" name="email" value="{{ old('email') }}">
 
                         @if ($errors->has('email'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
+                            <span class="error-auth">{{ $errors->first('email') }}</span>
                         @endif
 
                     </label>
                 </fieldset>
-                <fieldset class="account-action group">
+                <fieldset class="group">
                     <input class="btn" type="submit" value="Send Password Reset Link">
                 </fieldset>
             </form>
