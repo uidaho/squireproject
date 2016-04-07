@@ -92,9 +92,10 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'username' => ['required' => 'A username is required',],
+        'email' => [ 'required' => 'An email is required',],
+        'password' => ['required' => 'A password is required',],
+        'password' => ['confirmed' => 'Passwords don\'t match',],
     ],
 
     /*

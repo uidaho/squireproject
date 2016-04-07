@@ -45,48 +45,39 @@
                             First and Last Name
                             <input type="text" name="name" placeholder="John Smith">
                         </label>-->
-                        <label class="{{ $errors->has('username') ? ' has-error' : '' }}">
+                        <label>
                             Username
                             <input type="text" name="username" value="{{ old('username') }}">
 
                             @if ($errors->has('username'))
-                                <script>alert("error");</script>
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
+                                <span class="error-auth">{{ $errors->first('username') }}</span>
                             @endif
 
                         </label>
-                        <label class="{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label>
                             Email
                             <input type="email" name="email" placeholder="name@domain.com" value="{{ old('email') }}">
 
                             @if ($errors->has('email'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                <span class="error-auth">{{ $errors->first('email') }}</span>
                             @endif
 
                         </label>
-                        <label class="{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label>
                             Password
                             <input type="password" name="password">
 
                             @if ($errors->has('password'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                <span class="error-auth">{{ $errors->first('password') }}</span>
                             @endif
 
                         </label>
-                        <label class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                        <label>
                             Repeat Password
                             <input type="password" name="password_confirmation">
 
                             @if ($errors->has('password_confirmation'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
+                                <span class="error-auth">{{ $errors->first('password_confirmation') }}</span>
                             @endif
 
                         </label>

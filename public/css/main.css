@@ -247,7 +247,7 @@ label
 	background: #fff;
 	border-radius: 5px;
 	border: 2px solid #dfe2ef;
-	height: 350px;
+	height: 100%;
 }
 
 .register-why
@@ -298,7 +298,7 @@ Login
 	background: #fff;
 	border-radius: 5px;
 	border: 2px solid #dfe2ef;
-	height: 250px;
+	height: 100%;
 }
 
 .login-form h5
@@ -591,8 +591,21 @@ Button
 	width: 100%;
 }
 
-.username-btn {
+.btn-username {
 	color: #000000;
 	font-size: 18px;
 	font-weight: 600;
+}
+
+/*
+======================================
+Errors
+======================================
+*/
+
+.error-auth {
+	color: darkred;
+	font-weight: 600;
+	font-size: 13px;
+	letter-spacing: .1px;
 }

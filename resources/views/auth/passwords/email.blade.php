@@ -36,7 +36,7 @@
 
                     </label>
                 </fieldset>
-                <fieldset class="account-action group">
+                <fieldset class="group">
                     <input class="btn" type="submit" value="Send Password Reset Link">
                 </fieldset>
             </form>
