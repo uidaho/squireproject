@@ -27,6 +27,10 @@ class PagesController extends Controller
 		return view('pages.projectfinder');         //resources/views/pages/projectfinder.blade.php
 	}
 
+	public function project($id) {
+        return view('pages.project', ['id' => $id]);
+    }
+
 	/*public function register()
 	{
 		return view('pages.register');             //resources/views/pages/register.blade.php

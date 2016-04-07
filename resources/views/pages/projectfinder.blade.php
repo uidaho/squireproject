@@ -31,7 +31,7 @@
     <section class="grid">
 
         <div class="col-1-3 project-teaser">
-            <a href="index.html">
+            <a href="project/some-id">
                 <img src="/images/projects/product1.jpg" alt="Project Image">
                 <h4>Squire Ultra</h4>
                 <p>Cross platform group IDE and super computer.</p>
@@ -40,7 +40,7 @@
         </div><!--
 
 		--><div class="col-1-3 project-teaser">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="/images/projects/product2.jpg" alt="Project Image">
                 <h4>Fancy Images</h4>
                 <p>Takes your photos and auto touches them up and allows for user edits.</p>
@@ -49,7 +49,7 @@
         </div><!--
 
 		--><div class="col-1-3 project-teaser">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="/images/projects/product3.jpg" alt="Project Image">
                 <h4>News Catcher</h4>
                 <p>Collects all the news you need to know about based upon location and interests.</p>
@@ -60,7 +60,7 @@
         <!-- Next Row-->
 
         <div class="col-1-3 project-teaser">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="/images/projects/product4.jpg" alt="Project Image">
                 <h4>Simple Graphs</h4>
                 <p>Takes the users input and creates beautifully rendered graphs.</p>
@@ -69,7 +69,7 @@
         </div><!--
 
 		--><div class="col-1-3 project-teaser">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="/images/projects/product5.jpg" alt="Project Image">
                 <h4>Key Remapper</h4>
                 <p>Allows the user to remap any keys on their keyboard with ease.<br></p>
@@ -78,7 +78,7 @@
         </div><!--
 
 		--><div class="col-1-3 project-teaser">
-            <a href="index.html">
+            <a href="index.php">
                 <img src="/images/projects/product6.jpg" alt="Project Image">
                 <h4>Daily Activity Tracker</h4>
                 <p>Smart phone app that allows the user to keep track of their activity and is diplayed in simple
