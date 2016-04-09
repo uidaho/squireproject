@@ -25,7 +25,7 @@ class PagesController extends Controller
 
 	public function projectfinder()
 	{
-		return view('pages.projectfinder');         //resources/views/pages/projectfinder.blade.php
+		return view('pages.projectfinder', ['projects' => Project::all()]);         //resources/views/pages/projectfinder.blade.php
 	}
 
 	public function project($id) {
