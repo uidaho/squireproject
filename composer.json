@@ -1,6 +1,6 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "uidaho/squireproject",
+    "description": "The Squire Project.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
