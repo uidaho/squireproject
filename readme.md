@@ -1,16 +1,16 @@
 # The Squire Project
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+[![Build Status](https://travis-ci.org/uidaho/squireproject.svg?branch=master)](https://travis-ci.org/uidaho/squireproject)
+[![Total Downloads](https://poser.pugx.org/uidaho/squireproject/d/total.svg)](https://packagist.org/packages/uidaho/squireproject)
+[![Latest Stable Version](https://poser.pugx.org/uidaho/squireproject/v/stable.svg)](https://packagist.org/packages/uidaho/squireproject)
+[![Latest Unstable Version](https://poser.pugx.org/uidaho/squireproject/v/unstable.svg)](https://packagist.org/packages/uidaho/squireproject)
+[![License](https://poser.pugx.org/uidaho/squireproject/license.svg)](https://packagist.org/packages/uidaho/squireproject)
 
 Squire is a web-based collaborative software development environment with a project development center. Squire will allow multiple users to edit files and communicate in real time. Projects can be stubbed out and then other users can join and/or vote to support for their favorite projects. After a certain amount of support, planning, and documentation is reached for a project, the project becomes a fully fleged project and then community development can start. Think "kickstarter for code" where people pledge their help with the project and not just financial support.
 
 ## Official Documentation
 
-All documentation for the framework can be found on the [github Wiki](https://github.com/uidaho/squireproject/wiki).
+All documentation for the project can be found on the [github Wiki](https://github.com/uidaho/squireproject/wiki).
 
 ## Contributing
 
