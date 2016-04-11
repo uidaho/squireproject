@@ -18,7 +18,7 @@
         <header class="primary-header container group">
 
             <h3 class="logo">
-                <a href="projectfinder">sQuire</a>
+                <a href="/projectfinder">sQuire</a>
             </h3>
 
             <!-- Login & Logout Area -->
@@ -29,9 +29,9 @@
                         <li><a href="/login">Login</a></li>
                         <li><a href="/register">Register</a></li>
                     @else
-                        <a class="username-btn">{{ Auth::user()->username }}</a>
+                        <a class="btn-username">{{ Auth::user()->username }}</a>
                         <div class="dropdown-content">
-                            <a href="/profile">Profile</a>
+                            <a href="">Profile</a>
                             <a href="/logout">Logout</a>
                         </div>
                     @endif

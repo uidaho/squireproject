@@ -1,0 +1,22 @@
+language: php
+
+php:
+  - 5.6
+  - 7.0
+  - hhvm
+
+
+before_install:
+  - travis_retry composer self-update
+
+install:
+  - travis_retry composer update --prefer-dist --no-interaction --prefer-stable
+
+before_script:
+  - cp .env.travis .env
+  - mysql -e 'create database squire_test;'
+  - composer self-update
+  - composer install --no-interaction
+
+script: 
+  - vendor/bin/phpunit

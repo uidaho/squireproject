@@ -31,9 +31,7 @@
                         <input type="text" name="username" value="{{ old('username') }}">
 
                         @if ($errors->has('username'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
+                            <span class="error-auth">{{ $errors->first('username') }}</span>
                         @endif
 
                     </label>
@@ -42,9 +40,7 @@
                         <input type="password" name="password">
 
                         @if ($errors->has('password'))
-                            <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                            <span class="error-auth">{{ $errors->first('password') }}</span>
                         @endif
                     </label>
                     <label>
