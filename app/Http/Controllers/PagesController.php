@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Request;
 
 class PagesController extends Controller
 {
-
 	/*
 	 * Route to each html page
 	 */
@@ -35,21 +34,29 @@ class PagesController extends Controller
 
 	public function create()
 	{
+		if (Auth::guest()) {
+			return redirect('/login');
+		}
 		return view('pages.create');
 	}
 
 	public function createProject()
 	{
+		if (Auth::guest()) {
+			return redirect('/login');
+		}
 		$title = Request::input('title');
 		$description = Request::input('description');
+		$body = Request::input('project-body');
 		$newEntry = Project::create([
 			'author' => Auth::user()->username,
 			'title'  => $title,
-			'description' => $description
+			'description' => $description,
+			'body' => $body
 		]);
 		return redirect('/project/' . $newEntry->id);
 	}
-
+ 
 	/*public function register()
 	{
 		return view('pages.register');             //resources/views/pages/register.blade.php

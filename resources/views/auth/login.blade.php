@@ -25,7 +25,7 @@
                 {!! csrf_field() !!}
 
                 <h5>Login</h5>
-                <fieldset class="login">
+                <fieldset class="login register">
                     <label>
                         Username
                         <input type="text" name="username" value="{{ old('username') }}">
