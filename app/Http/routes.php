@@ -11,7 +11,6 @@
 |
 */
 
-
 /*-------------------------
  * Routes Authentication
  * ------------------------
@@ -24,3 +23,7 @@ Route::auth();
 Route::get('/', 'PagesController@home');
 Route::get('about', 'PagesController@about');
 Route::get('projectfinder', 'PagesController@projectfinder');
+
+Route::get('/project/{title}', 'PagesController@project');
+Route::get('/create', 'PagesController@create');
+Route::post('/create', 'PagesController@createProject');

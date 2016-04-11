@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use Illuminate\Http\Request;
-
+use App\Project;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class PagesController extends Controller
 {
-
 	/*
 	 * Route to each html page
 	 */
@@ -24,9 +24,39 @@ class PagesController extends Controller
 
 	public function projectfinder()
 	{
-		return view('pages.projectfinder');         //resources/views/pages/projectfinder.blade.php
+		return view('pages.projectfinder', ['projects' => Project::all()]);         //resources/views/pages/projectfinder.blade.php
 	}
 
+	public function project($id)
+	{
+        return view('pages.project', ['project' => Project::find($id)]);
+    }
+
+	public function create()
+	{
+		if (Auth::guest()) {
+			return redirect('/login');
+		}
+		return view('pages.create');
+	}
+
+	public function createProject()
+	{
+		if (Auth::guest()) {
+			return redirect('/login');
+		}
+		$title = Request::input('title');
+		$description = Request::input('description');
+		$body = Request::input('project-body');
+		$newEntry = Project::create([
+			'author' => Auth::user()->username,
+			'title'  => $title,
+			'description' => $description,
+			'body' => $body
+		]);
+		return redirect('/project/' . $newEntry->id);
+	}
+ 
 	/*public function register()
 	{
 		return view('pages.register');             //resources/views/pages/register.blade.php
