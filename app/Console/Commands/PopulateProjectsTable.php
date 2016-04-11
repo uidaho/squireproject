@@ -19,7 +19,7 @@ class PopulateProjectsTable extends Command
      *
      * @var string
      */
-    protected $description = 'Populates the projects table with some dummie projects for testing.';
+    protected $description = 'Populates the projects table with some dummy projects for testing.';
 
     /**
      * Create a new command instance.
@@ -78,7 +78,7 @@ class PopulateProjectsTable extends Command
 
     private function createEntry($title, $author, $description, $date) {
         $msg = sprintf(
-            '+ [title=>\'%s\',author=>\'%s\', description=>\'%s\', date=>\'%s\']',
+            '+[title=>\'%s\',author=>\'%s\', description=>\'%s\', date=>\'%s\']',
             $title, $author, $description, $date
         );
         $this->info($msg);

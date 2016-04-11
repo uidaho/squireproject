@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Project;
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class PagesController extends Controller
 {
@@ -28,9 +28,27 @@ class PagesController extends Controller
 		return view('pages.projectfinder', ['projects' => Project::all()]);         //resources/views/pages/projectfinder.blade.php
 	}
 
-	public function project($id) {
+	public function project($id)
+	{
         return view('pages.project', ['project' => Project::find($id)]);
     }
+
+	public function create()
+	{
+		return view('pages.create');
+	}
+
+	public function createProject()
+	{
+		$title = Request::input('title');
+		$description = Request::input('description');
+		$newEntry = Project::create([
+			'author' => Auth::user()->username,
+			'title'  => $title,
+			'description' => $description
+		]);
+		return redirect('/project/' . $newEntry->id);
+	}
 
 	/*public function register()
 	{

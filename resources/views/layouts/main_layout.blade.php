@@ -42,7 +42,7 @@
                 <ul>
                     <li><a href="">Home</a></li><!--
 			        --><li><a href="/projectfinder">Explore</a></li><!--
-			        --><li><a href="">Start a project</a></li><!--
+			        --><li><a href="/create">Start a project</a></li><!--
 			        --><li><a href="/about">About us</a></li>
                 </ul>
             </nav>
@@ -61,7 +61,7 @@
                 <ul>
                     <li><a href="">Home</a></li><!--
 			        --><li><a href="/projectfinder">Explore</a></li><!--
-			        --><li><a href="">Start a project</a></li><!--
+			        --><li><a href="/create">Start a project</a></li><!--
 			        --><li><a href="/about">About us</a></li><!--
 			        --><li><a href="">Contact us</a></li>
                 </ul>
