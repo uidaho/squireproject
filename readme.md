@@ -1,5 +1,8 @@
 # The Squire Project
 
+just testing travis
+
+
 [![Build Status](https://travis-ci.org/uidaho/squireproject.svg?branch=master)](https://travis-ci.org/uidaho/squireproject)
 [![Total Downloads](https://poser.pugx.org/uidaho/squireproject/d/total.svg)](https://packagist.org/packages/uidaho/squireproject)
 [![Latest Stable Version](https://poser.pugx.org/uidaho/squireproject/v/stable.svg)](https://packagist.org/packages/uidaho/squireproject)
