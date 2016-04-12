@@ -11,14 +11,38 @@
 |
 */
 
+<<<<<<< Updated upstream
 /*-------------------------
+=======
+
+/*
+>>>>>>> Stashed changes
  * Routes Authentication
- * ------------------------
  */
 
-//Routes to pages with authentication
-Route::auth();
+Route::group(['middleware' => ['web']], function() {
+    /*
+     * Routes to pages with authentication
+     */
+    Route::auth();
 
+    /*
+    * Routes to the different html pages
+    */
+
+    Route::get('/', 'PagesController@home');
+
+    Route::get('about', 'PagesController@about');
+
+    Route::get('projectfinder', 'PagesController@projectfinder');
+
+    Route::get('user_profile', 'PagesController@user_profile');
+
+    Route::get('form', function(){
+        return View::make('form');
+    });
+
+<<<<<<< Updated upstream
 //Routes to the different html pages
 Route::get('/', 'PagesController@home');
 Route::get('about', 'PagesController@about');
@@ -27,3 +51,12 @@ Route::get('projectfinder', 'PagesController@projectfinder');
 Route::get('/project/{title}', 'PagesController@project');
 Route::get('/create', 'PagesController@create');
 Route::post('/create', 'PagesController@createProject');
+=======
+    Route::any('form-submit', function(){
+        var_dump(Input::file('file'));
+    });
+    //Route::get('register', 'PagesController@register');
+    //Route::get('login', 'PagesController@login');
+    //Route::get('reset', 'PagesContorller@reset');
+});
+>>>>>>> Stashed changes

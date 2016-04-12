@@ -18,7 +18,7 @@
         <header class="primary-header container group">
 
             <h3 class="logo">
-                <a href="/projectfinder">sQuire</a>
+                <a href="projectfinder">sQuire</a>
             </h3>
 
             <!-- Login & Logout Area -->
@@ -29,21 +29,28 @@
                         <li><a href="/login">Login</a></li>
                         <li><a href="/register">Register</a></li>
                     @else
-                        <a class="btn-username">{{ Auth::user()->username }}</a>
+                        <a class="username-btn">{{ Auth::user()->username }}</a>
                         <div class="dropdown-content">
-                            <a href="">Profile</a>
+                            <a href="/profile">Profile</a>
                             <a href="/logout">Logout</a>
                         </div>
                     @endif
                 </div>
             </ul>
 
+            <!-- Bottom Navigation Area -->
             <nav class="nav nav-primary">
                 <ul>
-                    <li><a href="">Home</a></li><!--
+                       <li><a href="">Home</a></li><!--
 			        --><li><a href="/projectfinder">Explore</a></li><!--
+<<<<<<< Updated upstream
 			        --><li><a href="/create">Start a project</a></li><!--
 			        --><li><a href="/about">About us</a></li>
+=======
+			        --><li><a href="">Start a Project</a></li><!--
+			        --><li><a href="/about">About us</a></li><!--
+                    --><li><a href="/user_profile">User Profile</a></li>
+>>>>>>> Stashed changes
                 </ul>
             </nav>
 
@@ -61,7 +68,11 @@
                 <ul>
                     <li><a href="">Home</a></li><!--
 			        --><li><a href="/projectfinder">Explore</a></li><!--
+<<<<<<< Updated upstream
 			        --><li><a href="/create">Start a project</a></li><!--
+=======
+			        --><li><a href="">Start a Project </a></li><!--
+>>>>>>> Stashed changes
 			        --><li><a href="/about">About us</a></li><!--
 			        --><li><a href="">Contact us</a></li>
                 </ul>

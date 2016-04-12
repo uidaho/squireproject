@@ -247,7 +247,7 @@ input, label
 	background: #fff;
 	border-radius: 5px;
 	border: 2px solid #dfe2ef;
-	height: 100%;
+	height: 350px;
 }
 
 .register-why
@@ -298,7 +298,7 @@ Login
 	background: #fff;
 	border-radius: 5px;
 	border: 2px solid #dfe2ef;
-	height: 100%;
+	height: 250px;
 }
 
 .login-form h5
@@ -614,7 +614,7 @@ Button
 	width: 100%;
 }
 
-.btn-username {
+.username-btn {
 	color: #000000;
 	font-size: 18px;
 	font-weight: 600;
@@ -622,13 +622,33 @@ Button
 
 /*
 ======================================
-Errors
+Profile
 ======================================
 */
 
-.error-auth {
-	color: darkred;
-	font-weight: 600;
-	font-size: 13px;
-	letter-spacing: .1px;
+.profile-main {
+	float: left;
 }
+
+nav.nav-profile
+{
+	letter-spacing: .5px;
+	font-weight: 600;
+	padding-top: 0px;
+	text-align: left;
+	margin: 31px;
+}
+
+.profile-username h1{
+	float: left;
+	text-size: 100px;
+	width: 100px;
+}
+
+.profile-main img{
+	float: left;
+	margin: 0px 15px 15px 0px;
+}
+
+
+

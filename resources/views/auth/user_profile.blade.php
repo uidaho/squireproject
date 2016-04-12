@@ -6,7 +6,7 @@
         <script>window.location.href = "projectfinder";</script>
     @endunless
 
-    <title>Login</title>
+    <title>UserProfile</title>
 
 @endsection
 
@@ -21,11 +21,11 @@
 
         <div class="col-1-3">
 
-            <form class="login-form" action="{{ url('/login') }}" method="POST">
+            <form class="login-form" action="{{ url('/user_profile') }}" method="POST">
                 {!! csrf_field() !!}
 
                 <h5>Login</h5>
-                <fieldset class="login register">
+                <fieldset class="login">
                     <label>
                         Username
                         <input type="text" name="username" value="{{ old('username') }}">
