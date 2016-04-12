@@ -11,18 +11,26 @@
 |
 */
 
-/*-------------------------
- * Routes Authentication
- * ------------------------
+/*
+ * Routes to pages with authentication
  */
-
-//Routes to pages with authentication
 Route::auth();
 
-//Routes to the different html pages
+/*
+* Routes to the different html pages
+*/
 Route::get('/', 'PagesController@home');
 Route::get('about', 'PagesController@about');
 Route::get('projectfinder', 'PagesController@projectfinder');
+
+Route::get('user_profile', 'PagesController@user_profile');
+
+Route::get('form', function(){
+    return View::make('form');
+});
+Route::any('form-submit', function(){
+    var_dump(Input::file('file'));
+});
 
 Route::get('/project/{title}', 'PagesController@project');
 Route::get('/create', 'PagesController@create');

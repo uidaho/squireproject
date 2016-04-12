@@ -63,7 +63,17 @@ class PagesController extends Controller
 
 		return redirect('/project/' . $newEntry->id);
 	}
- 
+
+	public function user_profile()
+	{
+		return view('pages.user_profile');         //resources/views/pages/projectfinder.blade.php
+	}
+
+	public function user_projects()
+	{
+		return view('pages.user_projects');         //resources/views/pages/projectfinder.blade.php
+	}
+
 	/*public function register()
 	{
 		return view('pages.register');             //resources/views/pages/register.blade.php
