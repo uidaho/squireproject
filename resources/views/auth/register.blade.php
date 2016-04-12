@@ -83,7 +83,7 @@
                         </label>
                     </fieldset>
                     <fieldset>
-                        <input class="btn" type="submit">
+                        <input class="btn" id="submit" type="submit">
                         <a class="already-member" href="/login">Already registered click here</a>
                     </fieldset>
                 </form>
