@@ -63,6 +63,29 @@ class PagesController extends Controller
 
 		return redirect('/project/' . $newEntry->id);
 	}
+
+	public function deleteProject($id) {
+		if (Auth::guest()) {
+			return redirect('/login');
+		}
+
+		$project = Project::find($id);
+		if ($project == null) {
+			// TODO: Redirect to an error page
+			return redirect('/projectfinder');
+		}
+
+		if ($project->author == Auth::user()->username) {
+			$project->delete();
+			$imagePath = base_path() . '/public/images/projects/product' . $id . '.jpg';
+			if (file_exists($imagePath)) {
+				unlink($imagePath);
+			}
+		}
+
+		// TODO: Notice of success?
+		return redirect('/projectfinder');
+	}
  
 	/*public function register()
 	{
