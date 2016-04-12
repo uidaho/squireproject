@@ -31,3 +31,7 @@ Route::get('form', function(){
 Route::any('form-submit', function(){
     var_dump(Input::file('file'));
 });
+
+Route::get('/project/{title}', 'PagesController@project');
+Route::get('/create', 'PagesController@create');
+Route::post('/create', 'PagesController@createProject');
