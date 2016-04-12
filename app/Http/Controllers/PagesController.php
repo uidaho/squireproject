@@ -54,6 +54,13 @@ class PagesController extends Controller
 			'description' => $description,
 			'body' => $body
 		]);
+
+		if (Request::hasFile('thumbnail')) {
+			$path = str_replace('/app', '', app_path());
+			$thumbnail = Request::file('thumbnail');
+			$thumbnail->move($path . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
+		}
+
 		return redirect('/project/' . $newEntry->id);
 	}
  

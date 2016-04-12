@@ -14,6 +14,10 @@
 
         <h5>Create Project</h5>
         <div class="form-group">
+            <label for="thumbnail">Thumbnail</label>
+            <input class="form-control" type="file" id="thumbnail" name="thumbnail">
+        </div>
+        <div class="form-group">
             <label for="title">Title</label>
             <input class="form-control" type="text" id="title" name="title" placeholder="Your project's title">
         </div>
