@@ -41,16 +41,11 @@
             <!-- Bottom Navigation Area -->
             <nav class="nav nav-primary">
                 <ul>
-                       <li><a href="">Home</a></li><!--
-			        --><li><a href="/projectfinder">Explore</a></li><!--
-<<<<<<< Updated upstream
-			        --><li><a href="/create">Start a project</a></li><!--
-			        --><li><a href="/about">About us</a></li>
-=======
-			        --><li><a href="">Start a Project</a></li><!--
-			        --><li><a href="/about">About us</a></li><!--
-                    --><li><a href="/user_profile">User Profile</a></li>
->>>>>>> Stashed changes
+                    <li><a href="">Home</a></li>
+                    <li><a href="/projectfinder">Explore</a></li>
+                    <li><a href="/create">Start a project</a></li>
+                    <li><a href="/about">About us</a></li>
+			        <li><a href="/user_profile">User Profile</a></li>
                 </ul>
             </nav>
 
@@ -66,19 +61,13 @@
 
             <nav class="nav">
                 <ul>
-                    <li><a href="">Home</a></li><!--
-			        --><li><a href="/projectfinder">Explore</a></li><!--
-<<<<<<< Updated upstream
-			        --><li><a href="/create">Start a project</a></li><!--
-=======
-			        --><li><a href="">Start a Project </a></li><!--
->>>>>>> Stashed changes
-			        --><li><a href="/about">About us</a></li><!--
-			        --><li><a href="">Contact us</a></li>
+                    <li><a href="">Home</a></li>
+                    <li><a href="/projectfinder">Explore</a></li>
+                    <li><a href="/create">Start a project</a></li>
+                    <li><a href="/about">About us</a></li>
+                    <li><a href="">Contact us</a></li>
                 </ul>
             </nav>
-
         </footer>
-
     </body>
 </html>

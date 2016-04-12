@@ -27,7 +27,6 @@ class PagesController extends Controller
 		return view('pages.projectfinder', ['projects' => Project::all()]);         //resources/views/pages/projectfinder.blade.php
 	}
 
-<<<<<<< Updated upstream
 	public function project($id)
 	{
         return view('pages.project', ['project' => Project::find($id)]);
@@ -64,8 +63,7 @@ class PagesController extends Controller
 
 		return redirect('/project/' . $newEntry->id);
 	}
- 
-=======
+
 	public function user_profile()
 	{
 		return view('pages.user_profile');         //resources/views/pages/projectfinder.blade.php
@@ -75,8 +73,7 @@ class PagesController extends Controller
 	{
 		return view('pages.user_projects');         //resources/views/pages/projectfinder.blade.php
 	}
-	
->>>>>>> Stashed changes
+
 	/*public function register()
 	{
 		return view('pages.register');             //resources/views/pages/register.blade.php
