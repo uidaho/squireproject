@@ -16,7 +16,9 @@ class EditorController extends Controller
      */
     public function editFile($projectname, $filename)
     {
-        return view('editor.edit', ['project' => Project::find($id)]);
+        $file = File::where('projectname', $projectname)->where('filename', $filename)->distinct()->get();
+
+        return view('editor.edit', ['file' => $file]);
     }
 
     /**
@@ -27,7 +29,9 @@ class EditorController extends Controller
      */
     public function listFiles($projectname)
     {
-        return view('editor.list', ['project' => Project::find($id)]);
+        $files = File::where('projectname', $projectname)->get();
+
+        return view('editor.list', ['files' => $files]);
     }
 
     /**
@@ -42,62 +46,51 @@ class EditorController extends Controller
     
 
     /**
-     * Creates a new project using the input from the form
+     * Creates a new file using the input from the form
      *
+     * @param $projectname project name
      * @return mixed
      */
-    public function create()
+    public function create($projectname)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-        $title = Request::input('title');
+        $filename = Request::input('filename');
+        $type = "file"; // TODO: just type file for now, no folders
         $description = Request::input('description');
-        $body = Request::input('project-body');
-        $newEntry = Project::create([
-            'author' => Auth::user()->username,
-            'title'  => $title,
+        $contents = "The default file contents.";
+        $creator = Auth::user()->id;
+        $parent = 0; // TODO: no parent for now, flat file system
+
+        $newEntry = File::create([
+            'projectname' => $projectname,
+            'filename'  => $filename,
+            'type' => $type,
             'description' => $description,
-            'body' => $body
+            'contents' => $contents,
+            'creator' => $creator,
+            'parent' => $parent
         ]);
 
-        if (Request::hasFile('thumbnail')) {
-            $path = str_replace('/app', '', app_path());
-            $thumbnail = Request::file('thumbnail');
-            $thumbnail->move($path . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
-        }
-
-        return redirect('/project/' . $newEntry->id);
+        return redirect('/editor/' . $newEntry->projectname . '/' . $newEntry->filename);
     }
 
     /**
-     * Deletes the project give by the id, only if the user
-     * is authenticated and is the author.
+     * Deletes a file given by the project and file name.
      *
-     * @param $id the project id for lookup
+     * @param $projectname projectname project name $filename file name
      * @return mixed
      */
-    public function delete($id)
+    public function delete($projectname, $filename)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
+        $file = File::where('projectname', $projectname)->where('filename', $filename)->distinct()->get();
 
-        $project = Project::find($id);
-        if ($project == null) {
+        if ($file == null) {
             // TODO: Redirect to an error page
-            return redirect('/projectfinder');
+            return redirect('/editor/'.$projectname);
         }
 
-        if ($project->author == Auth::user()->username) {
-            $project->delete();
-            $imagePath = base_path() . '/public/images/projects/product' . $id . '.jpg';
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-        }
+        $file->delete();
 
         // TODO: Notice of success?
-        return redirect('/projectfinder');
+        return redirect('/editor/'.$projectname);
     }
 }

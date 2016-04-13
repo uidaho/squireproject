@@ -1,7 +1,7 @@
 @extends('layouts.main_layout')
 
 @section('head')
-    <title>{{$editor->projectname}} Files | The Squire Project</title>
+    <title>{{$files[0]->projectname}} Files | The Squire Project</title>
 @endsection
 
 @section('mainBody')
@@ -25,11 +25,12 @@
     <section class="grid">
         @foreach($files as $file)
             <div class="col-1-3 project-teaser">
-                <a href="/editor/{{$editor->projectname}}/{{$editor->filename}}">
-                    <h4>{{$editor->filename}}</h4>
-                    <p>{{$editor->description}}</p>
-                    <p>Created: {{$editor->created}}</p>
-                    <p>Modified: {{$editor->modified}}</p>
+                <a href="/editor/{{$file->projectname}}/{{$file->filename}}">
+                    <h4>{{$file->filename}}</h4>
+                    <p>Description: {{$file->type}}</p>
+                    <p>Created by: {{$file->creator}}</p>
+                    <p>Created: {{$file->created_at}}</p>
+                    <p>Updated: {{$file->updated_at}}</p>
                 </a>
             </div>
         @endforeach
