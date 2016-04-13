@@ -21,7 +21,7 @@
 
         <div class="col-1-3">
 
-            <form name="myform" class="login-form" action="{{ url('/login') }}" method="POST" onsubmit="DoSubmit();">
+            <form name="loginForm" class="login-form" action="{{ url('/login') }}" method="POST" onsubmit="DoSubmit();">
                 {!! csrf_field() !!}
 
                 <h5>Login</h5>
@@ -66,9 +66,9 @@
 
 <script>
     function DoSubmit(){
-        if (document.myform.username.value.indexOf("@") > -1) {
-            document.myform.email.value = document.myform.username.value;
-            document.myform.action = "/loginemail";
+        if (document.loginForm.username.value.indexOf("@") > -1) {
+            document.loginForm.email.value = document.myform.username.value;
+            document.loginForm.action = "/loginemail";
         }
 
         return true;
