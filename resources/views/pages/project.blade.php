@@ -16,9 +16,16 @@
                 <h5>{{ $project->title }} by {{ $project->author  }}</h5>
                 <h4>{{ $project->description }}</h4>
             </div>
-            <div class="project-page-text">
+            <div class="project-page-elements">
                 <pre style="white-space: pre-wrap">{{ $project->body }}</pre>
             </div>
+            @if (Auth::check() && Auth::user()->username == $project->author)
+            <div class="project-page-elements">
+                <a href="/delete-project/{{ $project->id }}">
+                    <button type="button" id="delete">Delete</button>
+                </a>
+            </div>
+            @endif
         </div>
     </main>
 @stop

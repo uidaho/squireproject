@@ -24,6 +24,11 @@ Route::get('/', 'PagesController@home');
 Route::get('about', 'PagesController@about');
 Route::get('projectfinder', 'PagesController@projectfinder');
 
-Route::get('/project/{title}', 'PagesController@project');
-Route::get('/create', 'PagesController@create');
-Route::post('/create', 'PagesController@createProject');
+/*-----------------------*
+ *  Project Controller   *
+ *-----------------------*/
+Route::get('/project/{id}', 'ProjectController@view');
+Route::get('/create', 'ProjectController@createProjectPage');
+Route::post('/create', 'ProjectController@create');
+Route::get('/delete-project/{id}', 'ProjectController@delete');
+
