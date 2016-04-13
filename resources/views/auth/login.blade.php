@@ -21,18 +21,22 @@
 
         <div class="col-1-3">
 
-            <form class="login-form" action="{{ url('/login') }}" method="POST">
+            <form name="myform" class="login-form" action="{{ url('/login') }}" method="POST" onsubmit="DoSubmit();">
                 {!! csrf_field() !!}
 
                 <h5>Login</h5>
                 <fieldset class="login register">
                     <label>
-                        Username
+                        Username or Email
                         <input type="text" name="username" value="{{ old('username') }}">
 
                         @if ($errors->has('username'))
                             <span class="error-auth">{{ $errors->first('username') }}</span>
+                        @elseif($errors->has('email'))
+                            <span class="error-auth">{{ $errors->first('email') }}</span>
                         @endif
+
+                        <input type="hidden" name="email" value="{{ old('username') }}">
 
                     </label>
                     <label>
@@ -59,5 +63,16 @@
 
     </section>
 </main>
+
+<script>
+    function DoSubmit(){
+        if (document.myform.username.value.indexOf("@") > -1) {
+            document.myform.email.value = document.myform.username.value;
+            document.myform.action = "/loginemail";
+        }
+
+        return true;
+    }
+</script>
 
 @stop
