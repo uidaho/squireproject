@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProjectRequest;
 use App\Project;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 
 class ProjectController extends Controller
 {
@@ -35,16 +35,15 @@ class ProjectController extends Controller
     /**
      * Creates a new project using the input from the form
      *
+     * @param CreateProjectRequest $request The validated request
      * @return mixed
      */
-    public function create()
+    public function create(CreateProjectRequest $request)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-        $title = Request::input('title');
-        $description = Request::input('description');
-        $body = Request::input('project-body');
+        $title = $request->input('title');
+        $description = $request->input('description');
+        $body = $request->input('project-body');
+
         $newEntry = Project::create([
             'author' => Auth::user()->username,
             'title'  => $title,
@@ -52,11 +51,9 @@ class ProjectController extends Controller
             'body' => $body
         ]);
 
-        if (Request::hasFile('thumbnail')) {
-            $path = str_replace('/app', '', app_path());
-            $thumbnail = Request::file('thumbnail');
-            $thumbnail->move($path . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
-        }
+        $path = str_replace('/app', '', app_path());
+        $thumbnail = $request->file('thumbnail');
+        $thumbnail->move($path . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
         return redirect('/project/' . $newEntry->id);
     }
