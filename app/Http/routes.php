@@ -32,3 +32,9 @@ Route::get('/create', 'ProjectController@createProjectPage');
 Route::post('/create', 'ProjectController@create');
 Route::get('/delete-project/{id}', 'ProjectController@delete');
 
+/*-----------------------*
+ *  Editor Controller   *
+ *-----------------------*/
+Route::get('/editor/{projectname}/{filename}', 'EditorController@editFile');
+Route::get('/editor/{projectname}', 'EditorController@listFiles');
+Route::get('/editor', 'EditorController@index');
