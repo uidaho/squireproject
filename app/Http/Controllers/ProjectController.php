@@ -6,18 +6,20 @@ use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Project;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
     /**
      * Renders the Project View for the given id
      *
-     * @param $id project id for lookup
+     * @param Project $project
      * @return The project page view
+     * @internal param Project $id id for lookup
      */
-    public function view($id)
+    public function view(Project $project)
     {
-        return view('pages.project', ['project' => Project::find($id)]);
+        return view('pages.project', ['project' => $project]);
     }
 
     /**
@@ -25,12 +27,12 @@ class ProjectController extends Controller
      *
      * @return mixed
      */
-    public function createProjectPage()
+    public function createForm()
     {
         if (Auth::guest()) {
             return redirect('/login');
         }
-        return view('pages.create');
+        return view('pages.project-create');
     }
 
     /**
@@ -69,9 +71,10 @@ class ProjectController extends Controller
     public function delete(DeleteProjectRequest $request)
     {
         $project = $request->project;
+        $title = $project->title;
         $project->delete();
 
-        // TODO: Notice of success?
+        Session::flash('delete-success', 'Successfully deleted the project "' . $title .'"');
         return redirect()->action('PagesController@projectfinder');
     }
 }

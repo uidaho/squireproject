@@ -10,7 +10,7 @@
 @section('mainBody')
 
 <main class="container primary-main row">
-    <form role="form" class="project-form" action="{{ url('/create') }}" method="post" enctype="multipart/form-data">
+    <form role="form" class="project-form" action="{{ url('/project-create') }}" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
 
         <h5>Create Project</h5>

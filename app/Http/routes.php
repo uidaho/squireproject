@@ -39,8 +39,8 @@ Route::get('projectfinder', 'PagesController@projectfinder');
 /*-----------------------*
  *  Project Controller   *
  *-----------------------*/
-Route::get('/project/{id}', 'ProjectController@view');
-Route::get('/create', 'ProjectController@createProjectPage');
-Route::post('/create', 'ProjectController@create');
-Route::get('/delete-project/{project}', 'ProjectController@delete');
+Route::get('/project/{project}', 'ProjectController@view');
+Route::get('/project-create', 'ProjectController@createForm');        // can't do `/project/create` as it tries to find the project `create`
+Route::post('/project-create', 'ProjectController@create');
+Route::get('/project/{project}/delete', 'ProjectController@delete');
 
