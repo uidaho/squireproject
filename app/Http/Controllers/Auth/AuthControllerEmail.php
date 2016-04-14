@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-class AuthController extends Controller
+class AuthControllerEmail extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,6 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = 'projectfinder';
-    protected $username = 'username';
 
     /**
      * Create a new authentication controller instance.
@@ -51,7 +50,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|min:6|max:16|alpha_dash|unique:users',
+            'username' => 'required|min:6|max:16|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|max:32|confirmed',
         ]);

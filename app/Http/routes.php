@@ -16,8 +16,20 @@
  * ------------------------
  */
 
-//Routes to pages with authentication
-Route::auth();
+// Authentication Routes...
+Route::get('login', 'Auth\AuthController@showLoginForm');
+Route::post('login', 'Auth\AuthController@login');
+Route::post('loginemail', 'Auth\AuthControllerEmail@login');
+Route::get('logout', 'Auth\AuthController@logout');
+
+// Registration Routes...
+Route::get('register', 'Auth\AuthController@showRegistrationForm');
+Route::post('register', 'Auth\AuthController@register');
+
+// Password Reset Routes...
+Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+Route::post('password/reset', 'Auth\PasswordController@reset');
 
 //Routes to the different html pages
 Route::get('/', 'PagesController@home');
