@@ -19,7 +19,11 @@ class EditorController extends Controller
     {
         $file = File::where('projectname', $projectname)->where('filename', $filename)->distinct()->get();
 
-        return view('editor.edit', ['file' => $file]);
+        if ($file) {
+            return view('editor.edit', ['file' => $file]);
+        } else {
+            return abort(404);
+        }
     }
 
     /**
