@@ -36,7 +36,7 @@
                 <ul class="list-group">
                     @foreach($project->comments as $comment)
                         <li class="list-group-item">
-                            {{ $comment->body }}
+                            {{ $comment->comment_body }}
                             <p class="small"><br>
                                 Created by: <a href="#">{{ $comment->user->username }}</a>
                                 Created at: {{ $comment->created_at }}
@@ -50,15 +50,15 @@
 
                     <h6>Add a Comment</h6>
 
-                    @if ($errors->has('comment'))
-                        <span class="error-auth">{{ $errors->first('comment') }}</span>
+                    @if ($errors->has('comment_body'))
+                        <span class="error-auth">{{ $errors->first('comment_body') }}</span>
                     @elseif(Session::has('guestComment'))
                         <span class="error-auth">{{ Session::get('guestComment') }}</span>
                     @elseif(Session::has('userComment'))
                         <span class="">{{ Session::get('userComment') }}</span>
                     @endif
-                    
-                    <textarea class="form-control" name="comment">{{ old('comment') }}</textarea>
+
+                    <textarea class="form-control" name="comment_body">{{ old('comment_body') }}</textarea>
                     <br><!-- Remove <br> when actual stylesheet is implemented -->
                     <input class="btn btn-primary" type="submit" name="submit" value="Send">
                 </form>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectComment extends Model
 {
     protected $table = 'projectComments';               //Set table name
-    protected $fillable = ['body'];                     //Set what can be mass assigned
+    protected $fillable = ['comment_body'];             //Set what can be mass assigned
 
     //Lets Laravel know the comment belongs to a project
     public function project()

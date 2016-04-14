@@ -17,7 +17,7 @@ class CreateProjectCommentsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->integer('project_id')->unsigned()->index();
             //$table->foreign('project_id')->references('id')->on('projects');
-            $table->text('body');
+            $table->text('comment_body');
             $table->timestamps();
         });
     }
