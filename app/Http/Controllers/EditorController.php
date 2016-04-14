@@ -68,7 +68,7 @@ class EditorController extends Controller
         }
 
         $this->validate($request, [
-            'filename' => 'required|unique:files|max:255',
+            'filename' => 'required|unique:files|max:255|regex:/([A-Za-z0-9_.-]+)/',
             'description' => 'required',
         ]);
 
