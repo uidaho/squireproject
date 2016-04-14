@@ -3,20 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\ProjectComment;
+use App\Http\Requests\CreateCommentRequest;
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Session;
 
 class ProjectController extends Controller
 {
     /**
      * Renders the Project View for the given id
      *
-     * @param $id project id for lookup
+     * @param $project project id cast to Project
      * @return The project page view
      */
-    public function view($id)
+    public function view(Project $project)
     {
-        return view('pages.project', ['project' => Project::find($id)]);
+        $project->load('comments.user');
+
+        return view('pages.project', compact('project'));
     }
 
     /**
@@ -90,5 +95,29 @@ class ProjectController extends Controller
 
         // TODO: Notice of success?
         return redirect('/projectfinder');
+    }
+
+    /**
+     * Adds the comment to the given project
+     *
+     * @param $request = user entered text, $project project_id for lookup
+     * @return back to same page
+     */
+    public function addComment(CreateCommentRequest $request, Project $project)
+    {
+        if(Auth::guest())                                                                   //Checks if user is not logged in
+        {
+            Session::flash('guestComment', 'You must be logged in to submit a comment');
+        }
+        else                                                                                //User is logged in
+        {
+            $project->addComment(
+                new ProjectComment($request->all())
+            );
+
+            Session::flash('userComment', 'Comment submitted');
+        }
+
+        return back();
     }
 }

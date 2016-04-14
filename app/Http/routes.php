@@ -39,8 +39,10 @@ Route::get('projectfinder', 'PagesController@projectfinder');
 /*-----------------------*
  *  Project Controller   *
  *-----------------------*/
-Route::get('/project/{id}', 'ProjectController@view');
+Route::get('/project/{project}', 'ProjectController@view');
 Route::get('/create', 'ProjectController@createProjectPage');
 Route::post('/create', 'ProjectController@create');
 Route::get('/delete-project/{id}', 'ProjectController@delete');
 
+//Project Comments
+Route::post('project/{project}/comments', 'ProjectController@addComment');
