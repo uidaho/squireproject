@@ -1,5 +1,5 @@
 var FirepadUserList = (function() {
-  function FirepadUserList(ref, place, userId) {
+  function FirepadUserList(ref, place, userId, userName) {
     if (!(this instanceof FirepadUserList)) { return new FirepadUserList(ref, place, userId, userName); }
 
     this.ref_ = ref;
