@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\File;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+//use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
 
 class EditorController extends Controller
