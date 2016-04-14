@@ -22,15 +22,15 @@
             <div class="form-group">
                 <label for="title">Name</label>
                 <input class="form-control" type="text" id="filename" name="filename" placeholder="filename.txt">
-                @foreach ($messages->get('filename') as $message)
-                    <li>$message</li>
+                @foreach ($errors->get('filename') as $error)
+                    <li>$error</li>
                 @endforeach
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
                 <input class="form-control" type="text" id="description" name="description" placeholder="A short description" maxlength="100" size="88" height="2">
-                @foreach ($messages->get('description') as $message)
-                    <li>$message</li>
+                @foreach ($errors->get('description') as $error)
+                    <li>$error</li>
                 @endforeach
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
