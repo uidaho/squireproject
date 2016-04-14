@@ -42,6 +42,8 @@
                 <h6>Add a Comment</h6>
 
                 <form class="form-group" method="POST" action="/project/{{ $project->id }}/comments">
+                    {!! csrf_field() !!}
+                    
                     <textarea class="form-control" name="comment"></textarea>
 
                     <input class="btn btn-primary" type="submit" name="submit" value="Send">

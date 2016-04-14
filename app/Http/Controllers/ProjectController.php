@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\ProjectComment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+//use Illuminate\Support\Facades\Request;
 
 class ProjectController extends Controller
 {
     /**
      * Renders the Project View for the given id
      *
-     * @param $id project id for lookup
+     * @param $project project id cast to Project
      * @return The project page view
      */
     public function view(Project $project)
@@ -90,5 +92,21 @@ class ProjectController extends Controller
 
         // TODO: Notice of success?
         return redirect('/projectfinder');
+    }
+
+    /**
+     * Adds the comment to the given project
+     *
+     * @param $request = user entered text, $project project_id for lookup
+     * @return back to same page
+     */
+    public function addComment(Request $request, Project $project)
+    {
+        $comment = new ProjectComment;
+
+        $comment->body = $request->comment;
+        $project->comments()->save($comment);
+
+        return back();
     }
 }
