@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\ProjectComment;
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateCommentRequest;
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
@@ -102,7 +103,7 @@ class ProjectController extends Controller
      * @param $request = user entered text, $project project_id for lookup
      * @return back to same page
      */
-    public function addComment(Request $request, Project $project)
+    public function addComment(CreateCommentRequest $request, Project $project)
     {
         if(Auth::guest())                                                                   //Checks if user is not logged in
         {
@@ -110,9 +111,9 @@ class ProjectController extends Controller
         }
         else                                                                                //User is logged in
         {
-            $this->validate($request, [
+            /*$this->validate($request, [
                 'comment_body' => 'required|min:6|max:256|regex:/(?=.*[a-zA-Z])(.*?)/s'
-            ]);
+            ]);*/
 
             $project->addComment(
                 new ProjectComment($request->all())
