@@ -632,3 +632,8 @@ Errors
 	font-size: 13px;
 	letter-spacing: .1px;
 }
+
+/* hide firepad watermark*/
+a.powered-by-firepad {
+	display: none;
+}
