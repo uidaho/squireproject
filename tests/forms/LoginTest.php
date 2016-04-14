@@ -13,26 +13,24 @@ class LoginTest extends TestCase
      */
     public function testLogin()
     {
-        // Test bad login
         $this->visit('/login')
-            ->type('test_user', 'username')
-            ->type('test_secret', 'password')
-            ->press('submit')
-            ->seePageIs('/login');
+            ->submitForm('submit',[
+                'username' => 'test_user',
+                'password' => 'test_secret',
+            ])->seePageIs('/login');
 
         // Test good login
-        $password = "testing_password";
+        $password = "test_secret";
         $user = factory(App\User::class)->create([
             'username' => 'test_user',
             'password' => bcrypt($password)
         ]);
 
         $this->visit('/login')
-            ->type($user->username, 'username')
-            ->type($password, 'password')
-            ->press('submit')
-            ->see($user->username)
-            ->seePageIs('/projectfinder');
+            ->submitForm('submit',[
+                'username' => 'test_user',
+                'password' => 'test_secret',
+            ])->seePageIs('/projectfinder');
 
         // Delete user for testing login
         App\User::destroy($user->id);

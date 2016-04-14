@@ -12,16 +12,22 @@ class RegisterTest extends TestCase
      *
      * @return void
      */
-    public function testRegistration()
+    public function testShortUsername()
     {
         // Submit short username
         $this->tryRegister('short', 'ok@email.com', 'test_secret', 'test_secret')
             ->seePageIs('/register');
+    }
 
+    public function testBadEmail()
+    {
         // Submit malformed email
         $this->tryRegister('test_user', 'bademail', 'test_secret', 'test_secret')
             ->seePageIs('/register');
+    }
 
+    public function testMismatchedPasswords()
+    {
         // Submit mismatched passwords
         $this->tryRegister('test_user', 'ok@email.com', 'mismatched', 'test_secret')
             ->seePageIs('/register');
@@ -29,11 +35,17 @@ class RegisterTest extends TestCase
         // Submit mismatched passwords
         $this->tryRegister('test_user', 'ok@email.com', 'test_secret', 'mismatched')
             ->seePageIs('/register');
+    }
 
+    public function testShortPassword()
+    {
         // Submit short password
         $this->tryRegister('test_user', 'ok@email.com', 'short', 'short')
             ->seePageIs('/register');
+    }
 
+    public function testGoodRegistration()
+    {
         // Submit a good form
         $this->tryRegister('test_user', 'ok@email.com', 'test_secret', 'test_secret')
             ->seeInDatabase('users', ['username' => 'test_user'])
@@ -48,10 +60,11 @@ class RegisterTest extends TestCase
     private function tryRegister($username, $email, $pass, $passConf)
     {
         return $this->visit('/register')
-            ->type($username, 'username')
-            ->type($email, 'email')
-            ->type($pass, 'password')
-            ->type($passConf, 'password_confirmation')
-            ->press('submit');
+            ->submitForm('submit', [
+                'username' => $username,
+                'email' => $email,
+                'password' => $pass,
+                'password_confirmation' => $passConf
+            ]);
     }
 }
