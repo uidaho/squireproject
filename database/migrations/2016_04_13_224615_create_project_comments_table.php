@@ -14,6 +14,7 @@ class CreateProjectCommentsTable extends Migration
     {
         Schema::create('projectComments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->index();
             $table->integer('project_id')->unsigned()->index();
             //$table->foreign('project_id')->references('id')->on('projects');
             $table->text('body');

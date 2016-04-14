@@ -18,6 +18,8 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
+        $project->load('comments.user');
+
         return view('pages.project', compact('project'));
     }
 
@@ -105,8 +107,27 @@ class ProjectController extends Controller
         $comment = new ProjectComment;
 
         $comment->body = $request->comment;
+        $comment->user_id = Auth::id();
         $project->comments()->save($comment);
+
+        session()->flash('flash_message', 'Comment submitted');
 
         return back();
     }
+
+    /**
+     * Updates a comment on the given project
+     *
+     * @param $request = user entered text, $project project_id for lookup
+     * @return back to same page
+     *
+    public function updateComment(Request $request, ProjectComment $comment)
+    {
+        $comment = new ProjectComment;
+
+        $comment->body = $request->comment;
+
+        return back();
+    }
+     */
 }

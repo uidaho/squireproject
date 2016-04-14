@@ -30,22 +30,28 @@
             @endif
 
             <div class="col-md-6 col-md-offset-3">
-                <br>
+                <br><!-- Remove <br> when actual stylesheet is implemented -->
                 <h6>Comments</h6>
 
                 <ul class="list-group">
                     @foreach($project->comments as $comment)
-                        <li class="list-group-item">{{ $comment->body }} <br> Created at: {{ $comment->created_at }}</li>
+                        <li class="list-group-item">
+                            {{ $comment->body }}
+                            <p class="small"><br>
+                                Created by: <a href="#">{{ $comment->user->username }}</a>
+                                Created at: {{ $comment->created_at }}
+                            </p>
+                        </li>
                     @endforeach
                 </ul>
 
-                <h6>Add a Comment</h6>
-
                 <form class="form-group" method="POST" action="/project/{{ $project->id }}/comments">
                     {!! csrf_field() !!}
-                    
-                    <textarea class="form-control" name="comment"></textarea>
 
+                    <h6>Add a Comment</h6>
+
+                    <textarea class="form-control" name="comment"></textarea>
+                    <br><!-- Remove <br> when actual stylesheet is implemented -->
                     <input class="btn btn-primary" type="submit" name="submit" value="Send">
                 </form>
 
