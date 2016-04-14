@@ -27,7 +27,7 @@ class Project extends Model
      */
     public function getImagePath()
     {
-        return base_path() . '/public/images/projects/product' . $this->id . '.jpg';
+        return '/images/projects/product' . $this->id . '.jpg';
     }
 
     /**
