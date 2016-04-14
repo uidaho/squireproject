@@ -18,9 +18,15 @@ class EditorController extends Controller
      */
     public function editFile($projectname, $filename)
     {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        $userid = Auth::user()->id;
+
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
 
-        return view('editor.edit', ['file' => $file, 'userid' => Auth::user()->id]);
+        return view('editor.edit', ['file' => $file, 'userid' => $userid]);
     }
 
     /**
@@ -56,6 +62,10 @@ class EditorController extends Controller
      */
     public function create(Request $request, $projectname)
     {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
         $this->validate($request, [
             'filename' => 'required|unique:files|max:255',
             'description' => 'required',
@@ -83,6 +93,10 @@ class EditorController extends Controller
 
     public function createView($projectname)
     {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
         if ($projectname) {
             return view('editor.create', ['projectname' => $projectname]);
         } else {
@@ -98,7 +112,11 @@ class EditorController extends Controller
      */
     public function delete($projectname, $filename)
     {
-        $file = File::where('projectname', $projectname)->where('filename', $filename)->distinct()->get();
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
 
         if ($file == null) {
             // TODO: Redirect to an error page
