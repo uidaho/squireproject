@@ -42,16 +42,34 @@
     </main>
 
     <script>
+        function hashCode(str) { // java String#hashCode
+            var hash = 0;
+            for (var i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return hash;
+        }
+        function intToRGB(i){
+            var c = (i & 0x00FFFFFF)
+                    .toString(16)
+                    .toUpperCase();
+
+            return "00000".substring(0, 6 - c.length) + c;
+        }
         function init() {
             var userId = '{{$userid}}';
             var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/{{$file->projectname}}/{{$file->filename}}');
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
+                indentUnit: 2,
+                smartIndent: true,
+                tabSize: 4,
+                readOnly: false,
                 lineNumbers: true,
                 lineWrapping: true,
                 mode: 'text/x-java'});
             var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
                 userId: userId,
-                userColor: '#333'});
+                userColor: intToRGB(hashCode(userId))});
             var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId);
             firepad.on('ready', function() {
                 if (firepad.isHistoryEmpty()) {
