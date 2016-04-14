@@ -6,7 +6,7 @@ var FirepadUserList = (function() {
     this.userId_ = userId;
     this.place_ = place;
     this.firebaseCallbacks_ = [];
-    this.displayName_ = userName + '(' + userId + ')';
+    this.displayName_ = userName + ' (' + userId + ')';
 
     var self = this;
     this.firebaseOn_(ref.root().child('.info/connected'), 'value', function(s) {
