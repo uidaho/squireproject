@@ -21,7 +21,7 @@
             </div>
             @if (Auth::check() && Auth::user()->username == $project->author)
             <div class="project-page-elements">
-                <a href="/project/{{ $project->id }}/delete">
+                <a href="{{ $project->getSlug() }}/delete">
                     <button type="button" id="delete">Delete</button>
                 </a>
             </div>

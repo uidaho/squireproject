@@ -37,7 +37,7 @@
     <section class="grid">
         @foreach($projects as $project)
             <div class="col-1-3 project-teaser">
-                <a href="project/{{ $project->id }}">
+                <a href="{{ $project->getSlug() }}">
                     <img src="/images/projects/product{{ $project->id }}.jpg" alt="Project Image">
                     <h4>{{ $project->title }}</h4>
                     <p>{{ $project->description }}</p>
