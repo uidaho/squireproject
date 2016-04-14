@@ -30,7 +30,7 @@
         @foreach($projects as $project)
         <div class="col-md-4">
             <a href="{{ $project->getSlug() }}">
-                <img src="/images/projects/product{{ $project->id }}.jpg" alt="Project Image">
+                <img src="/images/projects/product{{ $project->getImagePath() }}.jpg" alt="Project Image">
                 <h4>{{ $project->title }}</h4>
                 <p>{{ $project->description }}</p>
                 <p class="team-count">Total members: 30</p>
