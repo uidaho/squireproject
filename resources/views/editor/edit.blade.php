@@ -51,7 +51,7 @@
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
                 lineNumbers: true,
                 lineWrapping: true });
-            var userId = Math.floor(Math.random() * 9999999999).toString();
+            var userId = '{{$userid}}';
             var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
                 richTextToolbar: true,
                 richTextShortcuts: true,

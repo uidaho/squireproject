@@ -20,7 +20,7 @@ class EditorController extends Controller
     {
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
 
-        return view('editor.edit', ['file' => $file]);
+        return view('editor.edit', ['file' => $file, 'userid' => Auth::user()->id]);
     }
 
     /**
