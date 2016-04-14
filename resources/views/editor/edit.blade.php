@@ -6,7 +6,7 @@
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/javascript/javascript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/clike/clike.js"></script>
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
     <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
     <link rel="stylesheet" href="https://www.firepad.io/examples/firepad-userlist.css" />
@@ -47,7 +47,7 @@
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
                 lineNumbers: true,
                 lineWrapping: true,
-                mode: 'javascript'});
+                mode: 'clike'});
             var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
                 userId: userId,
                 userColor: '#333'});
