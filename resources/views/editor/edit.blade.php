@@ -75,7 +75,11 @@
             })();
             var userId = '{{$userid}}';
             var userName = '{{$username}}';
-            var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/{{$file->projectname}}/{{$file->filename}}');
+            var fileName = '{{$file->filename}}';
+            var fileName = fileName.replace(/[.]/gi, "-");
+            var projectName = '{{$file->projectname}}';
+            var projectName = projectName.replace(/[.]/gi, "-");
+            var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/'+projectName+'/'+fileName);
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
                 indentUnit: 2,
                 smartIndent: true,
