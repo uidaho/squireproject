@@ -3,10 +3,14 @@
 @section('head')
     <title>{{$file->projectname}}/{{$file->filename}} | The Squire Project</title>
 
-    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
+    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/javascript/javascript.js"></script>
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
+    <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
     <link rel="stylesheet" href="https://www.firepad.io/examples/firepad-userlist.css" />
-    <!-- <link rel="stylesheet" href="https://demo.firepad.io/demo.css" /> -->
+    <script src="https://www.firepad.io/examples/firepad-userlist.js"></script>
 @stop
 
 @section('mainBody')
@@ -36,22 +40,15 @@
         </div>
     </main>
 
-    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/javascript/javascript.js"></script>
-    <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
-    <script src="https://www.firepad.io/examples/firepad-userlist.js"></script>
-
     <script>
         function init() {
             var userId = '{{$userid}}';
             var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/{{$file->projectname}}/{{$file->filename}}');
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
                 lineNumbers: true,
-                lineWrapping: true });
+                lineWrapping: true,
+                mode: 'javascript'});
             var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-                richTextToolbar: true,
-                richTextShortcuts: true,
                 userId: userId,
                 userColor: '#333'});
             var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId);
