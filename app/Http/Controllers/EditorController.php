@@ -63,7 +63,7 @@ class EditorController extends Controller
 
         $newEntry = File::create([
             'projectname' => $projectname,
-            'filename'  => $filename,
+            'filename' => $filename,
             'type' => $type,
             'description' => $description,
             'contents' => $contents,
@@ -76,7 +76,11 @@ class EditorController extends Controller
 
     public function createView($projectname)
     {
-        return view('editor.create.', ['projectname' => $projectname]);
+        if ($projectname) {
+            return view('editor.create', ['projectname' => $projectname]);
+        } else {
+            // TODO: return error
+        }
     }
 
     /**

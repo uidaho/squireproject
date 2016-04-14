@@ -36,6 +36,7 @@ Route::get('/delete-project/{id}', 'ProjectController@delete');
  *  Editor Controller   *
  *-----------------------*/
 Route::get('/editor/create/{projectname}', 'EditorController@createView');
+Route::post('/editor/create/{projectname}', 'EditorController@create');
 Route::get('/editor/delete/{projectname}/{filename}', 'EditorController@delete');
 Route::get('/editor/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('/editor/{projectname}', 'EditorController@listFiles');

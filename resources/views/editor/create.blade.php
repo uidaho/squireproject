@@ -5,6 +5,15 @@
 @endsection
 
 @section('mainBody')
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <main class="container primary-main row">
         <form role="form" class="project-form" action="{{ url('/editor/create/'.$projectname) }}" method="post" enctype="multipart/form-data">
             {!! csrf_field() !!}
