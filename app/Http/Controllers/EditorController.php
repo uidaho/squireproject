@@ -12,12 +12,13 @@ class EditorController extends Controller
     /**
      * Renders the editor view for the given project and file
      *
-     * @param $project project name $file file name
+     * @param string $projectname project name
+     * @param string $filename file name
      * @return mixed
      */
     public function editFile($projectname, $filename)
     {
-        $file = File::where('projectname', $projectname)->where('filename', $filename)->distinct()->get();
+        $file = File::where('projectname', $projectname)->where('filename', $filename)->first();
 
         if ($file) {
             return view('editor.edit', ['file' => $file]);
@@ -29,7 +30,7 @@ class EditorController extends Controller
     /**
      * Renders the file list view for the given project
      *
-     * @param $project project name
+     * @param string $projectname project name
      * @return mixed
      */
     public function listFiles($projectname)
