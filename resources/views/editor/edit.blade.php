@@ -47,7 +47,7 @@
 
     <script>
         function init() {
-            var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/{{$editor->projectname}}/{{$editor->filename}}');
+            var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/{{$file->projectname}}/{{$file->filename}}');
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
                 lineNumbers: true,
                 lineWrapping: true });
@@ -59,7 +59,7 @@
             var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId);
             firepad.on('ready', function() {
                 if (firepad.isHistoryEmpty()) {
-                    firepad.setText('/* Time to get programming! */');
+                    firepad.setText('{{$file->contents}}');
                 }});
         }
         init();
