@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
     <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
     <link rel="stylesheet" href="https://www.firepad.io/examples/firepad-userlist.css" />
-    <script src="https://www.firepad.io/examples/firepad-userlist.js"></script>
+    <script src="/js/firepad-userlist.js"></script>
 @stop
 
 @section('mainBody')
@@ -74,6 +74,7 @@
                 }
             })();
             var userId = '{{$userid}}';
+            var userName = '{{$username}}';
             var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/{{$file->projectname}}/{{$file->filename}}');
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
                 indentUnit: 2,
@@ -86,7 +87,7 @@
             var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
                 userId: userId,
                 userColor: StringToColor.next(userId)});
-            var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId);
+            var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId, userName);
             firepad.on('ready', function() {
                 if (firepad.isHistoryEmpty()) {
                     firepad.setText('{{$file->contents}}');

@@ -23,10 +23,11 @@ class EditorController extends Controller
         }
 
         $userid = Auth::user()->id;
+        $username = Auth::user()->name;
 
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
 
-        return view('editor.edit', ['file' => $file, 'userid' => $userid]);
+        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username]);
     }
 
     /**
