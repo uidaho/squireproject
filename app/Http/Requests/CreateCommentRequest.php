@@ -12,7 +12,7 @@ class CreateCommentRequest extends Request
      */
     public function authorize()
     {
-        return $this->user() != null;
+        return true;
     }
 
     /**
@@ -35,12 +35,10 @@ class CreateCommentRequest extends Request
     public function messages()
     {
         return [
-            'comment_body' => [
-                'required' => 'A comment is required.',
-                'min' => 'Your comment must include at least 6 characters.',
-                'max' => 'Your comment must be shorter than 256 characters.',
-                'regex' => 'Your comment must contain a letter.',
-            ]
+            'comment_body.required' => 'A comment is required.',
+            'comment_body.min' => 'Your comment must include at least 6 characters.',
+            'comment_body.max' => 'Your comment must be shorter than 256 characters.',
+            'comment_body.regex' => 'Your comment must contain a letter.',
         ];
     }
 }

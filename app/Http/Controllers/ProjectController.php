@@ -111,10 +111,6 @@ class ProjectController extends Controller
         }
         else                                                                                //User is logged in
         {
-            /*$this->validate($request, [
-                'comment_body' => 'required|min:6|max:256|regex:/(?=.*[a-zA-Z])(.*?)/s'
-            ]);*/
-
             $project->addComment(
                 new ProjectComment($request->all())
             );
