@@ -14,9 +14,9 @@ class ProjectController extends Controller
      * @param $id project id for lookup
      * @return The project page view
      */
-    public function view($id)
+    public function view(Project $project)
     {
-        return view('pages.project', ['project' => Project::find($id)]);
+        return view('pages.project', compact('project'));
     }
 
     /**
