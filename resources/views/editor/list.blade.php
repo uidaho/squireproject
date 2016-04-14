@@ -25,7 +25,7 @@
     <section class="grid">
         @foreach($files as $file)
             <div class="col-1-3 project-teaser">
-                <a href="/editor/{{$file->projectname}}/{{$file->filename}}">
+                <a href="/editor/edit/{{$file->projectname}}/{{$file->filename}}">
                     <h4>{{$file->filename}}</h4>
                     <p>Description: {{$file->type}}</p>
                     <p>Created by: {{$file->creator}}</p>
