@@ -48,12 +48,13 @@ class EditorController extends Controller
     /**
      * Creates a new file using the input from the form
      *
+     * @param Request  $request
      * @param $projectname project name
      * @return mixed
      */
-    public function create($projectname)
+    public function create(Request $request, $projectname)
     {
-        $filename = Request::input('filename');
+        $filename = $request->input('filename');
         $type = "file"; // TODO: just type file for now, no folders
         $description = Request::input('description');
         $contents = "The default file contents.";
@@ -71,6 +72,11 @@ class EditorController extends Controller
         ]);
 
         return redirect('/editor/' . $newEntry->projectname . '/' . $newEntry->filename);
+    }
+
+    public function createView($projectname)
+    {
+        return view('editor.create.', ['projectname' => $projectname]);
     }
 
     /**
