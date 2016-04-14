@@ -50,7 +50,10 @@
 
                     <h6>Add a Comment</h6>
 
-                    <textarea class="form-control" name="comment"></textarea>
+                    @if ($errors->has('comment'))
+                        <span class="error-auth">{{ $errors->first('comment') }}</span>
+                    @endif
+                    <textarea class="form-control" name="comment">{{ old('comment') }}</textarea>
                     <br><!-- Remove <br> when actual stylesheet is implemented -->
                     <input class="btn btn-primary" type="submit" name="submit" value="Send">
                 </form>

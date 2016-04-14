@@ -104,12 +104,17 @@ class ProjectController extends Controller
      */
     public function addComment(Request $request, Project $project)
     {
+
+        $this->validate($request, [
+            'comment' => 'required|min:6|max:256|regex:/^(?=.*[a-zA-Z])([a-zA-Z0-9 -+_!@#$%^&*.,?]+)$/'
+        ]);
+
         $comment = new ProjectComment;
 
         $comment->body = $request->comment;
         $comment->user_id = Auth::id();
         $project->comments()->save($comment);
-
+        
         session()->flash('flash_message', 'Comment submitted');
 
         return back();
@@ -126,6 +131,8 @@ class ProjectController extends Controller
         $comment = new ProjectComment;
 
         $comment->body = $request->comment;
+        $comment->user_id = Auth::id();
+        $project->comments()->save($comment);
 
         return back();
     }
