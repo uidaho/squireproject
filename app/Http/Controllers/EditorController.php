@@ -89,7 +89,7 @@ class EditorController extends Controller
             'parent' => $parent
         ]);
 
-        return redirect('/editor/' . $newEntry->projectname . '/' . $newEntry->filename);
+        return redirect('/editor/edit/' . $newEntry->projectname . '/' . $newEntry->filename);
     }
 
     public function createView($projectname)
