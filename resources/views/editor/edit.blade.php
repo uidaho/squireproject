@@ -45,11 +45,7 @@
     <script>
         function init() {
             var userId = '{{$userid}}';
-
             var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/{{$file->projectname}}/{{$file->filename}}');
-            var editor = ace.edit('firepad');
-            var firepad = Firepad.fromACE(firepadRef, editor);
-
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
                 lineNumbers: true,
                 lineWrapping: true });
