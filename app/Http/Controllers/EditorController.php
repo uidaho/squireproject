@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\File;
-//use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
 
@@ -57,7 +57,7 @@ class EditorController extends Controller
     {
         $filename = $request->input('filename');
         $type = "file"; // TODO: just type file for now, no folders
-        $description = Request::input('description');
+        $description = $request->input('description');
         $contents = "The default file contents.";
         $creator = Auth::user()->id;
         $parent = 0; // TODO: no parent for now, flat file system
