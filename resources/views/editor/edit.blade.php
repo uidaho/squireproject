@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.css" />
     <link rel="stylesheet" href="https://www.firepad.io/examples/firepad-userlist.css" />
-    <link rel="stylesheet" href="https://demo.firepad.io/demo.css" />
+    <!-- <link rel="stylesheet" href="https://demo.firepad.io/demo.css" /> -->
 @stop
 
 @section('mainBody')
