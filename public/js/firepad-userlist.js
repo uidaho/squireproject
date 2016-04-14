@@ -67,8 +67,9 @@ var FirepadUserList = (function() {
 
     var nameInput = elt('input', null, { type: 'text', 'class': 'firepad-userlist-name-input'} );
     nameInput.value = this.displayName_;
-
+      
     var nameHint = elt('div', 'ENTER YOUR NAME', { 'class': 'firepad-userlist-name-hint'} );
+      nameHint.style.display = 'none'; // hide hint
 
     // Update Firebase when name changes.
     on(nameInput, 'change', function(e) {
