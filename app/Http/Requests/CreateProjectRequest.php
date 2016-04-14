@@ -24,7 +24,7 @@ class CreateProjectRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|unique:projects|' . $this->minMaxFormatter('title'),
+            'title' => 'required|unique:projects|regex:/([A-Za-z0-9_ .]+)/|' . $this->minMaxFormatter('title'),
             'description' => 'required|' . $this->minMaxFormatter('description'),
             'project-body' => 'required|' . $this->minMaxFormatter('project-body'),
             'thumbnail' => 'required|image|max:2048'    // max image size 2mb

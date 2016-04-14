@@ -11,6 +11,16 @@ class Project extends Model
     ];
 
     /**
+     * Gets this projects url
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return '/project/' . str_replace(' ', '-', $this->title);
+    }
+
+    /**
      * Get the path to the image for this project.
      *
      * @return string the path

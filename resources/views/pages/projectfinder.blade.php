@@ -29,7 +29,7 @@
     <div class="row">
         @foreach($projects as $project)
         <div class="col-md-4">
-            <a href="project/{{ $project->id }}">
+            <a href="{{ $project->getSlug() }}">
                 <img src="/images/projects/product{{ $project->id }}.jpg" alt="Project Image">
                 <h4>{{ $project->title }}</h4>
                 <p>{{ $project->description }}</p>
