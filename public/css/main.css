@@ -633,3 +633,24 @@ Errors
 	letter-spacing: .1px;
 }
 
+/*
+======================================
+Animations
+======================================
+*/
+
+/* Source: http://jsfiddle.net/nprather/WKSrV/3/ */
+@-webkit-keyframes yellow-fade {
+	0% {background: gold;}
+	100% {background: none;}
+}
+@keyframes yellow-fade {
+	0% {background: gold;}
+	100% {background: none;}
+}
+
+.highlight {
+	-webkit-animation: yellow-fade 2s ease-in 1;
+	animation: yellow-fade 2s ease-in 1;
+}
+

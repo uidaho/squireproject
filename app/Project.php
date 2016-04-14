@@ -10,22 +10,6 @@ class Project extends Model
         'title', 'author', 'description', 'body', 'created_at', 'updated_at'
     ];
 
-    public static function attributeLengths()
-    {
-        return [
-            'title' => Project::minMaxHelper(2, 50),
-            'description' => Project::minMaxHelper(10, 100),
-            'project-body' => Project::minMaxHelper(100, 65535)
-        ];
-    }
-
-    private static function minMaxHelper($min, $max) {
-        return [
-            'min' => $min,
-            'max' => $max
-        ];
-    }
-
     /**
      * Get the path to the image for this project.
      *
@@ -52,5 +36,40 @@ class Project extends Model
         }
 
         return $res;
+    }
+
+    /**
+     * Checks if the provided is non-null and authored this project
+     *
+     * @param $user The user to check (nullable)
+     * @return bool if the provided user authored this project
+     */
+    public function isUserAuthor($user)
+    {
+        if ($user == null) {
+            return false;
+        }
+        return $user->username == $this->author;
+    }
+
+    /**
+     * Returns the array of lengths required for the attributes.
+     *
+     * @return array
+     */
+    public static function attributeLengths()
+    {
+        return [
+            'title' => Project::minMaxHelper(2, 50),
+            'description' => Project::minMaxHelper(10, 100),
+            'project-body' => Project::minMaxHelper(100, 65535)
+        ];
+    }
+
+    private static function minMaxHelper($min, $max) {
+        return [
+            'min' => $min,
+            'max' => $max
+        ];
     }
 }

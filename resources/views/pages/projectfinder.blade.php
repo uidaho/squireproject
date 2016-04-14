@@ -8,6 +8,11 @@
     <!-- Search -->
     <div class="row">
         <div class="col-md-12">
+            <section class ="grid">
+                @if(Session::has('delete-success'))
+                    <div class="alert alert-info highlight col-sm-1" >{{ Session::get('delete-success') }}</div>
+                @endif
+            </section>
             <ul class="project-search">
                 <li><input class="search-textbox" type="text" name="searchName" placeholder="Project title..."></li><!--
                     --><li><input class="btn btn-search" type="button" name="search" value="Search"></li>

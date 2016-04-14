@@ -2,10 +2,6 @@
 
 namespace App\Http\Requests;
 
-
-use App\Project;
-use Illuminate\Support\Facades\Auth;
-
 class DeleteProjectRequest extends Request
 {
     /**
@@ -15,8 +11,8 @@ class DeleteProjectRequest extends Request
      */
     public function authorize()
     {
-        $user = $this->user();
-        return $this->user() != null && $this->project->author == $user->username;
+        return $this->project->isUserAuthor($this->user());
+
     }
 
     /**
