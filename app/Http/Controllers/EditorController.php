@@ -55,6 +55,11 @@ class EditorController extends Controller
      */
     public function create(Request $request, $projectname)
     {
+        $this->validate($request, [
+            'filename' => 'required|unique:files|max:255',
+            'description' => 'required',
+        ]);
+
         $filename = $request->input('filename');
         $type = "file"; // TODO: just type file for now, no folders
         $description = $request->input('description');
