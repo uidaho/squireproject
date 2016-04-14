@@ -18,8 +18,8 @@ class EditorController extends Controller
      */
     public function editFile($projectname, $filename)
     {
-        $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
-        
+        $file = File::findOrFail(1);//where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
+
         return view('editor.edit', ['file' => $file]);
     }
 
