@@ -38,7 +38,7 @@ class EditorController extends Controller
      */
     public function listFiles($projectname)
     {
-        $files = File::where('projectname', $projectname)->findOrFail();
+        $files = File::where('projectname', $projectname)->get();
 
         return view('editor.list', ['files' => $files]);
     }
