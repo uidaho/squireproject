@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\DeleteProjectRequest;
 use App\Project;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,30 +63,15 @@ class ProjectController extends Controller
      * Deletes the project give by the id, only if the user
      * is authenticated and is the author.
      *
-     * @param $id the project id for lookup
+     * @param DeleteProjectRequest $request
      * @return mixed
      */
-    public function delete($id)
+    public function delete(DeleteProjectRequest $request)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-
-        $project = Project::find($id);
-        if ($project == null) {
-            // TODO: Redirect to an error page
-            return redirect('/projectfinder');
-        }
-
-        if ($project->author == Auth::user()->username) {
-            $project->delete();
-            $imagePath = base_path() . '/public/images/projects/product' . $id . '.jpg';
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-        }
+        $project = $request->project;
+        $project->delete();
 
         // TODO: Notice of success?
-        return redirect('/projectfinder');
+        return redirect()->action('PagesController@projectfinder');
     }
 }
