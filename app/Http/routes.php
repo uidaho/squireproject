@@ -46,4 +46,3 @@ Route::get('/delete-project/{id}', 'ProjectController@delete');
 
 //Project Comments
 Route::post('project/{project}/comments', 'ProjectController@addComment');
-//Route::patch('/comments/{comment}', 'ProjectController@updateComment'); //Edit a comment

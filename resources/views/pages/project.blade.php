@@ -52,7 +52,12 @@
 
                     @if ($errors->has('comment'))
                         <span class="error-auth">{{ $errors->first('comment') }}</span>
+                    @elseif(Session::has('guestComment'))
+                        <span class="error-auth">{{ Session::get('guestComment') }}</span>
+                    @elseif(Session::has('userComment'))
+                        <span class="">{{ Session::get('userComment') }}</span>
                     @endif
+                    
                     <textarea class="form-control" name="comment">{{ old('comment') }}</textarea>
                     <br><!-- Remove <br> when actual stylesheet is implemented -->
                     <input class="btn btn-primary" type="submit" name="submit" value="Send">

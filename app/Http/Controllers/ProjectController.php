@@ -6,6 +6,7 @@ use App\Project;
 use App\ProjectComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 //use Illuminate\Support\Facades\Request;
 
 class ProjectController extends Controller
@@ -97,13 +98,19 @@ class ProjectController extends Controller
     }
 
     /**
-     * Adds the comment to the given project
+     * Adds the comment to the given project as long as the user is logged in
      *
      * @param $request = user entered text, $project project_id for lookup
      * @return back to same page
      */
     public function addComment(Request $request, Project $project)
     {
+        if(Auth::guest())                                               //Checks if user is not logged in
+        {
+            Session::flash('guestComment', 'You must be logged in to submit a comment');
+            return back();
+        }
+
 
         $this->validate($request, [
             'comment' => 'required|min:6|max:256|regex:/^(?=.*[a-zA-Z])([a-zA-Z0-9 -+_!@#$%^&*.,?]+)$/'
@@ -114,27 +121,9 @@ class ProjectController extends Controller
         $comment->body = $request->comment;
         $comment->user_id = Auth::id();
         $project->comments()->save($comment);
-        
-        session()->flash('flash_message', 'Comment submitted');
+
+        Session::flash('userComment', 'Comment submitted');
 
         return back();
     }
-
-    /**
-     * Updates a comment on the given project
-     *
-     * @param $request = user entered text, $project project_id for lookup
-     * @return back to same page
-     *
-    public function updateComment(Request $request, ProjectComment $comment)
-    {
-        $comment = new ProjectComment;
-
-        $comment->body = $request->comment;
-        $comment->user_id = Auth::id();
-        $project->comments()->save($comment);
-
-        return back();
-    }
-     */
 }
