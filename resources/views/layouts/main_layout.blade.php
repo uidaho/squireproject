@@ -85,11 +85,10 @@
                             </ul>
                         </div>
                     </nav>
-
-                    <!-- CONTENT -->
-                    @yield('mainBody')
                 </div>
             </div>
+            <!-- CONTENT -->
+            @yield('mainBody')
         </div>
     </body>
 </html>
