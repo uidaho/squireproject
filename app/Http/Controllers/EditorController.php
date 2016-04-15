@@ -41,6 +41,10 @@ class EditorController extends Controller
     {
         $files = File::where('projectname', $projectname)->get();
 
+        if ($files == null) {
+            return abort(404);
+        }
+
         return view('editor.list', ['files' => $files]);
     }
 
