@@ -23,14 +23,22 @@
                 <label for="title">Name</label>
                 <input class="form-control" type="text" id="filename" name="filename" placeholder="filename.txt">
                 @foreach ($errors->get('filename') as $error)
-                    <li>{{$error}}</li>
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        {{$error}}
+                    </div>
                 @endforeach
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
                 <input class="form-control" type="text" id="description" name="description" placeholder="A short description" maxlength="100" size="88" height="2">
                 @foreach ($errors->get('description') as $error)
-                    <li>{{$error}}</li>
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        {{$error}}
+                    </div>
                 @endforeach
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
