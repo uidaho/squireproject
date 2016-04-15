@@ -41,7 +41,7 @@ class EditorController extends Controller
     {
         $files = File::where('projectname', $projectname)->get();
 
-        if (!$files[0]) {
+        if (empty($files)) {
             return redirect('/editor/create/$projectname');
         }
 
