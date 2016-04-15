@@ -16,6 +16,7 @@ before_script:
   - mysql -e 'create database squire_test;'
   - composer self-update
   - composer install --no-interaction
+  - php artisan migrate
 
 script: 
   - vendor/bin/phpunit

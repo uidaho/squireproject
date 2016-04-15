@@ -52,7 +52,7 @@
                     </label>
                 </fieldset>
                 <fieldset class="account-action group">
-                    <input class="btn" type="submit">
+                    <input class="btn" type="submit" id="submit">
                     <label>
                         <input type="checkbox" name="remember"> Remember Me
                     </label>

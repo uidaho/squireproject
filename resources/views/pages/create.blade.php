@@ -29,7 +29,7 @@
             <label for="project-body">About The Project</label>
             <textarea class="form-control" id="project-body" name="project-body" rows="15" placeholder="All the details of your project"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
         <a href="/projectfinder">
             <button type="button" class="btn btn-danger">Cancel</button>
         </a>

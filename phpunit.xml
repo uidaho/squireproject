@@ -9,8 +9,8 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Application Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="Full Test Suite">
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -24,4 +24,7 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
     </php>
+    <logging>
+        <log type="testdox-text" target="php://stdout"/>
+    </logging>
 </phpunit>
