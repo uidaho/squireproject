@@ -17,6 +17,36 @@ class CreateProjectRequest extends Request
     }
 
     /**
+     * Helper to get the title for this request.
+     *
+     * @return array|string
+     */
+    public function getTitle()
+    {
+        return $this->input('title');
+    }
+
+    /**
+     * Helper to get the description for this request.
+     *
+     * @return array|string
+     */
+    public function getDescription()
+    {
+        return $this->input('description');
+    }
+
+    /**
+     * Helper to get the body for this request.
+     *
+     * @return array|string
+     */
+    public function getBody()
+    {
+        return $this->input('project-body');
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,9 +54,9 @@ class CreateProjectRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|unique:projects|regex:/([A-Za-z0-9_ .]+)/|' . $this->minMaxFormatter('title'),
-            'description' => 'required|' . $this->minMaxFormatter('description'),
-            'project-body' => 'required|' . $this->minMaxFormatter('project-body'),
+            'title' => 'required|unique:projects|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('title'),
+            'description' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('description'),
+            'project-body' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('project-body'),
             'thumbnail' => 'required|image|max:2048'    // max image size 2mb
         ];
     }
@@ -37,9 +67,9 @@ class CreateProjectRequest extends Request
      * @param $field
      * @return string formatted (i.e. "min:2|max:20")
      */
-    private function minMaxFormatter($field)
+    private function betweenFormatter($field)
     {
-        return 'min:' . Project::attributeLengths()[$field]['min'] . '|max:' . Project::attributeLengths()[$field]['max'];
+        return 'between:' . Project::attributeLengths()[$field]['min'] . ',' . Project::attributeLengths()[$field]['max'];
     }
 
     /**
@@ -50,27 +80,22 @@ class CreateProjectRequest extends Request
     public function messages()
     {
         return [
-            'title' => [
-                'required' => 'A title is required.',
-                'unique' => 'The title must be unique.',
-                'min' => 'The title must be longer.',
-                'max' => 'The title must be shorter than 50 characters.',
-            ],
-            'description' => [
-                'required' => 'A description is required.',
-                'min' => 'Description must be at least 10 characters.',
-                'max' => 'Description must be shorter than 100 characters.',
-            ],
-            'project-body' => [
-                'required' => 'A full explanation of the project is required.' ,
-                'min' => 'Project explanation must be at least 100 characters.',
-                'max' => 'Project explanation must be shorter than 65535 characters.',
-            ],
-            'thumbnail' => [
-                'required' => 'An image for the project is required.',
-                'max' => 'The file is larger than 2mb.',
-                'image' => 'File is not an image.',
-            ]
+            'title.required' => 'A title is required.',
+            'title.unique' => 'The title must be unique.',
+            'title.regex' => 'The :attribute must contain at least one letter/number.',
+            'title.between' => 'The :attribute must be from :min to :max characters.',
+
+            'description.required' => 'A description is required.',
+            'description.between' => 'Description must be from :min to :max characters.',
+            'description.regex' => 'The :attribute must contain at least one letter/number.',
+
+            'project-body.required' => 'A full explanation of the project is required.' ,
+            'project-body.between' => 'Project explanation must be between :min and :max characters.',
+            'project-body.regex' => 'The :attribute must contain at least one letter/number.',
+
+            'thumbnail.required' => 'An image for the project is required.',
+            'thumbnail.max' => 'The file is larger than .',
+            'thumbnail.image' => 'File is not an image.',
         ];
     }
 }
