@@ -16,24 +16,46 @@
 
 @section('mainBody')
     <main class="container editor">
-        <div class="row">
-            <div class="project-page-elements">
-                <strong>{{$file->projectname}}/{{$file->filename}}</strong>
-                <a href="/editor/create/{{$file->projectname}}">
-                    <button type="button" id="delete">Create</button>
-                </a>
-                <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
-                    <button type="button" id="delete">Rename</button>
-                </a>
-                <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
-                    <button type="button" id="delete">Delete</button>
-                </a>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="/editor">Home</a> <span class="divider">/</span>
+                        </li>
+                        <li>
+                            <a href="/editor/{{$file->projectname}}">{{$file->projectname}}</a> <span class="divider">/</span>
+                        </li>
+                        <li class="active">
+                            <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
+                        </li>
+                    </ul>
+                    <div class="btn-group">
+                        <a href="/editor/create/{{$file->projectname}}">
+                            <button class="btn btn-default" type="button">
+                                <em class="glyphicon glyphicon-align-left"></em> Create
+                            </button>
+                        </a>
+                        <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
+                            <button class="btn btn-default" type="button">
+                                <em class="glyphicon glyphicon-align-center"></em> Rename
+                            </button>
+                        </a>
+                        <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
+                            <button class="btn btn-default" type="button">
+                                <em class="glyphicon glyphicon-align-right"></em> Delete
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div id="firepad-container">
-                <div id="userlist"></div>
-                <div id="firepad"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="firepad-container">
+                        <div id="userlist"></div>
+                        <div id="firepad"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
