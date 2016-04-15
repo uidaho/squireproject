@@ -75,7 +75,10 @@ class EditorController extends Controller
         $filename = $request->input('filename');
         $type = "file"; // TODO: just type file for now, no folders
         $description = $request->input('description');
-        $contents = "The default file contents.";
+        
+        $quote = json_decode(file_get_contents('http://api.icndb.com/jokes/random?limitTo=[nerdy]&exclude=[explicit]'));
+
+        $contents = "/* ".$quote." */";
         $creator = Auth::user()->id;
         $parent = 0; // TODO: no parent for now, flat file system
 
