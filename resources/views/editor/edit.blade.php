@@ -47,14 +47,12 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+
             <div id="firepad-container">
                 <div id="userlist"></div>
                 <div id="firepad"></div>
             </div>
-        </div>
-    </div>
+
     <script>
         function hashCode(str) { // java String#hashCode
             var hash = 0;
