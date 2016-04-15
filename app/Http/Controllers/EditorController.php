@@ -78,7 +78,7 @@ class EditorController extends Controller
 
         $quote = json_decode(utf8_encode(file_get_contents('http://api.icndb.com/jokes/random?limitTo=[nerdy]&exclude=[explicit]')));
 
-        $contents = "/* ".$quote." */";
+        $contents = "/* ".$quote->value->joke." */";
         $creator = Auth::user()->id;
         $parent = 0; // TODO: no parent for now, flat file system
 
