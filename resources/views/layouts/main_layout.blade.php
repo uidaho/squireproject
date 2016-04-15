@@ -6,7 +6,7 @@
 
         @yield('head')
 
-        <!-- <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}"> -->
+        <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
         <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
         <!-- bootstrap and theme -->
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
