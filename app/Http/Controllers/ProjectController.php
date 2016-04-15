@@ -43,15 +43,11 @@ class ProjectController extends Controller
      */
     public function create(CreateProjectRequest $request)
     {
-        $title = $request->input('title');
-        $description = $request->input('description');
-        $body = $request->input('project-body');
-
         $newEntry = Project::create([
             'author' => Auth::user()->username,
-            'title'  => $title,
-            'description' => $description,
-            'body' => $body
+            'title'  => $request->getTitle(),
+            'description' => $request->getDescription(),
+            'body' => $request->getBody()
         ]);
 
         $thumbnail = $request->file('thumbnail');
