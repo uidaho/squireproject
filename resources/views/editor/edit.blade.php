@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
     <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
     <link rel="stylesheet" href="https://www.firepad.io/examples/firepad-userlist.css" />
-    <script src="/js/firepad-userlist.js"></script>
+    <link rel="stylesheet" href="{{ URL::asset('css/firepad-userlist.css') }}" />
+    <script src="{{ URL::asset('js/firepad-userlist.js') }}"></script>
 @stop
 
 @section('mainBody')
