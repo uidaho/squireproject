@@ -10,7 +10,7 @@
     <main class="container project-page">
         <div class="row">
             <div class="col-1-2">
-                <img src="/images/projects/product{{ $project->id }}.jpg" alt="Project Image" border="1px">
+                <img src="{{ $project->getImagePath() }}" alt="Project Image" border="1px">
             </div>
             <div class="col-1-2">
                 <h5>{{ $project->title }} by {{ $project->author  }}</h5>
@@ -21,7 +21,7 @@
             </div>
             @if (Auth::check() && Auth::user()->username == $project->author)
             <div class="project-page-elements">
-                <a href="/delete-project/{{ $project->id }}">
+                <a href="{{ $project->getSlug() }}/delete">
                     <button type="button" id="delete">Delete</button>
                 </a>
             </div>

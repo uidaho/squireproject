@@ -13,6 +13,12 @@
 <main class="primary-main row project-main">
 
     <section class="container">
+        <section class ="grid">
+        @if(Session::has('delete-success'))
+            <div class="alert alert-info highlight col-sm-1" >{{ Session::get('delete-success') }}</div>
+        @endif
+        </section>
+
         <ul class="project-search">
             <li><input class="search-textbox" type="text" name="searchName" placeholder="Project title..."></li><!--
 			--><li><input class="btn btn-search" type="button" name="search" value="Search"></li>
@@ -31,8 +37,8 @@
     <section class="grid">
         @foreach($projects as $project)
             <div class="col-1-3 project-teaser">
-                <a href="project/{{ $project->id }}">
-                    <img src="/images/projects/product{{ $project->id }}.jpg" alt="Project Image">
+                <a href="{{ $project->getSlug() }}">
+                    <img src="{{ $project->getImagePath() }}" alt="Project Image">
                     <h4>{{ $project->title }}</h4>
                     <p>{{ $project->description }}</p>
                     <p class="team-count">Total members: 30</p>

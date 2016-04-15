@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Project;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -24,9 +25,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
-
         parent::boot($router);
+
+        $router->bind('project', function($title) {
+            $title = str_replace('-', ' ', $title);
+            return Project::where('title', $title)->first();
+        });
     }
 
     /**

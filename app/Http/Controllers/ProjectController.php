@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\DeleteProjectRequest;
 use App\Project;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
     /**
      * Renders the Project View for the given id
      *
-     * @param $id project id for lookup
+     * @param Project $project
      * @return The project page view
+     * @internal param Project $id id for lookup
      */
-    public function view($id)
+    public function view(Project $project)
     {
-        return view('pages.project', ['project' => Project::find($id)]);
+        return view('pages.project', ['project' => $project]);
     }
 
     /**
@@ -24,71 +27,49 @@ class ProjectController extends Controller
      *
      * @return mixed
      */
-    public function createProjectPage()
+    public function createForm()
     {
         if (Auth::guest()) {
             return redirect('/login');
         }
-        return view('pages.create');
+        return view('pages.project-create');
     }
 
     /**
      * Creates a new project using the input from the form
      *
+     * @param CreateProjectRequest $request The validated request
      * @return mixed
      */
-    public function create()
+    public function create(CreateProjectRequest $request)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-        $title = Request::input('title');
-        $description = Request::input('description');
-        $body = Request::input('project-body');
         $newEntry = Project::create([
             'author' => Auth::user()->username,
-            'title'  => $title,
-            'description' => $description,
-            'body' => $body
+            'title'  => $request->getTitle(),
+            'description' => $request->getDescription(),
+            'body' => $request->getBody()
         ]);
 
-        if (Request::hasFile('thumbnail')) {
-            $path = str_replace('/app', '', app_path());
-            $thumbnail = Request::file('thumbnail');
-            $thumbnail->move($path . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
-        }
+        $thumbnail = $request->file('thumbnail');
+        $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
-        return redirect('/project/' . $newEntry->id);
+        return redirect($newEntry->getSlug());
     }
 
     /**
      * Deletes the project give by the id, only if the user
      * is authenticated and is the author.
      *
-     * @param $id the project id for lookup
+     * @param DeleteProjectRequest $request
      * @return mixed
      */
-    public function delete($id)
+    public function delete(DeleteProjectRequest $request)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
+        $project = $request->project;
+        $title = $project->title;
+        $project->delete();
 
-        $project = Project::find($id);
-        if ($project == null) {
-            // TODO: Redirect to an error page
-            return redirect('/projectfinder');
-        }
-
-        if ($project->author == Auth::user()->username) {
-            $project->delete();
-            $imagePath = base_path() . '/public/images/projects/product' . $id . '.jpg';
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
-        }
-
-        // TODO: Notice of success?
-        return redirect('/projectfinder');
+        Session::flash('delete-success', 'Successfully deleted the project "' . $title .'"');
+        return redirect()->action('PagesController@projectfinder');
     }
 }
