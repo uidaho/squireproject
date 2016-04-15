@@ -28,22 +28,24 @@
                     <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
                 </li>
             </ul>
-            <div class="btn-group" role="group" aria-label="Normal button group">
-                <a href="/editor/create/{{$file->projectname}}">
-                    <button class="btn btn-default" type="button">
-                        <em class="glyphicon glyphicon-align-left"></em> Create
-                    </button>
-                </a>
-                <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
-                    <button class="btn btn-default" type="button">
-                        <em class="glyphicon glyphicon-align-center"></em> Rename
-                    </button>
-                </a>
-                <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
-                    <button class="btn btn-default" type="button">
-                        <em class="glyphicon glyphicon-align-right"></em> Delete
-                    </button>
-                </a>
+            <div class="btn-toolbar" role="toolbar" aria-label="Editor toolbar">
+                <div class="btn-group" role="group" aria-label="File button group">
+                    <a href="/editor/create/{{$file->projectname}}">
+                        <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-plus"></em> Create
+                        </button>
+                    </a>
+                    <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
+                        <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-edit"></em> Rename
+                        </button>
+                    </a>
+                    <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
+                        <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-remove"></em> Delete
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
