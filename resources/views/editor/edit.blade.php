@@ -28,7 +28,7 @@
                     <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
                 </li>
             </ul>
-            <div class="btn-group">
+            <div class="btn-group" role="group" aria-label="Normal button group">
                 <a href="/editor/create/{{$file->projectname}}">
                     <button class="btn btn-default" type="button">
                         <em class="glyphicon glyphicon-align-left"></em> Create
