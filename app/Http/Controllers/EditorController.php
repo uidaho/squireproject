@@ -75,8 +75,8 @@ class EditorController extends Controller
         $filename = $request->input('filename');
         $type = "file"; // TODO: just type file for now, no folders
         $description = $request->input('description');
-        
-        $quote = json_decode(file_get_contents('http://api.icndb.com/jokes/random?limitTo=[nerdy]&exclude=[explicit]'));
+
+        $quote = json_decode(utf8_encode(file_get_contents('http://api.icndb.com/jokes/random?limitTo=[nerdy]&exclude=[explicit]')));
 
         $contents = "/* ".$quote." */";
         $creator = Auth::user()->id;
