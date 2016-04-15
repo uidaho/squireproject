@@ -11,7 +11,7 @@
             <h5>{{ $project->title }} by {{ $project->author  }}</h5>
             <h4>{{ $project->description }}</h4>
             <div class="jumbotron well">
-                <pre style="white-space: pre-wrap">{{ $project->body }}</pre>
+                {{ $project->body }}
             </div>
             @if (Auth::check() && Auth::user()->username == $project->author)
             <a href="/delete-project/{{ $project->id }}">
