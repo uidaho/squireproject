@@ -99,7 +99,7 @@ class EditorController extends Controller
             $quote = Cache::get('EditorController@quoteOfTheDay');
         } else {
             $quote = file_get_contents('http://api.icndb.com/jokes/random?limitTo=[nerdy]&exclude=[explicit]');
-            $quote = json_decode(utf8_encode(html_entity_decode($quote->value->joke)));
+            $quote = json_decode(utf8_encode(html_entity_decode($quote)))->value->joke;
             Cache::put('EditorController@quoteOfTheDay', $quote, 1);
         }
 
