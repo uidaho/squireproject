@@ -87,14 +87,18 @@
                     </nav>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- CONTENT -->
+                    @yield('mainBody')
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- FOOTER -->
+                    <small>sQuire &copy;2016 University of Idaho</small>
+                </div>
+            </div>
         </div>
-
-        <!-- CONTENT -->
-        @yield('mainBody')
-
-        <!-- FOOTER -->
-        <small>sQuire &copy;2016 University of Idaho</small>
-
     </body>
 </html>
