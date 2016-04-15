@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use App\File;
 use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Request;
@@ -75,8 +76,8 @@ class EditorController extends Controller
         $filename = $request->input('filename');
         $type = "file"; // TODO: just type file for now, no folders
         $description = $request->input('description');
-        $quote = json_decode(utf8_encode(file_get_contents('http://api.icndb.com/jokes/random?limitTo=[nerdy]&exclude=[explicit]')));
-        $contents = "/* ".html_entity_decode($quote->value->joke)." */";
+
+        $contents = "/* ".quoteOfTheDay()." */";
         $creator = Auth::user()->id;
         $parent = 0; // TODO: no parent for now, flat file system
 
@@ -91,6 +92,19 @@ class EditorController extends Controller
         ]);
 
         return redirect('/editor/edit/' . $newEntry->projectname . '/' . $newEntry->filename);
+    }
+
+    public function quoteOfTheDay()
+    {
+        if (Cache::has('EditorController@quoteOfTheDay')) {
+            $quote = Cache::get('EditorController@quoteOfTheDay');
+        } else {
+            $quote = file_get_contents('http://api.icndb.com/jokes/random?limitTo=[nerdy]&exclude=[explicit]');
+            $quote = json_decode(utf8_encode(html_entity_decode($quote->value->joke)));
+            Cache::put('EditorController@quoteOfTheDay', $quote, 1);
+        }
+
+        return $quote;
     }
 
     public function createView($projectname)
