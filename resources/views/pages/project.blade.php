@@ -14,9 +14,14 @@
                 {{ $project->body }}
             </div>
             @if (Auth::check() && Auth::user()->username == $project->author)
-            <a href="/delete-project/{{ $project->id }}">
-                <button type="button" id="delete">Delete</button>
-            </a>
+                <a href="/delete-project/{{ $project->id }}">
+                    <button type="button" id="delete">Delete</button>
+                </a>
+            @endif
+            @if (Auth::check())
+                <a href="/editor/{{ $project->title }}">
+                    <button type="button" id="viewfiles">View Files</button>
+                </a>
             @endif
         </div>
     </div>
