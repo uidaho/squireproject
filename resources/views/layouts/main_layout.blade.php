@@ -11,6 +11,7 @@
         <!-- bootstrap and theme -->
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-theme.min.css') }}">
+        <script src="{{ URL::asset('js/jquery-2.2.3.min.js') }}"></script>
         <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
     </head>
 
