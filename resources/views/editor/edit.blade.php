@@ -18,6 +18,7 @@
     <main class="container editor">
         <div class="row">
             <div class="project-page-elements">
+                <strong>{{$file->projectname}}/{{$file->filename}}</strong>
                 <a href="/editor/create/{{$file->projectname}}">
                     <button type="button" id="delete">Create</button>
                 </a>
