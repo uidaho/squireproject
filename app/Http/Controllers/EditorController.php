@@ -42,7 +42,7 @@ class EditorController extends Controller
         $files = File::where('projectname', $projectname)->get();
 
         if ($files == null) {
-            return abort(404);
+            return redirect('/editor/create/$projectname');
         }
 
         return view('editor.list', ['files' => $files]);
@@ -71,6 +71,8 @@ class EditorController extends Controller
         if (Auth::guest()) {
             return redirect('/login');
         }
+
+        // TODO: handle non-existant projectname
 
         $this->validate($request, [
             'filename' => 'required|unique:files|max:255|regex:/([A-Za-z0-9_.-]+)/',
