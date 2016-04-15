@@ -87,12 +87,10 @@
                     </nav>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- CONTENT -->
-                    @yield('mainBody')
-                </div>
-            </div>
+
+            <!-- CONTENT -->
+            @yield('mainBody')
+
             <div class="row">
                 <div class="col-md-12">
                     <!-- FOOTER -->

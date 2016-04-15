@@ -8,58 +8,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/javascript/javascript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/clike/clike.js"></script>
-    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.css" />
+    <link rel="stylesheet" href="{{ URL::asset('css/firepad.css') }}" />
     <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('css/firepad-userlist.css') }}" />
     <script src="{{ URL::asset('js/firepad-userlist.js') }}"></script>
 @stop
 
 @section('mainBody')
-    <main class="container editor">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="/editor">Home</a> <span class="divider">/</span>
-                        </li>
-                        <li>
-                            <a href="/editor/{{$file->projectname}}">{{$file->projectname}}</a> <span class="divider">/</span>
-                        </li>
-                        <li class="active">
-                            <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
-                        </li>
-                    </ul>
-                    <div class="btn-group">
-                        <a href="/editor/create/{{$file->projectname}}">
-                            <button class="btn btn-default" type="button">
-                                <em class="glyphicon glyphicon-align-left"></em> Create
-                            </button>
-                        </a>
-                        <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
-                            <button class="btn btn-default" type="button">
-                                <em class="glyphicon glyphicon-align-center"></em> Rename
-                            </button>
-                        </a>
-                        <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
-                            <button class="btn btn-default" type="button">
-                                <em class="glyphicon glyphicon-align-right"></em> Delete
-                            </button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="firepad-container">
-                        <div id="userlist"></div>
-                        <div id="firepad"></div>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/editor">Home</a> <span class="divider">/</span>
+                </li>
+                <li>
+                    <a href="/editor/{{$file->projectname}}">{{$file->projectname}}</a> <span class="divider">/</span>
+                </li>
+                <li class="active">
+                    <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
+                </li>
+            </ul>
+            <div class="btn-group">
+                <a href="/editor/create/{{$file->projectname}}">
+                    <button class="btn btn-default" type="button">
+                        <em class="glyphicon glyphicon-align-left"></em> Create
+                    </button>
+                </a>
+                <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
+                    <button class="btn btn-default" type="button">
+                        <em class="glyphicon glyphicon-align-center"></em> Rename
+                    </button>
+                </a>
+                <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
+                    <button class="btn btn-default" type="button">
+                        <em class="glyphicon glyphicon-align-right"></em> Delete
+                    </button>
+                </a>
             </div>
         </div>
-    </main>
-
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="firepad-container">
+                <div id="userlist"></div>
+                <div id="firepad"></div>
+            </div>
+        </div>
+    </div>
     <script>
         function hashCode(str) { // java String#hashCode
             var hash = 0;
