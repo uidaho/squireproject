@@ -13,13 +13,12 @@ class CreateProjectTest extends TestCase
      */
     public function testCreateProject()
     {
-        $this->setup();
-        $this->visit('/create')
+        $this->visit('/project-create')
             ->seePageIs('/login');
 
         $user = factory(App\User::class)->make(['username' => 'test_user']);
 
-        $base = base_path() . '/public/images/';
+        $base = base_path() . '/public/images';
         $testImage = $base . '/test-project-image.jpg';
 
         /* !! Validation is needed on project create form first
@@ -44,15 +43,16 @@ class CreateProjectTest extends TestCase
         // Create and retrieve good project
         $this->tryCreateProject($user,
             'Test Project',
-            'Create test!',
-            'This is not the body you are looking for.',
+            'Create test please work',
+            'This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. ',
             $testImage
         );
         $entry = App\Project::where('title', '=', 'Test Project')->first();
-        $this->seePageIs('/project/' . $entry->id);
+        $this->assertTrue($entry != null);
+        $this->seePageIs($entry->getSlug());
 
         // Check if image exists
-        $imagePath = $base . 'projects/product' . $entry->id . '.jpg';
+        $imagePath = $base . '/projects/product' . $entry->id . '.jpg';
         $this->assertTrue(file_exists($imagePath));
 
         // Delete project using delete button
@@ -68,7 +68,7 @@ class CreateProjectTest extends TestCase
     private function tryCreateProject($user, $title, $description, $body, $image)
     {
         return $this->actingAs($user)
-            ->visit('/create')
+            ->visit('/project-create')
             ->type($title, 'title')
             ->type($description, 'description')
             ->type($body, 'project-body')
