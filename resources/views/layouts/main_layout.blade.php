@@ -15,62 +15,85 @@
     </head>
 
     <body>
-
-        <!-- Header -->
-
-        <header class="primary-header container group">
-
-            <h3 class="logo">
-                <a href="/projectfinder">sQuire</a>
-            </h3>
-
-            <!-- Login & Logout Area -->
-            <ul class="nav">
-                <div class="dropdown">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/register">Register</a></li>
-                    @else
-                        <a class="btn-username">{{ Auth::user()->username }}</a>
-                        <div class="dropdown-content">
-                            <a href="">Profile</a>
-                            <a href="/logout">Logout</a>
+        <!-- FOOTER -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                            </button> <a class="navbar-brand" href="/">The Squire Project</a>
                         </div>
-                    @endif
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active">
+                                    <a href="/projectfinder">Explore Projects</a>
+                                </li>
+                                <li>
+                                    <a href="/create">Start a Project</a>
+                                </li>
+                                <li>
+                                    <a href="/about">About</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact</a>
+                                </li>
+                            </ul>
+                            <form class="navbar-form navbar-right" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <button type="submit" class="btn btn-default">
+                                    Submit
+                                </button>
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <!-- Authentication Links -->
+                                    @if (Auth::guest())
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Not logged in<strong class="caret"></strong></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="/register">Register</a>
+                                            </li>
+                                            <li class="divider"> </li>
+                                            <li>
+                                                <a href="/login">Login</a>
+                                            </li>
+                                        </ul>
+                                    @else
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}<strong class="caret"></strong></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#">Your Profile</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">Help</a>
+                                            </li>
+                                            <li class="divider"> </li>
+                                            <li>
+                                                <a href="#">Settings</a>
+                                            </li>
+                                            <li>
+                                                <a href="/logout">Sign out</a>
+                                            </li>
+                                        </ul>
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
-            </ul>
+            </div>
 
-            <nav class="nav nav-primary">
-                <ul>
-                    <li><a href="">Home</a></li><!--
-			        --><li><a href="/projectfinder">Explore</a></li><!--
-			        --><li><a href="/create">Start a project</a></li><!--
-			        --><li><a href="/about">About us</a></li>
-                </ul>
-            </nav>
+        </div>
 
-        </header>
-
+        <!-- CONTENT -->
         @yield('mainBody')
 
-        <!-- Footer -->
-
-        <footer class="primary-footer container group">
-
-            <small>&copy; sQuire University of Idaho</small>
-
-            <nav class="nav">
-                <ul>
-                    <li><a href="">Home</a></li><!--
-			        --><li><a href="/projectfinder">Explore</a></li><!--
-			        --><li><a href="/create">Start a project</a></li><!--
-			        --><li><a href="/about">About us</a></li><!--
-			        --><li><a href="">Contact us</a></li>
-                </ul>
-            </nav>
-
-        </footer>
+        <!-- FOOTER -->
+        <small>sQuire &copy;2016 University of Idaho</small>
 
     </body>
 </html>
