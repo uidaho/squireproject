@@ -14,7 +14,7 @@
                 <label for="thumbnail">
                     Thumbnail image
                 </label>
-                <input type="file" id="thumbnail" />
+                <input type="file" id="thumbnail" name="thumbnail" />
                 <!-- <p class="help-block">
                     Error here
                 </p> -->
@@ -23,7 +23,7 @@
                 <label for="title">
                     Title
                 </label>
-                <input type="text" class="form-control" id="title" />
+                <input type="text" class="form-control" id="title" name="title" />
                 <!-- <p class="help-block">
                     Error here
                 </p> -->
@@ -32,7 +32,7 @@
                 <label for="description">
                     Description
                 </label>
-                <input type="text" class="form-control" id="description" maxlength="100" size="88" height="2" />
+                <input type="text" class="form-control" id="description" name="description" maxlength="100" size="88" height="2" />
                 <!-- <p class="help-block">
                     Error here
                 </p> -->
@@ -41,7 +41,7 @@
                 <label for="project-body">
                     About The Project
                 </label>
-                <textarea class="form-control" id="project-body" rows="15" placeholder="All the details of your project"></textarea>
+                <textarea class="form-control" id="project-body" name="project-body" rows="15" placeholder="All the details of your project"></textarea>
                 <!-- <p class="help-block">
                     Error here
                 </p> -->
