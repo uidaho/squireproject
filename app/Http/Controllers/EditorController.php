@@ -76,7 +76,6 @@ class EditorController extends Controller
         $filename = $request->input('filename');
         $type = "file"; // TODO: just type file for now, no folders
         $description = $request->input('description');
-
         $contents = "/* ".EditorController::quoteOfTheDay()." */";
         $creator = Auth::user()->id;
         $parent = 0; // TODO: no parent for now, flat file system
