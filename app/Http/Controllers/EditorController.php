@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class EditorController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Renders the editor view for the given project and file
      *
@@ -19,10 +25,6 @@ class EditorController extends Controller
      */
     public function editFile($projectname, $filename)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-
         $userid = Auth::user()->id;
         $username = Auth::user()->username;
 
@@ -41,6 +43,8 @@ class EditorController extends Controller
      */
     public function listFiles($projectname)
     {
+        $userid = Auth::user()->id;
+        
         $files = File::where('projectname', $projectname)
                     ->orderBy('filename', 'asc')
                     ->get();
@@ -49,7 +53,7 @@ class EditorController extends Controller
             return redirect('/editor/create/'.$projectname);
         }
 
-        return view('editor.list', ['files' => $files]);
+        return view('editor.list', ['files' => $files, 'i' => 1, 'userid' => $userid]);
     }
 
     /**
@@ -72,10 +76,6 @@ class EditorController extends Controller
      */
     public function create(Request $request, $projectname)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-
         // TODO: handle non-existant projectname
 
         $this->validate($request, [
@@ -129,10 +129,6 @@ class EditorController extends Controller
      */
     public function createView($projectname)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-
         if ($projectname) {
             return view('editor.create', ['projectname' => $projectname]);
         } else {
@@ -149,10 +145,6 @@ class EditorController extends Controller
      */
     public function delete($projectname, $filename)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
         
         if ($file->creator == Auth::user()->id) { // for now, only allow creator to delete their file
@@ -178,10 +170,6 @@ class EditorController extends Controller
      */
     public function deleteView($projectname, $filename)
     {
-        if (Auth::guest()) {
-            return redirect('/login');
-        }
-
         if ($projectname && $filename) {
             return view('editor.delete', ['projectname' => $projectname, 'filename' => $filename]);
         } else {
