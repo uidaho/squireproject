@@ -42,6 +42,7 @@ Route::post('project-create', 'ProjectController@create'); // TODO: deprecated
 Route::get('project/delete/{project}', 'ProjectController@delete');
 Route::get('projectfinder', 'PagesController@projectfinder'); // TODO: deprecated
 Route::get('project', 'PagesController@projectfinder');
+Route::get('projects', 'PagesController@projectfinder');
 Route::get('project/view/{project}', 'ProjectController@view');
 Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
 
@@ -59,8 +60,8 @@ Route::post('editor/rename/{projectname}/{filename}', 'EditorController@rename')
 Route::get('editor/delete/{projectname}/{filename}', 'EditorController@deleteView');
 Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete');
 Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
-Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/list/{projectname}', 'EditorController@listFiles');
+Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/{projectname}', 'EditorController@listFiles');
 Route::get('editor', 'EditorController@index');
 
