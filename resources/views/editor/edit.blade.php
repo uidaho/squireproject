@@ -18,17 +18,6 @@
 @section('mainBody')
     <div class="row">
         <div class="col-md-12">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="/editor">Home</a>
-                </li>
-                <li>
-                    <a href="/editor/{{$file->projectname}}">{{$file->projectname}}</a>
-                </li>
-                <li class="active">
-                    <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
-                </li>
-            </ul>
             <div class="btn-toolbar" role="toolbar" aria-label="Editor toolbar">
                 <div class="btn-group" role="group" aria-label="File button group">
                     <a href="/editor/list/{{$file->projectname}}" class="btn btn-default btn-sm">
