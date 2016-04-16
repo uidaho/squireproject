@@ -77,7 +77,7 @@
                     <div class="has-error">
                 @endif
 
-                <label for="project-body" class="col-lg-10 control-label">
+                <label for="project-body" class="col-lg-2 control-label">
                     About The Project
                 </label>
                 <div class="col-lg-10">
