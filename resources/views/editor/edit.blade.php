@@ -54,26 +54,13 @@
         </div>
     </div>
 
-            <div id="firepad-container">
-                <div id="userlist"></div>
-                <div id="firepad"></div>
-            </div>
+    <!-- EDITOR -->
+    <div id="firepad-container">
+        <div id="userlist"></div>
+        <div id="firepad"></div>
+    </div>
 
     <script>
-        function hashCode(str) { // java String#hashCode
-            var hash = 0;
-            for (var i = 0; i < str.length; i++) {
-                hash = str.charCodeAt(i) + ((hash << 5) - hash);
-            }
-            return hash;
-        }
-        function intToRGB(i){
-            var c = (i & 0x00FFFFFF)
-                    .toString(16)
-                    .toUpperCase();
-
-            return "00000".substring(0, 6 - c.length) + c;
-        }
         function init() {
             var userId = '{{$userid}}';
             var userName = '{{$username}}';
