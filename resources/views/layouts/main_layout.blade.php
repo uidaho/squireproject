@@ -3,16 +3,11 @@
 
     <head>
         <meta charset="utf-8">
-
-        @yield('head')
-
-        <!-- <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
-        <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'> -->
-        <!-- bootstrap and theme -->
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-theme.min.css') }}">
         <script src="{{ URL::asset('js/jquery-2.2.3.min.js') }}"></script>
         <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+        @yield('head')
     </head>
 
     <body>
