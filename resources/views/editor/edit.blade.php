@@ -32,12 +32,22 @@
                 <div class="btn-group" role="group" aria-label="File button group">
                     <a href="/editor/create/{{$file->projectname}}">
                         <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-open-file"></em> Open
+                        </button>
+                    </a>
+                    <a href="/editor/create/{{$file->projectname}}">
+                        <button class="btn btn-default" type="button">
                             <em class="glyphicon glyphicon-plus"></em> Create
                         </button>
                     </a>
-                    <a href="/editor/download/{{$file->projectname}}/{{$file->filename}}">
+                    <a href="/editor/import/{{$file->projectname}}/{{$file->filename}}">
                         <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-download"></em> Download
+                            <em class="glyphicon glyphicon-import"></em> Import
+                        </button>
+                    </a>
+                    <a href="/editor/export/{{$file->projectname}}/{{$file->filename}}">
+                        <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-export"></em> Export
                         </button>
                     </a>
                     <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
@@ -47,19 +57,24 @@
                     </a>
                     <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
                         <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-remove"></em> Delete
+                            <em class="glyphicon glyphicon-trash"></em> Delete
                         </button>
                     </a>
                 </div>
                 <div class="btn-group" role="group" aria-label="Compiler button group">
                     <a href="#">
                         <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-edit"></em> Compile
+                            <em class="glyphicon glyphicon-flash"></em> Compile
                         </button>
                     </a>
                     <a href="#">
                         <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-check"></em> Syntax Check
+                            <em class="glyphicon glyphicon-flash"></em> Run
+                        </button>
+                    </a>
+                    <a href="#">
+                        <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
                         </button>
                     </a>
                 </div>
