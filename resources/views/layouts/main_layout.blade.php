@@ -41,10 +41,10 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active">
-                                    <a href="/projectfinder">Explore Projects</a>
+                                    <a href="/project">Explore Projects</a>
                                 </li>
                                 <li>
-                                    <a href="/create">Start a Project</a>
+                                    <a href="/project/create">Start a Project</a>
                                 </li>
                                 <li>
                                     <a href="/about">About</a>
