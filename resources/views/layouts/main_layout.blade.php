@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                    <nav class="navbar navbar-default" role="navigation">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                                 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
