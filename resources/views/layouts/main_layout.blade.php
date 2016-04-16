@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.css') }}">
@@ -28,7 +27,7 @@
     </head>
 
     <body>
-        <!-- FOOTER -->
+        <!-- BODY -->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -40,16 +39,16 @@
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active">
+                                <li{{  Request::is('/project') ? ' class="active"' : '' }}>
                                     <a href="/project">Explore Projects</a>
                                 </li>
-                                <li>
+                                <li{{  Request::is('/project/create') ? ' class="active"' : '' }}>
                                     <a href="/project/create">Start a Project</a>
                                 </li>
-                                <li>
+                                <li{{  Request::is('/about') ? ' class="active"' : '' }}>
                                     <a href="/about">About</a>
                                 </li>
-                                <li>
+                                <li{{  Request::is('/contact') ? ' class="active"' : '' }}>
                                     <a href="#">Contact</a>
                                 </li>
                             </ul>
@@ -97,6 +96,17 @@
                             </ul>
                         </div>
                     </nav>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="/editor">Home</a>
+                        </li>
+                        <li>
+                            <a href="/editor/{{$file->projectname}}">{{$file->projectname}}</a>
+                        </li>
+                        <li class="active">
+                            <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <!-- CONTENT -->
