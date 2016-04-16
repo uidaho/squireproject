@@ -35,6 +35,11 @@
                             <em class="glyphicon glyphicon-plus"></em> Create
                         </button>
                     </a>
+                    <a href="/editor/download/{{$file->projectname}}/{{$file->filename}}">
+                        <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-download"></em> Download
+                        </button>
+                    </a>
                     <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
                         <button class="btn btn-default" type="button">
                             <em class="glyphicon glyphicon-edit"></em> Rename
@@ -43,6 +48,18 @@
                     <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
                         <button class="btn btn-default" type="button">
                             <em class="glyphicon glyphicon-remove"></em> Delete
+                        </button>
+                    </a>
+                </div>
+                <div class="btn-group" role="group" aria-label="Compiler button group">
+                    <a href="#">
+                        <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-edit"></em> Compile
+                        </button>
+                    </a>
+                    <a href="#">
+                        <button class="btn btn-default" type="button">
+                            <em class="glyphicon glyphicon-check"></em> Syntax Check
                         </button>
                     </a>
                 </div>
