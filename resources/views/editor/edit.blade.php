@@ -20,10 +20,10 @@
         <div class="col-md-12">
             <ul class="breadcrumb">
                 <li>
-                    <a href="/editor">Home</a> <span class="divider">/</span>
+                    <a href="/editor">Home</a>
                 </li>
                 <li>
-                    <a href="/editor/{{$file->projectname}}">{{$file->projectname}}</a> <span class="divider">/</span>
+                    <a href="/editor/{{$file->projectname}}">{{$file->projectname}}</a>
                 </li>
                 <li class="active">
                     <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
