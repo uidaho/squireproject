@@ -44,7 +44,7 @@ class Project extends Model
     {
         $res = parent::delete();
 
-        $imagePath = $this->getImagePath();
+        $imagePath = base_path() . '/public' .$this->getImagePath();
         if (file_exists($imagePath)) {  // Shouldn't be null, let's check for sanity
             unlink($imagePath);
         }
