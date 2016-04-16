@@ -30,7 +30,7 @@
             </ul>
             <div class="btn-toolbar" role="toolbar" aria-label="Editor toolbar">
                 <div class="btn-group" role="group" aria-label="File button group">
-                    <a href="/editor/create/{{$file->projectname}}">
+                    <a href="/editor/list/{{$file->projectname}}">
                         <button class="btn btn-default" type="button">
                             <em class="glyphicon glyphicon-open-file"></em> Open
                         </button>
