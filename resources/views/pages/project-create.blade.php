@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-md-12">
         <h5>Create Project</h5>
-        <form role="form" action="{{ url('/create') }}" method="post" enctype="multipart/form-data">
+        <form role="form" action="{{ url('/project/create') }}" method="post" enctype="multipart/form-data">
             {!! csrf_field() !!}
             <div class="form-group">
                 <label for="thumbnail">

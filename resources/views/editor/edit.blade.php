@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/javascript/javascript.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/mode/clike/clike.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('css/firepad.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('css/base16-light.css') }}" />
     <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
     <link rel="stylesheet" href="{{ URL::asset('css/firepad-userlist.css') }}" />
     <script src="{{ URL::asset('js/firepad-userlist.js') }}"></script>
@@ -30,52 +31,34 @@
             </ul>
             <div class="btn-toolbar" role="toolbar" aria-label="Editor toolbar">
                 <div class="btn-group" role="group" aria-label="File button group">
-                    <a href="/editor/list/{{$file->projectname}}">
-                        <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-open-file"></em> Open
-                        </button>
+                    <a href="/editor/list/{{$file->projectname}}" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-open-file"></em> Open
                     </a>
-                    <a href="/editor/create/{{$file->projectname}}">
-                        <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-plus"></em> Create
-                        </button>
+                    <a href="/editor/create/{{$file->projectname}}" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-plus"></em> Create
                     </a>
-                    <a href="/editor/import/{{$file->projectname}}/{{$file->filename}}">
-                        <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-import"></em> Import
-                        </button>
+                    <a href="/editor/import/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-import"></em> Import
                     </a>
-                    <a href="/editor/export/{{$file->projectname}}/{{$file->filename}}">
-                        <button class="btn btn-default" type="button">
+                    <a href="/editor/export/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
                             <em class="glyphicon glyphicon-export"></em> Export
-                        </button>
                     </a>
-                    <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}">
-                        <button class="btn btn-default" type="button">
+                    <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
                             <em class="glyphicon glyphicon-edit"></em> Rename
-                        </button>
                     </a>
-                    <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}">
-                        <button class="btn btn-default" type="button">
+                    <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
                             <em class="glyphicon glyphicon-trash"></em> Delete
-                        </button>
                     </a>
                 </div>
                 <div class="btn-group" role="group" aria-label="Compiler button group">
-                    <a href="#">
-                        <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-flash"></em> Compile
-                        </button>
+                    <a href="#" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-flash"></em> Compile
                     </a>
-                    <a href="#">
-                        <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-flash"></em> Run
-                        </button>
+                    <a href="#" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-flash"></em> Run
                     </a>
-                    <a href="#">
-                        <button class="btn btn-default" type="button">
-                            <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
-                        </button>
+                    <a href="#" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
                     </a>
                 </div>
             </div>
@@ -117,6 +100,7 @@
                 readOnly: false,
                 lineNumbers: true,
                 lineWrapping: true,
+                theme: 'base16-light',
                 mode: 'text/x-java'});
             var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
                 userId: userId});

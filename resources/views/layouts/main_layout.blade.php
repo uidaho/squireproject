@@ -3,8 +3,8 @@
 
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('css/application.css') }}">
         <script src="{{ URL::asset('js/jquery-2.2.3.min.js') }}"></script>
         <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
         <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
