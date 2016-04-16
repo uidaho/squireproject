@@ -39,16 +39,16 @@
                         </div>
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li{{  Request::is('/project') ? ' class="active"' : '' }}>
+                                <li class="{{ Request::is('project') ? 'active' : '' }}">
                                     <a href="/project">Explore Projects</a>
                                 </li>
-                                <li{{  Request::is('/project/create') ? ' class="active"' : '' }}>
+                                <li class="{{ Request::is('project/create') ? 'active' : '' }}">
                                     <a href="/project/create">Start a Project</a>
                                 </li>
-                                <li{{  Request::is('/about') ? ' class="active"' : '' }}>
+                                <li class="{{ Request::is('about') ? 'active' : '' }}">
                                     <a href="/about">About</a>
                                 </li>
-                                <li{{  Request::is('/contact') ? ' class="active"' : '' }}>
+                                <li class="{{ Request::is('contact') ? 'active' : '' }}">
                                     <a href="#">Contact</a>
                                 </li>
                             </ul>
@@ -96,17 +96,6 @@
                             </ul>
                         </div>
                     </nav>
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="/editor">Home</a>
-                        </li>
-                        <li>
-                            <a href="/editor/{{$file->projectname}}">{{$file->projectname}}</a>
-                        </li>
-                        <li class="active">
-                            <a href="/editor/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <!-- CONTENT -->
