@@ -26,7 +26,9 @@ class EditorController extends Controller
         $userid = Auth::user()->id;
         $username = Auth::user()->username;
 
-        $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
+        $file = File::where('projectname', $projectname)
+                    ->where('filename', $filename)
+                    ->firstOrFail();
 
         return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username]);
     }
@@ -39,7 +41,9 @@ class EditorController extends Controller
      */
     public function listFiles($projectname)
     {
-        $files = File::where('projectname', $projectname)->get();
+        $files = File::where('projectname', $projectname)
+                    ->orderBy('filename', 'asc')
+                    ->get();
 
         if (empty($files[0])) {
             return redirect('/editor/create/'.$projectname);
@@ -99,6 +103,11 @@ class EditorController extends Controller
         return redirect('/editor/edit/' . $newEntry->projectname . '/' . $newEntry->filename);
     }
 
+    /**
+     * Returns a cached string that contains a random quote.
+     *
+     * @return string $quote
+     */
     public function quoteOfTheDay()
     {
         if (Cache::has('EditorController@quoteOfTheDay')) {
@@ -112,6 +121,12 @@ class EditorController extends Controller
         return $quote;
     }
 
+    /**
+     * Displays the form to create a file for the given project.
+     *
+     * @param string $projectname project name 
+     * @return mixed
+     */
     public function createView($projectname)
     {
         if (Auth::guest()) {
@@ -128,7 +143,8 @@ class EditorController extends Controller
     /**
      * Deletes a file given by the project and file name.
      *
-     * @param $projectname projectname project name $filename file name
+     * @param string $projectname project name 
+     * @param string $filename file name
      * @return mixed
      */
     public function delete($projectname, $filename)
@@ -138,15 +154,32 @@ class EditorController extends Controller
         }
 
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
-
-        if ($file == null) {
-            // TODO: Redirect to an error page
-            return redirect('/editor/'.$projectname);
+        
+        if ($file->creator == Auth::user()->id) {
+            File::where('projectname', $projectname)->where('filename', $filename)->delete();
         }
 
-        $file->delete();
+        // TODO: Notice of success
+        return redirect('/editor/list/'.$projectname);
+    }
+    
+    /**
+     * Displays the form view to delete a file given by the project and file name.
+     *
+     * @param string $projectname project name 
+     * @param string $filename file name
+     * @return mixed
+     */
+    public function deleteView($projectname, $filename)
+    {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
 
-        // TODO: Notice of success?
-        return redirect('/editor/'.$projectname);
+        if ($projectname && $filename) {
+            return view('editor.delete', ['projectname' => $projectname, 'filename' => $filename]);
+        } else {
+            return abort(404);
+        }
     }
 }
