@@ -155,7 +155,13 @@ class EditorController extends Controller
 
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
         
-        if ($file->creator == Auth::user()->id) {
+        if ($file->creator == Auth::user()->id) { // for now, only allow creator to delete their file
+            // delete file from firebase
+            $firebase_path = '/' + $projectname + '/' + str_replace('.', '-', $filename);
+            $firebase = new \Firebase\FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
+            $firebase->delete($firebase_path);
+            
+            // delete file record from database
             File::where('projectname', $projectname)->where('filename', $filename)->delete();
         }
 
@@ -164,7 +170,7 @@ class EditorController extends Controller
     }
     
     /**
-     * Displays the form view to delete a file given by the project and file name.
+     * Displays the form view to confirm the deletion of a file given by the project and file name.
      *
      * @param string $projectname project name 
      * @param string $filename file name

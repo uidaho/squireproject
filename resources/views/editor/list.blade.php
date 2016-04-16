@@ -30,6 +30,7 @@
                   <th>Creator</th>
                   <th>Created at</th>
                   <th>Updated at</th>
+                  <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +44,13 @@
                         <td><a href="/profile/view/{{$file->creator}}">{{$file->creator}}</td>
                         <td>{{$file->created_at}}</td>
                         <td>{{$file->updated_at}}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="File action button group">
+                                <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
+                                    <em class="glyphicon glyphicon-trash"></em> Delete
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

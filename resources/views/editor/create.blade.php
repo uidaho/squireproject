@@ -5,23 +5,15 @@
 @endsection
 
 @section('mainBody')
-    <main class="container primary-main row">
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <form role="form" class="project-form" action="{{ url('/editor/create/'.$projectname) }}" method="post" enctype="multipart/form-data">
-            {!! csrf_field() !!}
-
-            <h5>Create File</h5>
+<div class="row">
+    <div class="col-md-12">
+        <form role="form" class="form-horizontal" action="{{ url('/editor/create/'.$projectname) }}" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>Create a new file in {{ $projectname }}</legend>
             <div class="form-group">
-                <label for="title">Name</label>
-                <input class="form-control" type="text" id="filename" name="filename" placeholder="filename.txt">
+              <label for="filename" class="col-lg-2 control-label">File name</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control" id="filename" name="filename" placeholder="filename.txt">
                 @foreach ($errors->get('filename') as $error)
                     <div class="alert alert-danger" role="alert">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -29,10 +21,12 @@
                         {{$error}}
                     </div>
                 @endforeach
+              </div>
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
-                <input class="form-control" type="text" id="description" name="description" placeholder="A short description" maxlength="100" size="88" height="2">
+              <label for="description" class="col-lg-2 control-label">Description</label>
+              <div class="col-lg-10">
+                <textarea class="form-control" rows="3" id="description" name="description" maxlength="255"></textarea>
                 @foreach ($errors->get('description') as $error)
                     <div class="alert alert-danger" role="alert">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -40,11 +34,35 @@
                         {{$error}}
                     </div>
                 @endforeach
+                <span class="help-block">A short description helps others understand what the file is used for without opening it.</span>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="/editor/{{$projectname}}">
-                <button type="button" class="btn btn-danger">Cancel</button>
-            </a>
+            <div class="form-group">
+              <label class="col-lg-2 control-label">Type</label>
+              <div class="col-lg-10">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="type" id="type" value="file" checked="">
+                    File
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="type" id="type2" value="directory">
+                    Directory
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+            {!! csrf_field() !!}
+          </fieldset>
         </form>
-    </main>
+    </div>
+</div>
 @stop
