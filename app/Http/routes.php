@@ -39,10 +39,13 @@ Route::get('projectfinder', 'PagesController@projectfinder');
 /*-----------------------*
  *  Project Controller   *
  *-----------------------*/
-Route::get('/project/{project}', 'ProjectController@view');
-Route::get('/project-create', 'ProjectController@createForm');        // can't do `/project/create` as it tries to find the project `create`
-Route::post('/project-create', 'ProjectController@create');
-Route::get('/project/{project}/delete', 'ProjectController@delete');
+Route::get('/project/create', 'ProjectController@createForm');
+Route::post('/project/create', 'ProjectController@create');
+Route::get('/project-create', 'ProjectController@createForm'); // deprecated
+Route::post('/project-create', 'ProjectController@create'); // deprecated
+Route::get('/project/delete/{project}', 'ProjectController@delete');
+Route::get('/project/view/{project}', 'ProjectController@view');
+Route::get('/project/{project}', 'ProjectController@view'); // overloads go last.
 
 /*-----------------------*
  *  Editor Controller   *
