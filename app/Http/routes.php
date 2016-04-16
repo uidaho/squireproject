@@ -34,27 +34,29 @@ Route::post('password/reset', 'Auth\PasswordController@reset');
 //Routes to the different html pages
 Route::get('/', 'PagesController@home');
 Route::get('about', 'PagesController@about');
-Route::get('projectfinder', 'PagesController@projectfinder');
+
 
 /*-----------------------*
  *  Project Controller   *
  *-----------------------*/
-Route::get('/project/create', 'ProjectController@createForm');
-Route::post('/project/create', 'ProjectController@create');
-Route::get('/project-create', 'ProjectController@createForm'); // deprecated
-Route::post('/project-create', 'ProjectController@create'); // deprecated
-Route::get('/project/delete/{project}', 'ProjectController@delete');
-Route::get('/project/view/{project}', 'ProjectController@view');
-Route::get('/project/{project}', 'ProjectController@view'); // overloads go last.
+Route::get('project/create', 'ProjectController@createForm');
+Route::post('project/create', 'ProjectController@create');
+Route::get('project-create', 'ProjectController@createForm'); // TODO: deprecated
+Route::post('project-create', 'ProjectController@create'); // TODO: deprecated
+Route::get('project/delete/{project}', 'ProjectController@delete');
+Route::get('projectfinder', 'PagesController@projectfinder'); // TODO: deprecated
+Route::get('project', 'PagesController@projectfinder');
+Route::get('project/view/{project}', 'ProjectController@view');
+Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
 
 /*-----------------------*
  *  Editor Controller   *
  *-----------------------*/
-Route::get('/editor/create/{projectname}', 'EditorController@createView');
-Route::post('/editor/create/{projectname}', 'EditorController@create');
-Route::get('/editor/delete/{projectname}/{filename}', 'EditorController@delete');
-Route::get('/editor/edit/{projectname}/{filename}', 'EditorController@editFile');
-Route::get('/editor/{projectname}/{filename}', 'EditorController@editFile');
-Route::get('/editor/list/{projectname}', 'EditorController@listFiles');
-Route::get('/editor/{projectname}', 'EditorController@listFiles');
-Route::get('/editor', 'EditorController@index');
+Route::get('editor/create/{projectname}', 'EditorController@createView');
+Route::post('editor/create/{projectname}', 'EditorController@create');
+Route::get('editor/delete/{projectname}/{filename}', 'EditorController@delete');
+Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
+Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
+Route::get('editor/list/{projectname}', 'EditorController@listFiles');
+Route::get('editor/{projectname}', 'EditorController@listFiles');
+Route::get('editor', 'EditorController@index');
