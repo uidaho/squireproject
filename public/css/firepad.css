@@ -419,9 +419,9 @@ a.powered-by-firepad {
 #firepad-container {
     position: absolute;
     left: 30px;
-    top: 160px;
+    top: 170px;
     right: 30px;
-    bottom: 125px;
+    bottom: 30px;
     background: white;
     -moz-box-shadow: 0 5px 25px #333;
     -webkit-box-shadow: 0 5px 25px #333;
