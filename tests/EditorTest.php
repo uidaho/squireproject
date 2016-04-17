@@ -18,7 +18,7 @@ class EditorTest extends TestCase
         // login
         $this->actingAs($user);
         // look for username to confirm login
-        $this->visit('/')
+        $this->visit('editor')
             ->see($user->username);
     }
     
