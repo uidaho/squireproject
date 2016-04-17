@@ -1,10 +1,6 @@
 <?php
 
-use App\User;
-use App\Project;
-use App\ProjectComment;
 use Illuminate\Database\Seeder;
-use Faker\Generator;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);                         //Seed the users table
-        $this->call(ProjectsTableSeeder::class);                      //Seed the projects table
+        $this->call(UsersTableSeeder::class);                           //Seed the users table
+        $this->call(ProjectsTableSeeder::class);                        //Seed the projects table
+        //$this->call(ProjectCommentsTableSeeder::class);                 //Seed the project comments table
     }
 }

@@ -3,7 +3,6 @@
 use App\User;
 use App\Project;
 use App\ProjectComment;
-
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -14,44 +13,73 @@ use App\ProjectComment;
 | database. Just tell the factory how a default model should look.
 |
 */
-
+/*-----------------*
+ *  Users Creator  *
+ *-----------------*/
 //Creates users
 $factory->define(User::class, function (Faker\Generator $faker) {
     return [
-        'username' => $faker->regexify('(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)'),
-        'email' => $faker->safeEmail,
+        'username' => $faker->unique()->regexify('^[a-zA-Z0-9-_]{6,16}'),
+        'email' => $faker->unique()->safeEmail,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
 });
 
 // extend above to create 'admin' type user
-$factory->defineAs(App\User::class, 'admin', function ($faker) use ($factory) {
-    $user = $factory->raw(App\User::class);
+$factory->defineAs(User::class, 'admin', function ($faker) use ($factory) {
+    $user = $factory->raw(User::class);
 
     return array_merge($user, ['admin' => true]);
 });
 
+/*--------------------*
+ *  Projects Creator  *
+ *--------------------*/
 //Creates projects and uses previously made users
 $factory->define(Project::class, function (Faker\Generator $faker) {
-    $randUserNum = random_int(1, DB::table('users')->count());
-    $username = DB::table('users')->lists('username')[$randUserNum];
+    $user = User::all()->random(1);
 
     return [
-        'title' => $faker->catchPhrase,
-        'author' => $username,
+        'title' => $faker->unique()->lexify('Project ????'),
+        'author' => $user->username,
+        //'user_id' => $user_id,
+        'description' => $faker->lexify('Description ??????'),
+        'body' => $faker->paragraph,
+    ];
+});
+//Creates projects and users
+$factory->defineAs(Project::class, 'selfContained', function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->unique()->regexify('^[a-zA-Z0-9-_]{6,16}'),
+        'author' => factory(User::class)->create()->username,
+        //'user_id' => factory(User::class)->create()->id,
         'description' => $faker->bs,
         'body' => $faker->paragraph,
     ];
 });
 
-//Creates projects and users
-$factory->defineAs(Project::class, 'selfContained', function (Faker\Generator $faker) {
+/*----------------------------*
+ *  Project Comments Creator  *
+ *----------------------------*/
+//Creates project comments and uses previously made users and projects
+$factory->define(ProjectComment::class, function (Faker\Generator $faker) {
+    $user = User::all()->random(1);
+    $project = Project::all()->random(1);
 
     return [
-        'title' => $faker->catchPhrase,
-        'author' => factory(User::class)->create()->username,
-        'description' => $faker->bs,
-        'body' => $faker->paragraph,
+        'user_id' => $user->id,
+        'project_id' => $project->id,
+        'comment_body' => $faker->sentence,
+    ];
+});
+
+//Creates project comments, users, and projects
+$factory->defineAs(ProjectComment::class, 'selfContained', function (Faker\Generator $faker) {
+
+    return [
+        'user_id' => factory(User::class)->create()->id,
+        'project_id' => factory(Project::class)->create()->id,
+        'comment_body' => $faker->sentence,
     ];
 });
