@@ -11,8 +11,15 @@ use Illuminate\Http\Request;
 class EditorController extends Controller
 {
     
+    /**
+     * Runs before every method in the class, useful for what's below.
+     */
     public function __construct()
     {
+        /**
+         * This will require login for the entire controller and then return
+         * the user back where they were going.
+         */
         $this->middleware('auth');
     }
     

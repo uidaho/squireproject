@@ -30,7 +30,7 @@ class LoginTest extends TestCase
             ->submitForm('submit',[
                 'username' => 'test_user',
                 'password' => 'test_secret',
-            ])->seePageIs('/projectfinder');
+            ])->seePageIs('/projects');
 
         // Delete user for testing login
         App\User::destroy($user->id);

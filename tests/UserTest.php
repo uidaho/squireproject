@@ -24,10 +24,10 @@ class UserTest extends TestCase
 
         // Visit as logged in, should be redirected
         $this->call('GET', '/')
-            ->isRedirect('/projectfinder');
+            ->isRedirect('/projects');
 
         // Should find username in page (top right)
-        $this->visit('/projectfinder')
+        $this->visit('/projects')
             ->see($user->username);
     }
 }

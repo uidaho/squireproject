@@ -28,7 +28,7 @@ class AuthControllerEmail extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'projectfinder';
+    protected $redirectTo = '/projects';
 
     /**
      * Create a new authentication controller instance.

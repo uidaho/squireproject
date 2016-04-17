@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <base href="{{ url('/') }}/" />
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ URL::asset('css/application.css') }}">
         <script src="{{ URL::asset('js/jquery-2.2.3.min.js') }}"></script>
