@@ -61,8 +61,8 @@
                             float: right;
                         }
                         .project-description {
-                            height: 200px;
-                            overflow: scroll;
+                            height: 75px;
+                            overflow-x: auto;
                         }
                     </style>
                     <div class="fallback-image">
