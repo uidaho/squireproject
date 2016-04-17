@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Cache;
 use App\File;
+use App\Project;
 use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
@@ -51,10 +52,8 @@ class EditorController extends Controller
     public function listFiles($projectname)
     {
         $userid = Auth::user()->id;
-        
-        $files = File::where('projectname', $projectname)
-                    ->orderBy('filename', 'asc')
-                    ->get();
+        $project = Project::fromName($projectname)->get()->first();
+        $files = File::forProject($project)->get();
 
         if (empty($files[0])) {
             return redirect('/editor/create/'.$projectname);

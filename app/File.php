@@ -32,6 +32,11 @@ class File extends Model
         return $this->belongsTo('App\Project', 'project_id', 'id');
     }
     
+    public static function forProject(Project $project) {
+        $files = (new static)->where('projectname', $project->title)->orderBy('filename', 'asc');
+        return $files;
+    }
+    
     /**
      * Show a list of all files in the database.
      *

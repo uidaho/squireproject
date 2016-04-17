@@ -19,6 +19,10 @@ class Project extends Model
     {
         return '/project/' . $this->title;
     }
+    
+    public static function fromName($name) {
+        return (new static)->where('title', $name);
+    }
 
     /**
      * Get the path to the image for this project.

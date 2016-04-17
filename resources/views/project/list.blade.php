@@ -44,13 +44,8 @@
             <div class="panel panel-default panel-project">
                 <a href="{{ $project->getSlug() }}" class="project-link">
                 <div class="panel-body">
-                    <style type="text/css">
-
-                    </style>
                     <div class="fallback-image">
-                        <div class="project-image" style="background-image: url({{ $project->getImagePath() }});">
-                        
-                        </div>
+                        <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
                     </div>
                     <hr/>
                     <span class="label label-default project-memebers">n+1 Members</span>

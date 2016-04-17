@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Project;
+use App\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -24,7 +25,12 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
-        return view('project.view', ['project' => $project]);
+        
+        $userid = Auth::user()->id;
+        
+        $files = File::forProject($project)->get();
+                    
+        return view('project.view', ['project' => $project, 'files' => $files, 'userid' => $userid]);
     }
 
     /**
