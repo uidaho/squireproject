@@ -29,8 +29,8 @@ script:
   - vendor/bin/phpunit
   
 after_script:
-  - ls -laR squireproject/storage
-  - cat squireproject/storage/logs/*
+  - ls -laR $HOME/squireproject/storage
+  - cat $HOME/squireproject/storage/logs/*
 
 notifications:
   slack: uidaho:KlprSysDjxzbBTJjtLAJZDks
