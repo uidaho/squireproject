@@ -1,5 +1,9 @@
 <?php
 
+use App\User;
+use App\Project;
+use App\ProjectComment;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,11 +15,46 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+//Creates users
+$factory->define(User::class, function (Faker\Generator $faker) {
     return [
-        'username' => $faker->name,
+        'username' => $faker->regexify('(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)'),
         'email' => $faker->safeEmail,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
+    ];
+});
+
+//Creates users
+$factory->define(User::class, function (Faker\Generator $faker) {
+    return [
+        'username' => $faker->regexify('(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)'),
+        'email' => $faker->safeEmail,
+        'password' => bcrypt(str_random(10)),
+        'remember_token' => str_random(10),
+    ];
+});
+
+//Creates projects and uses previously made users
+$factory->define(Project::class, function (Faker\Generator $faker) {
+    $randUserNum = random_int(1, DB::table('users')->count());
+    $username = DB::table('users')->lists('username')[$randUserNum];
+
+    return [
+        'title' => $faker->catchPhrase,
+        'author' => $username,
+        'description' => $faker->bs,
+        'body' => $faker->paragraph,
+    ];
+});
+
+//Creates projects and users
+$factory->defineAs(Project::class, 'selfContained', function (Faker\Generator $faker) {
+
+    return [
+        'title' => $faker->catchPhrase,
+        'author' => factory(User::class)->create()->username,
+        'description' => $faker->bs,
+        'body' => $faker->paragraph,
     ];
 });
