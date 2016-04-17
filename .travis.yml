@@ -29,8 +29,6 @@ script:
   - vendor/bin/phpunit
   
 after_script:
-  - pwd
-  - ls -la
   - ls -laR storage
   - cat storage/logs/*
 
