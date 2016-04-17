@@ -13,7 +13,7 @@ class EditorController extends Controller
     
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
     
     /**
@@ -53,7 +53,7 @@ class EditorController extends Controller
             return redirect('/editor/create/'.$projectname);
         }
 
-        return view('editor.list', ['files' => $files, 'i' => 1, 'userid' => $userid]);
+        return view('editor.list', ['files' => $files, 'userid' => $userid]);
     }
 
     /**
@@ -79,25 +79,20 @@ class EditorController extends Controller
         // TODO: handle non-existant projectname
 
         $this->validate($request, [
-            'filename' => 'required|unique:files|max:255|regex:/([A-Za-z0-9_.-]+)/',
-            'description' => 'required',
+            'filename'      => 'required|unique:files|max:255|regex:/([A-Za-z0-9_.-]+)/',
+            'description'   => 'required',
+            'type'          => 'required',
         ]);
 
-        $filename = $request->input('filename');
-        $type = "file"; // TODO: just type file for now, no folders
-        $description = $request->input('description');
-        $contents = "/* ".EditorController::quoteOfTheDay()." */";
-        $creator = Auth::user()->id;
-        $parent = 0; // TODO: no parent for now, flat file system
-
         $newEntry = File::create([
-            'projectname' => $projectname,
-            'filename' => $filename,
-            'type' => $type,
-            'description' => $description,
-            'contents' => $contents,
-            'creator' => $creator,
-            'parent' => $parent
+            'project_id'    => 1,
+            'projectname'   => $projectname,
+            'filename'      => $request->input('filename'),
+            'type'          => $request->input('type'),
+            'description'   => $request->input('description'),
+            'contents'      => "/* ".EditorController::quoteOfTheDay()." */",
+            'user_id'       => Auth::user()->id,
+            'parent'        => 0 // TODO: no parent for now, flat file system
         ]);
 
         return redirect('/editor/edit/' . $newEntry->projectname . '/' . $newEntry->filename);
@@ -147,9 +142,9 @@ class EditorController extends Controller
     {
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
         
-        if ($file->creator == Auth::user()->id) { // for now, only allow creator to delete their file
+        if ($file->user_id == Auth::user()->id) { // for now, only allow creator user_id to delete their file
             // delete file from firebase
-            $firebase_path = '/' + $projectname + '/' + str_replace('.', '-', $filename);
+            $firebase_path = '/' + $file->project_id + '/' + $file->id;
             $firebase = new \Firebase\FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
             $firebase->delete($firebase_path);
             

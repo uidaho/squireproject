@@ -8,22 +8,31 @@
 <div class="row">
     <div class="col-md-12">
         <!-- Search -->
-        <ul class="project-search">
-            <li><input class="search-textbox" type="text" name="searchName" placeholder="Search"></li><!--
-			--><li><input class="btn btn-search" type="button" name="search" value="Search"></li>
-        </ul>
-        <!-- Sort -->
-        <select class="project-sort" name="sortBy">
-            <option value="filename" selected>Name</option>
-            <option value="description">Description</option>
-            <option value="created">Created</option>
-            <option value="modified">Modified</option>
-        </select>
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <!-- Toolbar -->
+        <div class="btn-toolbar" role="toolbar" aria-label="File list toolbar">
+            <div class="btn-group" role="group" aria-label="File command group">
+                <a href="/editor/create/{{ $files[0]->projectname }}" class="btn btn-default btn-sm">
+                    <em class="glyphicon glyphicon-plus"></em> Create
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
         <!-- Files -->
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                  <th>#</th>
+                  <th>id</th>
+                  <th>project_id</th>
+                  <th>projectname</th>
                   <th>Filename</th>
                   <th>Type</th>
                   <th>Description</th>
@@ -34,21 +43,24 @@
                 </tr>
             </thead>
             <tbody>
-                {{{$i = 1}}}
                 @foreach($files as $file)
                     <tr>
-                        <td>{{ $i++ }}</td>
-                        <td><a href="/editor/edit/{{$file->projectname}}/{{$file->filename}}">{{$file->filename}}</a></td>
-                        <td>{{$file->type}}</td>
-                        <td>{{$file->description}}</td>
-                        <td><a href="/profile/view/{{$file->creator}}">{{$file->creator}}</td>
-                        <td>{{$file->created_at}}</td>
-                        <td>{{$file->updated_at}}</td>
+                        <td>{{ $file->id }}</td>
+                        <td>{{ $file->project_id }}</td>
+                        <td><a href="/editor/{{ $file->projectname }}">{{ $file->projectname }}</a></td>
+                        <td><a href="/editor/edit/{{ $file->projectname }}/{{ $file->filename }}">{{ $file->filename }}</a></td>
+                        <td>{{ $file->type }}</td>
+                        <td>{{ $file->description }}</td>
+                        <td><a href="/profile/view/{{ $file->user_id }}">{{ $file->author()->first()->username }}</td>
+                        <td>{{ $file->created_at }}</td>
+                        <td>{{ $file->updated_at }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="File action button group">
-                                <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
-                                    <em class="glyphicon glyphicon-trash"></em> Delete
-                                </a>
+                                @if($file->user_id == $userid)
+                                    <a href="/editor/delete/{{ $file->projectname }}/{{ $file->filename }}" class="btn btn-default btn-sm">
+                                        <em class="glyphicon glyphicon-trash"></em> Delete
+                                    </a>
+                                @endif
                             </div>
                         </td>
                     </tr>

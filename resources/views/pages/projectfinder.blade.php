@@ -13,28 +13,54 @@
                     <div class="alert alert-info highlight col-sm-1" >{{ Session::get('delete-success') }}</div>
                 @endif
             </section>
-            <ul class="project-search">
-                <li><input class="search-textbox" type="text" name="searchName" placeholder="Project title..."></li><!--
-                    --><li><input class="btn btn-search" type="button" name="search" value="Search"></li>
-            </ul>
-            <select class="project-sort" name="sortBy">
-                <option value="Title" selected>Title</option>
-                <option value="TeamCount">Team Count</option>
-                <option value="Author">Author</option>
-            </select>
+            <!-- Search -->
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <!-- Sort -->
+            <div class="btn-group">
+                <a href="#" class="btn btn-default">Sorting</a>
+                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">File name</a></li>
+                    <li><a href="#">Description</a></li>
+                    <li><a href="#">Created by</a></li>
+                    <li><a href="#">Created date</a></li>
+                    <li><a href="#">Modified date</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Default</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <!-- Projects -->
     <div class="row">
         @foreach($projects as $project)
-        <div class="col-md-4">
-            <a href="{{ $project->getSlug() }}">
-                <img src="{{ $project->getImagePath() }}" alt="Project Image">
-                <h4>{{ $project->title }}</h4>
-                <p>{{ $project->description }}</p>
-                <p class="team-count">Total members: 30</p>
-            </a>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <style type="text/css">
+                        .project-image {
+                            width: 100%;
+                            height: 240px;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            background-size: 100%;
+                        }
+                    </style>
+                    <div class="project-image" style="background-image: url({{ $project->getImagePath() }});">
+                        
+                    </div>
+                    <hr/>
+                    <h4>{{ $project->title }}</h4>
+                    <p>{{ $project->description }}</p>
+                    <p class="team-count">Total members: 30</p>
+                </div>
+            </div>
         </div>
         @endforeach
     </div>

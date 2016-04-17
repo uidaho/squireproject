@@ -28,7 +28,6 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot($router);
 
         $router->bind('project', function($title) {
-            $title = str_replace('-', ' ', $title);
             return Project::where('title', $title)->first();
         });
     }
