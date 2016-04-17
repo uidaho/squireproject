@@ -44,21 +44,38 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <style type="text/css">
+                        .fallback-image {
+                            width: 100%;
+                            height: 240px;
+                            background-image: url({{ asset('images/no-image.png') }});
+                        }
                         .project-image {
                             width: 100%;
                             height: 240px;
+                            background-image: url({{ asset('images/no-image.png') }});
                             background-position: center;
                             background-repeat: no-repeat;
                             background-size: 100%;
                         }
+                        .project-memebers {
+                            float: right;
+                        }
+                        .project-description {
+                            height: 200px;
+                            overflow: scroll;
+                        }
                     </style>
-                    <div class="project-image" style="background-image: url({{ $project->getImagePath() }});">
+                    <div class="fallback-image">
+                        <div class="project-image" style="background-image: url({{ $project->getImagePath() }});">
                         
+                        </div>
                     </div>
                     <hr/>
+                    <span class="label label-default project-memebers">42 Members</span>
                     <h4>{{ $project->title }}</h4>
-                    <p>{{ $project->description }}</p>
-                    <p class="team-count">Total members: 30</p>
+                    <div class="project-description">
+                        {{ $project->description }}
+                    </div>
                 </div>
             </div>
         </div>
