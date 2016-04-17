@@ -25,14 +25,11 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     ];
 });
 
-//Creates users
-$factory->define(User::class, function (Faker\Generator $faker) {
-    return [
-        'username' => $faker->regexify('(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)'),
-        'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
-    ];
+// extend above to create 'admin' type user
+$factory->defineAs(App\User::class, 'admin', function ($faker) use ($factory) {
+    $user = $factory->raw(App\User::class);
+
+    return array_merge($user, ['admin' => true]);
 });
 
 //Creates projects and uses previously made users
