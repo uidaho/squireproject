@@ -42,6 +42,7 @@
         @foreach($projects as $project)
         <div class="col-md-3">
             <div class="panel panel-default">
+                <a href="{{ $project->getSlug() }}" class="project-link">
                 <div class="panel-body">
                     <style type="text/css">
                         .fallback-image {
@@ -64,6 +65,9 @@
                             height: 75px;
                             overflow-x: auto;
                         }
+                        .project-link {
+                            text-decoration: none !important;
+                        }
                     </style>
                     <div class="fallback-image">
                         <div class="project-image" style="background-image: url({{ $project->getImagePath() }});">
@@ -71,13 +75,14 @@
                         </div>
                     </div>
                     <hr/>
-                    <span class="label label-default project-memebers">42 Members</span>
+                    <span class="label label-default project-memebers">n+1 Members</span>
                     <h4>{{ $project->title }}</h4>
                     <div class="project-description">
                         {{ $project->description }}
                     </div>
                 </div>
             </div>
+            </a>
         </div>
         @endforeach
     </div>
