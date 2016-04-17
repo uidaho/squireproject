@@ -41,21 +41,21 @@ $factory->define(Project::class, function (Faker\Generator $faker) {
     $user = User::all()->random(1);
 
     return [
-        'title' => $faker->unique()->lexify('Project ????'),
+        'title' => $faker->unique()->regexify('[A-Za-z0-9_ .]{2,50}'),
         'author' => $user->username,
         //'user_id' => $user_id,
-        'description' => $faker->lexify('Description ??????'),
-        'body' => $faker->paragraph,
+        'description' => $faker->regexify('[A-Za-z0-9_ .]{10,100}'),
+        'body' => $faker->regexify('[A-Za-z0-9_ .]{100,65535}'),
     ];
 });
 //Creates projects and users
 $factory->defineAs(Project::class, 'selfContained', function (Faker\Generator $faker) {
     return [
-        'title' => $faker->unique()->regexify('^[a-zA-Z0-9-_]{6,16}'),
+        'title' => $faker->unique()->regexify('[A-Za-z0-9_ .]{2,50}'),
         'author' => factory(User::class)->create()->username,
         //'user_id' => factory(User::class)->create()->id,
-        'description' => $faker->bs,
-        'body' => $faker->paragraph,
+        'description' => $faker->regexify('[A-Za-z0-9_ .]{10,100}'),
+        'body' => $faker->regexify('[A-Za-z0-9_ .]{100,65535}'),
     ];
 });
 
@@ -70,7 +70,7 @@ $factory->define(ProjectComment::class, function (Faker\Generator $faker) {
     return [
         'user_id' => $user->id,
         'project_id' => $project->id,
-        'comment_body' => $faker->sentence,
+        'comment_body' => $faker->regexify('(.*?)/s[6,256]'),
     ];
 });
 
@@ -80,6 +80,6 @@ $factory->defineAs(ProjectComment::class, 'selfContained', function (Faker\Gener
     return [
         'user_id' => factory(User::class)->create()->id,
         'project_id' => factory(Project::class)->create()->id,
-        'comment_body' => $faker->sentence,
+        'comment_body' => $faker->regexify('(.*?)/s[6,256]'),
     ];
 });
