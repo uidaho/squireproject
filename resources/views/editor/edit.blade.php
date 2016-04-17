@@ -62,13 +62,11 @@
 
     <script>
         function init() {
-            var userId = '{{$userid}}';
-            var userName = '{{$username}}';
-            var fileName = '{{$file->filename}}';
-            var fileName = fileName.replace(/[.]/gi, "-");
-            var projectName = '{{$file->projectname}}';
-            var projectName = projectName.replace(/[.]/gi, "-");
-            var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/'+projectName+'/'+fileName);
+            var userId = '{{ $userid }}';
+            var userName = '{{ $username }}';
+            var fileId = '{{ $file->id }}';
+            var projectId = '{{ $file->project_id }}';
+            var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/' + projectId + '/' + fileId);
             var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
                 indentUnit: 2,
                 smartIndent: true,

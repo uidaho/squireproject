@@ -52,14 +52,6 @@
                                     <a href="#">Contact</a>
                                 </li>
                             </ul>
-                            <form class="navbar-form navbar-right" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" />
-                                </div>
-                                <button type="submit" class="btn btn-default">
-                                    Submit
-                                </button>
-                            </form>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <!-- Authentication Links -->
