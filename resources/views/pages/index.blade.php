@@ -4,7 +4,7 @@
     <head>
         <!-- Redirect to main page if user is already logged in -->
         @unless(Auth::guest())
-            <script>window.location.href = "projectfinder";</script>
+            <script>window.location.href = "/projects";</script>
         @endunless
 
         <meta charset="utf-8">
@@ -75,9 +75,9 @@
             <nav class="nav">
                 <ul>
                     <li><a href="">Home</a></li><!--
-			        --><li><a href="projectfinder">Explore</a></li><!--
+			        --><li><a href="/projects">Explore</a></li><!--
 			        --><li><a href="">Start a project</a></li><!--
-			        --><li><a href="about">About us</a></li><!--
+			        --><li><a href="/about">About us</a></li><!--
 			        --><li><a href="">Contact us</a></li>
                 </ul>
             </nav>

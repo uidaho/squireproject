@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
+	public function listProjects()
+	{
+		return view('project.list', ['projects' => Project::all()]);
+	}
+	
     /**
      * Renders the Project View for the given id
      *
@@ -19,7 +24,7 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
-        return view('pages.project', ['project' => $project]);
+        return view('project.view', ['project' => $project]);
     }
 
     /**
@@ -32,7 +37,7 @@ class ProjectController extends Controller
         if (Auth::guest()) {
             return redirect('/login');
         }
-        return view('pages.project-create');
+        return view('project.create');
     }
 
     /**

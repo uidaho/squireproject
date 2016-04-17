@@ -37,12 +37,9 @@ Route::get('about', 'PagesController@about');
  *-----------------------*/
 Route::get('project/create', 'ProjectController@createForm');
 Route::post('project/create', 'ProjectController@create');
-Route::get('project-create', 'ProjectController@createForm'); // TODO: deprecated
-Route::post('project-create', 'ProjectController@create'); // TODO: deprecated
 Route::get('project/delete/{project}', 'ProjectController@delete');
-Route::get('projectfinder', 'PagesController@projectfinder'); // TODO: deprecated
-Route::get('project', 'PagesController@projectfinder');
-Route::get('projects', 'PagesController@projectfinder');
+Route::get('project', 'ProjectController@listProjects');
+Route::get('projects', 'ProjectController@listProjects');
 Route::get('project/view/{project}', 'ProjectController@view');
 Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
 

@@ -41,33 +41,11 @@
     <div class="row">
         @foreach($projects as $project)
         <div class="col-md-3">
-            <div class="panel panel-default">
+            <div class="panel panel-default panel-project">
                 <a href="{{ $project->getSlug() }}" class="project-link">
                 <div class="panel-body">
                     <style type="text/css">
-                        .fallback-image {
-                            width: 100%;
-                            height: 240px;
-                            background-image: url({{ asset('images/no-image.png') }});
-                        }
-                        .project-image {
-                            width: 100%;
-                            height: 240px;
-                            background-image: url({{ asset('images/no-image.png') }});
-                            background-position: center;
-                            background-repeat: no-repeat;
-                            background-size: 100%;
-                        }
-                        .project-memebers {
-                            float: right;
-                        }
-                        .project-description {
-                            height: 75px;
-                            overflow-x: auto;
-                        }
-                        .project-link {
-                            text-decoration: none !important;
-                        }
+
                     </style>
                     <div class="fallback-image">
                         <div class="project-image" style="background-image: url({{ $project->getImagePath() }});">

@@ -54,7 +54,7 @@
             <button type="submit" class="btn btn-default">
                 Submit
             </button>
-            <a href="/projectfinder">
+            <a href="/projects">
                 <button type="button" class="btn btn-danger">
                     Cancel
                 </button>

@@ -9,3 +9,34 @@
 .breadcrumb {
     margin-bottom: 15px;
 }
+
+.panel-project:hover {
+    box-shadow: 0px 0px 20px #CCCCCC
+}
+.fallback-image {
+    width: 100%;
+    height: 240px;
+    background-image: url('images/no-image.png');
+}
+.project-image {
+    width: 100%;
+    height: 240px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.project-memebers {
+    float: right;
+}
+.project-description {
+    height: 75px;
+    overflow-x: auto;
+}
+.project-link {
+    color: inherit;
+    text-decoration: none !important;
+}
+.project-link:hover {
+    color: inherit;
+    text-decoration: none !important;
+}
