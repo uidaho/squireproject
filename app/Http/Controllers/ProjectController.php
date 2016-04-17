@@ -75,6 +75,6 @@ class ProjectController extends Controller
         $project->delete();
 
         Session::flash('delete-success', 'Successfully deleted the project "' . $title .'"');
-        return redirect()->action('PagesController@projectfinder');
+        return redirect()->action('ProjectController@listProjects');
     }
 }

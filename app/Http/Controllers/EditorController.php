@@ -70,7 +70,7 @@ class EditorController extends Controller
      */
     public function index()
     {
-        return redirect('/projectfinder');
+        return redirect('/projects');
     }
     
 
