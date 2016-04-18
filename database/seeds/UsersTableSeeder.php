@@ -12,9 +12,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // Create three App\User instances...
-        $users = factory(App\User::class, 3)->make();
-        
+        factory(User::class, 5)->create();
+
         // Create three App\User "admin" instances...
         // $users = factory(App\User::class, 'admin', 3)->make(); // TODO: add admin bool column to user table
     }
