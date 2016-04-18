@@ -18,7 +18,7 @@
                     {{ $project->description }}
                 </div>
                 @if (Auth::check() && Auth::user()->username == $project->author)
-                    <a href="{{ $project->getSlug() }}/delete">
+                    <a href="/project/delete/{{ $project->getSlug() }}">
                         <button type="button" id="delete">Delete</button>
                     </a>
                 @endif
