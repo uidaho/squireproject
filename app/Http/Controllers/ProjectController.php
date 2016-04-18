@@ -15,7 +15,7 @@ class ProjectController extends Controller
 	{
 		return view('project.list', ['projects' => Project::all()]);
 	}
-	
+
     /**
      * Renders the Project View for the given id
      *
@@ -24,6 +24,18 @@ class ProjectController extends Controller
      * @internal param Project $id id for lookup
      */
     public function view(Project $project)
+    {
+        return view('project.viewproject', ['project' => $project]);
+    }
+	
+    /**
+     * Renders the Project View for the given id
+     *
+     * @param Project $project
+     * @return The project page view
+     * @internal param Project $id id for lookup
+     */
+    public function viewManager(Project $project)
     {
         
         $userid = Auth::user()->id;

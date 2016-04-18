@@ -17,6 +17,7 @@ class Project extends Model
      */
     public function getSlug()
     {
+        //return '/project/' . str_replace(' ', '_', $this->title);
         return '/project/' . $this->title;
     }
     

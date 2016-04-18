@@ -38,9 +38,10 @@ Route::get('about', 'PagesController@about');
 Route::get('project/create', 'ProjectController@createForm');
 Route::post('project/create', 'ProjectController@create');
 Route::get('project/delete/{project}', 'ProjectController@delete');
-Route::get('project', 'ProjectController@listProjects');
+//Route::get('project', 'ProjectController@listProjects');
 Route::get('projects', 'ProjectController@listProjects');
-Route::get('project/view/{project}', 'ProjectController@view');
+//Route::get('project/view/{project}', 'ProjectController@view');
+Route::get('project/{project}/files', 'ProjectController@viewManager');
 Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
 
 /*-----------------------*
