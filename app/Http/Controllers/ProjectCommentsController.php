@@ -57,7 +57,7 @@ class ProjectCommentsController extends Controller
     public function editComment(Request $request, Project $project, ProjectComment $projectComment)
     {
         $this->authorize('destroy', $projectComment);
-        return view('pages.editcomment', ['project' => $project, 'comment' => $projectComment]);
+        return view('project.editcomment', ['project' => $project, 'comment' => $projectComment]);
     }
     /**
      * Updates the comment for the given project
@@ -73,6 +73,6 @@ class ProjectCommentsController extends Controller
 
         Session::flash('userComment', 'Comment updated');
         $project->load('comments.user');
-        return view('pages.project', ['project' => $project]);
+        return view('project.view', ['project' => $project]);
     }
 }
