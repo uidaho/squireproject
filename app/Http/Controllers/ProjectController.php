@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
+use App\Http\Requests\CreateCommentRequest;
 use App\Project;
+use App\ProjectComment;
 use App\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\CreateCommentRequest;
-use App\ProjectComment;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller

@@ -48,7 +48,7 @@
                 @endforeach
             </ul>
 
-            <form class="form-group" method="POST" action="/project/{{ $project->id }}/comments">
+            <form class="form-group" method="POST" action="/project/{{ $project->title }}/comments">
                 {!! csrf_field() !!}
 
                 <h6>Add a Comment</h6>
