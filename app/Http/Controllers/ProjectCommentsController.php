@@ -57,7 +57,7 @@ class ProjectCommentsController extends Controller
     public function editComment(Request $request, Project $project, ProjectComment $projectComment)
     {
         $this->authorize('destroy', $projectComment);
-        return view('pages.edit-comment', ['project' => $project, 'comment' => $projectComment]);
+        return view('pages.editcomment', ['project' => $project, 'comment' => $projectComment]);
     }
     /**
      * Updates the comment for the given project
