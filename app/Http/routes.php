@@ -43,6 +43,9 @@ Route::get('projects', 'ProjectController@listProjects');
 Route::get('project/view/{project}', 'ProjectController@view');
 Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
 
+//Project Comments
+Route::post('project/{project}/comments', 'ProjectController@addComment');
+
 /*-----------------------*
  *  Editor Controller    *
  *-----------------------*/
