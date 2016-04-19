@@ -8,9 +8,9 @@
             <p class="small"><br>
                 Created by: <a href="#">{{ $comment->user->username }}</a>
                 @if ($comment->created_at == $comment->updated_at)
-                    Created at: {{ $comment->created_at }}
+                    Created: {{ $comment->getCreatedAt() }}
                 @else
-                    Updated at: {{ $comment->updated_at }}
+                    Updated: {{ $comment->getUpdatedAt() }}
                 @endif
             </p>
 
