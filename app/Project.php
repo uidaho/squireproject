@@ -139,4 +139,10 @@ class Project extends Model
         $comment->user_id = Auth::id();
         return $this->comments()->save($comment);
     }
+
+    //Lets Laravel know the project belongs to a user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

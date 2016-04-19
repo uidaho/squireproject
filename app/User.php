@@ -29,4 +29,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProjectComment::class);
     }
+
+    //Lets Laravel know the user has many projects
+    public function projects()
+    {
+        return $this->hasMany(Projects::class);
+    }
 }
