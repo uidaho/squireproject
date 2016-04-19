@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class ProjectComment extends Model
 {
@@ -17,5 +18,20 @@ class ProjectComment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    //Todo user defined timezone
+    public function getCreatedAt()
+    {
+        $time = Carbon::createFromTimestamp(strtotime($this->created_at))->timezone('America/Los_Angeles');
+
+        return $time->format('F j\\, Y \\a\\t g:i A');
+    }
+
+    public function getUpdatedAt()
+    {
+        $time = Carbon::createFromTimestamp(strtotime($this->updated_at))->timezone('America/Los_Angeles');
+
+        return $time->format('F j\\, Y \\a\\t g:i A');
     }
 }
