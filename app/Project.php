@@ -17,7 +17,17 @@ class Project extends Model
      */
     public function getSlug()
     {
-        return '/project/' . $this->title;
+        return '/project/' . str_replace(' ', '-', $this->title);
+    }
+
+    public function getNameFromSlug()
+    {
+        return self::fromSlug($this->getSlug());
+    }
+
+    public static function fromSlug($slug)
+    {
+        return (new static)->where('title', str_replace('-', ' ', $slug));
     }
     
     public static function fromName($name) {

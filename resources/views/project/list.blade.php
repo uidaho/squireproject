@@ -54,6 +54,7 @@
                         {{ $project->description }}
                     </div>
                 </div>
+                </a>
             </div>
             </a>
         </div>

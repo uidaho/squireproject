@@ -56,7 +56,7 @@ class ProjectController extends Controller
     {
         $newEntry = Project::create([
             'author' => Auth::user()->username,
-            'title'  => str_replace(' ', '-', $request->getTitle()),
+            'title'  => $request->getTitle(),
             'description' => $request->getDescription(),
             'body' => $request->getBody()
         ]);
