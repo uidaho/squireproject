@@ -50,7 +50,6 @@ class ProjectCommentsController extends Controller
     /**
      * Goes to a page to edit the given project comment
      *
-     * @param  Request  $request
      * @param $request = $comment data
      * @return to edit comment page
      */
@@ -58,7 +57,7 @@ class ProjectCommentsController extends Controller
     {
         $this->authorize('destroy', $projectComment);
 
-        return view('pages.editcomment', ['comment' => $projectComment]);
+        return view('project.editcomment', ['comment' => $projectComment]);
     }
     /**
      * Updates the comment for the given project
