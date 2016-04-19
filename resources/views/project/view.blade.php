@@ -43,7 +43,11 @@
                         <p>{{ $comment->comment_body }}</p>
                         <p class="small"><br>
                             Created by: <a href="#">{{ $comment->user->username }}</a>
-                            Created at: {{ $comment->created_at }}
+                            @if ($comment->created_at == $comment->updated_at)
+                                Created at: {{ $comment->created_at }}
+                            @else
+                                Updated at: {{ $comment->updated_at }}
+                            @endif
                         </p>
 
                         @if($comment->user_id == Auth::id())
