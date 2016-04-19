@@ -50,6 +50,10 @@ Route::post('project/{project}/comments', 'ProjectCommentsController@addComment'
 Route::get('project/comments/edit/{projectComment}', 'ProjectCommentsController@editComment');
 Route::patch('project/{project}/{projectComment}', 'ProjectCommentsController@updateComment');
 Route::delete('project/{project}/comments/{projectComment}', 'ProjectCommentsController@deleteComment');
+//Empty routes
+Route::get('/project/comments', 'ProjectController@listProjects');
+Route::get('/project/comment', 'ProjectController@listProjects');
+Route::get('project/comments/edit/{projectComment}', 'ProjectController@listProjects');
 
 /*-----------------------*
  *  Editor Controller    *
