@@ -15,7 +15,7 @@
             </p>
 
             @if($comment->user_id == Auth::id())
-                <form action="/project/comments/{{ $comment->id }}" method="GET">
+                <form action="/project/comments/edit/{{ $comment->id }}" method="GET">
                     {!! csrf_field() !!}
 
                     <button type="submit" class="btn btn-xs btn-warning" value="Edit">
