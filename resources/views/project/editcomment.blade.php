@@ -1,7 +1,7 @@
 @extends('layouts.main_layout')
 
 @section('head')
-    <title>{{ $project->title }}</title>
+    <title>Edit Comment</title>
 @stop
 
 @section('mainBody')
@@ -9,7 +9,7 @@
         <div class="col-md-6 col-md-offset-3">
             <h4>Edit Comment</h4>
 
-            <form class="form-group" method="POST" action="/project/{{ $project->title }}/comments/{{ $comment->id }}">
+            <form class="form-group" method="POST" action="/project/{{ str_replace(' ', '-', $comment->project->title) }}/{{ $comment->id }}">
                 {!! csrf_field() !!}
                 {!! method_field('PATCH') !!}
 
