@@ -5,34 +5,46 @@
 @stop
 
 @section('mainBody')
-    <div class="row">
-        <div class="panel-body">
-            <div class="fallback-image">
-                <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-5">
+                <h4>{{ $project->title }}</h4>
             </div>
-            <hr/>
-            <span class="label label-default project-members">n+1 Members</span>
-            <h4>{{ $project->title }}</h4>
-            <div class="project-description">
-                {{ $project->description }}
-            </div>
-            <div>
-                {{ $project->body }}
-            </div>
-            <br>
-            @if (Auth::check())
-                <a href="/editor/{{ $project->getSlugFriendlyTitle() }}">
-                    <button class="btn btn-default" id="view-files">View Files</button>
-                </a>
-                @if (Auth::user()->username == $project->author)
-                    <a href="/project/delete/{{ $project->getSlugFriendlyTitle() }}">
-                        <button class="btn btn-danger" id="delete">Delete</button>
-                    </a>
-                @endif
-            @endif
         </div>
-        <div class="col-md-6 col-md-offset-3">
-            @include('project.comments')
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="fallback-image">
+                    <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
+                </div>
+                <hr>
+                <span class="label label-default project-memebers">n+1 Members</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+                <p class="text-left">
+                    {{ $project->description }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                @include('project.comments')
+            </div>
+            <hr>
+            <hr>
+            <div class="col-md-10">
+                @if (Auth::check())
+                    <a href="/editor/{{ $project->getSlugFriendlyTitle() }}">
+                        <button class="btn btn-default" id="view-files">View Files</button>
+                    </a>
+                    @if (Auth::user()->username == $project->author)
+                        <a href="/project/delete/{{ $project->getSlugFriendlyTitle() }}">
+                            <button class="btn btn-danger" id="delete">Delete</button>
+                        </a>
+                    @endif
+                @endif
+            </div>
         </div>
     </div>
 @stop

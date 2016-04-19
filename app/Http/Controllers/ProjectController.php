@@ -24,7 +24,13 @@ class ProjectController extends Controller
      * @internal param Project $id id for lookup
      */
     public function view(Project $project)
+<<<<<<< HEAD
     {
+=======
+    {   
+        $files = File::forProject($project)->get();
+
+>>>>>>> Reformat project view
         $project->load('comments.user');
 
         return view('project.view', ['project' => $project]);
