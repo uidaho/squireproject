@@ -17,13 +17,15 @@
                     <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
                 </div>
                 <hr>
+                <h3>Creator: {{ $project->author }}</h3>
                 <span class="label label-default project-memebers">n+1 Members</span>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-1">
+            <div class="col-md-8 col-md-offset-4">
+                <h3>Description</h3>
                 <p class="text-left">
-                    {{ $project->description }}
+                    {{ $project->body }}
                 </p>
             </div>
         </div>
@@ -33,7 +35,7 @@
             </div>
             <hr>
             <hr>
-            <div class="col-md-10">
+            <div class="col-md-6 col-md-offset-3">
                 @if (Auth::check())
                     <a href="/editor/{{ $project->getSlugFriendlyTitle() }}">
                         <button class="btn btn-default" id="view-files">View Files</button>
