@@ -15,15 +15,15 @@
             </p>
 
             @if($comment->user_id == Auth::id())
-                <form action="/project/comments/edit/{{ $comment->id }}" method="GET">
+                <form class="span4" action="/project/comments/edit/{{ $comment->id }}" method="GET">
                     {!! csrf_field() !!}
 
-                    <button type="submit" class="btn btn-xs btn-warning" value="Edit">
+                    <button type="submit" class="pull-left btn btn-xs btn-warning" value="Edit">
                         Edit
                     </button>
                 </form>
 
-                <form action="/project/{{ $project->title }}/comments/{{ $comment->id }}" method="POST">
+                <form class="offset2" action="/project/{{ $project->title }}/comments/{{ $comment->id }}" method="POST">
                     {!! csrf_field() !!}
                     {!! method_field('DELETE') !!}
 

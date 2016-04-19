@@ -8,7 +8,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4 col-md-offset-5">
-                <h4>{{ $project->title }}</h4>
+                <h4 class="visible-lg-inline">{{ $project->title }}</h4>
+                @if (Auth::check() && Auth::user()->username == $project->author)
+                    <a href="/project/delete/{{ $project->title }}">
+                        <button type="button" id="delete">Delete</button>
+                    </a>
+                @endif
+                <br>
+                <br>
             </div>
         </div>
         <div class="row">
@@ -19,22 +26,27 @@
                 <hr>
                 <h3>Creator: {{ $project->author }}</h3>
                 <span class="label label-default project-memebers">n+1 Members</span>
+                <hr>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-4">
-                <h3>Description</h3>
-                <p class="text-left">
-                    {{ $project->body }}
-                </p>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="jumbotron">
+                    <h2>
+                        Description
+                    </h2>
+                    <p>
+                        {{ $project->body }}
+                    </p>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 @include('project.comments')
             </div>
-            <hr>
-            <hr>
+            <br>
+            <br>
             <div class="col-md-6 col-md-offset-3">
                 @if (Auth::check())
                     <a href="/editor/{{ $project->getSlugFriendlyTitle() }}">
