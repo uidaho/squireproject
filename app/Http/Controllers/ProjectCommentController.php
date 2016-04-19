@@ -32,4 +32,18 @@ class ProjectCommentsController extends Controller
         }
         return back();
     }
+
+    /**
+     * Destroy the given project comment
+     *
+     * @param  Request  $request
+     * @param $request = user entered data, $comment data
+     * @return back to same page
+     */
+    public function deleteComment(Request $request, Project $project, ProjectComment $projectComment)
+    {
+        $this->authorize('destroy', $projectComment);
+        $projectComment->delete();
+        return back();
+    }
 }

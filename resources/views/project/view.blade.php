@@ -44,6 +44,22 @@
                             Created by: <a href="#">{{ $comment->user->username }}</a>
                             Created at: {{ $comment->created_at }}
                         </p>
+                        <form action="/project/{{ $project->title }}/comments/{{ $comment->id }}" method="POST">
+                            {!! csrf_field() !!}
+                            {!! method_field('UPDATE') !!}
+
+                            <button type="submit" class="btn btn-xs btn-warning" value="Edit">
+                                Edit
+                            </button>
+                        </form>
+                        <form action="/project/{{ $project->title }}/comments/{{ $comment->id }}" method="POST">
+                            {!! csrf_field() !!}
+                            {!! method_field('DELETE') !!}
+
+                            <button type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                Delete
+                            </button>
+                        </form>
                     </li>
                 @endforeach
             </ul>
