@@ -53,7 +53,7 @@ Route::delete('project/{project}/comments/{projectComment}', 'ProjectCommentsCon
 //Empty routes
 Route::get('/project/comments', 'ProjectController@listProjects');
 Route::get('/project/comment', 'ProjectController@listProjects');
-Route::get('project/comments/edit/{projectComment}', 'ProjectController@listProjects');
+Route::get('project/comments/edit', 'ProjectController@listProjects');
 
 /*-----------------------*
  *  Editor Controller    *
