@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Project extends Model
 {
@@ -125,5 +126,17 @@ class Project extends Model
             'min' => $min,
             'max' => $max
         ];
+    }
+
+    //Used for fetching the project's comments
+    public function comments()
+    {
+        return $this->hasMany(ProjectComment::class);
+    }
+    //Adds a comment to the project
+    public function addComment(ProjectComment $comment)
+    {
+        $comment->user_id = Auth::id();
+        return $this->comments()->save($comment);
     }
 }

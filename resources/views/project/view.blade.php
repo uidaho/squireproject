@@ -31,5 +31,42 @@
                 @endif
             @endif
         </div>
+
+        <div class="col-md-6 col-md-offset-3">
+            <br><!-- Remove <br> when actual stylesheet is implemented -->
+            <h6>Comments</h6>
+
+            <ul class="list-group">
+                @foreach($project->comments as $comment)
+                    <li class="list-group-item">
+                        {{ $comment->comment_body }}
+                        <p class="small"><br>
+                            Created by: <a href="#">{{ $comment->user->username }}</a>
+                            Created at: {{ $comment->created_at }}
+                        </p>
+                    </li>
+                @endforeach
+            </ul>
+
+            <form class="form-group" method="POST" action="/project/{{ $project->id }}/comments">
+                {!! csrf_field() !!}
+
+                <h6>Add a Comment</h6>
+
+                @if ($errors->has('comment_body'))
+                    <span class="error-auth">{{ $errors->first('comment_body') }}</span>
+                @elseif(Session::has('guestComment'))
+                    <span class="error-auth">{{ Session::get('guestComment') }}</span>
+                @elseif(Session::has('userComment'))
+                    <span class="">{{ Session::get('userComment') }}</span>
+                @endif
+
+                <textarea class="form-control" name="comment_body">{{ old('comment_body') }}</textarea>
+                <br><!-- Remove <br> when actual stylesheet is implemented -->
+                <input class="btn btn-primary" type="submit" name="submit" value="Send">
+            </form>
+
+        </div>
+        
     </div>
 @stop

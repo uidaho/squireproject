@@ -8,6 +8,9 @@ use App\Project;
 use App\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\CreateCommentRequest;
+use App\ProjectComment;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -25,6 +28,8 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
+        $project->load('comments.user');
+
         return view('project.view', ['project' => $project]);
     }
 
@@ -77,5 +82,27 @@ class ProjectController extends Controller
 
         Session::flash('delete-success', 'Successfully deleted the project "' . $title .'"');
         return redirect()->action('ProjectController@listProjects');
+    }
+
+    /**
+     * Adds the comment to the given project
+     *
+     * @param $request = user entered text, $project project_id for lookup
+     * @return back to same page
+     */
+    public function addComment(CreateCommentRequest $request, Project $project)
+    {
+        if(Auth::guest())                                                                   //Checks if user is not logged in
+        {
+            Session::flash('guestComment', 'You must be logged in to submit a comment');
+        }
+        else                                                                                //User is logged in
+        {
+            $project->addComment(
+                new ProjectComment($request->all())
+            );
+            Session::flash('userComment', 'Comment submitted');
+        }
+        return back();
     }
 }
