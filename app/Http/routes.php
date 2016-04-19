@@ -52,7 +52,6 @@ Route::patch('project/{project}/{projectComment}', 'ProjectCommentsController@up
 Route::delete('project/{project}/comments/{projectComment}', 'ProjectCommentsController@deleteComment');
 //Empty routes
 Route::get('/project/comments', 'ProjectController@listProjects');
-Route::get('/project/comment', 'ProjectController@listProjects');
 Route::get('project/comments/edit', 'ProjectController@listProjects');
 
 /*-----------------------*
