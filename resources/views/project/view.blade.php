@@ -39,12 +39,14 @@
             <ul class="list-group">
                 @foreach($project->comments as $comment)
                     <li class="list-group-item">
-                        {{ $comment->comment_body }}
+
+                        <p>{{ $comment->comment_body }}</p>
                         <p class="small"><br>
                             Created by: <a href="#">{{ $comment->user->username }}</a>
                             Created at: {{ $comment->created_at }}
                         </p>
-                        <form action="/project/{{ $project->title }}/comments/{{ $comment->id }}" method="POST">
+
+                        <form action="/project/{{ $project->title }}/comments/{{ $comment->id }}" method="GET">
                             {!! csrf_field() !!}
                             {!! method_field('UPDATE') !!}
 
@@ -52,6 +54,7 @@
                                 Edit
                             </button>
                         </form>
+
                         <form action="/project/{{ $project->title }}/comments/{{ $comment->id }}" method="POST">
                             {!! csrf_field() !!}
                             {!! method_field('DELETE') !!}

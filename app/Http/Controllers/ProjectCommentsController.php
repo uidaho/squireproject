@@ -46,4 +46,33 @@ class ProjectCommentsController extends Controller
         $projectComment->delete();
         return back();
     }
+
+    /**
+     * Goes to a page to edit the given project comment
+     *
+     * @param  Request  $request
+     * @param $request = user entered data, $comment data
+     * @return to edit comment page
+     */
+    public function editComment(Request $request, Project $project, ProjectComment $projectComment)
+    {
+        $this->authorize('destroy', $projectComment);
+        return view('pages.edit-comment', ['project' => $project, 'comment' => $projectComment]);
+    }
+    /**
+     * Updates the comment for the given project
+     *
+     * @param $request = user entered text, $project data
+     * @return back to same page
+     */
+    public function updateComment(CreateCommentRequest $request, Project $project, ProjectComment $projectComment)
+    {
+        $this->authorize('destroy', $projectComment);
+
+        $projectComment->update($request->all());
+
+        Session::flash('userComment', 'Comment updated');
+        $project->load('comments.user');
+        return view('pages.project', ['project' => $project]);
+    }
 }

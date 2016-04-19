@@ -43,11 +43,12 @@ Route::get('projects', 'ProjectController@listProjects');
 Route::get('project/view/{project}', 'ProjectController@view');
 Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
 
-/*-----------------------*
- *  Project Controller   *
- *-----------------------*/
+/*--------------------------------*
+ *  Project Comments Controller   *
+ *--------------------------------*/
 Route::post('project/{project}/comments', 'ProjectCommentsController@addComment');
-//Route::update('project/{project}/comments/{projectComment}', 'ProjectCommentsController@updateComment');
+Route::get('project/{project}/comments/{projectComment}', 'ProjectCommentsController@editComment');
+Route::patch('project/{project}/comments/{projectComment}', 'ProjectCommentsController@updateComment');
 Route::delete('project/{project}/comments/{projectComment}', 'ProjectCommentsController@deleteComment');
 
 /*-----------------------*
