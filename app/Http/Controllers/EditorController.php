@@ -36,7 +36,7 @@ class EditorController extends Controller
         $userid = Auth::user()->id;
         $username = Auth::user()->username;
 
-        $file = File::where('projectname', $projectname)
+        $file = File::where('projectname', Project::getTitleFromSlug($projectname))
                     ->where('filename', $filename)
                     ->firstOrFail();
 
@@ -52,7 +52,7 @@ class EditorController extends Controller
     public function listFiles($projectname)
     {
         $userid = Auth::user()->id;
-        $project = Project::fromName($projectname)->get()->first();
+        $project = Project::fromSlug($projectname)->get()->first();
         $files = File::forProject($project)->get();
 
         if (empty($files[0])) {

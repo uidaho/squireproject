@@ -23,4 +23,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //Lets Laravel know the user has many comments
+    public function comments()
+    {
+        return $this->hasMany(ProjectComment::class);
+    }
+
+    //Lets Laravel know the user has many projects
+    public function projects()
+    {
+        return $this->hasMany(Projects::class);
+    }
 }

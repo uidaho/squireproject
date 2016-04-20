@@ -43,7 +43,6 @@ $factory->define(Project::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->unique()->regexify('[A-Za-z0-9_ .]{2,50}'),
         'author' => $user->username,
-        //'user_id' => $user_id,
         'description' => $faker->regexify('[A-Za-z0-9_ .]{10,100}'),
         'body' => $faker->regexify('[A-Za-z0-9_ .]{100,65535}'),
     ];
@@ -53,7 +52,6 @@ $factory->defineAs(Project::class, 'selfContained', function (Faker\Generator $f
     return [
         'title' => $faker->unique()->regexify('[A-Za-z0-9_ .]{2,50}'),
         'author' => factory(User::class)->create()->username,
-        //'user_id' => factory(User::class)->create()->id,
         'description' => $faker->regexify('[A-Za-z0-9_ .]{10,100}'),
         'body' => $faker->regexify('[A-Za-z0-9_ .]{100,65535}'),
     ];

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Project extends Model
 {
@@ -17,9 +18,49 @@ class Project extends Model
      */
     public function getSlug()
     {
-        return '/project/' . $this->title;
+        return '/project/' . $this->getSlugFriendlyTitle();
     }
-    
+
+    /**
+     * Converts this projects title to a slug friendly version
+     *
+     * @return mixed
+     */
+    public function getSlugFriendlyTitle()
+    {
+        return str_replace(' ', '-', $this->title);
+    }
+
+    /**
+     * Converts the given slug for a project to its title.
+     *
+     * @param $slug
+     * @return mixed
+     */
+    public static function getTitleFromSlug($slug)
+    {
+        return str_replace('-', ' ', $slug);
+    }
+
+
+    /**
+     * Retrieve the project from the database with the given slug, converting
+     * it to its proper title for lookup.
+     *
+     * @param $slug
+     * @return mixed
+     */
+    public static function fromSlug($slug)
+    {
+        return (new static)->where('title', str_replace('-', ' ', $slug));
+    }
+
+    /**
+     * Retrieves the project from the database with the given <strong>title</strong>.
+     *
+     * @param $name
+     * @return mixed
+     */
     public static function fromName($name) {
         return (new static)->where('title', $name);
     }
@@ -44,7 +85,7 @@ class Project extends Model
     {
         $res = parent::delete();
 
-        $imagePath = $this->getImagePath();
+        $imagePath = base_path() . '/public' .$this->getImagePath();
         if (file_exists($imagePath)) {  // Shouldn't be null, let's check for sanity
             unlink($imagePath);
         }
@@ -85,5 +126,23 @@ class Project extends Model
             'min' => $min,
             'max' => $max
         ];
+    }
+
+    //Used for fetching the project's comments
+    public function comments()
+    {
+        return $this->hasMany(ProjectComment::class);
+    }
+    //Adds a comment to the project
+    public function addComment(ProjectComment $comment)
+    {
+        $comment->user_id = Auth::id();
+        return $this->comments()->save($comment);
+    }
+
+    //Lets Laravel know the project belongs to a user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
