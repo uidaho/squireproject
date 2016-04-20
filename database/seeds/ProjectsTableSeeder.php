@@ -18,7 +18,7 @@ class ProjectsTableSeeder extends Seeder
 
         $faker = Faker\Factory::create();
         //Creates projects
-        for ($i = 0, $j = 0; $i < 10; $i++, $j++)
+        for ($i = 0, $j = 0; $i < 5; $i++, $j++)
         {
             factory(Project::class, 1)->create();
             //factory(Project::class, 'selfContained', 1)->create();                                        //Use when wanting to create connected users with the project
