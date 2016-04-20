@@ -207,56 +207,6 @@ Register
 ======================================
 */
 
-input, label
-{
-	display: block;
-	text-align: left;
-}
-
-.register label
-{
-	font-size: 15px;
-	padding-bottom: 10px;
-	margin: 0 20px 0 20px;
-}
-
-.register-title
-{
-	font-size: 40px;
-	padding: 20px 0 40px 0;
-}
-
-.register input, .login input
-{
-	width: 200px;
-}
-
-.account-action .btn
-{
-	float: left;
-	margin: 0 20px 0 20px;
-}
-
-.account-action input
-{
-	display: inline;
-}
-
-.register-form
-{
-	background: #fff;
-	border-radius: 5px;
-	border: 2px solid #dfe2ef;
-	height: 100%;
-}
-
-.register-why
-{
-	background: #fff;
-	border-radius: 5px;
-	border: 2px solid #dfe2ef;
-	height: 350px;
-}
 
 ul.join-points
 {
@@ -271,17 +221,6 @@ ul.join-points
 	list-style-position: inside;
 }
 
-.register-main
-{
-	padding-top: 200px;
-}
-
-.already-member
-{
-	display: block;
-	font-size: 12px;
-}
-
 /*
 ======================================
 Login
@@ -291,46 +230,6 @@ Login
 .login-main
 {
 	padding-top: 175px;
-}
-
-.login-form
-{
-	background: #fff;
-	border-radius: 5px;
-	border: 2px solid #dfe2ef;
-	height: 100%;
-}
-
-.login-form h5
-{
-	padding-top: 25px;
-}
-
-/*
-======================================
-About Page
-======================================
-*/
-
-.mini-background
-{
-	background: #fff;
-	border-radius: 5px;
-	border: 2px solid #dfe2ef;
-	min-height: 250px;
-}
-
-.mini-background h5
-{
-	font-size: 40px;
-	padding: 20px 0 40px 0;
-}
-
-.mini-background ul.join-points
-{
-	width: 400px;
-	margin: auto;
-	list-style: disc;
 }
 
 /*
