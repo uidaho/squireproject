@@ -98,7 +98,7 @@
                         </div>
                     @endif
                 </div>
-                <button type="submit" class="btn btn-default">
+                <button type="submit" id="submit" class="btn btn-default">
                     Submit
                 </button>
                 <a href="/projects">
