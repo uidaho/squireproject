@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+
 class CreateCommentRequest extends Request
 {
     /**
@@ -11,7 +13,7 @@ class CreateCommentRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return !Auth::guest();
     }
     /**
      * Get the validation rules that apply to the request.

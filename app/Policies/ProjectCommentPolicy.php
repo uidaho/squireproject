@@ -7,14 +7,15 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class ProjectCommentPolicy
 {
     use HandlesAuthorization;
+
     /**
-     * Determine if the given user can delete the given project comment.
+     * Determine if the given user is the owner of the given project comment.
      *
      * @param  User  $user
-     * @param  ProjectComment  $projectComment
+     * @param  ProjectComment $projectComment
      * @return bool
      */
-    public function destroy(User $user, ProjectComment  $projectComment)
+    public function userIsOwner(User $user, ProjectComment  $projectComment)
     {
         return $user->id == $projectComment->user_id;
     }

@@ -9,14 +9,15 @@
         <div class="col-md-6 col-md-offset-3">
             <h4>Edit Comment</h4>
 
-            <form class="form-group" method="POST" action="/project/{{ str_replace(' ', '-', $comment->project->title) }}/{{ $comment->id }}">
+            <form class="form-group" method="POST" action="project/comments/update/{{ $comment->id }}">
                 {!! csrf_field() !!}
                 {!! method_field('PATCH') !!}
 
                 @if ($errors->has('comment_body'))
-                    <span class="error-auth">{{ $errors->first('comment_body') }}</span>
-                @elseif(Session::has('userComment'))
-                    <span class="">{{ Session::get('userComment') }}</span>
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <p>{{ $errors->first('comment_body') }}</p>
+                    </div>
                 @endif
 
                 <textarea class="form-control" name="comment_body">{{ $comment->comment_body }}{{ old('comment_body') }}</textarea>
