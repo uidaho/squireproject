@@ -1,0 +1,11 @@
+/*
+======================================
+Image Edits
+======================================
+*/
+
+.r-image-restraint {
+    max-height: 500px;
+    max-width: 600px;
+    border: 2px solid #3c3c3c;
+}

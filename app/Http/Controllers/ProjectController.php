@@ -25,6 +25,8 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
+        $project->load('comments.user');
+
         return view('project.view', ['project' => $project]);
     }
 

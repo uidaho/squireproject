@@ -1,13 +1,13 @@
 <?php
 
-use App\Project;
+use App\ProjectComment;
 use Faker\Generator;
 use Illuminate\Database\Seeder;
 
-class ProjectsTableSeeder extends Seeder
+class SC_CommentSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Creates project comments, users, and projects all in one
      *
      * @return void
      */
@@ -17,13 +17,10 @@ class ProjectsTableSeeder extends Seeder
         $images = glob($dir . "*");
 
         $faker = Faker\Factory::create();
-        //Creates projects
-        for ($i = 0, $j = 0; $i < 5; $i++, $j++)
+        for ($i = 0, $j = 0; $i < 10; $i++, $j++)
         {
-            factory(Project::class, 1)->create();
-            //factory(Project::class, 'selfContained', 1)->create();                                        //Use when wanting to create connected users with the project
+            factory(ProjectComment::class, 'selfContained' ,1)->create();
             $newestID = DB::table('projects')->orderBy('created_at', 'desc')->first()->id;                  //Get the project that was just created's id
-
             $imagePath = 'public/images/projects/' . 'product' . $newestID . '.jpg';
             if (sizeof($images) <= $j)
                 $j = 0;
