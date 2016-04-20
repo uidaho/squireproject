@@ -10,16 +10,6 @@ class Project extends Model
         'title', 'author', 'description', 'body', 'created_at', 'updated_at'
     ];
 
-    public static function getTitleFromSlug($slug)
-    {
-        return str_replace('-', ' ', $slug);
-    }
-
-    public function getSlugFriendlyTitle()
-    {
-        return str_replace(' ', '-', $this->title);
-    }
-
     /**
      * Gets this projects url
      *
@@ -30,16 +20,46 @@ class Project extends Model
         return '/project/' . $this->getSlugFriendlyTitle();
     }
 
-    public function getNameFromSlug()
+    /**
+     * Converts this projects title to a slug friendly version
+     *
+     * @return mixed
+     */
+    public function getSlugFriendlyTitle()
     {
-        return self::fromSlug($this->getSlug());
+        return str_replace(' ', '-', $this->title);
     }
 
+    /**
+     * Converts the given slug for a project to its title.
+     *
+     * @param $slug
+     * @return mixed
+     */
+    public static function getTitleFromSlug($slug)
+    {
+        return str_replace('-', ' ', $slug);
+    }
+
+
+    /**
+     * Retrieve the project from the database with the given slug, converting
+     * it to its proper title for lookup.
+     *
+     * @param $slug
+     * @return mixed
+     */
     public static function fromSlug($slug)
     {
         return (new static)->where('title', str_replace('-', ' ', $slug));
     }
-    
+
+    /**
+     * Retrieves the project from the database with the given <strong>title</strong>.
+     *
+     * @param $name
+     * @return mixed
+     */
     public static function fromName($name) {
         return (new static)->where('title', $name);
     }
