@@ -25,12 +25,7 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
-        
-        $userid = Auth::user()->id;
-        
-        $files = File::forProject($project)->get();
-                    
-        return view('project.view', ['project' => $project, 'files' => $files, 'userid' => $userid]);
+        return view('project.view', ['project' => $project]);
     }
 
     /**
@@ -56,7 +51,7 @@ class ProjectController extends Controller
     {
         $newEntry = Project::create([
             'author' => Auth::user()->username,
-            'title'  => str_replace(' ', '-', $request->getTitle()),
+            'title'  => $request->getTitle(),
             'description' => $request->getDescription(),
             'body' => $request->getBody()
         ]);

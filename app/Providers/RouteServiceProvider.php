@@ -27,8 +27,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
 
-        $router->bind('project', function($title) {
-            return Project::where('title', $title)->first();
+        $router->bind('project', function($slug) {
+            return Project::fromSlug($slug)->first();
         });
     }
 
