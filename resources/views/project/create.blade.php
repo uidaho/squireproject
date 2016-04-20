@@ -88,7 +88,7 @@
                         About The Project
                     </label>
                     <div class="col-lg-10">
-                        <textarea class="form-control" id="project-body" name="project-body" rows="10"> {{ old('project-body') }} </textarea>
+                        <textarea class="form-control" id="project-body" name="project-body" rows="10">{{ old('project-body') }}</textarea>
                     </div>
 
                     @if($errors->has('project-body'))
