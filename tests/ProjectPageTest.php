@@ -64,7 +64,7 @@ class ProjectPageTest extends TestCase
     public function testForbiddenDirectDelete()
     {
         $this->actingAs(factory(App\User::class)->make(['username' => 'other_user']))
-            ->get($this->entry->getSlug() . '/delete')
+            ->get('/project/delete/' . $this->entry->getSlugFriendlyTitle())
             ->assertResponseStatus(403);
     }
 

@@ -10,6 +10,16 @@ class Project extends Model
         'title', 'author', 'description', 'body', 'created_at', 'updated_at'
     ];
 
+    public static function getTitleFromSlug($slug)
+    {
+        return str_replace('-', ' ', $slug);
+    }
+
+    public function getSlugFriendlyTitle()
+    {
+        return str_replace(' ', '-', $this->title);
+    }
+
     /**
      * Gets this projects url
      *
@@ -17,7 +27,7 @@ class Project extends Model
      */
     public function getSlug()
     {
-        return '/project/' . str_replace(' ', '-', $this->title);
+        return '/project/' . $this->getSlugFriendlyTitle();
     }
 
     public function getNameFromSlug()

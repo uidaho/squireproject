@@ -17,29 +17,21 @@
                 <div class="project-description">
                     {{ $project->description }}
                 </div>
-                <div class="project-description">
+                <div>
                     {{ $project->body }}
                 </div>
                 <br>
                 @if (Auth::check())
-
+                    <a href="/editor/{{ $project->getSlugFriendlyTitle() }}">
+                        <button class="btn btn-default" id="view-files">View Files</button>
+                    </a>
                     @if (Auth::user()->username == $project->author)
-                        <a href="/project/delete/{{ $project->title }}">
-                            <button type="button" id="delete">Delete</button>
+                        <a href="/project/delete/{{ $project->getSlugFriendlyTitle() }}">
+                            <button class="btn btn-danger" id="delete">Delete</button>
                         </a>
                     @endif
                 @endif
             </div>
-        </div>
-        <div class="col-md-10">
-            <!--@if (Auth::check())
-                <a href="/editor/create/{{ $project->title }}" class="btn btn-default btn-sm">
-                    <em class="glyphicon glyphicon-plus"></em> Create
-                </a>
-                @include('editor.filelist')
-            @else
-                @{{ tetris here }}
-            @endif -->
         </div>
     </div>
 @stop
