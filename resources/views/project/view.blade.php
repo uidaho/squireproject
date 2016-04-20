@@ -15,8 +15,8 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <div class="fallback-image">
-                    <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
+                <div class="">
+                    <img class="center-block r-image-restraint" src="{{ $project->getImagePath() }}" alt="Project Image">
                 </div>
             </div>
         </div>
