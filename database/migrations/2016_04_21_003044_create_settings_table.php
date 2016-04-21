@@ -15,13 +15,12 @@ class CreateSettingsTable extends Migration
         Schema::create(/**
          * @param Blueprint $table
          */
-            'users', function (Blueprint $table) {
+            'settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nickname');
-            $table->string('chatFont');
-            $table->string('chatColor');
-            $table->string('bio');
-            $table->boolean('enableChat');
+            $table->integer('user_id')->unique()->key();
+            $table->string('chat_font');
+            $table->string('chat_color');
+            $table->boolean('enable_chat');
 
 
             //$table->string('avatar');
