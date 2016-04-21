@@ -28,7 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'projectfinder';
+    protected $redirectTo = 'projects';
     protected $username = 'username';
 
     /**
@@ -51,7 +51,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|min:6|max:16|unique:users',
+            'username' => 'required|min:6|max:16|alpha_dash|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|max:32|confirmed',
         ]);

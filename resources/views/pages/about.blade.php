@@ -1,30 +1,18 @@
 @extends('layouts.main_layout')
 
 @section('head')
-
     <title>About</title>
-
 @endsection
 
 @section('mainBody')
-
-<main class="primary-main row">
-    <section class="grid register-main">
-
-        <section class="col-2-3">
-
-            <div class="mini-background">
-                <h5>About us?</h5>
-
-                <ul class="join-points">
-                    <li>A group of cs students at the University of Idaho</li>
-                    <li>We were tasked with creating a collaborative ide</li>
-                </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h2>About us?</h2>
+                <p>
+                    We are a group of Computer Science 383 students at the University of Idaho tasked with creating a collaborative IDE.
+                </p>
             </div>
-
-        </section>
-
-    </section>
-</main>
-
+        </div>
+    </div>
 @stop

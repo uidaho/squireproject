@@ -20,7 +20,7 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
-    protected $redirectTo = '/projectfinder';           //Redirect the user after resetting their password
+    protected $redirectTo = '/projects';           //Redirect the user after resetting their password
 
     /**
      * Create a new password controller instance.

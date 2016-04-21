@@ -1,75 +1,69 @@
 @extends('layouts.main_layout')
 
 @section('head')
-    <!-- Redirect to main page if user is already logged in -->
-    @unless(Auth::guest())
-        <script>window.location.href = "projectfinder";</script>
-    @endunless
-
     <title>Password Reset</title>
 @endsection
 
 @section('mainBody')
 
-    <!-- Main -->
+<main class="primary-main row center-block">
+    <div class="jumbotron col-sm-6 col-sm-offset-3">
+        <form class="form-horizontal" action="{{ url('/password/reset') }}" method="POST">
+            {!! csrf_field() !!}
 
-    <main class="primary-main row">
-        <section class="grid login-main">
+            <input type="hidden" name="token" value="{{ $token }}">
+            <fieldset>
+                <legend>Reset Password</legend>
 
-            <!-- Login -->
-
-            <div class="col-1-3">
-
-                <form class="login-form" action="{{ url('/password/reset') }}" method="POST">
-                    {!! csrf_field() !!}
-
-                    <input type="hidden" name="token" value="{{ $token }}">
-
-                    <h5>Reset Password</h5>
-
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+                <div class="form-group">
+                    <!--
+                    @if($errors->has('email'))
+                        <div class="has-error">
+                    @endif -->
+                    <label for="email" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="email" name="email" id="email" value="{{ $email or old('email') }}">
+                        <!--@if ($errors->has('email'))
+                            <label class="control-label">{{ $errors->first('email') }}</label>
+                            </div>
+                        @endif -->
+                    </div>
+                </div>
+                @if($errors->has('password') or $errors->has('password_confirmation'))
+                    <div class="has-error">
+                @endif
+                <div class="form-group">
+                    <div class="col-lg-offset-2">
+                        <div class="col-sm-6">
+                            <label for="password" class="control-label">Type new password.</label>
+                            <input class="form-control" type="password" id="password" name="password">
                         </div>
-                    @endif
+                        <div class="col-sm-6">
+                            <label for="password_confirmation" class="control-label">Retype password.</label>
+                            <input class="form-control" type="password" id="password_confirmation" name="password_confirmation">
+                        </div>
+                        @if($errors->has('password') or $errors->has('password_confirmation'))
+                            <div class="col-sm-10">
+                                <label class="control-label">
+                                    @if($errors->has('password'))
+                                        {{ $errors->first('password') }}
+                                    @elseif($errors->has('password_confirmation'))
+                                        {{ $errors->first('password_confirmation') }}
+                                    @endif
+                                </label>
+                            </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
 
-                    <fieldset class="login">
-                        <label>
-                            Email Address
-                            <input type="email" name="email" value="{{ $email or old('email') }}">
-
-                            @if ($errors->has('email'))
-                                <span class="error-auth">{{ $errors->first('email') }}</span>
-                            @endif
-
-                        </label>
-                        <label>
-                            Password
-                            <input type="password" name="password">
-
-                            @if ($errors->has('password'))
-                                <span class="error-auth">{{ $errors->first('password') }}</span>
-                            @endif
-
-                        </label>
-                        <label>
-                            Repeat Password
-                            <input type="password" name="password_confirmation">
-
-                            @if ($errors->has('password_confirmation'))
-                                <span class="error-auth">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
-
-                        </label>
-                    </fieldset>
-                    <fieldset class="group">
-                        <input class="btn" type="submit" value="Reset Password">
-                    </fieldset>
-                </form>
-
-            </div>
-
-        </section>
-    </main>
-
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary" id="submit">Change Password</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</main>
 @stop

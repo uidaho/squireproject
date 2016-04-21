@@ -207,56 +207,6 @@ Register
 ======================================
 */
 
-input, label
-{
-	display: block;
-	text-align: left;
-}
-
-label
-{
-	font-size: 15px;
-	padding-bottom: 10px;
-	margin: 0 20px 0 20px;
-}
-
-.register-title
-{
-	font-size: 40px;
-	padding: 20px 0 40px 0;
-}
-
-.register input, .login input
-{
-	width: 200px;
-}
-
-.account-action .btn
-{
-	float: left;
-	margin: 0 20px 0 20px;
-}
-
-.account-action input
-{
-	display: inline;
-}
-
-.register-form
-{
-	background: #fff;
-	border-radius: 5px;
-	border: 2px solid #dfe2ef;
-	height: 100%;
-}
-
-.register-why
-{
-	background: #fff;
-	border-radius: 5px;
-	border: 2px solid #dfe2ef;
-	height: 350px;
-}
 
 ul.join-points
 {
@@ -271,17 +221,6 @@ ul.join-points
 	list-style-position: inside;
 }
 
-.register-main
-{
-	padding-top: 200px;
-}
-
-.already-member
-{
-	display: block;
-	font-size: 12px;
-}
-
 /*
 ======================================
 Login
@@ -291,46 +230,6 @@ Login
 .login-main
 {
 	padding-top: 175px;
-}
-
-.login-form
-{
-	background: #fff;
-	border-radius: 5px;
-	border: 2px solid #dfe2ef;
-	height: 100%;
-}
-
-.login-form h5
-{
-	padding-top: 25px;
-}
-
-/*
-======================================
-About Page
-======================================
-*/
-
-.mini-background
-{
-	background: #fff;
-	border-radius: 5px;
-	border: 2px solid #dfe2ef;
-	min-height: 250px;
-}
-
-.mini-background h5
-{
-	font-size: 40px;
-	padding: 20px 0 40px 0;
-}
-
-.mini-background ul.join-points
-{
-	width: 400px;
-	margin: auto;
-	list-style: disc;
 }
 
 /*
@@ -519,6 +418,29 @@ Projects Page
 	box-shadow: 0px 1px 3px #888888;
 }
 
+.project-form label {
+	margin-top: 10px;
+	font-size: 20px;
+}
+
+.project-form input, textarea, button {
+	font-size: 15px;
+}
+
+.project-form textarea {
+	width: 100%;
+}
+
+.project-page img {
+	border-radius: 5px;
+	display: block;
+	margin-bottom: 22px;
+	max-width: 75%;
+}
+.project-page-elements {
+	margin: 10px 30px 0 30px;
+}
+
 /*
 ======================================
 Button
@@ -608,4 +530,25 @@ Errors
 	font-weight: 600;
 	font-size: 13px;
 	letter-spacing: .1px;
+}
+
+/*
+======================================
+Animations
+======================================
+*/
+
+/* Source: http://jsfiddle.net/nprather/WKSrV/3/ */
+@-webkit-keyframes yellow-fade {
+	0% {background: gold;}
+	100% {background: none;}
+}
+@keyframes yellow-fade {
+	0% {background: gold;}
+	100% {background: none;}
+}
+
+.highlight {
+	-webkit-animation: yellow-fade 2s ease-in 1;
+	animation: yellow-fade 2s ease-in 1;
 }

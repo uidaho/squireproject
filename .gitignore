@@ -5,3 +5,6 @@
 Homestead.yaml
 Homestead.json
 .env
+/public/images/projects
+/.c9
+composer.lock

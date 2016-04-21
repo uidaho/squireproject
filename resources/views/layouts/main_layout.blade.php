@@ -1,73 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
-
+        <base href="{{ url('/') }}/" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('css/application.css') }}">
+        <link rel="stylesheet" href="/css/custom.css">
+        <script src="{{ URL::asset('js/jquery-2.2.3.min.js') }}"></script>
+        <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+        <link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/images/favicon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/images/favicon/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
         @yield('head')
-
-        <link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
-        <link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
-
     </head>
 
     <body>
-
-        <!-- Header -->
-
-        <header class="primary-header container group">
-
-            <h3 class="logo">
-                <a href="/projectfinder">sQuire</a>
-            </h3>
-
-            <!-- Login & Logout Area -->
-            <ul class="nav">
-                <div class="dropdown">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/register">Register</a></li>
-                    @else
-                        <a class="btn-username">{{ Auth::user()->username }}</a>
-                        <div class="dropdown-content">
-                            <a href="">Profile</a>
-                            <a href="/logout">Logout</a>
-                        </div>
-                    @endif
-                </div>
+        <!-- BODY -->
+        <div class="container-fluid">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        	<span class="sr-only">Toggle navigation</span>
+                        	<span class="icon-bar"></span>
+                        	<span class="icon-bar"></span>
+                        	<span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">The Squire Project</a>
+                    </div>
+                
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="{{ Request::is('projects') ? 'active' : '' }}">
+                                <a href="/projects">Explore Projects</a>
+                            </li>
+                            <li class="{{ Request::is('project/create') ? 'active' : '' }}">
+                                <a href="/project/create">Start a Project</a>
+                            </li>
+                            <li class="{{ Request::is('about') ? 'active' : '' }}">
+                                <a href="/about">About</a>
+                            </li>
+                            <li class="{{ Request::is('contact') ? 'active' : '' }}">
+                                <a href="#">Contact</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right" id="bs-example-navbar-collapse-1">
+                            <li class="dropdown">
+                                <!-- Authentication Links -->
+                                @if (Auth::guest())
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Not logged in<strong class="caret"></strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="/register">Register</a>
+                                        </li>
+                                        <li class="divider"> </li>
+                                        <li>
+                                            <a href="/login">Login</a>
+                                        </li>
+                                    </ul>
+                                @else
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}<strong class="caret"></strong></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Your Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Help</a>
+                                        </li>
+                                        <li class="divider"> </li>
+                                        <li>
+                                            <a href="#">Settings</a>
+                                        </li>
+                                        <li>
+                                            <a href="/logout">Sign out</a>
+                                        </li>
+                                    </ul>
+                                @endif
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                @for($i = 1; $i <= count(Request::segments()); $i++)
+                    <li @if($i == count(Request::segments())) class="active" @endif>
+                        <a href="@for($j = 1; $j <= $i; $j++)/{{ Request::segment($j) }}@endfor">{{ Request::segment($i) }}</a>
+                    </li>
+                @endfor
             </ul>
-
-            <nav class="nav nav-primary">
-                <ul>
-                    <li><a href="">Home</a></li><!--
-			        --><li><a href="/projectfinder">Explore</a></li><!--
-			        --><li><a href="">Start a project</a></li><!--
-			        --><li><a href="/about">About us</a></li>
-                </ul>
-            </nav>
-
-        </header>
-
-        @yield('mainBody')
-
-        <!-- Footer -->
-
-        <footer class="primary-footer container group">
-
-            <small>&copy; sQuire University of Idaho</small>
-
-            <nav class="nav">
-                <ul>
-                    <li><a href="">Home</a></li><!--
-			        --><li><a href="/projectfinder">Explore</a></li><!--
-			        --><li><a href="">Start a project</a></li><!--
-			        --><li><a href="/about">About us</a></li><!--
-			        --><li><a href="">Contact us</a></li>
-                </ul>
-            </nav>
-
-        </footer>
-
+            <!-- CONTENT -->
+            @yield('mainBody')
+        </div>
     </body>
 </html>

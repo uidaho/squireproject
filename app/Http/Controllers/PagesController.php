@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use Illuminate\Http\Request;
-
+use App\Project;
 
 class PagesController extends Controller
 {
-
 	/*
 	 * Route to each html page
 	 */
@@ -21,24 +19,4 @@ class PagesController extends Controller
 	{
 		return view('pages.about');                 //resources/views/pages/about.blade.php
 	}
-
-	public function projectfinder()
-	{
-		return view('pages.projectfinder');         //resources/views/pages/projectfinder.blade.php
-	}
-
-	/*public function register()
-	{
-		return view('pages.register');             //resources/views/pages/register.blade.php
-	}
-
-	public function login()
-	{
-		return view('pages.login');                 //resources/views/pages/login.blade.php
-	}*/
-
-	/*public function reset()
-	{
-		return view('passwords.reset');
-	}*/
 }

@@ -3,7 +3,7 @@
 @section('head')
     <!-- Redirect to main page if user is already logged in -->
     @unless(Auth::guest())
-        <script>window.location.href = "projectfinder";</script>
+        <script>window.location.href = "/projects";</script>
     @endunless
 
     <title>Login</title>
@@ -14,50 +14,70 @@
 
 <!-- Main -->
 
-<main class="primary-main row">
-    <section class="grid login-main">
+<main class="primary-main row center-block">
+    <div class="jumbotron col-sm-6 col-sm-offset-3">
+        <form name="loginForm" class="form-horizontal" action="{{ url('/login') }}" method="POST" onsubmit="DoSubmit();"  >
+            {!! csrf_field() !!}
 
-        <!-- Login -->
+            <fieldset>
+                <legend>Login</legend>
+                @if($errors->has('username'))
+                    <div class="has-error">
+                @endif
 
-        <div class="col-1-3">
-
-            <form class="login-form" action="{{ url('/login') }}" method="POST">
-                {!! csrf_field() !!}
-
-                <h5>Login</h5>
-                <fieldset class="login">
-                    <label>
-                        Username
-                        <input type="text" name="username" value="{{ old('username') }}">
-
-                        @if ($errors->has('username'))
-                            <span class="error-auth">{{ $errors->first('username') }}</span>
+                <div class="form-group">
+                    <label for="username" class="col-lg-2 control-label">Username</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="text" id="username" name="username" placeholder="Username" value="{{old('username')}}">
+                        @if($errors->has('username') || $errors->has('email'))
+                            <label class="control-label">
+                                @if($errors->has('username'))
+                                    {{ $errors->first('username') }}
+                                @else
+                                    {{ $errors->first('email') }}
+                                @endif
+                            </label>
+                            </div>
                         @endif
+                    </div>
+                </div>
+                <div class="form-group">
+                    @if($errors->has('password'))
+                        <div class="has-error">
+                    @endif
 
-                    </label>
-                    <label>
-                        Password
-                        <input type="password" name="password">
-
-                        @if ($errors->has('password'))
-                            <span class="error-auth">{{ $errors->first('password') }}</span>
+                    <label for="password" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" type="password" id="password" name="password">
+                        @if($errors->has('password'))
+                            <label class="control-label">{{ $errors->first('password') }}</label>
+                            </div>
                         @endif
-                    </label>
-                    <label>
-                        <a class="btn" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                    </label>
-                </fieldset>
-                <fieldset class="account-action group">
-                    <input class="btn" type="submit">
-                    <label>
-                        <input type="checkbox" name="remember"> Remember Me
-                    </label>
-                </fieldset>
-            </form>
-
-        </div>
-
-    </section>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" id="submit" class="btn btn-primary">Login</button>
+                        <a class="small col-xs-offset-1" href="{{ url('/password/reset') }}">Forgot your password? Click here.</a>
+                    </div>
+                    <div class="checkbox col-lg-10 col-lg-offset-2">
+                        <label><input type="checkbox" name="remember">Remember Me</label>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </main>
+
+<script>
+    function DoSubmit(){
+        if (document.loginForm.username.value.indexOf("@") > -1) {
+            document.loginForm.email.value = document.myform.username.value;
+            document.loginForm.action = "/loginemail";
+        }
+
+        return true;
+    }
+</script>
 
 @stop
