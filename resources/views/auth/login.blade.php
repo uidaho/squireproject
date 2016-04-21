@@ -11,5 +11,5 @@
 @endsection
 
 @section('mainBody')
-    @include('auth.loginmini')
+    @include('auth.login_insert')
 @stop
