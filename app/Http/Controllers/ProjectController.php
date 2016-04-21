@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Project;
+use App\ProjectFollower;
 use App\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -25,9 +26,7 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
-        $project->load('comments.user');
-
-        return view('project.view', ['project' => $project]);
+        return view('project.view', ['project' => $project, 'followers' => $project->getFollowerIDs()]);
     }
 
     /**
@@ -79,5 +78,39 @@ class ProjectController extends Controller
 
         Session::flash('delete-success', 'Successfully deleted the project "' . $title .'"');
         return redirect()->action('ProjectController@listProjects');
+    }
+
+    /**
+     * Add a follower to the project
+     *
+     * @param Project $project
+     * @return current view
+     */
+    public function addFollower(Project $project)
+    {
+        if (Auth::guest())
+            return abort(403);
+
+        $project->addFollower();
+        Session::flash('follow_success', 'You are now following this project.');
+
+        return back();
+    }
+
+    /**
+     * Remove a follower from this project
+     *
+     * @param Project $project
+     * @return current view
+     */
+    public function removeFollower(Project $project)
+    {
+        if (Auth::guest())
+            return abort(403);
+
+        $project->deleteFollower();
+        Session::flash('unfollow_success', 'You are now not following this project.');
+
+        return back();
     }
 }

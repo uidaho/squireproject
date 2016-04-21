@@ -145,4 +145,54 @@ class Project extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     *
+     *
+     * @return 
+     */
+    public function followers()
+    {
+        return $this->hasMany(ProjectFollower::class);
+    }
+
+    /**
+     * Adds a follower to the project
+     *
+     * @return
+     */
+    public function addFollower()
+    {
+        $follower = ProjectFollower::create([
+            'user_id' => Auth::user()->id,
+            'project_id' => $this->id
+        ]);
+
+        return $this->followers()->save($follower);
+    }
+
+    /**
+     * Adds a follower to the project
+     *
+     * @return
+     */
+    public function deleteFollower()
+    {
+        foreach ($this->followers as $follower)
+        {
+            if ($follower->user_id == Auth::user()->id)
+                $follower->delete();
+        }
+    }
+
+    public function getFollowerIDs()
+    {
+        $followerArray = [];
+        foreach ($this->followers as $follower)
+        {
+            $followerArray[] = $follower->user_id;
+        }
+
+        return $followerArray;
+    }
 }
