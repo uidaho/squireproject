@@ -29,10 +29,10 @@
                 <a href="#" class="btn btn-default">Sorting</a>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/projects?s=t">Project Title</a></li>
-                    <li><a href="/projects?s=a">Author</a></li>
-                    <li><a href="/projects?s=c">Created date</a></li>
-                    <li><a href="/projects?s=m">Modified date</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['s' => 't']) }}">Project Title</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['s' => 'a']) }}">Author</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['s' => 'c']) }}">Created date</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['s' => 'm']) }}">Modified date</a></li>
                     <li class="divider"></li>
                     <li><a href="/projects">Default</a></li>
                 </ul>
