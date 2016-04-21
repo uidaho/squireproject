@@ -57,7 +57,9 @@
             </div>
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Cancel</button>
+                <a href="{{ back()->getTargetUrl() }}">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </a>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </div>
