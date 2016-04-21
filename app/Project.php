@@ -194,10 +194,13 @@ class Project extends Model
      *
      * @return
      */
-    public function addFollower()
+    public function addFollower($user_id = null)
     {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
         $follower = ProjectFollower::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $user_id,
             'project_id' => $this->id
         ]);
 
@@ -209,12 +212,14 @@ class Project extends Model
      *
      * @return
      */
-    public function deleteFollower()
+    public function deleteFollower($user_id = null)
     {
-        foreach ($this->followers as $follower)
-        {
-            if ($follower->user_id == Auth::user()->id)
-                $follower->delete();
-        }
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $follower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+
+        if ($follower != null)
+            $follower->delete();
     }
 }
