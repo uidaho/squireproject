@@ -26,7 +26,7 @@
                 <span class="label label-default project-members">n+1 Members</span>
                 <div class="pull-right">
                     @if (Auth::check())
-                        @if ($isUserFollower)
+                        @if ($project->isUserFollower())
                             <a href="/project/unfollow/{{ $project->getSlugFriendlyTitle() }}">
                                 <button class="btn btn-danger">Unfollow</button>
                             </a>
@@ -41,11 +41,11 @@
                             <!-- Modal -->
                             <div class="modal fade" id="loginForm" role="dialog">
                                 <div class="modal-dialog modal-lg">
-                                    @include('auth.loginmini')
+                                    @include('auth.login_insert')
                                 </div>
                             </div>
                     @endif
-                    <p class="visible-lg-inline">Followers: {{ $followerCount }}</p>
+                    <p class="visible-lg-inline">Followers: {{ $project->getFollowerCount() }}</p>
                     @if(Session::has('follow_success') || Session::has('unfollow_success'))
                         <div class="alert alert-dismissible alert-success">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>

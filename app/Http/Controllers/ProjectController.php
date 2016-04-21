@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
-        return view('project.view', ['project' => $project, 'isUserFollower' => $project->isUserFollower(), 'followerCount' => $project->getFollowerCount()]);
+        return view('project.view', ['project' => $project]);
     }
 
     /**
