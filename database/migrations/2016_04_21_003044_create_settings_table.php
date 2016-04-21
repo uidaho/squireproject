@@ -21,7 +21,7 @@ class CreateSettingsTable extends Migration
             $table->string('chatFont');
             $table->string('chatColor');
             $table->string('bio');
-            $table->bool('enableChat');
+            $table->boolean('enableChat');
 
 
             //$table->string('avatar');
