@@ -171,10 +171,13 @@ class Project extends Model
      *
      * @return
      */
-    public function isUserFollower()
+    public function isUserFollower($user_id = null)
     {
         if (!Auth::guest()) {
-            $isUserFollower = ProjectFollower::where('user_id', '=', Auth::user()->id)->where('project_id', '=', $this->id)->first();
+            if ($user_id == null)
+                $user_id = Auth::user()->id;
+            
+            $isUserFollower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
             if ($isUserFollower != null)
                 $isUserFollower = true;
             else
