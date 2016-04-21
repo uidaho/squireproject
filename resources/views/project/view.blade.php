@@ -13,24 +13,10 @@
             <br>
         </div>
         <div class="row">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-md-offset-3">
                 <div class="">
                     <img class="center-block r-image-restraint" src="{{ $project->getImagePath() }}" alt="Project Image">
                 </div>
-            </div>
-            <div class="col-md-3">
-                @if (Auth::check())
-                    <a href="/editor/{{ $project->getSlugFriendlyTitle() }}">
-                        <button class="btn btn-default" id="view-files">View Files</button>
-                    </a>
-                    @if (Auth::user()->username == $project->author)
-                        <a href="/project/delete/{{ $project->getSlugFriendlyTitle() }}">
-                            <button class="btn btn-danger" id="delete">Delete</button>
-                        </a>
-                    @endif
-                @endif
             </div>
         </div>
         <div class="row">
@@ -72,6 +58,21 @@
             <br>
             <br>
         </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                @if (Auth::check())
+                    <a href="/editor/{{ $project->getSlugFriendlyTitle() }}">
+                        <button class="btn btn-default" id="view-files">View Files</button>
+                    </a>
+                    @if (Auth::user()->username == $project->author)
+                        <a href="/project/delete/{{ $project->getSlugFriendlyTitle() }}">
+                            <button class="btn btn-danger" id="delete">Delete</button>
+                        </a>
+                    @endif
+                @endif
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="jumbotron">
