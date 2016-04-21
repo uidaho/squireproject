@@ -5,17 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Project;
-use App\ProjectFollower;
-use App\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
-use DB;
 
 class ProjectController extends Controller
 {
 	public function listProjects()
 	{
-		return view('project.list', ['projects' => Project::all()]);
+        $projects = Project::all();
+        if (Request::has('s')) {
+            $sort = Project::sortFor(Request::get('s'));
+            if ($sort != null) {
+                $projects = $projects->sortBy($sort);
+            } else {
+                redirect('/projects');
+            }
+        }
+		return view('project.list', ['projects' => $projects]);
 	}
 	
     /**

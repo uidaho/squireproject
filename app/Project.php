@@ -11,6 +11,17 @@ class Project extends Model
         'title', 'author', 'description', 'body', 'created_at', 'updated_at'
     ];
 
+    public static function sortFor($term)
+    {
+        switch ($term) {
+            case "t": return 'title';
+            case "a": return 'author';
+            case "c": return 'created_at';
+            case "m": return 'updated_at';
+            default: return null;
+        }
+    }
+
     /**
      * Gets this projects url
      *

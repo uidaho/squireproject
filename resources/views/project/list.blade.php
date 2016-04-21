@@ -29,13 +29,12 @@
                 <a href="#" class="btn btn-default">Sorting</a>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">File name</a></li>
-                    <li><a href="#">Description</a></li>
-                    <li><a href="#">Created by</a></li>
-                    <li><a href="#">Created date</a></li>
-                    <li><a href="#">Modified date</a></li>
+                    <li><a href="/projects?s=t">Project Title</a></li>
+                    <li><a href="/projects?s=a">Author</a></li>
+                    <li><a href="/projects?s=c">Created date</a></li>
+                    <li><a href="/projects?s=m">Modified date</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Default</a></li>
+                    <li><a href="/projects">Default</a></li>
                 </ul>
             </div>
         </div>
