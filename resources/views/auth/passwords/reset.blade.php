@@ -43,7 +43,7 @@
                             <input class="form-control" type="password" id="password_confirmation" name="password_confirmation">
                         </div>
                         @if($errors->has('password') or $errors->has('password_confirmation'))
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-sm-10">
                                 <label class="control-label">
                                     @if($errors->has('password'))
                                         {{ $errors->first('password') }}
