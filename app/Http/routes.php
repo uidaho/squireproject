@@ -102,12 +102,17 @@ Route::get('editor/list', 'EditorController@index');
 /*-----------------------*
  *  Profile Controller   *
  *-----------------------*/
- //Replace when profile gets added
-Route::get('profile1', 'ProfileController@view');
-//Change user to profile object
-Route::delete('profile1/delete/{user}', 'ProfileController@deleteUser');
+Route::get('profile/view/{username}', 'ProfileController@profile');
+Route::get('profile/delete/{username}', 'ProfileController@deleteView');
+Route::post('profile/delete/{username}', 'ProfileController@delete');
+Route::get('profile/friends/add/{username}', 'ProfileController@addFriendView');
+Route::post('profile/friends/add/{username}', 'ProfileController@addFriend');
+Route::get('profile/friends/remove/{username}', 'ProfileController@removeFriendView');
+Route::post('profile/friends/remove/{username}', 'ProfileController@removeFriend');
+Route::get('profile/friends/view/{username}', 'ProfileController@friendView');
+Route::get('profile/friends/{username}', 'ProfileController@friendView');
+Route::get('profile/{username}', 'ProfileController@profile');
 
- 
  /*-----------------------*
   *  Settings Controller  *
   *-----------------------*/
