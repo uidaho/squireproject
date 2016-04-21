@@ -16,9 +16,10 @@ class CreateUserProfileTable extends Migration
             $table->increments('id');
             $table->integer('date_of_birth');
             $table->boolean('gender');
-	    $table->longText('biography');
-	    $table->string ('first_name');
-	    $table->string('last_name');
+	    	$table->longText('biography');
+	    	$table->string ('first_name');
+	    	$table->string('last_name');
+			$table->binary('profile_photo');
             $table->timestamps();
         });
     }
