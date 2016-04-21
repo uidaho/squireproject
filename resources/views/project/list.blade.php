@@ -5,6 +5,7 @@
 @endsection
 
 @section('mainBody')
+    @include('inserts.breadcrumb')
     <!-- Search -->
     <div class="row">
         <div class="col-md-12">

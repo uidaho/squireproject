@@ -7,6 +7,7 @@
 @endsection
 
 @section('mainBody')
+@include('inserts.breadcrumb')
 <main class="container primary-main row">
     <div class="col-md-12">
 

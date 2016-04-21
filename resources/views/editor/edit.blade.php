@@ -16,6 +16,7 @@
 @stop
 
 @section('mainBody')
+    @include('inserts.breadcrumb')
     <div class="row">
         <div class="col-md-12">
             <div class="btn-toolbar" role="toolbar" aria-label="Editor toolbar">

@@ -42,6 +42,8 @@ Route::get('project', 'ProjectController@listProjects');
 Route::get('projects', 'ProjectController@listProjects');
 Route::get('project/view/{project}', 'ProjectController@view');
 Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
+Route::get('project/follow/{project}', 'ProjectController@addFollower');
+Route::get('project/unfollow/{project}', 'ProjectController@removeFollower');
 
 /*--------------------------------*
  *  Project Comments Controller   *

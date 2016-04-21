@@ -5,6 +5,7 @@
 @endsection
 
 @section('mainBody')
+@include('inserts.breadcrumb')
 <div class="row">
     <div class="col-md-12">
         <form role="form" class="form-horizontal" action="{{ url('/editor/create/'.$projectname) }}" method="post" enctype="multipart/form-data">
