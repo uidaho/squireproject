@@ -39,7 +39,7 @@
                 <span class="label label-default project-members">n+1 Members</span>
                 <div class="pull-right">
                     @if (Auth::check())
-                        @if (in_array(Auth::user()->id, $followers))
+                        @if ($isUserFollower)
                             <a href="/project/unfollow/{{ $project->getSlugFriendlyTitle() }}">
                                 <button class="btn btn-danger">Unfollow</button>
                             </a>
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                     @endif
-                    <p class="visible-lg-inline">Followers: {{ count($project->followers) }}</p>
+                    <p class="visible-lg-inline">Followers: {{ $followerCount }}</p>
                     @if(Session::has('follow_success') || Session::has('unfollow_success'))
                         <div class="alert alert-dismissible alert-success">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>

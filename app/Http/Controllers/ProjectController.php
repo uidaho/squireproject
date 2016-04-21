@@ -9,6 +9,7 @@ use App\ProjectFollower;
 use App\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use DB;
 
 class ProjectController extends Controller
 {
@@ -26,7 +27,7 @@ class ProjectController extends Controller
      */
     public function view(Project $project)
     {
-        return view('project.view', ['project' => $project, 'followers' => $project->getFollowerIDs()]);
+        return view('project.view', ['project' => $project, 'isUserFollower' => $project->isUserFollower(), 'followerCount' => $project->getFollowerCount()]);
     }
 
     /**

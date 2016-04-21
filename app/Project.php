@@ -157,6 +157,36 @@ class Project extends Model
     }
 
     /**
+     * Get the count of followers for the project
+     *
+     * @return
+     */
+    public function getFollowerCount()
+    {
+        return count(ProjectFollower::where('project_id', '=', $this->id)->get());
+    }
+
+    /**
+     * Check if user is a follower of this project
+     *
+     * @return
+     */
+    public function isUserFollower()
+    {
+        if (!Auth::guest()) {
+            $isUserFollower = ProjectFollower::where('user_id', '=', Auth::user()->id)->where('project_id', '=', $this->id)->first();
+            if ($isUserFollower != null)
+                $isUserFollower = true;
+            else
+                $isUserFollower = false;
+        }
+        else
+            $isUserFollower = false;
+
+        return $isUserFollower;
+    }
+
+    /**
      * Adds a follower to the project
      *
      * @return
@@ -172,7 +202,7 @@ class Project extends Model
     }
 
     /**
-     * Adds a follower to the project
+     * Deletes a follower to the project
      *
      * @return
      */
