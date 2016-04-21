@@ -8,11 +8,12 @@
     @include('inserts.breadcrumb')
     <div class="row">
         <div class="col-md-12">
-            <div id="editor">some text</div>
-            <script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
-            <script>
-                var editor = ace.edit("editor");
-            </script>
+            <div class="jumbotron">
+                <h2>About us?</h2>
+                <p>
+                    We are a group of Computer Science 383 students at the University of Idaho tasked with creating a collaborative IDE.
+                </p>
+            </div>
         </div>
     </div>
 @stop

@@ -115,8 +115,8 @@ class Project extends Model
     public static function attributeLengths()
     {
         return [
-            'title' => Project::minMaxHelper(2, 50),
-            'description' => Project::minMaxHelper(10, 100),
+            'title' => Project::minMaxHelper(2, 32),
+            'description' => Project::minMaxHelper(10, 75),
             'project-body' => Project::minMaxHelper(100, 65535)
         ];
     }
