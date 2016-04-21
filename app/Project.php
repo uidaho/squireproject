@@ -176,7 +176,7 @@ class Project extends Model
         if (!Auth::guest()) {
             if ($user_id == null)
                 $user_id = Auth::user()->id;
-            
+
             $isUserFollower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
             if ($isUserFollower != null)
                 $isUserFollower = true;
@@ -216,16 +216,5 @@ class Project extends Model
             if ($follower->user_id == Auth::user()->id)
                 $follower->delete();
         }
-    }
-
-    public function getFollowerIDs()
-    {
-        $followerArray = [];
-        foreach ($this->followers as $follower)
-        {
-            $followerArray[] = $follower->user_id;
-        }
-
-        return $followerArray;
     }
 }
