@@ -16,17 +16,16 @@
                 <legend>Reset Password</legend>
 
                 <div class="form-group">
-                    <!--
                     @if($errors->has('email'))
                         <div class="has-error">
-                    @endif -->
+                    @endif
                     <label for="email" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-10">
                         <input class="form-control" type="email" name="email" id="email" value="{{ $email or old('email') }}">
-                        <!--@if ($errors->has('email'))
+                        @if ($errors->has('email'))
                             <label class="control-label">{{ $errors->first('email') }}</label>
                             </div>
-                        @endif -->
+                        @endif
                     </div>
                 </div>
                 @if($errors->has('password') or $errors->has('password_confirmation'))
