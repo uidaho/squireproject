@@ -102,16 +102,17 @@ Route::get('editor/list', 'EditorController@index');
 /*-----------------------*
  *  Profile Controller   *
  *-----------------------*/
-Route::get('profile/view/{username}', 'ProfileController@profile');
+Route::get('profile/view/{username}', 'ProfileController@profileView');
 Route::get('profile/delete/{username}', 'ProfileController@deleteView');
-Route::post('profile/delete/{username}', 'ProfileController@delete');
-Route::get('profile/friends/add/{username}', 'ProfileController@addFriendView');
-Route::post('profile/friends/add/{username}', 'ProfileController@addFriend');
-Route::get('profile/friends/remove/{username}', 'ProfileController@removeFriendView');
-Route::post('profile/friends/remove/{username}', 'ProfileController@removeFriend');
+Route::get('profile/friends/add/{username}', 'ProfileController@addfriendView');
+Route::post('profile/friends/add/{username}', 'ProfileController@addfriend');
+Route::get('profile/friends/remove/{username}', 'ProfileController@deletefriendView');
+Route::post('profile/friends/remove/{username}', 'ProfileController@deletefriend');
 Route::get('profile/friends/view/{username}', 'ProfileController@friendView');
 Route::get('profile/friends/{username}', 'ProfileController@friendView');
-Route::get('profile/{username}', 'ProfileController@profile');
+Route::get('profile/projects/{username}', 'ProfileController@projectView');
+Route::get('profile/comments/{username}','ProfileController@commentsView');
+Route::get('profile/{username}', 'ProfileController@profileView');
 
  /*-----------------------*
   *  Settings Controller  *
