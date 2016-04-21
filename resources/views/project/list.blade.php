@@ -8,12 +8,15 @@
     @include('inserts.breadcrumb')
     <!-- Search -->
     <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            @if(session('delete-success'))
+                <div class="alert alert-info alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ session('delete-success') }}
+                </div>
+            @endif
+        </div>
         <div class="col-md-12">
-            <section class ="grid">
-                @if(Session::has('delete-success'))
-                    <div class="alert alert-info highlight col-sm-1" >{{ Session::get('delete-success') }}</div>
-                @endif
-            </section>
             <!-- Search -->
             <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
