@@ -12,7 +12,20 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create(/**
+         * @param Blueprint $table
+         */
+            'users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nickname');
+            $table->string('chatFont');
+            $table->string('chatColor');
+            $table->string('bio');
+            $table->bool('enableChat');
+
+
+            //$table->string('avatar');
+        });
     }
 
     /**
@@ -22,6 +35,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('settings');
     }
 }
