@@ -38,16 +38,23 @@
 }
 
 .panel-body h4 {
+    font-weight: 500;
     padding-top: 15px;
     max-height: 55px;
     word-wrap: break-word;
     overflow: hidden;
+    text-decoration: none !important;
 }
 
 .project-description {
-    max-height: 105px;
+    font-size: 14px;
+    color: #3c3c3c;
+    padding-top: 15px;
+    max-height: 100px;
     word-wrap: break-word;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-decoration: none !important;
 }
 .project-link {
     color: inherit;

@@ -27,6 +27,7 @@ Image Edits
 }
 
 .r-grid {
+    padding-top: 20px;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
@@ -52,7 +53,6 @@ Image Edits
     font-size: 13px;
     color: #5c5c5c;
     padding: 2px 4px 2px 4px;
-    margin: 0 0 50px 0;
     background-color: #ededed;
     letter-spacing: -.5px;
     position: absolute;
