@@ -4,21 +4,8 @@
     <title>About</title>
 @endsection
 
-@section('breadcrumb')
-    <ul class="breadcrumb">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <div class="jumbotron">
-            <h2>About us?</h2>
-            <p>
-                We are a group of Computer Science 383 students at the University of Idaho tasked with creating a collaborative IDE.
-            </p>
-        </div>
-    </ul>
-@endsection
-
 @section('mainBody')
+    @include('inserts.breadcrumb')
     <div class="row">
         <div class="col-md-12">
             <div id="editor">some text</div>

@@ -4,20 +4,8 @@
     <title>{{ $project->title }}</title>
 @stop
 
-@section('breadcrumb')
-    <ul class="breadcrumb">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        @for($i = 1; $i <= count(Request::segments()); $i++)
-            <li @if($i == count(Request::segments())) class="active" @endif>
-                <a href="@for($j = 1; $j <= $i; $j++)/{{ Request::segment($j) }}@endfor">{{ Request::segment($i) }}</a>
-            </li>
-        @endfor
-    </ul>
-@endsection
-
 @section('mainBody')
+    @include('inserts.breadcrumb')
     <div class="container-fluid">
         <div class="row">
             <h1 class="text-center">{{ $project->title }}</h1>

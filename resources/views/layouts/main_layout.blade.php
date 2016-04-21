@@ -99,7 +99,6 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-            @yield('breadcrumb')
             <!-- CONTENT -->
             @yield('mainBody')
         </div>
