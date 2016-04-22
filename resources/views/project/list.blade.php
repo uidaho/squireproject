@@ -62,7 +62,8 @@
                 </div>
             </section>
         @endforeach
-    </div>
+        </div>
+    </section>
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3 text-center">
             @if($sorting != null)

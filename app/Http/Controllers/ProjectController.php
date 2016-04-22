@@ -13,8 +13,14 @@ use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
 {
-	public function listProjects()
-	{
+    /**
+     * The view for /projects. Lists all the projects taking into
+     * account the active page and the sorting of the projects.
+     *
+     * @return mixed
+     */
+    public function listProjects()
+    {
         $allProjects = Project::all();
         $sorting = Request::has('sort');
 
@@ -41,7 +47,7 @@ class ProjectController extends Controller
         ]);
 
         return view('project.list', compact(['projects', 'sorting']));
-	}
+    }
 	
     /**
      * Renders the Project View for the given id

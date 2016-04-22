@@ -65,7 +65,7 @@ abstract class MassSeeder extends Seeder
     protected function getNumberIterations()
     {
         if ($this->isTravis()) {
-            return $this->getNumberIterations();
+            return $this->getNumberIterationsFromConfig();
         } else {
             $input = $this->prompt($this->message);
             assert(is_numeric($input) && $input > 0, "Must provide a positive integer.");
