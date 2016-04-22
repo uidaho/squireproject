@@ -32,7 +32,7 @@
                     <li><a href="{{ Request::fullURLWithQuery(['sort' => 'title']) }}">Project Title</a></li>
                     <li><a href="{{ Request::fullURLWithQuery(['sort' => 'author']) }}">Author</a></li>
                     <li><a href="{{ Request::fullURLWithQuery(['sort' => 'created_at']) }}">Created date</a></li>
-                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'modified_at']) }}">Modified date</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'updated_at']) }}">Modified date</a></li>
                     <li class="divider"></li>
                     <li><a href="/projects">Default</a></li>
                 </ul>

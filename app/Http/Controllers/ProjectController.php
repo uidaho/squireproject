@@ -25,7 +25,10 @@ class ProjectController extends Controller
         $sorting = Request::get('sort');
 
         if ($sorting) {
-            $allProjects = $allProjects->sortBy(Request::get('sort'));
+            $allProjects = $allProjects->sort(function($a, $b) {
+                $sortBy = Request::get('sort');
+                return strtolower($a[$sortBy]) > strtolower($b[$sortBy]);
+            });
         }
 
         $page = Paginator::resolveCurrentPage('page');
