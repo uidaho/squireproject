@@ -7,5 +7,7 @@
 @section('mainBody')
     <div>
 	<p> Testing </p>
+
+	<!-- Template: -->
     </div>
 @stop
