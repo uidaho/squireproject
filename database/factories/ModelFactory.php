@@ -41,7 +41,7 @@ $factory->define(Project::class, function (Faker\Generator $faker) {
     $user = User::all()->random(1);
 
     return [
-        'title' => $faker->unique()->regexify('[A-Za-z0-9_ .]{2,50}'),
+        'title' => $faker->unique()->regexify('[A-Za-z0-9_ .]{2,32}'),
         'author' => $user->username,
         'description' => $faker->regexify('[A-Za-z0-9_ .]{10,100}'),
         'body' => $faker->regexify('[A-Za-z0-9_ .]{100,65535}'),
@@ -50,9 +50,9 @@ $factory->define(Project::class, function (Faker\Generator $faker) {
 //Creates projects and users
 $factory->defineAs(Project::class, 'selfContained', function (Faker\Generator $faker) {
     return [
-        'title' => $faker->unique()->regexify('[A-Za-z0-9_ .]{2,50}'),
+        'title' => $faker->unique()->regexify('[A-Za-z0-9_ .]{2,32}'),
         'author' => factory(User::class)->create()->username,
-        'description' => $faker->regexify('[A-Za-z0-9_ .]{10,100}'),
+        'description' => $faker->regexify('[A-Za-z0-9_ .]{10,75}'),
         'body' => $faker->regexify('[A-Za-z0-9_ .]{100,65535}'),
     ];
 });

@@ -5,6 +5,7 @@
 @endsection
 
 @section('mainBody')
+    @include('inserts.breadcrumb')
     <!-- Search -->
     <div class="row">
         <div class="col-md-12">
@@ -38,26 +39,27 @@
     </div>
 
     <!-- Projects -->
-    <div class="row">
+    <section class="row">
+        <div class="r-project r-grid">
         @foreach($projects as $project)
-        <div class="col-md-3">
-            <div class="panel panel-default panel-project">
-                <a href="{{ $project->getSlug() }}" class="project-link">
-                <div class="panel-body">
-                    <div class="fallback-image">
-                        <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
-                    </div>
-                    <hr/>
-                    <span class="label label-default project-memebers">n+1 Members</span>
-                    <h4>{{ $project->title }}</h4>
-                    <div class="project-description">
-                        {{ $project->description }}
-                    </div>
+            <section class="col-md-3">
+                <div class="panel panel-default panel-project">
+                    <a href="{{ $project->getSlug() }}" class="project-link">
+                        <div class="panel-body r-small">
+                            <div class="fallback-image">
+                                <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
+                            </div>
+                            <hr>
+                            <span class="r-members">n+1 Members</span>
+                            <h4>{{ $project->title }}</h4>
+                            <div class="project-description">
+                                {{ $project->description }}
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                </a>
-            </div>
-            </a>
-        </div>
+            </section>
         @endforeach
-    </div>
+        </div>
+    </section>
 @stop

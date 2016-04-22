@@ -115,8 +115,8 @@ class Project extends Model
     public static function attributeLengths()
     {
         return [
-            'title' => Project::minMaxHelper(2, 50),
-            'description' => Project::minMaxHelper(10, 100),
+            'title' => Project::minMaxHelper(2, 32),
+            'description' => Project::minMaxHelper(10, 75),
             'project-body' => Project::minMaxHelper(100, 65535)
         ];
     }
@@ -144,5 +144,82 @@ class Project extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     *
+     *
+     * @return 
+     */
+    public function followers()
+    {
+        return $this->hasMany(ProjectFollower::class);
+    }
+
+    /**
+     * Get the count of followers for the project
+     *
+     * @return
+     */
+    public function getFollowerCount()
+    {
+        return count(ProjectFollower::where('project_id', '=', $this->id)->get());
+    }
+
+    /**
+     * Check if user is a follower of this project
+     *
+     * @return
+     */
+    public function isUserFollower($user_id = null)
+    {
+        if (!Auth::guest()) {
+            if ($user_id == null)
+                $user_id = Auth::user()->id;
+
+            $isUserFollower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+            if ($isUserFollower != null)
+                $isUserFollower = true;
+            else
+                $isUserFollower = false;
+        }
+        else
+            $isUserFollower = false;
+
+        return $isUserFollower;
+    }
+
+    /**
+     * Adds a follower to the project
+     *
+     * @return
+     */
+    public function addFollower($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $follower = ProjectFollower::create([
+            'user_id' => $user_id,
+            'project_id' => $this->id
+        ]);
+
+        return $this->followers()->save($follower);
+    }
+
+    /**
+     * Deletes a follower to the project
+     *
+     * @return
+     */
+    public function deleteFollower($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $follower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+
+        if ($follower != null)
+            $follower->delete();
     }
 }

@@ -11,85 +11,82 @@
 @endsection
 
 @section('mainBody')
-    <main class="primary-main row">
-        <section class="grid register-main">
+    <main class="primary-main row center-block">
 
-            <section class="col-2-3">
+        <div class="col-lg-5">
+            <div class="jumbotron">
+                <h2>Why Register?</h2>
+                <ul>
+                    <li>Reach like minded users</li>
+                    <li>Turn a one man team into a 32 man team</li>
+                    <li>Simultaneous user IDE</li>
+                    <li>Chat with fellow team members</li>
+                    <li>Project files located all in one spot</li>
+                    <li>Projects backed-up to prevent file lose</li>
+                    <li>Complete all in one project and team manager</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <form class="form-horizontal" action="{{ url('/register') }}" method="POST">
+                {!! csrf_field() !!}
 
-                <div class="register-why">
-                    <h5 class="register-title">Why Register?</h5>
-
-                    <ul class="join-points">
-                        <li>Reach like minded users</li>
-                        <li>Turn a one man team into a 32 man team</li>
-                        <li>Simultaneous user IDE</li>
-                        <li>Chat with fellow team members</li>
-                        <li>Project files located all in one spot</li>
-                        <li>Projects backed-up to prevent file lose</li>
-                        <li>Complete all in one project and team manager</li>
-                    </ul>
-                </div>
-
-            </section><!--
-
-			Register
-
-			--><section class="col-1-3">
-
-                <form class="register-form" action="{{ url('/register') }}" method="POST">
-                    {!! csrf_field() !!}
-
-                    <h5>Register</h5>
-                    <fieldset class="register">
-                        <!--<label>
-                            First and Last Name
-                            <input type="text" name="name" placeholder="John Smith">
-                        </label>-->
-                        <label>
-                            Username
-                            <input type="text" name="username" value="{{ old('username') }}">
-
-                            @if ($errors->has('username'))
-                                <span class="error-auth">{{ $errors->first('username') }}</span>
+                <fieldset>
+                    <legend>Register</legend>
+                    <div class="form-group">
+                        @if($errors->has('username'))
+                            <div class="has-error">
+                        @endif
+                        <label for="username" class="col-lg-2 control-label">Username</label>
+                        <div class="col-lg-10">
+                            <input class="form-control" type="text" id="username" name="username" placeholder="Username" value="{{ old('username') }}">
+                            @if($errors->has('username'))
+                                <label class="control-label">{{ $errors->first('username') }}</label>
+                                </div>
                             @endif
-
-                        </label>
-                        <label>
-                            Email
-                            <input type="email" name="email" placeholder="name@domain.com" value="{{ old('email') }}">
-
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @if($errors->has('email'))
+                            <div class="has-error">
+                        @endif
+                        <label for="email" class="col-lg-2 control-label">Email</label>
+                        <div class="col-lg-10">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@domain.com" value="{{ old('email') }}">
                             @if ($errors->has('email'))
-                                <span class="error-auth">{{ $errors->first('email') }}</span>
+                                <label class="control-label">{{ $errors->first('email') }}</label>
+                                </div>
                             @endif
-
-                        </label>
-                        <label>
-                            Password
-                            <input type="password" name="password">
-
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @if($errors->has('password'))
+                            <div class="has-error">
+                        @endif
+                        <label for="password" class="col-lg-2 control-label">Password</label>
+                        <div class="col-lg-10">
+                            <input type="password" class="form-control" id="password" name="password">
                             @if ($errors->has('password'))
-                                <span class="error-auth">{{ $errors->first('password') }}</span>
+                                <label class="control-label">{{ $errors->first('password') }}</label>
+                                </div>
                             @endif
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password_confirmation" class="col-lg-2 control-label">Repeat</label>
+                        <div class="col-lg-10">
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" id="submit" class="btn btn-primary">Register</button>
+                            <a class="already-member small col-xs-offset-1" href="/login">Already registered? Click here!</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
 
-                        </label>
-                        <label>
-                            Repeat Password
-                            <input type="password" name="password_confirmation">
-
-                            @if ($errors->has('password_confirmation'))
-                                <span class="error-auth">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
-
-                        </label>
-                    </fieldset>
-                    <fieldset>
-                        <input class="btn" id="submit" type="submit">
-                        <a class="already-member" href="/login">Already registered click here</a>
-                    </fieldset>
-                </form>
-
-            </section>
-
-        </section>
     </main>
 @stop

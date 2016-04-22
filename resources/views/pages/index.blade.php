@@ -74,9 +74,9 @@
 
             <nav class="nav">
                 <ul>
-                    <li><a href="">Home</a></li><!--
+                    <li><a href="/projects">Home</a></li><!--
 			        --><li><a href="/projects">Explore</a></li><!--
-			        --><li><a href="">Start a project</a></li><!--
+			        --><li><a href="/project/create">Start a project</a></li><!--
 			        --><li><a href="/about">About us</a></li><!--
 			        --><li><a href="">Contact us</a></li>
                 </ul>
