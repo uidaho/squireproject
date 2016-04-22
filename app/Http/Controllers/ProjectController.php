@@ -23,11 +23,12 @@ class ProjectController extends Controller
     {
         $allProjects = Project::all();
         $sorting = Request::get('sort');
+        $reverse = Request::get('order') == 'desc';
 
         if ($sorting) {
-            $allProjects = $allProjects->sort(function($a, $b) {
-                $sortBy = Request::get('sort');
-                return strtolower($a[$sortBy]) > strtolower($b[$sortBy]);
+            $allProjects = $allProjects->sort(function($a, $b) use($sorting, $reverse) {
+                $result = strtolower($a[$sorting]) > strtolower($b[$sorting]);
+                return $reverse ? !$result : $result;
             });
         }
 
@@ -49,7 +50,16 @@ class ProjectController extends Controller
             'pageName' => 'page'
         ]);
 
-        return view('project.list', compact(['projects', 'sorting']));
+        if ($reverse) {
+            $projects->appends(['order' => Request::get('order')]);
+        }
+        if ($sorting) {
+            $projects->appends(['sort' => $sorting]);
+        }
+
+        $friendly = ucwords(preg_replace('[_]', ' ', $sorting));
+
+        return view('project.list', compact(['projects', 'sorting', 'friendly']));
     }
 	
     /**

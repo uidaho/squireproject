@@ -25,17 +25,29 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <!-- Sort -->
-            <div class="btn-group">
-                <a href="#" class="btn btn-default">Sorting</a>
-                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'title']) }}">Project Title</a></li>
-                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'author']) }}">Author</a></li>
-                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'created_at']) }}">Created date</a></li>
-                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'updated_at']) }}">Modified date</a></li>
-                    <li class="divider"></li>
-                    <li><a href="/projects">Default</a></li>
-                </ul>
+            <div>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default">Sorting</a>
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ Request::fullURLWithQuery(['sort' => 'title']) }}">Project Title</a></li>
+                        <li><a href="{{ Request::fullURLWithQuery(['sort' => 'author']) }}">Author</a></li>
+                        <li><a href="{{ Request::fullURLWithQuery(['sort' => 'created_at']) }}">Created date</a></li>
+                        <li><a href="{{ Request::fullURLWithQuery(['sort' => 'updated_at']) }}">Modified date</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/projects">Default</a></li>
+                    </ul>
+                </div>
+                @if($sorting != null)
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">{{ $friendly }}</a>
+                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ Request::fullURLWithQuery(['order' => 'asc']) }}">Ascending</a></li>
+                            <li><a href="{{ Request::fullURLWithQuery(['order' => 'desc']) }}">Descending</a></li>
+                        </ul>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -66,11 +78,7 @@
     </section>
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3 text-center">
-            @if($sorting != null)
-                {!! $projects->appends(['sort' => $sorting])->links() !!}
-            @else
-                {!! $projects->links() !!}
-            @endif
+            {!! $projects->links() !!}
         </div>
     </div>
 @stop
