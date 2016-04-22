@@ -25,6 +25,11 @@ trait SortableRequest
                 return SortOrder::Ascending;
         }
     }
+
+    public function getSortOrderFriendly()
+    {
+        return SortOrder::getFriendlyForOrder($this->getSortOrder());
+    }
 }
 
 trait SortableEntries
@@ -59,10 +64,26 @@ trait SortableEntries
         return $this->get('sort');
     }
 
+    public function getSortKeyFriendly()
+    {
+        return ucwords(preg_replace('[_]', ' ', $this->getSortKey()));
+    }
+
 }
 
 abstract class SortOrder
 {
     const Ascending = 'asc';
+    const Ascending_Friendly = 'Ascending';
     const Descending = 'desc';
+    const Descending_Friendly = 'Descending';
+
+    public static function getFriendlyForOrder($order)
+    {
+        if ($order == SortOrder::Ascending) {
+            return SortOrder::Ascending_Friendly;
+        }
+
+        return SortOrder::Descending_Friendly;
+    }
 }

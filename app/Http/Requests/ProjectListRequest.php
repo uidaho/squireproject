@@ -3,19 +3,19 @@
 namespace App\Http\Requests;
 
 use App\Project;
+use Illuminate\Support\Facades\Session;
 
-class ProjectListRequest extends Request
+class ProjectListRequest extends PaginatedRequest
 {
-    use SortableRequest, SortableEntries;
-
     public function getEntries()
     {
         return Project::all();
     }
 
-    public function getModelName()
+    public function whenEmpty()
     {
-        return 'Project';
+        Session::flash('alert', 'There are no projects created yet! Be the <strong>first!</strong>');
+        return redirect('/project/create');
     }
     
     /**

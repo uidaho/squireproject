@@ -6,10 +6,7 @@ use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Http\Requests\ProjectListRequest;
 use App\Project;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
@@ -18,43 +15,23 @@ class ProjectController extends Controller
      * The view for /projects. Lists all the projects taking into
      * account the active page and the sorting of the projects.
      *
+     * @param ProjectListRequest $request
      * @return mixed
      */
     public function listProjects(ProjectListRequest $request)
     {
-        $allProjects = $request->getEntriesSortable();
-        $sorting = $request->getSortKey();
-        $reverse = $request->isSortDescending();
+        $projects = $request->getPaginatedEntries();
 
-        $page = Paginator::resolveCurrentPage('page');
+        if ($request->isEmpty())
+        {
+            return $request->whenEmpty();
+        } else {
+            $sorting = $request->getSortKey();
+            $friendly = $request->getSortKeyFriendly();
+            $order = $request->getSortOrderFriendly();
 
-        if (count($allProjects) == 0) {
-            Session::flash('alert', 'There are no projects created yet! Be the <strong>first!</strong>');
-            return redirect('/project/create');
+            return view('project.list', compact(['projects', 'sorting', 'friendly', 'order']));
         }
-
-        $perPage = $allProjects->first()->getPerPage();
-
-        if (($page - 1) * $perPage > count($allProjects)) {
-            return redirect(Request::fullURLWithQuery(['page' => (int) (count($allProjects) / $perPage)]));
-        }
-
-        $projects = new LengthAwarePaginator($allProjects->splice(($page - 1) * $perPage, $perPage), Project::query()->toBase()->getCountForPagination(), $perPage, $page, [
-            'path' => Paginator::resolveCurrentPath(),
-            'pageName' => 'page'
-        ]);
-
-        if ($reverse) {
-            $projects->appends(['order' => Request::get('order')]);
-        }
-        if ($sorting) {
-            $projects->appends(['sort' => $sorting]);
-        }
-
-        $friendly = ucwords(preg_replace('[_]', ' ', $sorting));
-        $order = $reverse ? "Descending" : "Ascending";
-
-        return view('project.list', compact(['projects', 'sorting', 'friendly', 'order']));
     }
 	
     /**
