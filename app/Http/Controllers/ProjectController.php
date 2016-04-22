@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
+use App\Http\Requests\ProjectListRequest;
 use App\Project;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -19,18 +20,11 @@ class ProjectController extends Controller
      *
      * @return mixed
      */
-    public function listProjects()
+    public function listProjects(ProjectListRequest $request)
     {
-        $allProjects = Project::all();
-        $sorting = Request::get('sort');
-        $reverse = Request::get('order') == 'desc';
-
-        if ($sorting) {
-            $allProjects = $allProjects->sort(function($a, $b) use($sorting, $reverse) {
-                $result = strtolower($a[$sorting]) > strtolower($b[$sorting]);
-                return $reverse ? !$result : $result;
-            });
-        }
+        $allProjects = $request->getEntriesSortable();
+        $sorting = $request->getSortKey();
+        $reverse = $request->isSortDescending();
 
         $page = Paginator::resolveCurrentPage('page');
 
