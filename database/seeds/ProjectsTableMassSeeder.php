@@ -28,7 +28,7 @@ class ProjectsTableMassSeeder extends MassSeeder
     {
         factory(Project::class, 1)->create([
             'author' => $this->faker->userName,
-            'title' => $this->faker->realText(32),
+            'title' => preg_replace('/[^a-z0-9 ]+/i', "", $this->faker->realText(32)),
             'description' => $this->faker->realText(30),
             'body' => $this->faker->realText()
         ]);

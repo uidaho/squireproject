@@ -22,7 +22,7 @@ class ProjectController extends Controller
     public function listProjects()
     {
         $allProjects = Project::all();
-        $sorting = Request::has('sort');
+        $sorting = Request::get('sort');
 
         if ($sorting) {
             $allProjects = $allProjects->sortBy(Request::get('sort'));
