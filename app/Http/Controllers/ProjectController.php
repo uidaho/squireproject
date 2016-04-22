@@ -23,6 +23,12 @@ class ProjectController extends Controller
         }
 
         $page = Paginator::resolveCurrentPage('page');
+
+        if (count($allProjects) == 0) {
+            Session::flash('alert', 'There are no projects created yet! Be the <strong>first!</strong>');
+            return redirect('/project/create');
+        }
+
         $perPage = $allProjects->first()->getPerPage();
 
         if (($page - 1) * $perPage > count($allProjects)) {

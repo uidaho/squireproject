@@ -13,17 +13,6 @@ class Project extends Model
 
     protected $perPage = 16;
 
-    public static function sortFor($term)
-    {
-        switch ($term) {
-            case "t": return 'title';
-            case "a": return 'author';
-            case "c": return 'created_at';
-            case "m": return 'updated_at';
-            default: return null;
-        }
-    }
-
     /**
      * Gets this projects url
      *
