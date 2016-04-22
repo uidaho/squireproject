@@ -58,8 +58,9 @@ class ProjectController extends Controller
         }
 
         $friendly = ucwords(preg_replace('[_]', ' ', $sorting));
+        $order = $reverse ? "Descending" : "Ascending";
 
-        return view('project.list', compact(['projects', 'sorting', 'friendly']));
+        return view('project.list', compact(['projects', 'sorting', 'friendly', 'order']));
     }
 	
     /**
