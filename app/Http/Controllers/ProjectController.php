@@ -20,18 +20,11 @@ class ProjectController extends Controller
      */
     public function listProjects(ProjectListRequest $request)
     {
-        $projects = $request->getPaginatedEntries();
-
-        if ($request->isEmpty())
-        {
-            return $request->whenEmpty();
-        } else {
-            $sorting = $request->getSortKey();
-            $friendly = $request->getSortKeyFriendly();
-            $order = $request->getSortOrderFriendly();
-
-            return view('project.list', compact(['projects', 'sorting', 'friendly', 'order']));
-        }
+        $sorting = $request->getSortKey();
+        $friendly = $request->getSortKeyFriendly();
+        $order = $request->getSortOrderFriendly();
+            
+        return $request->renderViewOrEmpty('projects', compact(['sorting', 'friendly', 'order']));
     }
 	
     /**

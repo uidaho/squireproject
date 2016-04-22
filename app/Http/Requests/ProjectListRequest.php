@@ -7,11 +7,41 @@ use Illuminate\Support\Facades\Session;
 
 class ProjectListRequest extends PaginatedRequest
 {
+    /**
+     * see @link PaginatedRequest#getViewName()
+     *
+     * @return string
+     */
+    public function getViewName()
+    {
+        return 'project.list';
+    }
+
+    /**
+     * see @link PaginatedRequest$getViewName()
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function getEntries()
     {
         return Project::all();
     }
 
+    /**
+     * Returns whether or not any entries exist.
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return Project::count() == 0;
+    }
+
+    /**
+     * Defined the behavior that should be carried out if there are no 
+     * 
+     * @return mixed
+     */
     public function whenEmpty()
     {
         Session::flash('alert', 'There are no projects created yet! Be the <strong>first!</strong>');
