@@ -29,10 +29,10 @@
                 <a href="#" class="btn btn-default">Sorting</a>
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{{ Request::fullURLWithQuery(['s' => 't']) }}">Project Title</a></li>
-                    <li><a href="{{ Request::fullURLWithQuery(['s' => 'a']) }}">Author</a></li>
-                    <li><a href="{{ Request::fullURLWithQuery(['s' => 'c']) }}">Created date</a></li>
-                    <li><a href="{{ Request::fullURLWithQuery(['s' => 'm']) }}">Modified date</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'title']) }}">Project Title</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'author']) }}">Author</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'created_at']) }}">Created date</a></li>
+                    <li><a href="{{ Request::fullURLWithQuery(['sort' => 'modified_at']) }}">Modified date</a></li>
                     <li class="divider"></li>
                     <li><a href="/projects">Default</a></li>
                 </ul>
@@ -62,6 +62,14 @@
                 </div>
             </section>
         @endforeach
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 text-center">
+            @if($sorting != null)
+                {!! $projects->appends(['sort' => $sorting])->links() !!}
+            @else
+                {!! $projects->links() !!}
+            @endif
         </div>
-    </section>
+    </div>
 @stop

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Project;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
@@ -13,16 +15,26 @@ class ProjectController extends Controller
 {
 	public function listProjects()
 	{
-        $projects = Project::all();
-        if (Request::has('s')) {
-            $sort = Project::sortFor(Request::get('s'));
-            if ($sort != null) {
-                $projects = $projects->sortBy($sort);
-            } else {
-                redirect('/projects');
-            }
+        $allProjects = Project::all();
+        $sorting = Request::has('sort');
+
+        if ($sorting) {
+            $allProjects = $allProjects->sortBy(Request::get('sort'));
         }
-		return view('project.list', ['projects' => $projects]);
+
+        $page = Paginator::resolveCurrentPage('page');
+        $perPage = $allProjects->first()->getPerPage();
+
+        if (($page - 1) * $perPage > count($allProjects)) {
+            return redirect(Request::fullURLWithQuery(['page' => (int) (count($allProjects) / $perPage)]));
+        }
+
+        $projects = new LengthAwarePaginator($allProjects->splice(($page - 1) * $perPage, $perPage), Project::query()->toBase()->getCountForPagination(), $perPage, $page, [
+            'path' => Paginator::resolveCurrentPath(),
+            'pageName' => 'page'
+        ]);
+
+        return view('project.list', compact(['projects', 'sorting']));
 	}
 	
     /**
