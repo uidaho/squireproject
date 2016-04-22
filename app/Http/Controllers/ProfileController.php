@@ -3,39 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
-    /**
-     * Renders the Profile view for the given project
-     *
-     *
-     * @return The user's profile page view
-     */
-    public function view()
+    public function profileView(User $username)
     {
-        return view('profile.view');
+        return view('profile.view', ['username' => $username]);
     }
 
     /**
-     * Deletes the given user and all their connected data
+     * Renders the project creation view if user is logged in
      *
+     * @return mixed
      *
-     * @return The index page
-     */
-    public function deleteUser(User $user)
+    public function createForm()
     {
-        //Check if user to be deleted is actually the user that is signed in
-        /*$this->authorize('userIsOwner', $profile);
-        $profile->user->deleteUser();
-        */
-
-        $user->deleteUser();
-
-        return view('pages.index');
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+        return view('project.create');
     }
+
+    /**
+     * Creates a new project using the input from the form
+     *
+     * @param CreateProjectRequest $request The validated request
+     * @return mixed
+     
+    public function create(CreateProjectRequest $request)
+    {
+        $newEntry = Project::create([
+            'author' => Auth::user()->username,
+            'title'  => $request->getTitle(),
+            'description' => $request->getDescription(),
+            'body' => $request->getBody()
+        ]);
+
+        $thumbnail = $request->file('thumbnail');
+        $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
+
+        return redirect($newEntry->getSlug());
+    }
+
+    /**
+     * Deletes the project give by the id, only if the user
+     * is authenticated and is the author.
+     *
+     * @param DeleteProjectRequest $request
+     * @return mixed
+     
+    public function delete(DeleteProjectRequest $request)
+    {
+        $project = $request->project;
+        $title = $project->title;
+        $project->delete();
+
+        Session::flash('delete-success', 'Successfully deleted the project "' . $title .'"');
+        return redirect()->action('ProjectController@listProjects');
+    }
+    */
 }
-
