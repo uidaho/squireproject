@@ -102,17 +102,22 @@ Route::get('editor/list', 'EditorController@index');
 /*-----------------------*
  *  Profile Controller   *
  *-----------------------*/
-Route::get('profile/view/{username}', 'ProfileController@profileView');
-Route::get('profile/delete/{username}', 'ProfileController@deleteView');
-Route::get('profile/friends/add/{username}', 'ProfileController@addfriendView');
-Route::post('profile/friends/add/{username}', 'ProfileController@addfriend');
-Route::get('profile/friends/remove/{username}', 'ProfileController@deletefriendView');
-Route::post('profile/friends/remove/{username}', 'ProfileController@deletefriend');
-Route::get('profile/friends/view/{username}', 'ProfileController@friendView');
-Route::get('profile/friends/{username}', 'ProfileController@friendView');
-Route::get('profile/projects/{username}', 'ProfileController@projectView');
-Route::get('profile/comments/{username}','ProfileController@commentsView');
-Route::get('profile/{username}', 'ProfileController@profileView');
+Route::get('profile/view/{username}'		, 'ProfileController@profileView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/view/'			, 'ProfileController@profileViewDefault');		
+Route::get('profile/delete/{username}'		, 'ProfileController@deleteView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/friends/add/{username}'	, 'ProfileController@addfriendView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::post('profile/friends/add/{username}'	, 'ProfileController@addfriend')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/friends/remove/{username}'	, 'ProfileController@deletefriendView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::post('profile/friends/remove/{username}'	, 'ProfileController@deletefriend')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/friends/view/{username}'	, 'ProfileController@friendView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/friends/{username}'		, 'ProfileController@friendView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/friends/'			, 'ProfileController@friendViewDefault');	
+Route::get('profile/projects/{username}'	, 'ProfileController@projectView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/projects/'			, 'ProfileController@projectViewDefault');
+Route::get('profile/comments/{username}'	, 'ProfileController@commentsView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/comments/'			, 'ProfileController@commentsViewDefault');
+Route::get('profile/{username}'			, 'ProfileController@profileView')		->where('username', '([a-zA-Z]{1,})([0-9]+)?\w+');
+Route::get('profile/'				, 'ProfileController@profileViewDefault');
 
  /*-----------------------*
   *  Settings Controller  *

@@ -1,7 +1,7 @@
 @extends('layouts.main_layout')
 
 @section('head')
-    <title>{{ $project->title }}</title>
+    <title>{{$username}}</title>
 @stop
 
 @section('mainBody')

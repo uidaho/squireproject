@@ -13,6 +13,15 @@ class ProfileController extends Controller
         return view('profile.view', ['username' => $username]);
     }
 
+    public function profileViewDefault()
+    {
+	if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        return view('profile.view', ['username' => Auth::user()->username]);
+    }
+
     /**
      * Renders the project creation view if user is logged in
      *
