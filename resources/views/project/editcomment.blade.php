@@ -22,7 +22,7 @@
 
                 <textarea class="form-control" name="comment_body">{{ $comment->comment_body }}{{ old('comment_body') }}</textarea>
                 <br><!-- Remove <br> when actual stylesheet is implemented -->
-                <input class="btn btn-primary" type="submit" name="submit" value="Send">
+                <input class="btn btn-primary" type="submit" name="submit-comment" value="Send">
             </form>
 
         </div>
