@@ -157,6 +157,12 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
+
+        /*
+         * Custom Service Providers
+         */
+        App\Providers\ProjectFinderServiceProvider::class
+
     ],
 
     /*
@@ -204,6 +210,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Html' => Collective\Html\HtmlFacade::class,
+
+        'ProjectFinder' => App\Facades\ProjectFinder::class
     ],
 
     'travis' => [

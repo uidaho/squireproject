@@ -45,6 +45,8 @@ Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
 Route::get('project/follow/{project}', 'ProjectController@addFollower');
 Route::get('project/unfollow/{project}', 'ProjectController@removeFollower');
 
+Route::get('/finder', function() { ProjectFinder::get(); });
+
 /*--------------------------------*
  *  Project Comments Controller   *
  *--------------------------------*/
