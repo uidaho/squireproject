@@ -45,7 +45,7 @@ Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
 Route::get('project/follow/{project}', 'ProjectController@addFollower');
 Route::get('project/unfollow/{project}', 'ProjectController@removeFollower');
 
-Route::get('/finder', function() { ProjectFinder::get(); });
+Route::get('/finder/{title}', function($title) { return ProjectFinder::matching(\App\Project::getTitleFromSlug($title)); });
 
 /*--------------------------------*
  *  Project Comments Controller   *

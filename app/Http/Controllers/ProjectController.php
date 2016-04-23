@@ -7,6 +7,7 @@ use App\Http\Requests\DeleteProjectRequest;
 use App\Http\Requests\ProjectListRequest;
 use App\Project;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class ProjectController extends Controller
