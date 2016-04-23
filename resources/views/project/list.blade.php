@@ -27,14 +27,14 @@
             <!-- Sort -->
             <div>
                 <div class="btn-group">
-                    <a href="#" class="btn btn-default">
+                    <a class="btn btn-default">
                         @if($sorting)
                             {{ $friendly }}
                         @else
                             Sorting
                         @endif
                     </a>
-                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ Request::fullURLWithQuery(['sort' => 'title']) }}">Project Title</a></li>
                         <li><a href="{{ Request::fullURLWithQuery(['sort' => 'author']) }}">Author</a></li>
@@ -46,14 +46,14 @@
                 </div>
                 @if($sorting != null)
                     <div class="btn-group">
-                        <a href="#" class="btn btn-default">
+                        <a class="btn btn-default">
                             @if($order)
                                 {{ $order }}
                             @else
                                 Order
                             @endif
                         </a>
-                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
+                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ Request::fullURLWithQuery(['order' => 'asc']) }}">Ascending</a></li>
                             <li><a href="{{ Request::fullURLWithQuery(['order' => 'desc']) }}">Descending</a></li>
