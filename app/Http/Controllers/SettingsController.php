@@ -23,8 +23,28 @@ class SettingsController extends Controller
         ]);
     }
     
-    
-    
+    //Check all settings are enabled using a loop when a user logs on
+    public function getSetting($setting)
+    {
+        switch ($setting)
+        {
+            case 'enable_chat':
+                $this->getEnableChat();
+                break;
+        }
+    }
+
+
+    //Paired with the getSetting() function to set settings to the given value
+    public function setSetting($setting, $value)
+    {
+        switch ($setting)
+        {
+            case 'enable_chat':
+                Auth::user()->enable_chat = $value;
+        }
+
+    }
     //TO be used in Authentication - whenever a new user is created, call this function
     /*public function initializeSettings()
 
