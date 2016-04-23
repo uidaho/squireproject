@@ -8,45 +8,25 @@ use App\Settings;
 
 class SettingsController extends Controller
 {
-
+    //DO we need this? What's the difference between this and the next function?
     protected function create(array $data)
     {
         return Settings::create([
+            'user_id' => $data['user_id'],
             'nickname' => $data['nickname'],
-            'chat_font' => $data['chat_font'],
-            'chat_color' => $data['chat_color'],
-            'enable_chat' => $data['enable_chat'],
+            'enable_chat' => 1,
 
         ]);
     }
 
-    
-
-    
-    
-    public function editSettings()
+    //TO be used in Authentication - whenever a new user is created, call this function
+    /*public function initializeSettings()
     {
-        if (Auth::user()->guest)
-        {
-            return redirect(login);
-        }
-
-        else
-        {
-            openSettings(Auth::user()->id);
-        }
-    }
-
-
-    public function openSettings(&$string)
-    {
-
-    }
+        $newEntry = Settings::create([
+            'user_id' => Auth::user()->user_id,
+            'nickname' => Auth::user()->username,
+            'chat_enabled' => 1,
+            ]);
+    }*/
     
-    public function applyChanges()
-
-    {
-
-    }
-
 }

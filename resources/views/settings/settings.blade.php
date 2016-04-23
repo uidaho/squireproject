@@ -18,7 +18,7 @@
                     <ul class="join-points">
                         <li>Wow look at all these settings</li>
                         <li>Below should be the chat color</li>
-                        <li>{{ Cache::get('user_settings:'.$chat_color) }}</li>
+                        <li>Binary Chat enabled? {{ Settings::user()->enable_chat }}</li>
 
                     </ul>
                 </div>
