@@ -226,4 +226,81 @@ class Project extends Model
         if ($follower != null)
             $follower->delete();
     }
+
+    /**
+     *
+     *
+     * @return
+     */
+    public function members()
+    {
+        return $this->hasMany(ProjectMember::class);
+    }
+
+    /**
+     * Get the count of followers for the project
+     *
+     * @return
+     */
+    public function getMemberCount()
+    {
+        return count(ProjectMember::where('project_id', '=', $this->id)->get());
+    }
+
+    /**
+     * Check if user is a follower of this project
+     *
+     * @return
+     */
+    public function isUserMember($user_id = null)
+    {
+        if (!Auth::guest()) {
+            if ($user_id == null)
+                $user_id = Auth::user()->id;
+
+            $isUserMember = ProjectMember::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+            if ($isUserMember != null)
+                $isUserMember = true;
+            else
+                $isUserMember = false;
+        }
+        else
+            $isUserMember = false;
+
+        return $isUserMember;
+    }
+
+    /**
+     * Adds a follower to the project
+     *
+     * @return
+     */
+    public function addMember($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $member = ProjectMember::create([
+            'user_id' => $user_id,
+            'project_id' => $this->id
+        ]);
+
+        return $this->members()->save($member);
+    }
+
+    /**
+     * Deletes a follower to the project
+     *
+     * @return
+     */
+    public function deleteMember($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $member = ProjectMember::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+
+        if ($member != null)
+            $member->delete();
+    }
 }

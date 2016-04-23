@@ -1,0 +1,36 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProjectMember extends Model
+{
+    protected $table = 'project_members';               //Set table name
+    //protected $fillable = [''];             //Set what can be mass assigned
+    //Lets Laravel know the comment belongs to a project
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+    //Lets Laravel know the comment belongs to a user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //Todo user defined timezone
+    public function getCreatedAt()
+    {
+        $time = Carbon::createFromTimestamp(strtotime($this->created_at))->timezone('America/Los_Angeles');
+
+        return $time->format('F j\\, Y \\a\\t g:i A');
+    }
+
+    public function getUpdatedAt()
+    {
+        $time = Carbon::createFromTimestamp(strtotime($this->updated_at))->timezone('America/Los_Angeles');
+
+        return $time->format('F j\\, Y \\a\\t g:i A');
+    }
+}
