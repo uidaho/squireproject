@@ -19,4 +19,9 @@ class PagesController extends Controller
 	{
 		return view('pages.about');                 //resources/views/pages/about.blade.php
 	}
+	
+	public function settings()
+	{
+		return view('settings.settings');
+	}
 }
