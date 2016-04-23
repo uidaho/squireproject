@@ -111,6 +111,6 @@
             </div>
             <!-- CONTENT -->
             @yield('mainBody')
-        </>
+        </section>
     </body>
 </html>
