@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
-    public function profileView(User $username)
+    public function profileView($username)
     {
         return view('profile.view', ['username' => $username]);
     }
