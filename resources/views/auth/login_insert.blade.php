@@ -14,6 +14,7 @@
                             <label for="username" class="col-lg-2 control-label">Username</label>
                             <div class="col-lg-10">
                                 <input class="form-control" type="text" id="username" name="username" placeholder="Username" value="{{old('username')}}">
+                                <input type="hidden" name="email" value="{{ old('username') }}">
                                 @if($errors->has('username') || $errors->has('email'))
                                     <label class="control-label">
                                         @if($errors->has('username'))
@@ -57,7 +58,7 @@
 <script>
     function DoSubmit(){
         if (document.loginForm.username.value.indexOf("@") > -1) {
-            document.loginForm.email.value = document.myform.username.value;
+            document.loginForm.email.value = document.loginForm.username.value;
             document.loginForm.action = "/loginemail";
         }
         return true;

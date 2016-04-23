@@ -33,6 +33,11 @@ Image Edits
     margin-right: auto;
 }
 
+.r-inline
+{
+    display: inline-block;
+}
+
 .r-project img
 {
     border-radius: 5px;

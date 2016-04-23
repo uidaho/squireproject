@@ -42,14 +42,13 @@
     padding-top: 15px;
     max-height: 55px;
     word-wrap: break-word;
-    overflow: hidden;
     text-decoration: none !important;
 }
 
 .project-description {
     font-size: 14px;
     color: #3c3c3c;
-    padding-top: 15px;
+    padding-top: 14px;
     max-height: 100px;
     word-wrap: break-word;
     overflow-x: hidden;

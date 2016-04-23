@@ -20,7 +20,7 @@
                 <form class="span4" action="/project/comments/edit/{{ $comment->id }}" method="GET">
                     {!! csrf_field() !!}
 
-                    <button type="submit" class="pull-left btn btn-xs btn-warning" value="Edit">
+                    <button name="comment-edit" type="submit" class="pull-left btn btn-xs btn-warning" value="Edit">
                         Edit
                     </button>
                 </form>
@@ -29,7 +29,7 @@
                     {!! csrf_field() !!}
                     {!! method_field('DELETE') !!}
 
-                    <button type="submit" class="btn btn-xs btn-danger" value="Delete">
+                    <button name="comment-delete" type="submit" class="btn btn-xs btn-danger" value="Delete">
                         Delete
                     </button>
                 </form>
@@ -41,11 +41,18 @@
 <h4>Add a Comment</h4>
 
 @if (Auth::guest())
-    <form method="GET" action="login">
+    <form>
         <span class="label label-warning">Warning</span>
-        <textarea class="form-control">You must be logged in to leave a comment.</textarea>
+        <textarea name="comment-message" class="form-control">You must be logged in to leave a comment.</textarea>
         <br><!-- Remove <br> when actual stylesheet is implemented -->
-        <input class="btn btn-warning" type="submit" value="Login">
+        <!-- Trigger the modal with a button -->
+        <button name="comment-login" class="btn btn-warning" data-toggle="modal" data-target="#loginForm">Login</button>
+        <!-- Modal -->
+        <div class="modal fade" id="loginForm" role="dialog">
+            <div class="modal-dialog modal-lg">
+                @include('auth.login_insert')
+            </div>
+        </div>
     </form>
 @else
     <form class="form-group" method="POST" action="/project/{{ $project->title }}/addComment">
@@ -65,6 +72,6 @@
 
         <textarea class="form-control" name="comment_body">{{ old('comment_body') }}</textarea>
         <br><!-- Remove <br> when actual stylesheet is implemented -->
-        <input class="btn btn-primary" type="submit" name="submit" value="Send">
+        <input class="btn btn-primary" type="submit" name="submit-comment" value="Send">
     </form>
 @endif
