@@ -31,10 +31,14 @@ class CreateUserSettingsTable extends Migration
         {
             $table->increments('id');
             $table->integer('user_id')->unique()->key();
+<<<<<<< HEAD
             $table->string('chat_font')->default('comicSans');
             $table->string('chat_color')->default('blue');
             $table->boolean('enable_chat')->default(true);
 >>>>>>> 16b05e60849177353837a729893f03a10660946a
+=======
+            $table->boolean('enable_chat')->default(1); //enabled by default
+>>>>>>> 2c32be178e9c2a5b564c7b719b759a7a99bd7ede
 
 
             //$table->string('avatar');
