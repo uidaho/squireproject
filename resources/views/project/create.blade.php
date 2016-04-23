@@ -99,13 +99,9 @@
                         </div>
                     @endif
                 </div>
-                <button type="submit" id="submit" class="btn btn-default">
-                    Submit
-                </button>
-                <a href="/projects">
-                    <button type="button" class="btn btn-danger">
-                        Cancel
-                    </button>
+                <button type="submit" id="submit" class="btn btn-default">Submit</button>
+                <a href="{{ back()->getTargetUrl() }}">
+                    <button type="button" class="btn btn-danger">Cancel</button>
                 </a>
             </fieldset>
         </form>

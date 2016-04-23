@@ -11,6 +11,8 @@ class Project extends Model
         'title', 'author', 'description', 'body', 'created_at', 'updated_at'
     ];
 
+    protected $perPage = 16;
+
     /**
      * Gets this projects url
      *

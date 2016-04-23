@@ -4,19 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
+use App\Http\Requests\ProjectListRequest;
 use App\Project;
-use App\ProjectFollower;
-use App\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use DB;
 
 class ProjectController extends Controller
 {
-	public function listProjects()
-	{
-		return view('project.list', ['projects' => Project::all()]);
-	}
+    /**
+     * The view for /projects. Lists all the projects taking into
+     * account the active page and the sorting of the projects.
+     *
+     * @param ProjectListRequest $request
+     * @return mixed
+     */
+    public function listProjects(ProjectListRequest $request)
+    {
+        $sorting = $request->getSortKey();
+        $friendly = $request->getSortKeyFriendly();
+        $order = $request->getSortOrderFriendly();
+            
+        return $request->renderViewOrEmpty('projects', compact(['sorting', 'friendly', 'order']));
+    }
 	
     /**
      * Renders the Project View for the given id

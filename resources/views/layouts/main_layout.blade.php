@@ -99,6 +99,16 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    @if(session('alert'))
+                        <div class="alert alert-info alert-dismissible alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {!! session('alert') !!}
+                        </div>
+                    @endif
+                </div>
+            </div>
             <!-- CONTENT -->
             @yield('mainBody')
         </div>
