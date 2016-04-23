@@ -63,7 +63,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 @if (Auth::check())
-                    <a href="/editor/{{ $project->getSlugFriendlyTitle() }}">
+                    <a href="/editor/list/{{ $project->getSlugFriendlyTitle() }}">
                         <button class="btn btn-default" id="view-files">View Files</button>
                     </a>
                     @if (Auth::user()->username == $project->author)
