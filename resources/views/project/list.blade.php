@@ -76,7 +76,7 @@
                                 <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
                             </div>
                             <hr>
-                            <span class="r-members">n+1 Members</span>
+                            <span class="r-members">Members: {{ $project->getMemberCount() }}</span>
                             <h4>{{ $project->title }}</h4>
                             <div class="project-description">
                                 {{ $project->description }}

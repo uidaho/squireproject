@@ -72,6 +72,9 @@ class ProjectController extends Controller
         $thumbnail = $request->file('thumbnail');
         $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
+        //Add creator as a member of the project
+        $newEntry->addMember();
+
         return redirect('/project/'.$newEntry->title);
     }
 
