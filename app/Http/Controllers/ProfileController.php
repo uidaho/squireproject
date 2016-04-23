@@ -22,55 +22,46 @@ class ProfileController extends Controller
         return view('profile.view', ['username' => Auth::user()->username]);
     }
 
-    /**
-     * Renders the project creation view if user is logged in
-     *
-     * @return mixed
-     *
-    public function createForm()
+
+    public function friendView($username)
     {
-        if (Auth::guest()) {
+        return view('profile.friends', ['username' => $username]);
+    }
+
+    public function friendViewDefault()
+    {
+	if (Auth::guest()) {
             return redirect('/login');
         }
-        return view('project.create');
+
+        return view('profile.friends', ['username' => Auth::user()->username]);
     }
 
-    /**
-     * Creates a new project using the input from the form
-     *
-     * @param CreateProjectRequest $request The validated request
-     * @return mixed
-     
-    public function create(CreateProjectRequest $request)
+    public function projectView($username)
     {
-        $newEntry = Project::create([
-            'author' => Auth::user()->username,
-            'title'  => $request->getTitle(),
-            'description' => $request->getDescription(),
-            'body' => $request->getBody()
-        ]);
-
-        $thumbnail = $request->file('thumbnail');
-        $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
-
-        return redirect($newEntry->getSlug());
+        return view('profile.projects', ['username' => $username]);
     }
 
-    /**
-     * Deletes the project give by the id, only if the user
-     * is authenticated and is the author.
-     *
-     * @param DeleteProjectRequest $request
-     * @return mixed
-     
-    public function delete(DeleteProjectRequest $request)
+    public function projectViewDefault()
     {
-        $project = $request->project;
-        $title = $project->title;
-        $project->delete();
+	if (Auth::guest()) {
+            return redirect('/login');
+        }
 
-        Session::flash('delete-success', 'Successfully deleted the project "' . $title .'"');
-        return redirect()->action('ProjectController@listProjects');
+        return view('profile.projects', ['username' => Auth::user()->username]);
     }
-    */
+
+    public function commentsView($username)
+    {
+        return view('profile.comments', ['username' => $username]);
+    }
+
+    public function commentsViewDefault()
+    {
+	if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        return view('profile.comments', ['username' => Auth::user()->username]);
+    }
 }

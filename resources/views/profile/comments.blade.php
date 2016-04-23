@@ -1,12 +1,12 @@
 @extends('layouts.main_layout')
 
 @section('head')
-    <title>{{$username}}s Profile</title>
+    <title>{{$username}}s Comments</title>
 @stop
 
 @section('mainBody')
     <div>
-	<p> Profile </p>
+	<p> Testing </p>
 
 	<!-- Template: http://wrapbootstrap.com/preview/WB09JXK43 -->
     </div>
