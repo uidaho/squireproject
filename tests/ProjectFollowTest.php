@@ -92,7 +92,7 @@ class ProjectFollowTest extends TestCase
             ->see('Followers:');
 
         //Remove user2
-        $this->entry->user()->delete();
+        $this->user2->delete();
 
         //Remove follower
         $this->entry->followers()->delete();
