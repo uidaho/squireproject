@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjectMember extends Model
+class ProjectRequest extends Model
 {
-    protected $table = 'project_members';                           //Set table name
+    protected $table = 'project_requests';                          //Set table name
     protected $fillable = ['user_id', 'project_id'];                //Set what can be mass assigned
-    
+
     //Lets Laravel know the comment belongs to a project
     public function project()
     {

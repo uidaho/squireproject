@@ -104,7 +104,7 @@ class ProjectController extends Controller
             return abort(403);
 
         $project->addFollower();
-        Session::flash('follow_success', 'You are now following this project.');
+        Session::flash('follower_success', 'You are now following this project.');
 
         return back();
     }
@@ -121,7 +121,58 @@ class ProjectController extends Controller
             return abort(403);
 
         $project->deleteFollower();
-        Session::flash('unfollow_success', 'You are now not following this project.');
+        Session::flash('follower_success', 'You are now not following this project.');
+
+        return back();
+    }
+
+    /**
+     * Remove a follower from this project
+     *
+     * @param Project $project
+     * @return current view
+     */
+    public function removeMember(Project $project)
+    {
+        if (Auth::guest())
+            return abort(403);
+
+        $project->deleteMember();
+        Session::flash('member_success', 'You are now not a member of project.');
+
+        return back();
+    }
+
+    /**
+     * Add a follower to the project
+     *
+     * @param Project $project
+     * @return current view
+     */
+    public function requestMembership(Project $project)
+    {
+        if (Auth::guest())
+            return abort(403);
+
+        $project->addMembershipRequest();
+        Session::flash('membership_request_success', 'Your request is waiting approval from a project admin.');
+
+        return back();
+    }
+
+    /**
+     * Remove a follower from this project
+     *
+     * @param Project $project
+     * @return current view
+     */
+    public function removeMembershipRequest(Project $project)
+    {
+        if (Auth::guest())
+            return abort(403);
+
+        $project->deleteMembershipRequest();
+        Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
 
         return back();
     }

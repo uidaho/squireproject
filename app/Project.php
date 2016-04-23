@@ -303,4 +303,71 @@ class Project extends Model
         if ($member != null)
             $member->delete();
     }
+
+    /**
+     *
+     *
+     * @return
+     */
+    public function requests()
+    {
+        return $this->hasMany(ProjectMember::class);
+    }
+
+    /**
+     * Adds a follower to the project
+     *
+     * @return
+     */
+    public function addMembershipRequest($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $membershipRequest = ProjectRequest::create([
+            'user_id' => $user_id,
+            'project_id' => $this->id
+        ]);
+
+        return $this->requests()->save($membershipRequest);
+    }
+
+    /**
+     * Check if user is a follower of this project
+     *
+     * @return
+     */
+    public function isMembershipPending($user_id = null)
+    {
+        if (!Auth::guest()) {
+            if ($user_id == null)
+                $user_id = Auth::user()->id;
+
+            $isPending = ProjectRequest::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+            if ($isPending != null)
+                $isPending = true;
+            else
+                $isPending = false;
+        }
+        else
+            $isPending = false;
+
+        return $isPending;
+    }
+
+    /**
+     * Deletes a follower to the project
+     *
+     * @return
+     */
+    public function deleteMembershipRequest($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $membershipRequest = ProjectRequest::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+
+        if ($membershipRequest != null)
+            $membershipRequest->delete();
+    }
 }
