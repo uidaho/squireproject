@@ -26,18 +26,20 @@
                 <span class="label label-default project-members">n+1 Members</span>
                 <div class="pull-right">
                     @if (Auth::check())
-                        @if ($project->isUserFollower())
-                            <a href="/project/unfollow/{{ $project->getSlugFriendlyTitle() }}">
-                                <button class="btn btn-danger">Unfollow</button>
-                            </a>
-                        @else
-                            <a href="/project/follow/{{ $project->getSlugFriendlyTitle() }}">
-                                <button class="btn btn-default">Follow</button>
-                            </a>
-                        @endif
+
+                            @if ($project->isUserFollower())
+                                <form class="r-inline" action="/project/unfollow/{{ $project->getSlugFriendlyTitle() }}" method="GET">
+                                    <button name="follow-remove" class="btn btn-danger">Unfollow</button>
+                                </form>
+                            @else
+                                <form class="r-inline" action="/project/follow/{{ $project->getSlugFriendlyTitle() }}" method="GET">
+                                    <button name="follow-add" class="btn btn-default">Follow</button>
+                                </form>
+                            @endif
+
                     @else
                         <!-- Trigger the modal with a button -->
-                        <button class="btn btn-default" data-toggle="modal" data-target="#loginForm">Follow</button>
+                        <button name="follow-login" class="btn btn-default" data-toggle="modal" data-target="#loginForm">Follow</button>
                             <!-- Modal -->
                             <div class="modal fade" id="loginForm" role="dialog">
                                 <div class="modal-dialog modal-lg">
