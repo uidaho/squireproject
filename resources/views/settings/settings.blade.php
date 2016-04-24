@@ -31,7 +31,7 @@
                         <label for="textArea" class="col-lg-2 control-label">Textarea</label>
                         <div class="col-lg-10">
                             <textarea class="form-control" rows="3" id="textArea"></textarea>
-                            <span class="help-block">Write a bio for yourself!.</span>
+                            <span class="help-block">Write a bio for yourself!</span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="select" class="col-lg-2 control-label">Selects</label>
+                        <label for="select" class="col-lg-2 control-label">Additional Options</label>
                         <div class="col-lg-10">
                             <select class="form-control" id="select">
                                 <option>1</option>
