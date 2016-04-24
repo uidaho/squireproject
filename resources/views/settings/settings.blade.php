@@ -18,13 +18,14 @@
                         <label for="inputEmail" class="col-lg-2 control-label">Nickname</label>
                         <div class="col-lg-10">
                             <input class="form-control" id="inputEmail" placeholder="Nickname" type="text">
+                                <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Enable Comments
+                            </label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Enable Comments
-                        </label>
-                    </div>
+
 
                     <div class="form-group">
                         <label for="textArea" class="col-lg-2 control-label">Textarea</label>
