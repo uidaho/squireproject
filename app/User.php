@@ -33,12 +33,18 @@ class User extends Authenticatable
     //Lets Laravel know the user has many projects
     public function projects()
     {
-        return $this->hasMany(Projects::class);
+        return $this->hasMany(Project::class);
     }
 
     //Lets Laravel know the user has many projects
     public function projectsAsMember()
     {
-        return $this->hasMany(Projects::class);
+        return $this->hasMany(ProjectMember::class);
+    }
+
+    //Lets Laravel know the user has many projects
+    public function projectRequests()
+    {
+        return $this->hasMany(ProjectRequest::class);
     }
 }

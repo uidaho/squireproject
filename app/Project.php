@@ -311,7 +311,7 @@ class Project extends Model
      */
     public function requests()
     {
-        return $this->hasMany(ProjectMember::class);
+        return $this->hasMany(ProjectRequest::class);
     }
 
     /**
@@ -364,6 +364,21 @@ class Project extends Model
     {
         if ($user_id == null)
             $user_id = Auth::user()->id;
+
+        $membershipRequest = ProjectRequest::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+
+        if ($membershipRequest != null)
+            $membershipRequest->delete();
+    }
+
+    /**
+     * Deletes a follower to the project
+     *
+     * @return
+     */
+    public function denyMembershipRequest($user_id)
+    {
+        //Todo send email to denied user
 
         $membershipRequest = ProjectRequest::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
 

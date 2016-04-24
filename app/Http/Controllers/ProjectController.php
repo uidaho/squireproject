@@ -6,6 +6,7 @@ use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Http\Requests\ProjectListRequest;
 use App\Project;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -176,6 +177,41 @@ class ProjectController extends Controller
 
         $project->deleteMembershipRequest();
         Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
+
+        return back();
+    }
+
+    /**
+     * Remove a follower from this project
+     *
+     * @param Project $project
+     * @return current view
+     */
+    public function acceptMembershipRequest(Project $project, User $user)
+    {
+        if (Auth::guest())
+            return abort(403);
+
+        $project->addMember($user->id);
+        $project->deleteMembershipRequest($user->id);
+        //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
+
+        return back();
+    }
+
+    /**
+     * Remove a follower from this project
+     *
+     * @param Project $project
+     * @return current view
+     */
+    public function denyMembershipRequest(Project $project, User $user)
+    {
+        if (Auth::guest())
+            return abort(403);
+
+        $project->denyMembershipRequest($user->id);
+        //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
 
         return back();
     }

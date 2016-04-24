@@ -25,8 +25,7 @@
                 <h4 class="visible-lg-inline">Creator: {{ $project->author }}</h4>
                 <span class="label label-default project-members">Members: {{ $project->getMemberCount() }}</span>
                 <div class="pull-right">
-                    @if (Auth::user()->username != $project->author)
-                        @if (Auth::check())
+                        @if (Auth::check() && Auth::user()->username != $project->author)
 
                             @if ($project->isUserMember())
                                 <form class="r-inline" action="/project/leave/{{ $project->getSlugFriendlyTitle() }}" method="GET">
@@ -52,7 +51,7 @@
                                 </form>
                             @endif
 
-                        @else
+                        @elseif (Auth::guest())
                             <!-- Trigger the modal with a button -->
                             <button name="member-login" class="btn btn-default" data-toggle="modal" data-target="#loginForm">Join Project</button>
                             <!-- Trigger the modal with a button -->
@@ -64,7 +63,6 @@
                                     </div>
                                 </div>
                         @endif
-                    @endif
                     <p class="visible-lg-inline">Followers: {{ $project->getFollowerCount() }}</p>
                     @if(Session::has('follower_success')||Session::has('member_success')||Session::has('membership_request_success'))
                         <div class="alert alert-dismissible alert-success">

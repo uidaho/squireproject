@@ -38,6 +38,16 @@ Image Edits
     display: inline-block;
 }
 
+.btn-xxs
+{
+    height: 17px;
+    padding: 2px 5px;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 3px;
+
+}
+
 .r-project img
 {
     border-radius: 5px;

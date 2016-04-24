@@ -46,6 +46,8 @@ Route::get('project/follow/{project}', 'ProjectController@addFollower');
 Route::get('project/unfollow/{project}', 'ProjectController@removeFollower');
 Route::get('project/request/join/{project}', 'ProjectController@requestMembership');
 Route::get('project/request/cancel/{project}', 'ProjectController@removeMembershipRequest');
+Route::post('project/request/accepted/{project}/{user}', 'ProjectController@acceptMembershipRequest');
+Route::post('project/request/denied/{project}/{user}', 'ProjectController@denyMembershipRequest');
 Route::get('project/leave/{project}', 'ProjectController@removeMember');
 
 /*--------------------------------*
@@ -70,10 +72,14 @@ Route::post('editor/rename/{projectname}/{filename}', 'EditorController@rename')
 Route::get('editor/delete/{projectname}/{filename}', 'EditorController@deleteView');
 Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete');
 Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
+<<<<<<< HEAD
 Route::get('editor/edit/{projectname}', 'EditorController@listFiles');
 Route::get('editor/edit', 'ProjectController@listProjects');
 Route::get('editor/list/{projectname}', 'EditorController@listFiles');
 Route::get('editor/list', 'ProjectController@listProjects');
+=======
+Route::get('editor/list/{project}', 'EditorController@listFiles');
+>>>>>>> Added basic accepting and denying of project requests
 Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/{projectname}', 'EditorController@listFiles');
 Route::get('editor', 'EditorController@index');
