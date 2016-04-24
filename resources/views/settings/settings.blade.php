@@ -23,6 +23,52 @@
                     </ul>
                 </div>
 
+                <table class="table table-striped table-hover ">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Settings</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Setting 1</td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Setting 2</td>
+
+                    </tr>
+                    <tr class="info">
+                        <td>3</td>
+                        <td>Setting 3</td>
+
+                    </tr>
+                    <tr class="success">
+                        <td>4</td>
+                        <td>Setting 4</td>
+
+                    </tr>
+                    <tr class="danger">
+                        <td>5</td>
+                        <td>Setting 5</td>
+
+                    </tr>
+                    <tr class="warning">
+                        <td>6</td>
+                        <td>Setting 6</td>
+
+                    </tr>
+                    <tr class="active">
+                        <td>7</td>
+                        <td>Setting 7</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
             </section>
 
         </section>
