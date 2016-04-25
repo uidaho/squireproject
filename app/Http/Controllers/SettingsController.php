@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 
@@ -22,6 +23,13 @@ class SettingsController extends Controller
 
         ]);
     }
+
+    public function update(Request $request)
+    {
+        $settings = Settings::where('user_id', Auth::user()->id);
+        dd($settings);
+    }
+    
     
     //Check all settings are enabled using a loop when a user logs on
     public function getSetting($setting)

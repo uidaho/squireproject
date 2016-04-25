@@ -81,5 +81,5 @@ Route::get('editor', 'EditorController@index');
   *  Settings Controller  *
   *-----------------------*/
 Route::get('/settings', 'PagesController@settings');
- 
+Route::post('/settings', 'PagesController@update');
  

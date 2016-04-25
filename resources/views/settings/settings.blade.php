@@ -11,13 +11,14 @@
     <main class="primary-main row">
         <section class="grid register-main">
 
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="{{ url("/settings"}}" method="POST">
+                {!! csrf_field() !!}
                 <fieldset>
                     <legend>Legend</legend>
                     <div class="form-group">
                         <label for="inputNickname" class="col-lg-2 control-label">Nickname</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputNickname" placeholder="inputNickname" type="text">
+                            <input class="form-control" id="inputNickname" placeholder="Nickname" type="text">
                                 <div class="checkbox">
                             <label>
                                 <input type="checkbox"> Enable Comments
