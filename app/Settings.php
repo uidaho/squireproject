@@ -1,6 +1,6 @@
 <?php
 
-namespace App\providers;
+namespace App;
 
 use App\Http\Controllers\SettingsController;
 use Illuminate\Database\Eloquent\Model;
