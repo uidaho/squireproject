@@ -15,9 +15,9 @@
                 <fieldset>
                     <legend>Legend</legend>
                     <div class="form-group">
-                        <label for="inputEmail" class="col-lg-2 control-label">Nickname</label>
+                        <label for="inputNickname" class="col-lg-2 control-label">Nickname</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="inputEmail" placeholder="Nickname" type="text">
+                            <input class="form-control" id="inputNickname" placeholder="inputNickname" type="text">
                                 <div class="checkbox">
                             <label>
                                 <input type="checkbox"> Enable Comments

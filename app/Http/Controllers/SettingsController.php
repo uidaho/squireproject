@@ -31,6 +31,8 @@ class SettingsController extends Controller
             case 'enable_chat':
                 $this->getEnableChat();
                 break;
+            default:
+                    pass;
         }
     }
 
@@ -42,7 +44,11 @@ class SettingsController extends Controller
         {
             case 'enable_chat':
                 Auth::user()->enable_chat = $value;
+                break;
+            default:
+                    pass;
         }
+
 
     }
     //TO be used in Authentication - whenever a new user is created, call this function

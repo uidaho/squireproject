@@ -27,7 +27,7 @@ class Settings extends Model
     
     
     //ensure that a user has settings (for when we add more settings), otherwise initialize to default settings
-    public function confirm_settings()
+    public function confirmSettings()
     {
         if (SettingsController::getSetting('enable_chat') == null)
         {

@@ -15,6 +15,9 @@ class CreateSettingsRequest extends Request
         {
             return redirect('/login');
         }
+
+        else
+            pass; //TODO fetch user settings
     }
 
     
@@ -24,7 +27,4 @@ class CreateSettingsRequest extends Request
         return $this->input('enable_chat');
     }
 
-    
-    
-    
 }

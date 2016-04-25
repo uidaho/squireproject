@@ -8,11 +8,7 @@ class CreateSettingsTable extends Migration
 
 
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
 
@@ -24,22 +20,11 @@ class CreateSettingsTable extends Migration
             $table->integer('user_id')->unique()->key();
             $table->boolean('enable_chat')->default(1); //enabled by default
 
-
-
-            //$table->string('avatar');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::drop('settings');
-
         Schema::drop('user_settings');
-
     }
 }
