@@ -28,14 +28,14 @@
 
 
                     <div class="form-group">
-                        <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+                        <label for="Bio" class="col-lg-2 control-label">Textarea</label>
                         <div class="col-lg-10">
                             <textarea class="form-control" rows="3" id="textArea"></textarea>
                             <span class="help-block">Write a bio for yourself!</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Radios</label>
+                        <label class="col-lg-2 control-label">Chat Options</label>
                         <div class="col-lg-10">
                             <div class="radio">
                                 <label>
