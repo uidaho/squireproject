@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="select" class="col-lg-2 control-label">Additional Options</label>
+                        <label for="select" class="col-lg-2 control-label">Font/color choices</label>
                         <div class="col-lg-10">
                             <select class="form-control" id="select">
                                 <option>1</option>
