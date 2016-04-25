@@ -32,7 +32,7 @@
 
     <body>
         <!-- BODY -->
-        <div class="container-fluid">
+        <section class="container-fluid">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -47,7 +47,7 @@
                     </div>
                 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <form class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li class="{{ Request::is('projects') ? 'active' : '' }}">
                                 <a href="/projects">Explore Projects</a>
@@ -96,11 +96,21 @@
                                 @endif
                             </li>
                         </ul>
-                    </div><!-- /.navbar-collapse -->
+                    </form><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    @if(session('alert'))
+                        <div class="alert alert-info alert-dismissible alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {!! session('alert') !!}
+                        </div>
+                    @endif
+                </div>
+            </div>
             <!-- CONTENT -->
             @yield('mainBody')
-        </div>
+        </section>
     </body>
 </html>

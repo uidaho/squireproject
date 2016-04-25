@@ -206,4 +206,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
     ],
 
+    'travis' => [
+        'MassSeederFallback' => 20
+    ],
+
 ];
