@@ -82,17 +82,17 @@ class EditorController extends Controller
      */
     public function create(Request $request, $projectname)
     {
-        // TODO: handle non-existant projectname
+        $project = Project::where('title', $projectname)->firstOrFail();
 
         $this->validate($request, [
-            'filename'      => 'required|unique:files|max:255|regex:/([A-Za-z0-9_.-]+)/',
+            'filename'      => 'required|unique:files,filename,NULL,id,project_id,'.$project->id.'|max:255|regex:/([A-Za-z0-9_.-]+)/',
             'description'   => 'required',
             'type'          => 'required',
         ]);
 
         $newEntry = File::create([
-            'project_id'    => 1,
-            'projectname'   => $projectname,
+            'project_id'    => $project->id,
+            'projectname'   => $project->title,
             'filename'      => $request->input('filename'),
             'type'          => $request->input('type'),
             'description'   => $request->input('description'),
