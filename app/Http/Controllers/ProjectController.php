@@ -34,8 +34,10 @@ class ProjectController extends Controller
      * @return The project page view
      * @internal param Project $id id for lookup
      */
-    public function view(Project $project)
+    public function view($projectname)
     {
+        $project = Project::where('title', $projectname)->firstOrFail();
+        
         return view('project.view', ['project' => $project]);
     }
 
@@ -70,7 +72,7 @@ class ProjectController extends Controller
         $thumbnail = $request->file('thumbnail');
         $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
-        return redirect($newEntry->getSlug());
+        return redirect('/project/'.$newEntry->title);
     }
 
     /**

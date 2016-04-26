@@ -30,7 +30,8 @@ class Project extends Model
      */
     public function getSlugFriendlyTitle()
     {
-        return str_replace(' ', '-', $this->title);
+        //return str_replace(' ', '-', $this->title);  //deprecated
+        return $this->title;
     }
 
     /**
@@ -54,7 +55,7 @@ class Project extends Model
      */
     public static function fromSlug($slug)
     {
-        return (new static)->where('title', str_replace('-', ' ', $slug));
+        return (new static)->where('title', $slug);
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layouts.main_layout')
 
 @section('head')
-    <title>{{$file->projectname}}/{{$file->filename}} | The Squire Project</title>
+    <title>{{$project->title}}/{{$file->filename}} | The Squire Project</title>
 
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.10.0/codemirror.css" />
