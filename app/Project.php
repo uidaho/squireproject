@@ -20,7 +20,7 @@ class Project extends Model
      */
     public function getSlug()
     {
-        return '/project/' . $this->getSlugFriendlyTitle();
+        return '/project/' . $this->title;
     }
 
     /**
@@ -42,7 +42,8 @@ class Project extends Model
      */
     public static function getTitleFromSlug($slug)
     {
-        return str_replace('-', ' ', $slug);
+        //return str_replace('-', ' ', $slug);
+        return $slug;
     }
 
 
