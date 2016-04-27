@@ -147,9 +147,10 @@ class EditorController extends Controller
         if ($file->user_id == Auth::user()->id) { // for now, only allow creator user_id to delete their file
             // delete file from firebase
             $firebase_path = '/' + $file->project_id + '/' + $file->id;
+
             $firebase = new \Firebase\FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
             $firebase->delete($firebase_path);
-            
+
             // delete file record from database
             File::where('projectname', $projectname)->where('filename', $filename)->delete();
         }
@@ -173,4 +174,19 @@ class EditorController extends Controller
             return abort(404);
         }
     }
+    
+    public function compile($projectname, $filename)
+    {
+        $contents = \Illuminate\Support\Facades\Request::get('file-contents');
+
+        $output = [];
+        $path = base_path('compile/' . $projectname . '_' . time() . '.java');
+        file_put_contents($path, $contents);
+        exec('javac -verbose ' . $path, $output);
+
+        dd($output);
+
+        return view('editor.compile', compact(['file', 'userid', 'username']));
+    }
 }
+

@@ -44,15 +44,16 @@
                     </a>
                 </div>
                 <div class="btn-group" role="group" aria-label="Compiler button group">
-                    <a href="#" class="btn btn-default btn-sm">
-                        <em class="glyphicon glyphicon-flash"></em> Compile
-                    </a>
-                    <a href="#" class="btn btn-default btn-sm">
-                        <em class="glyphicon glyphicon-flash"></em> Run
-                    </a>
-                    <a href="#" class="btn btn-default btn-sm">
-                        <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
-                    </a>
+                    <form id="contents-form" action="/editor/compile/{{$file->projectname}}/{{$file->filename}}" method="POST">
+                        {!! csrf_field() !!}
+                        <input type="hidden" name="file-contents" id="file-contents" value="asdf">
+                        <a type="submit" onclick="submitForm()" class="btn btn-default btn-sm">
+                            <em class="glyphicon glyphicon-flash"></em> Compile
+                        </a>
+                        <a href="#" class="btn btn-default btn-sm">
+                            <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
+                        </a>
+                    </form>
                 </div>
             </div>
         </div>
@@ -99,9 +100,17 @@
                 firepad.setText('{{$file->contents}}');
             }
         });
+
+        function submitForm() {
+            if (firepad != null) {
+                document.getElementById('file-contents').value = firepad.getText();
+            }
+            document.getElementById('contents-form').submit()
+        }
     </script>
 
     <script>
+<<<<<<< HEAD
         // connect to firebase
         var firebaseUrl = '{{ env('FIREBASE_URL') }}';
         var userName = '{{ $username }}';
