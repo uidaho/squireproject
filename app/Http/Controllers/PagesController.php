@@ -24,7 +24,7 @@ class PagesController extends Controller
 	{
 		if (Auth::guest())
 		{
-			return redirect('/login');
+			return redirect('auth.login');
 		}
 		return view('settings.settings');
 	}
