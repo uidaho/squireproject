@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Project;
+use App\Http\Controllers\Auth;
 
 class PagesController extends Controller
 {
