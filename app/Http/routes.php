@@ -67,7 +67,10 @@ Route::post('editor/rename/{projectname}/{filename}', 'EditorController@rename')
 Route::get('editor/delete/{projectname}/{filename}', 'EditorController@deleteView');
 Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete');
 Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
+Route::get('editor/edit/{projectname}', 'EditorController@listFiles');
+Route::get('editor/edit', 'ProjectController@listProjects');
 Route::get('editor/list/{projectname}', 'EditorController@listFiles');
+Route::get('editor/list', 'ProjectController@listProjects');
 Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/{projectname}', 'EditorController@listFiles');
 Route::get('editor', 'EditorController@index');
