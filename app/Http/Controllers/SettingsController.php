@@ -27,6 +27,12 @@ class SettingsController extends Controller
     public function update(Request $request)
     {
         $settings = Settings::where('user_id', Auth::user()->id);
+        $settings->nickname = $request->get('nickname');
+
+        $settings->save();
+
+        Session::flash('succes', 'Update settings');
+        return redirect('/settings');
         dd($settings);
     }
     

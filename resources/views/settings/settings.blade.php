@@ -12,7 +12,6 @@
         <section class="grid register-main">
 
             <form class="form-horizontal" action="{{ url("/settings")}}" method="POST">
-                {!! csrf_field() !!}
                 <fieldset>
                     <legend>Legend</legend>
                     <div class="form-group">
