@@ -80,8 +80,8 @@
             <div class="col-md-6 col-md-offset-3">
                 @if (Auth::check())
                     @if ($project->isUserMember())
-                        <a href="/editor/list/{{ $project->getSlugFriendlyTitle() }}">
-                            <button class="btn btn-default" id="view-files">View Files</button>
+                        <a href="/project/private/{{ $project->getSlugFriendlyTitle() }}">
+                            <button class="btn btn-default" id="members-button">Members Page</button>
                         </a>
                     @endif
                     @if (Auth::user()->username == $project->author)

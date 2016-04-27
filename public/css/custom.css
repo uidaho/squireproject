@@ -1,6 +1,12 @@
+.container-fluid
+{
+    padding: 0;
+    margin: 0;
+}
+
 /*
 ======================================
-Image Edits
+Project list
 ======================================
 */
 
@@ -81,4 +87,128 @@ Image Edits
     vertical-align: top;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+/*
+======================================
+Project Member Page
+======================================
+*/
+
+.r-hide-links a
+{
+    text-decoration: none;
+    color: black;
+}
+
+/*
+======================================
+Project Members Page Banner
+======================================
+*/
+.r-banner
+{
+    margin-bottom: 20px;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    height: 220px;
+    overflow: hidden;
+}
+
+.r-banner img
+{
+    width: 100%;
+    min-height: 250px;
+}
+
+/*
+======================================
+Project Members Page Pending Users
+======================================
+*/
+
+.r-pending-users
+{
+    margin-left: 20px;
+}
+
+/*
+======================================
+Project Members Page Left Column
+======================================
+*/
+
+.r-description
+{
+    padding: 10px 0 15px 0;
+    margin-bottom: 20px;
+    height: 225px;
+}
+
+.r-member-stats
+{
+    padding: 10px 0 15px 0;
+    height: 150px;
+}
+
+.r-admin-list
+{
+    padding: 10px 0 15px 0;
+    min-height: 150px;
+}
+
+.r-member-stats h4, .r-description h4, .r-admin-list h4, .r-pending-users h4
+{
+    text-align: center;
+    padding: 0 0 20px 0;
+    margin: 0;
+    font-weight: 500;
+}
+
+.r-description p
+{
+    padding: 0 15px 0 15px;
+}
+
+.r-member-stats h6
+{
+    margin: 0 0 20px 20px;
+    font-weight: 400;
+}
+
+.r-admin-list h6
+{
+    margin: 0 0 0 20px;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+/*
+======================================
+Project Members Page Tab Column
+======================================
+*/
+
+.r-tab-col
+{
+
+}
+
+.r-tab-body
+{
+    min-height: 522px;
+    background-color: #fafafa;
+    border: 1px solid #e8e8e8;
+    overflow: hidden;
+}
+
+/*
+======================================
+Project Members Page Members Tab
+======================================
+*/
+
+.r-member-table
+{
+    min-width: 910px;
 }

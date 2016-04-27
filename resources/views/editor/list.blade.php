@@ -32,44 +32,7 @@
     </div>
 </div>
 <div class="row">
-    <section class="col-md-3">
-        <h3 class="text-center"><u>Requests to Join the Project</u></h3>
-        <table class="table table-striped table-hover ">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($project->requests as $joinRequest)
-                    <tr class="info">
-                        <td>{{ $joinRequest->user->username }}</td>
-                        <td>
-                            <form action="project/request/accepted/{{ $project->getSlugFriendlyTitle() }}/{{ $joinRequest->user->id }}" method="POST">
-                                {!! csrf_field() !!}
-                                <button name="request-accepted" type="submit" class="btn btn-xxs btn-primary" value="Add User">
-                                    Add User
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="project/request/denied/{{ $project->getSlugFriendlyTitle() }}/{{ $joinRequest->user->id }}" method="POST">
-                                {!! csrf_field() !!}
-                                <button name="request-denied" type="submit" class="btn btn-xxs btn-danger" value="Deny User">
-                                    Deny User
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </section>
-    @foreach($project->requests() as $joinRequest)
-        <p>{{ $joinRequest->user()->username }}</p>
-    @endforeach
+
 
     <section class="col-md-8">
         <!-- Files -->

@@ -49,6 +49,7 @@ Route::get('project/request/cancel/{project}', 'ProjectController@removeMembersh
 Route::post('project/request/accepted/{project}/{user}', 'ProjectController@acceptMembershipRequest');
 Route::post('project/request/denied/{project}/{user}', 'ProjectController@denyMembershipRequest');
 Route::get('project/leave/{project}', 'ProjectController@removeMember');
+Route::get('project/private/{project}', 'ProjectController@membersHome');
 
 /*--------------------------------*
  *  Project Comments Controller   *

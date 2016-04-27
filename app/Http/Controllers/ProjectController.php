@@ -7,6 +7,7 @@ use App\Http\Requests\DeleteProjectRequest;
 use App\Http\Requests\ProjectListRequest;
 use App\Project;
 use App\User;
+use App\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -214,5 +215,19 @@ class ProjectController extends Controller
         //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
 
         return back();
+    }
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function membersHome(Project $project)
+    {
+        $userid = Auth::user()->id;
+        $files = File::forProject($project)->get();
+
+        return view('project.membersview', ['project' => $project, 'files' => $files, 'userid' => $userid]);
     }
 }
