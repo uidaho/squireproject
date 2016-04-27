@@ -35,12 +35,13 @@ class EditorController extends Controller
     {
         $userid = Auth::user()->id;
         $username = Auth::user()->username;
+        $project = Project::where('title', $projectname)->firstOrFail();
 
-        $file = File::where('projectname', Project::getTitleFromSlug($projectname))
+        $file = File::where('project_id', $project->id)
                     ->where('filename', $filename)
                     ->firstOrFail();
 
-        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username]);
+        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username, 'project' => $project]);
     }
 
     /**
@@ -52,7 +53,7 @@ class EditorController extends Controller
     public function listFiles($projectname)
     {
         $userid = Auth::user()->id;
-        $project = Project::fromSlug($projectname)->get()->first();
+        $project = Project::where('title', $projectname)->firstOrFail();
         $files = File::forProject($project)->get();
 
         if (empty($files[0])) {

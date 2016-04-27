@@ -48,7 +48,7 @@ class CreateProjectTest extends TestCase  // disable bad failing test, confirmed
             'Create test please work',
             'This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. ',
             $this->testImage
-        )->seePageIs('/project/Test-Project');
+        )->seePageIs('/project/Test Project');
         $entry = App\Project::where('title', '=', 'Test Project')->first();
         $this->assertTrue($entry != null);
         $this->seePageIs($entry->getSlug());

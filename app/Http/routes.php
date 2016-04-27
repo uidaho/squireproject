@@ -40,8 +40,8 @@ Route::post('project/create', 'ProjectController@create');
 Route::get('project/delete/{project}', 'ProjectController@delete');
 Route::get('project', 'ProjectController@listProjects');
 Route::get('projects', 'ProjectController@listProjects');
-Route::get('project/view/{project}', 'ProjectController@view');
-Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
+Route::get('project/view/{projectname}', 'ProjectController@view');
+Route::get('project/{projectname}', 'ProjectController@view'); // overloads go last.
 Route::get('project/follow/{project}', 'ProjectController@addFollower');
 Route::get('project/unfollow/{project}', 'ProjectController@removeFollower');
 
