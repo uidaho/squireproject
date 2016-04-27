@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Cache;
 use App\File;
 use App\Project;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
@@ -177,7 +178,6 @@ class EditorController extends Controller
     
     public function compile($projectname, $filename)
     {
-
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
         $firebase_path = '/' . $file->project_id . '/' . $file->id;
 
@@ -186,13 +186,28 @@ class EditorController extends Controller
 
         $contents = json_decode(utf8_encode($firebase->get($firebase_path)))->checkpoint->o[0];
 
-        $output = [];
-        $path = base_path('compile/' . $projectname . '_' . time() . '.java');
+        $key = $projectname . '_' . time();
+        $path = base_path('compile/' . $key);
+        mkdir($path);
 
-        file_put_contents($path, $contents);
-//        exec('javac -verbose ' . $path, $output);
+        $filePath = $path . '/' . $filename;
 
-        return view('editor.compile', compact(['file', 'userid', 'username']));
+        file_put_contents($filePath, $contents);
+        $output = shell_exec('javac ' . $filePath . ' 2>&1');
+
+        return view('editor.compile', compact(['file', 'output', 'key']));
+    }
+
+    public function downloadCompilation($projectname, $filename, $key)
+    {
+        $compiledName = str_replace('java', 'class', $filename);
+        $path = base_path('compile/' . $key . '/' . $compiledName);
+
+        $headers = array(
+            'Content-Type: application/java-vm',
+        );
+
+        return \Illuminate\Support\Facades\Response::download($path, $compiledName, $headers);
     }
 }
 
