@@ -113,12 +113,20 @@ Project Members Page Banner
     border-bottom: 5px solid black;
     height: 220px;
     overflow: hidden;
+    position: relative;
 }
 
 .r-banner img
 {
     width: 100%;
     min-height: 250px;
+}
+
+.r-banner button
+{
+    position: absolute;
+    bottom: 20px;
+    right: 40px;
 }
 
 /*
@@ -157,10 +165,17 @@ Project Members Page Left Column
     min-height: 150px;
 }
 
+.r-description h4
+{
+    display: inline-block;
+    padding-left: 20%;
+    padding-right: 10px;
+}
+
 .r-member-stats h4, .r-description h4, .r-admin-list h4, .r-pending-users h4
 {
     text-align: center;
-    padding: 0 0 20px 0;
+    padding-bottom: 20px;
     margin: 0;
     font-weight: 500;
 }
@@ -189,11 +204,6 @@ Project Members Page Tab Column
 ======================================
 */
 
-.r-tab-col
-{
-
-}
-
 .r-tab-body
 {
     min-height: 522px;
@@ -211,4 +221,29 @@ Project Members Page Members Tab
 .r-member-table
 {
     min-width: 910px;
+}
+
+/*
+======================================
+Project Members Page Edit
+======================================
+*/
+
+.r-edit-container
+{
+    text-align: center;
+}
+
+.r-edit-container h1
+{
+    display: inline-block;
+    /*padding-left: 40%;*/
+    padding-right: 10px;
+}
+
+.r-edit-container button
+{
+    margin-bottom: 15px;
+    max-height: 30px;
+    overflow: hidden;
 }

@@ -40,14 +40,19 @@ Route::post('project/create', 'ProjectController@create');
 Route::get('project/delete/{project}', 'ProjectController@delete');
 Route::get('project', 'ProjectController@listProjects');
 Route::get('projects', 'ProjectController@listProjects');
-Route::get('project/view/{projectname}', 'ProjectController@view');
-Route::get('project/{projectname}', 'ProjectController@view'); // overloads go last.
+Route::get('project/view/{project}', 'ProjectController@view');
+Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
+
 Route::get('project/follow/{project}', 'ProjectController@addFollower');
 Route::get('project/unfollow/{project}', 'ProjectController@removeFollower');
+
 Route::get('project/request/join/{project}', 'ProjectController@requestMembership');
 Route::get('project/request/cancel/{project}', 'ProjectController@removeMembershipRequest');
 Route::post('project/request/accepted/{project}/{user}', 'ProjectController@acceptMembershipRequest');
 Route::post('project/request/denied/{project}/{user}', 'ProjectController@denyMembershipRequest');
+Route::post('project/promote/{project}/{member}', 'ProjectController@promoteToAdmin');
+Route::post('project/demote/{project}/{user}', 'ProjectController@demoteFromAdmin');
+
 Route::get('project/leave/{project}', 'ProjectController@removeMember');
 Route::get('project/private/{project}', 'ProjectController@membersHome');
 
@@ -73,14 +78,10 @@ Route::post('editor/rename/{projectname}/{filename}', 'EditorController@rename')
 Route::get('editor/delete/{projectname}/{filename}', 'EditorController@deleteView');
 Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete');
 Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
-<<<<<<< HEAD
 Route::get('editor/edit/{projectname}', 'EditorController@listFiles');
 Route::get('editor/edit', 'ProjectController@listProjects');
-Route::get('editor/list/{projectname}', 'EditorController@listFiles');
-Route::get('editor/list', 'ProjectController@listProjects');
-=======
 Route::get('editor/list/{project}', 'EditorController@listFiles');
->>>>>>> Added basic accepting and denying of project requests
+Route::get('editor/list', 'ProjectController@listProjects');
 Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/{projectname}', 'EditorController@listFiles');
 Route::get('editor', 'EditorController@index');

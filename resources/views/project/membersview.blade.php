@@ -7,7 +7,8 @@
 @section('mainBody')
 
     <section class="r-banner">
-        <img class="" src="/images/test-banner.jpg" alt="Project Image">
+        <img class="" src="/images/banners/test-banner.jpg" alt="Project Image">
+        <button name="" type="submit" class="btn btn-default admin-only" value="Edit">Edit</button>
     </section>
 
     <section class="row r-hide-links">
@@ -15,9 +16,8 @@
 
             <!-- Left Gap -->
             <div class="col-md-2">
-                <!-- Todo check if user is admin -->
-                @if (true)
-                    <!-- Pending Users -->
+                <!-- Pending Users-->
+                @if ($project->requests != null && $project->isProjectAdmin())
                     <div class="well r-pending-users">
                         <h4>Requests to Join the Project</h4>
                         <table class="table table-striped table-hover ">
@@ -61,6 +61,7 @@
                 <!-- Mission Statement -->
                 <div class="well r-description">
                     <h4>Mission Statement</h4>
+                    <button name="" type="submit" class="btn btn-xs btn-default admin-only" value="Edit">Edit</button>
                     <!-- Todo display actual user input here -->
                     <p>{{ $project->description }}</p>
                 </div>
@@ -70,7 +71,7 @@
                     <h4>Member Statistics</h4>
                     <h6>Members: {{ $project->getMemberCount() }}</h6>
                     <!-- Todo get admins count -->
-                    <h6>Admins: N/A</h6>
+                    <h6>Admins: {{ $project->getAdminCount() }}</h6>
                 </div>
 
                 <!-- Admins List -->
@@ -79,8 +80,8 @@
                     <!-- Todo display project owner's username -->
                     <h6><a href="">Creator</a></h6>
                     <!-- Todo display projects admin's usernames -->
-                    @foreach($project->members as $admin)
-                        <h6><a href=""></a></h6>
+                    @foreach($admins as $admin)
+                        <h6><a href="">{{ $admin->user->username }}</a></h6>
                     @endforeach
                 </div>
 
@@ -101,7 +102,13 @@
 
                     <!-- Welcome Tab -->
                     <section class="tab-pane fade active in" id="welcome">
-                        <h1 class="text-center">Welcome</h1>
+                        <!-- Todo get user defined title -->
+                        <div class="r-edit-container">
+                            <h1>Welcome</h1>
+                            <button name="" type="submit" class="btn btn-xs btn-default admin-only" value="Edit">Edit</button>
+                        </div>
+                        <!-- Todo get body text -->
+                        <p></p>
                     </section>
 
                     <!-- Members Tab -->
@@ -115,14 +122,26 @@
                                 <tr class="info">
                                     <!-- Todo add link to user's profile -->
                                     <td><a href="">{{ $member->user->username }}</a></td>
-                                    <td>
-                                        <form action="" method="GET">
-                                            {!! csrf_field() !!}
-                                            <button name="" type="submit" class="btn btn-xxs btn-primary pull-right" value="">
-                                                Message
-                                            </button>
-                                        </form>
-                                    </td>
+                                    @if ($project->isProjectAdmin())
+                                        <td>
+                                            @if (!$member->admin && Auth::user()->id != $member->user_id)
+                                            <form action="/project/promote/{{ $project->getSlugFriendlyTitle() }}/{{ $member->id }}" method="POST">
+                                                {!! csrf_field() !!}
+                                                <button name="make-admin" type="submit" class="btn btn-xxs btn-primary pull-right" value="make-admin">
+                                                    Make Admin
+                                                </button>
+                                            </form>
+                                            @endif
+                                            @if ($project->isUserAuthor(Auth::user()) && $member->admin && Auth::user()->id != $member->user_id)
+                                                <form action="" method="POST">
+                                                    {!! csrf_field() !!}
+                                                    <button name="remove-admin" type="submit" class="btn btn-xxs btn-danger pull-right" value="remove-admin">
+                                                        Remove Admin
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>
@@ -145,4 +164,22 @@
         </div>
 
     </section>
+
+    <script>
+        var isAdmin = "<?php echo $project->isProjectAdmin(); ?>";
+
+        //Hide edit buttons from non-admins
+        function hideEditButtons() {
+            if (!isAdmin) {
+                var items = document.getElementsByClassName('admin-only');
+
+                for (var i = 0; i < items.length; i++)
+                {
+                    items[i].style.visibility = 'hidden';
+                }
+            }
+        }
+
+        window.onload = hideEditButtons();
+    </script>
 @stop

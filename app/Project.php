@@ -248,6 +248,16 @@ class Project extends Model
     }
 
     /**
+     * Get the count of admins for the project
+     *
+     * @return
+     */
+    public function getAdminCount()
+    {
+        return count(ProjectMember::where('project_id', '=', $this->id)->where('admin', '=', true)->get());
+    }
+
+    /**
      * Check if user is a follower of this project
      *
      * @return
@@ -275,14 +285,15 @@ class Project extends Model
      *
      * @return
      */
-    public function addMember($user_id = null)
+    public function addMember($admin = false, $user_id = null)
     {
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
         $member = ProjectMember::create([
             'user_id' => $user_id,
-            'project_id' => $this->id
+            'project_id' => $this->id,
+            'admin' => $admin
         ]);
 
         return $this->members()->save($member);
@@ -384,5 +395,25 @@ class Project extends Model
 
         if ($membershipRequest != null)
             $membershipRequest->delete();
+    }
+
+    /**
+     * Check if user is a follower of this project
+     *
+     * @return
+     */
+    public function isProjectAdmin($user_id = null)
+    {
+        $isAdmin = false;
+
+        if (!Auth::guest()) {
+            if ($user_id == null)
+                $user_id = Auth::user()->id;
+
+            $isAdmin = ProjectMember::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+            $isAdmin = $isAdmin->admin;
+        }
+
+        return $isAdmin;
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\ProjectListRequest;
 use App\Project;
 use App\User;
 use App\File;
+use App\ProjectMember;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -74,8 +75,8 @@ class ProjectController extends Controller
         $thumbnail = $request->file('thumbnail');
         $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
-        //Add creator as a member of the project
-        $newEntry->addMember();
+        //Add creator as a member and make admin of the project
+        $newEntry->addMember(true);
 
         return redirect('/project/'.$newEntry->title);
     }
@@ -190,10 +191,10 @@ class ProjectController extends Controller
      */
     public function acceptMembershipRequest(Project $project, User $user)
     {
-        if (Auth::guest())
+        if (Auth::guest() || !$project->isProjectAdmin())
             return abort(403);
 
-        $project->addMember($user->id);
+        $project->addMember(false, $user->id);
         $project->deleteMembershipRequest($user->id);
         //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
 
@@ -227,7 +228,22 @@ class ProjectController extends Controller
     {
         $userid = Auth::user()->id;
         $files = File::forProject($project)->get();
+        $admins = ProjectMember::where('project_id', '=', $project->id)->where('admin', '=', true)->get();
 
-        return view('project.membersview', ['project' => $project, 'files' => $files, 'userid' => $userid]);
+        return view('project.membersview', ['project' => $project, 'files' => $files, 'userid' => $userid, 'admins' => $admins]);
+    }
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function promoteToAdmin(Project $project, ProjectMember $member)
+    {
+        $member->admin = true;
+        $member->save();
+
+        return back();
     }
 }
