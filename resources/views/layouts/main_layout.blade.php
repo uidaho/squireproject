@@ -61,6 +61,9 @@
                             <li class="{{ Request::is('contact') ? 'active' : '' }}">
                                 <a href="#">Contact</a>
                             </li>
+                            <li class="{{ Request::is('settings') ? 'active' : '' }}">
+                                <a href = "/settings">Settings </a>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id="bs-example-navbar-collapse-1">
                             <li class="dropdown">
