@@ -177,14 +177,20 @@ class EditorController extends Controller
     
     public function compile($projectname, $filename)
     {
-        $contents = \Illuminate\Support\Facades\Request::get('file-contents');
+
+        $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
+        $firebase_path = '/' . $file->project_id . '/' . $file->id;
+
+        $firebase = new \Firebase\FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
+
+
+        $contents = json_decode(utf8_encode($firebase->get($firebase_path)))->checkpoint->o[0];
 
         $output = [];
         $path = base_path('compile/' . $projectname . '_' . time() . '.java');
-        file_put_contents($path, $contents);
-        exec('javac -verbose ' . $path, $output);
 
-        dd($output);
+        file_put_contents($path, $contents);
+//        exec('javac -verbose ' . $path, $output);
 
         return view('editor.compile', compact(['file', 'userid', 'username']));
     }

@@ -44,16 +44,12 @@
                     </a>
                 </div>
                 <div class="btn-group" role="group" aria-label="Compiler button group">
-                    <form id="contents-form" action="/editor/compile/{{$file->projectname}}/{{$file->filename}}" method="POST">
-                        {!! csrf_field() !!}
-                        <input type="hidden" name="file-contents" id="file-contents" value="asdf">
-                        <a type="submit" onclick="submitForm()" class="btn btn-default btn-sm">
-                            <em class="glyphicon glyphicon-flash"></em> Compile
-                        </a>
-                        <a href="#" class="btn btn-default btn-sm">
-                            <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
-                        </a>
-                    </form>
+                    <a href="/editor/compile/{{$file->projectname}}/{{$file->filename}}" type="submit" onclick="submitForm()" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-flash"></em> Compile
+                    </a>
+                    <a href="#" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
+                    </a>
                 </div>
             </div>
         </div>
@@ -103,9 +99,11 @@
 
         function submitForm() {
             if (firepad != null) {
-                document.getElementById('file-contents').value = firepad.getText();
+                firepad.firebaseAdapter_.saveCheckpoint_();
+                document.getElementById('contents-form').submit()
+            } else {
+                {{ Session::flash('error', 'Firepad not ready yet.') }}
             }
-            document.getElementById('contents-form').submit()
         }
     </script>
 
