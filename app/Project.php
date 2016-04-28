@@ -354,7 +354,7 @@ class Project extends Model
      */
     public function getAdmins()
     {
-        return $this->members()->join()->where('admin', 1)->get();
+        return $this->members()->where('admin', 1)->get();
     }
 
     /**
