@@ -7,24 +7,12 @@ use App\Settings;
 
 class CreateSettingsRequest extends Request
 {
-    
-    //if the user isn't logged in, redirect to login page
-    public function authorize()
-    {
-        if (Auth::guest())
-        {
-            return redirect('/login');
-        }
 
-        else
-            pass; //TODO fetch user settings
-    }
-
-    
-    //Ask for an return the enable_chat variable
-    public function getEnableChat()
+    public function rules()
     {
-        return $this->input('enable_chat');
+        return [
+            enable_chat => 'required',
+        ];
     }
 
 }

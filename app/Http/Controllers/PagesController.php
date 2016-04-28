@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Project;
-use App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
@@ -25,7 +26,7 @@ class PagesController extends Controller
 	{
 		if (Auth::guest())
 		{
-			return redirect('auth.login');
+			return redirect('/login');
 		}
 		return view('settings.settings');
 	}

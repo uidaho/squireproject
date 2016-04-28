@@ -12,7 +12,7 @@ use App\Settings;
 class SettingsController extends Controller
 {
 
-    
+
     //DO we need this? What's the difference between this and the next function?
     protected function create(array $data)
     {
@@ -31,49 +31,32 @@ class SettingsController extends Controller
 
         $settings->save();
 
-        Session::flash('succes', 'Update settings');
+        Session::flash('success', 'Update settings');
         return redirect('/settings');
-        dd($settings);
     }
-    
-    
+
+
     //Check all settings are enabled using a loop when a user logs on
     public function getSetting($setting)
     {
-        switch ($setting)
-        {
+        switch ($setting) {
             case 'enable_chat':
                 $this->getEnableChat();
                 break;
             default:
-                    pass;
+                pass;
         }
     }
 
 
     //Paired with the getSetting() function to set settings to the given value
-    public function setSetting($setting, $value)
+    public function setSetting($user_id, $enable_chat)
     {
-        switch ($setting)
-        {
-            case 'enable_chat':
-                Auth::user()->enable_chat = $value;
-                break;
-            default:
-                    pass;
-        }
-
-
+        DB::update('update user_settings set enable_chat = $enable_chat where user_id = ?', [$user_id]);
     }
-    //TO be used in Authentication - whenever a new user is created, call this function
-    /*public function initializeSettings()
 
-    {
-        $newEntry = Settings::create([
-            'user_id' => Auth::user()->user_id,
-            'nickname' => Auth::user()->username,
-            'chat_enabled' => 1,
-            ]);
-    }*/
-    
+
 }
+
+
+
