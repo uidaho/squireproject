@@ -402,6 +402,16 @@ class Project extends Model
      *
      * @return
      */
+    public function getAdmins()
+    {
+        return $this->members()->where('admin', 1)->get();
+    }
+
+    /**
+     * Check if user is a follower of this project
+     *
+     * @return
+     */
     public function isProjectAdmin($user_id = null)
     {
         $isAdmin = false;

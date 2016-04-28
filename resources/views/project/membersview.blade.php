@@ -78,10 +78,13 @@
                 <div class="well r-admin-list">
                     <h4>Admins</h4>
                     <!-- Todo display project owner's username -->
-                    <h6><a href="">Creator</a></h6>
+                    <h6 class="r-inline"><a href="">{{ $project->author }}</a></h6><!--
+                    --><p class="r-inline">Creator</p>
                     <!-- Todo display projects admin's usernames -->
-                    @foreach($admins as $admin)
-                        <h6><a href="">{{ $admin->user->username }}</a></h6>
+                    @foreach($project->getAdmins() as $admin)
+                        @if ($admin->user->id != $project->user)
+                            <h6><a href="">{{ $admin->user->id }}{{ $admin->user->username }}</a></h6>
+                        @endif
                     @endforeach
                 </div>
 
@@ -124,16 +127,16 @@
                                     <td><a href="">{{ $member->user->username }}</a></td>
                                     @if ($project->isProjectAdmin())
                                         <td>
-                                            @if (!$member->admin && Auth::user()->id != $member->user_id)
-                                            <form action="/project/promote/{{ $project->getSlugFriendlyTitle() }}/{{ $member->id }}" method="POST">
-                                                {!! csrf_field() !!}
-                                                <button name="make-admin" type="submit" class="btn btn-xxs btn-primary pull-right" value="make-admin">
-                                                    Make Admin
-                                                </button>
-                                            </form>
+                                            @if (!$member->admin)
+                                                <form action="/project/promote/{{ $project->getSlugFriendlyTitle() }}/{{ $member->id }}" method="POST">
+                                                    {!! csrf_field() !!}
+                                                    <button name="make-admin" type="submit" class="btn btn-xxs btn-primary pull-right" value="make-admin">
+                                                        Make Admin
+                                                    </button>
+                                                </form>
                                             @endif
                                             @if ($project->isUserAuthor(Auth::user()) && $member->admin && Auth::user()->id != $member->user_id)
-                                                <form action="" method="POST">
+                                                <form action="/project/demote/{{ $project->getSlugFriendlyTitle() }}/{{ $member->id }}" method="POST">
                                                     {!! csrf_field() !!}
                                                     <button name="remove-admin" type="submit" class="btn btn-xxs btn-danger pull-right" value="remove-admin">
                                                         Remove Admin

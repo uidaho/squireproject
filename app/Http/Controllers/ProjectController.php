@@ -228,9 +228,8 @@ class ProjectController extends Controller
     {
         $userid = Auth::user()->id;
         $files = File::forProject($project)->get();
-        $admins = ProjectMember::where('project_id', '=', $project->id)->where('admin', '=', true)->get();
 
-        return view('project.membersview', ['project' => $project, 'files' => $files, 'userid' => $userid, 'admins' => $admins]);
+        return view('project.membersview', ['project' => $project, 'files' => $files, 'userid' => $userid]);
     }
 
     /**
@@ -242,6 +241,20 @@ class ProjectController extends Controller
     public function promoteToAdmin(Project $project, ProjectMember $member)
     {
         $member->admin = true;
+        $member->save();
+
+        return back();
+    }
+
+    /**
+     *
+     *
+     * @param
+     * @return
+     */
+    public function demoteFromAdmin(Project $project, ProjectMember $member)
+    {
+        $member->admin = false;
         $member->save();
 
         return back();

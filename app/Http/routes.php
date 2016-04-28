@@ -51,7 +51,7 @@ Route::get('project/request/cancel/{project}', 'ProjectController@removeMembersh
 Route::post('project/request/accepted/{project}/{user}', 'ProjectController@acceptMembershipRequest');
 Route::post('project/request/denied/{project}/{user}', 'ProjectController@denyMembershipRequest');
 Route::post('project/promote/{project}/{member}', 'ProjectController@promoteToAdmin');
-Route::post('project/demote/{project}/{user}', 'ProjectController@demoteFromAdmin');
+Route::post('project/demote/{project}/{member}', 'ProjectController@demoteFromAdmin');
 
 Route::get('project/leave/{project}', 'ProjectController@removeMember');
 Route::get('project/private/{project}', 'ProjectController@membersHome');
