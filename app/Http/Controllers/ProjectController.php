@@ -213,7 +213,7 @@ class ProjectController extends Controller
         if (Auth::guest())
             return abort(403);
 
-        $project->denyMembershipRequest($user->id);
+        $project->deleteMembershipRequest($user->id);
         //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
 
         return back();

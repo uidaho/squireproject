@@ -161,70 +161,13 @@ class Project extends Model
     }
 
     /**
-     * Get the count of followers for the project
+     *
      *
      * @return
      */
-    public function getFollowerCount()
+    public function requests()
     {
-        return count(ProjectFollower::where('project_id', '=', $this->id)->get());
-    }
-
-    /**
-     * Check if user is a follower of this project
-     *
-     * @return
-     */
-    public function isUserFollower($user_id = null)
-    {
-        if (!Auth::guest()) {
-            if ($user_id == null)
-                $user_id = Auth::user()->id;
-
-            $isUserFollower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-            if ($isUserFollower != null)
-                $isUserFollower = true;
-            else
-                $isUserFollower = false;
-        }
-        else
-            $isUserFollower = false;
-
-        return $isUserFollower;
-    }
-
-    /**
-     * Adds a follower to the project
-     *
-     * @return
-     */
-    public function addFollower($user_id = null)
-    {
-        if ($user_id == null)
-            $user_id = Auth::user()->id;
-
-        $follower = ProjectFollower::create([
-            'user_id' => $user_id,
-            'project_id' => $this->id
-        ]);
-
-        return $this->followers()->save($follower);
-    }
-
-    /**
-     * Deletes a follower to the project
-     *
-     * @return
-     */
-    public function deleteFollower($user_id = null)
-    {
-        if ($user_id == null)
-            $user_id = Auth::user()->id;
-
-        $follower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-
-        if ($follower != null)
-            $follower->delete();
+        return $this->hasMany(ProjectRequest::class);
     }
 
     /**
@@ -242,19 +185,9 @@ class Project extends Model
      *
      * @return
      */
-    public function getMemberCount()
+    public function getFollowerCount()
     {
-        return count(ProjectMember::where('project_id', '=', $this->id)->get());
-    }
-
-    /**
-     * Get the count of admins for the project
-     *
-     * @return
-     */
-    public function getAdminCount()
-    {
-        return count(ProjectMember::where('project_id', '=', $this->id)->where('admin', '=', true)->get());
+        return count($this->followers());
     }
 
     /**
@@ -262,22 +195,14 @@ class Project extends Model
      *
      * @return
      */
-    public function isUserMember($user_id = null)
+    public function isUserFollower($user_id = null)
     {
-        if (!Auth::guest()) {
-            if ($user_id == null)
-                $user_id = Auth::user()->id;
+        //Todo authentication checking
 
-            $isUserMember = ProjectMember::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-            if ($isUserMember != null)
-                $isUserMember = true;
-            else
-                $isUserMember = false;
-        }
-        else
-            $isUserMember = false;
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
 
-        return $isUserMember;
+        return $this->followers()->where('user_id', $user_id)->first();
     }
 
     /**
@@ -285,8 +210,53 @@ class Project extends Model
      *
      * @return
      */
+    public function addFollower($user_id = null)
+    {
+        //Todo authentication checking
+
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $follower = ProjectFollower::create([
+            'user_id' => $user_id,
+            'project_id' => $this->id
+        ]);
+
+        return $this->followers()->save($follower);
+    }
+
+    /**
+     * Deletes a follower from the project
+     *
+     * @return
+     */
+    public function deleteFollower($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $this->followers()->where('user_id', $user_id)->first()->delete();
+    }
+
+    /**
+     * Get the count of followers for the project
+     *
+     * @return
+     */
+    public function getMemberCount()
+    {
+        return count($this->members());
+    }
+
+    /**
+     * Adds a member to the project
+     *
+     * @return
+     */
     public function addMember($admin = false, $user_id = null)
     {
+        //Todo authentication checking
+
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -300,29 +270,33 @@ class Project extends Model
     }
 
     /**
-     * Deletes a follower to the project
+     * Deletes a member from the project
      *
      * @return
      */
     public function deleteMember($user_id = null)
     {
+        //Todo authentication checking
+
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
-        $member = ProjectMember::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-
-        if ($member != null)
-            $member->delete();
+        $this->members()->where('user_id', $user_id)->first()->delete();
     }
 
     /**
-     *
+     * Check if user is a member of this project
      *
      * @return
      */
-    public function requests()
+    public function isUserMember($user_id = null)
     {
-        return $this->hasMany(ProjectRequest::class);
+        //Todo authentication checking
+
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        return $this->members()->where('user_id', $user_id)->first();
     }
 
     /**
@@ -332,6 +306,8 @@ class Project extends Model
      */
     public function addMembershipRequest($user_id = null)
     {
+        //Todo authentication checking
+
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -350,20 +326,12 @@ class Project extends Model
      */
     public function isMembershipPending($user_id = null)
     {
-        if (!Auth::guest()) {
-            if ($user_id == null)
-                $user_id = Auth::user()->id;
+        //Todo authentication checking
 
-            $isPending = ProjectRequest::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-            if ($isPending != null)
-                $isPending = true;
-            else
-                $isPending = false;
-        }
-        else
-            $isPending = false;
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
 
-        return $isPending;
+        return $this->requests()->where('user_id', $user_id)->first();
     }
 
     /**
@@ -373,57 +341,44 @@ class Project extends Model
      */
     public function deleteMembershipRequest($user_id = null)
     {
-        if ($user_id == null)
-            $user_id = Auth::user()->id;
-
-        $membershipRequest = ProjectRequest::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-
-        if ($membershipRequest != null)
-            $membershipRequest->delete();
-    }
-
-    /**
-     * Deletes a follower to the project
-     *
-     * @return
-     */
-    public function denyMembershipRequest($user_id)
-    {
+        //Todo authentication checking
         //Todo send email to denied user
 
-        $membershipRequest = ProjectRequest::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-
-        if ($membershipRequest != null)
-            $membershipRequest->delete();
+        $this->requests()->where('user_id', $user_id)->first()->delete();
     }
 
     /**
-     * Check if user is a follower of this project
+     * Gets all admins of this project
      *
      * @return
      */
     public function getAdmins()
     {
-        return $this->members()->where('admin', 1)->get();
+        return $this->members()->join()->where('admin', 1)->get();
     }
 
     /**
-     * Check if user is a follower of this project
+     * Check if user is an admin of this project
      *
      * @return
      */
     public function isProjectAdmin($user_id = null)
     {
-        $isAdmin = false;
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
 
-        if (!Auth::guest()) {
-            if ($user_id == null)
-                $user_id = Auth::user()->id;
+        //Todo authentication checking
 
-            $isAdmin = ProjectMember::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-            $isAdmin = $isAdmin->admin;
-        }
+        return $this->members()->where('user_id', $user_id)->first()->admin;
+    }
 
-        return $isAdmin;
+    /**
+     * Get the count of admins for the project
+     *
+     * @return
+     */
+    public function getAdminCount()
+    {
+        return count($this->members()->where('admin', 1)->get());
     }
 }
