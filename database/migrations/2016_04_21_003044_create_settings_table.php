@@ -12,8 +12,7 @@ class CreateSettingsTable extends Migration
     public function up()
     {
 
-
-        //TODO: Impliment this to be called every time a new user is created
+        
         Schema::create('user_settings', function (Blueprint $table)
         {
             $table->increments('id');

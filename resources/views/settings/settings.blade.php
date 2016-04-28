@@ -12,6 +12,7 @@
         <section class="grid register-main">
 
             <form class="form-horizontal" action="{{ url("/settings")}}" method="POST">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <fieldset>
                     <legend>Settings</legend>
                     <!--
@@ -37,6 +38,7 @@
                     </div>
                     <div class="form-group">
                         -->
+
                         <label class="col-lg-2 control-label">Chat Options</label>
                         <div class="col-lg-10">
                             <div class="radio">

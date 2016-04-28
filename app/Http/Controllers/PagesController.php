@@ -22,12 +22,4 @@ class PagesController extends Controller
 		return view('pages.about');                 //resources/views/pages/about.blade.php
 	}
 	
-	public function settings()
-	{
-		if (Auth::guest())
-		{
-			return redirect('/login');
-		}
-		return view('settings.settings');
-	}
 }

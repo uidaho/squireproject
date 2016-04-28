@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Settings extends Model
 {
+    protected $table = 'user_settings';
     protected $fillable = [
             'nickname', 'enable_comments',
     ];
