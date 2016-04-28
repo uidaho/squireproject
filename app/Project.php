@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Project extends Model
 {
     protected $fillable = [
-        'title', 'author', 'user_id', 'description', 'body', 'statement', 'tab_title', 'tab_body', 'created_at', 'updated_at'
+        'title', 'author', 'user_id', 'description', 'body', 'statement_title', 'statement_body', 'tab_title', 'tab_body', 'created_at', 'updated_at'
     ];
 
     protected $perPage = 16;
@@ -132,9 +132,6 @@ class Project extends Model
             'title' => Project::minMaxHelper(2, 32),
             'description' => Project::minMaxHelper(10, 75),
             'project-body' => Project::minMaxHelper(100, 65535),
-            'statement' => Project::minMaxHelper(10, 75),
-            'tab-title' => Project::minMaxHelper(2, 32),
-            'tab-body' => Project::minMaxHelper(100, 65535)
         ];
     }
 

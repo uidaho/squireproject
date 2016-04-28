@@ -62,7 +62,7 @@
                 <!-- Mission Statement -->
                 <div class="well r-description">
                     <h4>Mission Statement</h4>
-                    <button name="" type="submit" class="btn btn-xs btn-default admin-only" value="Edit">Edit</button>
+                    <button name="statement-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-statement">Edit</button>
                     <!-- Todo display actual user input here -->
                     <p>{{ $project->statement }}</p>
                 </div>
@@ -108,7 +108,7 @@
                     <section class="tab-pane fade active in" id="custom-tab">
                         <div class="r-edit-container">
                             <h1>{{ $project->tab_title }}</h1>
-                            <button name="" type="submit" class="btn btn-xs btn-default admin-only" value="Edit">Edit</button>
+                            <button name="customtab-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-customtab">Edit</button>
                         </div>
                         <p>{{ $project->tab_body }}</p>
                     </section>
@@ -167,12 +167,31 @@
 
     </section>
 
-    <!-- Modal -->
-    <div class="modal fade" id="edit-banner" role="dialog">
-        <div class="modal-dialog modal-lg">
-            @include('inserts.banner')
+    <!-- Modals Section -->
+    <section>
+
+        <!-- Banner Modal -->
+        <div class="modal fade" id="edit-banner" role="dialog">
+            <div class="modal-dialog modal-lg">
+                @include('project-members.edit.banner')
+            </div>
         </div>
-    </div>
+
+        <!-- Statement Modal -->
+        <div class="modal fade" id="edit-statement" role="dialog">
+            <div class="modal-dialog modal-lg">
+                @include('project-members.edit.statement')
+            </div>
+        </div>
+
+        <!-- Custom Tab Modal -->
+        <div class="modal fade" id="edit-customtab" role="dialog">
+            <div class="modal-dialog modal-lg">
+                @include('project-members.edit.customtab')
+            </div>
+        </div>
+
+    </section>
 
     <script>
         var isAdmin = "<?php echo $project->isProjectAdmin(); ?>";

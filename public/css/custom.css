@@ -274,3 +274,31 @@ Project Creation Page
 {
     margin-left: 17%;
 }
+
+/*
+======================================
+Project Members Modal
+======================================
+*/
+
+.r-modal-window
+{
+    padding: 30px;
+    background-color: #fafafa;
+}
+
+.r-modal-window legend
+{
+    max-width: 90%;
+}
+
+.r-modal-input
+{
+    max-width: 93%;
+    padding: 10px 0 0 25px;
+}
+
+.r-modal-buttons
+{
+    padding: 20px 0 0 25px;
+}

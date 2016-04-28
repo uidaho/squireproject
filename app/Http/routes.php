@@ -53,8 +53,16 @@ Route::post('project/request/denied/{project}/{user}', 'ProjectController@denyMe
 Route::post('project/promote/{project}/{member}', 'ProjectController@promoteToAdmin');
 Route::post('project/demote/{project}/{member}', 'ProjectController@demoteFromAdmin');
 
+/*------------------------------*
+ *  Project Member Controller   *
+ *------------------------------*/
+Route::post('project/edit/banner/{project}', 'ProjectController@editBanner');
+Route::post('project/edit/statement/{project}', 'ProjectController@editStatement');
+Route::post('project/edit/customtab/{project}', 'ProjectController@editCustomTab');
+
 Route::get('project/leave/{project}', 'ProjectController@removeMember');
 Route::get('project/private/{project}', 'ProjectController@membersHome');
+
 
 /*--------------------------------*
  *  Project Comments Controller   *

@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Http\Requests\ProjectListRequest;
+use App\Http\Requests\BannerRequest;
+use App\Http\Requests\StatementRequest;
+use App\Http\Requests\CustomTabRequest;
 use App\Project;
 use App\User;
-use App\File;
 use App\ProjectMember;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -71,16 +74,19 @@ class ProjectController extends Controller
             'title'  => $request->getTitle(),
             'description' => $request->getDescription(),
             'body' => $request->getBody(),
-            'statement' => $request->getStatement(),
-            'tab_title' => $request->getTabTitle(),
-            'tab_body' => $request->getTabBody(),
+            'statement_title' => 'Mission Statement',
+            'statement_body' => 'This is where you write about your mission statement or make it whatever you want.',
+            'tab_title' => 'Welcome',
+            'tab_body' => 'Here you can write a message or maybe the status of your project for all your members to see.',
         ]);
 
         $thumbnail = $request->file('thumbnail');
         $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
-        $banner = $request->file('banner');
-        $banner->move(base_path() . '/public/images/projects',  'banner' . $newEntry->id . '.jpg');
+        //Set project members page's banner
+        $banner = "public/images/banners/banner1.jpg";
+        $imagePath = 'public/images/projects/' . 'banner' . $newEntry->id . '.jpg';
+        \File::copy($banner, $imagePath);
 
         //Add creator as a member and make admin of the project
         $newEntry->addMember(true);
@@ -236,7 +242,7 @@ class ProjectController extends Controller
         $userid = Auth::user()->id;
         $files = File::forProject($project)->get();
 
-        return view('project.membersview', ['project' => $project, 'files' => $files, 'userid' => $userid]);
+        return view('project-members.view', ['project' => $project, 'files' => $files, 'userid' => $userid]);
     }
 
     /**
@@ -263,6 +269,50 @@ class ProjectController extends Controller
     {
         $member->admin = false;
         $member->save();
+
+        return back();
+    }
+
+    /**
+     * Creates a new project using the input from the form
+     *
+     * @param CreateProjectRequest $request The validated request
+     * @return mixed
+     */
+    public function editBanner(BannerRequest $request, Project $project)
+    {
+        $banner = $request->file('banner');
+        $banner->move(base_path() . '/public/images/projects',  'banner' . $project->id . '.jpg');
+
+        return back();
+    }
+
+    /**
+     * Creates a new project using the input from the form
+     *
+     * @param CreateProjectRequest $request The validated request
+     * @return mixed
+     */
+    public function editStatement(StatementRequest $request, Project $project)
+    {
+        //$project->statement_title = $request->getStatementTitle();
+        $project->statement = $request->getStatement();
+        $project->save();
+
+        return back();
+    }
+
+    /**
+     * Creates a new project using the input from the form
+     *
+     * @param CreateProjectRequest $request The validated request
+     * @return mixed
+     */
+    public function editCustomTab(CustomTabRequest $request, Project $project)
+    {
+        $project->tab_title = $request->getTabTitle();
+        $project->tab_body = $request->getTabBody();
+        $project->save();
 
         return back();
     }
