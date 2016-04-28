@@ -7,7 +7,7 @@
 @section('mainBody')
 
     <section class="r-banner">
-        <img class="" src="{{ $project->getBannerImagePath() }}" alt="Project Image">
+        <img class="" src="{{ $project->getBannerImagePath() }}" alt="Banner Image">
         <!-- Trigger banner edit modal -->
         <button name="banner-edit" type="submit" class="btn btn-default admin-only" data-toggle="modal" data-target="#edit-banner">Edit</button>
     </section>
@@ -61,10 +61,12 @@
             <section class="col-md-2">
                 <!-- Mission Statement -->
                 <div class="well r-description">
-                    <h4>Mission Statement</h4>
-                    <button name="statement-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-statement">Edit</button>
+                    <div class="r-edit-container">
+                        <h4>{{ $project->statement_title }}</h4>
+                        <button name="statement-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-statement">Edit</button>
+                    </div>
                     <!-- Todo display actual user input here -->
-                    <p>{{ $project->statement }}</p>
+                    <p>{{ $project->statement_body }}</p>
                 </div>
 
                 <!-- Member Statistics -->
@@ -105,7 +107,7 @@
                 <div class="tab-content r-tab-body">
 
                     <!-- Custom User Tab -->
-                    <section class="tab-pane fade active in" id="custom-tab">
+                    <section class="tab-pane fade active in r-tab-inside-body" id="custom-tab">
                         <div class="r-edit-container">
                             <h1>{{ $project->tab_title }}</h1>
                             <button name="customtab-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-customtab">Edit</button>

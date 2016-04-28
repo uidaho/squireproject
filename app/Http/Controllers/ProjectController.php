@@ -10,6 +10,7 @@ use App\Http\Requests\StatementRequest;
 use App\Http\Requests\CustomTabRequest;
 use App\Project;
 use App\User;
+use App\File;
 use App\ProjectMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -83,10 +84,7 @@ class ProjectController extends Controller
         $thumbnail = $request->file('thumbnail');
         $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
-        //Set project members page's banner
-        $banner = "public/images/banners/banner1.jpg";
-        $imagePath = 'public/images/projects/' . 'banner' . $newEntry->id . '.jpg';
-        \File::copy($banner, $imagePath);
+        //Todo set banner image
 
         //Add creator as a member and make admin of the project
         $newEntry->addMember(true);
@@ -295,8 +293,8 @@ class ProjectController extends Controller
      */
     public function editStatement(StatementRequest $request, Project $project)
     {
-        //$project->statement_title = $request->getStatementTitle();
-        $project->statement = $request->getStatement();
+        $project->statement_title = $request->getStatementTitle();
+        $project->statement_body = $request->getStatementBody();
         $project->save();
 
         return back();
