@@ -29,10 +29,10 @@ class SettingsController extends Controller
 
     public function update(Request $request)
     {
-        $settings = Settings::where('user_id', Auth::user()->id);
-        $settings->enable_chat = $request->get('enable_chat');
+        $settings = Settings::where('user_id', Auth::user()->id)->first();
+        $settings->nickname = $request->get('nickname');
 
-        $settings->save();
+        DB::update('update user_settings set enable_chat = $enable_chat where user_id = ?', ['user_id']);
 
         Session::flash('success', 'Update settings');
         return redirect('/settings');

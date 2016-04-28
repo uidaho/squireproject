@@ -37,6 +37,5 @@ class Settings extends Model
         
         //Add more checks and default values as we add more settings
     }
-        
     
 }
