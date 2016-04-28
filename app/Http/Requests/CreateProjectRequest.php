@@ -47,6 +47,36 @@ class CreateProjectRequest extends Request
     }
 
     /**
+     * Helper to get the mission statement for this request.
+     *
+     * @return array|string
+     */
+    public function getStatement()
+    {
+        return $this->input('statement');
+    }
+
+    /**
+     * Helper to get the tab title for this request.
+     *
+     * @return array|string
+     */
+    public function getTabTitle()
+    {
+        return $this->input('tab-title');
+    }
+
+    /**
+     * Helper to get the tab body for this request.
+     *
+     * @return array|string
+     */
+    public function getTabBody()
+    {
+        return $this->input('tab-body');
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -57,7 +87,11 @@ class CreateProjectRequest extends Request
             'title' => 'required|unique:projects|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('title'),
             'description' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('description'),
             'project-body' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('project-body'),
-            'thumbnail' => 'required|image|max:2048'    // max image size 2mb
+            'thumbnail' => 'required|image|max:2048',    // max image size 2mb
+            'statement' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('statement'),
+            'tab-title' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('tab-title'),
+            'tab-body' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('tab-body'),
+            'banner' => 'required|image|max:2048',    // max image size 2mb
         ];
     }
 
@@ -96,6 +130,18 @@ class CreateProjectRequest extends Request
             'thumbnail.required' => 'An image for the project is required.',
             'thumbnail.max' => 'The file is larger than .',
             'thumbnail.image' => 'File is not an image.',
+
+            'statement.required' => 'A mission statement is required.' ,
+            'statement.between' => 'Mission statement must be between :min and :max characters.',
+            'statement.regex' => 'The :attribute must contain at least one letter/number.',
+
+            'tab-title.required' => 'A tab title is required.' ,
+            'tab-title.between' => 'Tab title must be between :min and :max characters.',
+            'tab-title.regex' => 'The :attribute must contain at least one letter/number.',
+
+            'tab-body.required' => 'A tab body is required.' ,
+            'tab-body.between' => 'Tab body must be between :min and :max characters.',
+            'tab-body.regex' => 'The :attribute must contain at least one letter/number.',
         ];
     }
 }

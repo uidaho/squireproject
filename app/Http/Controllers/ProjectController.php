@@ -71,10 +71,16 @@ class ProjectController extends Controller
             'title'  => $request->getTitle(),
             'description' => $request->getDescription(),
             'body' => $request->getBody(),
+            'statement' => $request->getStatement(),
+            'tab_title' => $request->getTabTitle(),
+            'tab_body' => $request->getTabBody(),
         ]);
 
         $thumbnail = $request->file('thumbnail');
         $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
+
+        $banner = $request->file('banner');
+        $banner->move(base_path() . '/public/images/projects',  'banner' . $newEntry->id . '.jpg');
 
         //Add creator as a member and make admin of the project
         $newEntry->addMember(true);

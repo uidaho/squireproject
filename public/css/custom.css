@@ -165,6 +165,18 @@ Project Members Page Left Column
     min-height: 150px;
 }
 
+.r-admin-list-creator p
+{
+    display: inline-block;
+}
+
+.r-username
+{
+    padding: 0 15px 0 15px;
+    font-weight: 400;
+    font-size: 15px;
+}
+
 .r-description h4
 {
     display: inline-block;
@@ -185,17 +197,10 @@ Project Members Page Left Column
     padding: 0 15px 0 15px;
 }
 
-.r-member-stats h6
+.r-member-stats p
 {
     margin: 0 0 20px 20px;
     font-weight: 400;
-}
-
-.r-admin-list h6
-{
-    margin: 0 0 0 20px;
-    font-weight: 400;
-    font-size: 15px;
 }
 
 /*
@@ -246,4 +251,26 @@ Project Members Page Edit
     margin-bottom: 15px;
     max-height: 30px;
     overflow: hidden;
+}
+
+/*
+======================================
+Project Creation Page
+======================================
+*/
+
+.r-legend-sub
+{
+    font-size: 20px;
+    margin: 0 0 10px 25px;
+}
+
+.r-legend-sub small
+{
+    font-size: 12px;
+}
+
+.r-create-buttons
+{
+    margin-left: 17%;
 }

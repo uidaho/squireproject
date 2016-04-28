@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Project extends Model
 {
     protected $fillable = [
-        'title', 'author', 'user_id', 'description', 'body', 'created_at', 'updated_at'
+        'title', 'author', 'user_id', 'description', 'body', 'statement', 'tab_title', 'tab_body', 'created_at', 'updated_at'
     ];
 
     protected $perPage = 16;
@@ -70,13 +70,23 @@ class Project extends Model
     }
 
     /**
-     * Get the path to the image for this project.
+     * Get the path to the project main image for this project.
      *
      * @return string the path
      */
-    public function getImagePath()
+    public function getProjectImagePath()
     {
         return '/images/projects/product' . $this->id . '.jpg';
+    }
+
+    /**
+     * Get the path to the banner image for this project.
+     *
+     * @return string the path
+     */
+    public function getBannerImagePath()
+    {
+        return '/images/projects/banner' . $this->id . '.jpg';
     }
 
     /**
@@ -89,7 +99,7 @@ class Project extends Model
     {
         $res = parent::delete();
 
-        $imagePath = base_path() . '/public' .$this->getImagePath();
+        $imagePath = base_path() . '/public' .$this->getProjectImagePath();
         if (file_exists($imagePath)) {  // Shouldn't be null, let's check for sanity
             unlink($imagePath);
         }
@@ -121,7 +131,10 @@ class Project extends Model
         return [
             'title' => Project::minMaxHelper(2, 32),
             'description' => Project::minMaxHelper(10, 75),
-            'project-body' => Project::minMaxHelper(100, 65535)
+            'project-body' => Project::minMaxHelper(100, 65535),
+            'statement' => Project::minMaxHelper(10, 75),
+            'tab-title' => Project::minMaxHelper(2, 32),
+            'tab-body' => Project::minMaxHelper(100, 65535)
         ];
     }
 
@@ -245,7 +258,7 @@ class Project extends Model
      */
     public function getMemberCount()
     {
-        return count($this->members());
+        return count($this->members);
     }
 
     /**

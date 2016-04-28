@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="">
-                    <img class="center-block r-image-restraint" src="{{ $project->getImagePath() }}" alt="Project Image">
+                    <img class="center-block r-image-restraint" src="{{ $project->getProjectImagePath() }}" alt="Project Image">
                 </div>
             </div>
         </div>

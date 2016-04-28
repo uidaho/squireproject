@@ -73,7 +73,7 @@
                     <a href="{{ $project->getSlug() }}" class="project-link">
                         <div class="panel-body r-small">
                             <div class="fallback-image">
-                                <div class="project-image" style="background-image: url({{ $project->getImagePath() }});"></div>
+                                <div class="project-image" style="background-image: url({{ $project->getProjectImagePath() }});"></div>
                             </div>
                             <hr>
                             <span class="r-members">Members: {{ $project->getMemberCount() }}</span>

@@ -7,7 +7,7 @@
 @section('mainBody')
 
     <section class="r-banner">
-        <img class="" src="/images/banners/test-banner.jpg" alt="Project Image">
+        <img class="" src="{{ $project->getBannerImagePath() }}" alt="Project Image">
         <button name="" type="submit" class="btn btn-default admin-only" value="Edit">Edit</button>
     </section>
 
@@ -63,26 +63,27 @@
                     <h4>Mission Statement</h4>
                     <button name="" type="submit" class="btn btn-xs btn-default admin-only" value="Edit">Edit</button>
                     <!-- Todo display actual user input here -->
-                    <p>{{ $project->description }}</p>
+                    <p>{{ $project->statement }}</p>
                 </div>
 
                 <!-- Member Statistics -->
                 <div class="well r-member-stats">
                     <h4>Member Statistics</h4>
-                    <h6>Members: {{ $project->getMemberCount() }}</h6>
+                    <p>Members: {{ $project->getMemberCount() }}</p>
                     <!-- Todo get admins count -->
-                    <h6>Admins: {{ $project->getAdminCount() }}</h6>
+                    <p>Admins: {{ $project->getAdminCount() }}</p>
                 </div>
 
                 <!-- Admins List -->
                 <div class="well r-admin-list">
                     <h4>Admins</h4>
-                    <!-- Todo display project owner's username -->
-                    <h6 class="r-inline"><a href="">{{ $project->author }}</a></h6>
-                    <p class="r-inline">Creator</p>
+                    <div class="r-admin-list-creator">
+                        <p class="r-username"><a href="">{{ $project->author }}</a></p>
+                        <p>Creator</p>
+                    </div>
                     @foreach($project->getAdmins() as $admin)
                         @if ($admin->user->id != $project->user->id)
-                            <h6><a href="">{{ $admin->user->username }}</a></h6>
+                            <p class="r-username"><a href="">{{ $admin->user->username }}</a></p>
                         @endif
                     @endforeach
                 </div>
@@ -94,7 +95,7 @@
 
                 <!-- Tab Header -->
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#welcome" data-toggle="tab" aria-expanded="true">Welcome</a></li>
+                    <li class="active"><a href="#custom-tab" data-toggle="tab" aria-expanded="true">{{ $project->tab_title }}</a></li>
                     <li class=""><a href="#members" data-toggle="tab" aria-expanded="false">Members</a></li>
                     <li class=""><a href="#files" data-toggle="tab" aria-expanded="false">Files</a></li>
                 </ul>
@@ -102,15 +103,13 @@
                 <!-- Tab Container -->
                 <div class="tab-content r-tab-body">
 
-                    <!-- Welcome Tab -->
-                    <section class="tab-pane fade active in" id="welcome">
-                        <!-- Todo get user defined title -->
+                    <!-- Custom User Tab -->
+                    <section class="tab-pane fade active in" id="custom-tab">
                         <div class="r-edit-container">
-                            <h1>Welcome</h1>
+                            <h1>{{ $project->tab_title }}</h1>
                             <button name="" type="submit" class="btn btn-xs btn-default admin-only" value="Edit">Edit</button>
                         </div>
-                        <!-- Todo get body text -->
-                        <p></p>
+                        <p>{{ $project->tab_body }}</p>
                     </section>
 
                     <!-- Members Tab -->
