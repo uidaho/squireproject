@@ -16,6 +16,7 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('author');
+            $table->integer('user_id')->unsigned()->index();
             $table->string('description');
             $table->text('body');
             $table->timestamps();

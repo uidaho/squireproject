@@ -78,12 +78,11 @@
                 <div class="well r-admin-list">
                     <h4>Admins</h4>
                     <!-- Todo display project owner's username -->
-                    <h6 class="r-inline"><a href="">{{ $project->author }}</a></h6><!--
-                    --><p class="r-inline">Creator</p>
-                    <!-- Todo display projects admin's usernames -->
+                    <h6 class="r-inline"><a href="">{{ $project->author }}</a></h6>
+                    <p class="r-inline">Creator</p>
                     @foreach($project->getAdmins() as $admin)
-                        @if ($admin->user->id != $project->user)
-                            <h6><a href="">{{ $admin->user->id }}{{ $admin->user->username }}</a></h6>
+                        @if ($admin->user->id != $project->user->id)
+                            <h6><a href="">{{ $admin->user->username }}</a></h6>
                         @endif
                     @endforeach
                 </div>

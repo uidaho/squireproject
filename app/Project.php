@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Project extends Model
 {
     protected $fillable = [
-        'title', 'author', 'description', 'body', 'created_at', 'updated_at'
+        'title', 'author', 'user_id', 'description', 'body', 'created_at', 'updated_at'
     ];
 
     protected $perPage = 16;
@@ -132,6 +132,12 @@ class Project extends Model
         ];
     }
 
+    //Lets Laravel know the comment belongs to a user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     //Used for fetching the project's comments
     public function comments()
     {
@@ -142,12 +148,6 @@ class Project extends Model
     {
         $comment->user_id = Auth::id();
         return $this->comments()->save($comment);
-    }
-
-    //Lets Laravel know the project belongs to a user
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
     /**

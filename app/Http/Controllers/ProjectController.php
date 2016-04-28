@@ -67,9 +67,10 @@ class ProjectController extends Controller
     {
         $newEntry = Project::create([
             'author' => Auth::user()->username,
+            'user_id' => Auth::user()->id,
             'title'  => $request->getTitle(),
             'description' => $request->getDescription(),
-            'body' => $request->getBody()
+            'body' => $request->getBody(),
         ]);
 
         $thumbnail = $request->file('thumbnail');
