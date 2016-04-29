@@ -24,6 +24,22 @@ class ProjectMembersPolicy
     }
 
     /**
+     * Determine if the given user is not an admin of the project
+     *
+     * @param  User $user
+     * @param  Project $project
+     * @param  ProjectMember $member
+     * @return bool
+     */
+    public function userIsNotAdmin(User $user, Project $project, ProjectMember $member = null)
+    {
+        if ($member != null)
+            $user = $member->user;
+
+        return $project->isUserMember($user->id) && !$project->isProjectAdmin($user->id);
+    }
+
+    /**
      * Determine if the given user is the owner of the given project
      *
      * @param  User $user
@@ -40,11 +56,30 @@ class ProjectMembersPolicy
      *
      * @param  User $user
      * @param  Project $project
+     * @param  ProjectMember $member
      * @return bool
      */
-    public function userIsMember(User $user, Project $project)
+    public function userIsMember(User $user, Project $project, ProjectMember $member = null)
     {
+        if ($member != null)
+            $user = $member->user;
+
         return $project->isUserMember($user->id);
+    }
+
+    /**
+     * Determine if the given user has appropriate privileges to add or deny a user from a project
+     * Checks if the user making the request is a admin for the project and the user being added or denied is actually requesting access to the project
+     *
+     * @param  User $user
+     * @param  Project $project
+     * @param  $userID
+     * @return bool
+     */
+    public function authToAddDeny(User $user, Project $project, $userID)
+    {
+
+        return $project->isProjectAdmin($user->id) && $project->isMembershipPending($userID);
     }
 
     /**

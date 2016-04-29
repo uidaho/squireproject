@@ -78,7 +78,11 @@ class ProjectController extends Controller
         $thumbnail = $request->file('thumbnail');
         $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
-        //Todo set banner image
+        //Sets banner image to a random pre-made banner
+        $images = glob("images/banners/*");
+        $imagePath = 'images/projects/' . 'banner' . $newEntry->id . '.jpg';
+        $rand = random_int(0, count($images) - 1);
+        \File::copy($images[$rand], $imagePath);
 
         //Add creator as a member and make admin of the project
         $newEntry->addMember(true);

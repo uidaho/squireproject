@@ -41,11 +41,7 @@ class ProjectMembersController extends Controller
      */
     public function acceptMembershipRequest(Project $project, User $user)
     {
-        //Todo verify member is requesting access to be a member
-        $this->authorize('userIsAdmin', $project);
-
-        if (Auth::guest() || !$project->isProjectAdmin())
-            return abort(403);
+        $this->authorize('authToAddDeny', [$project, $user->id]);
 
         $project->addMember(false, $user->id);
         $project->deleteMembershipRequest($user->id);
@@ -63,11 +59,7 @@ class ProjectMembersController extends Controller
      */
     public function denyMembershipRequest(Project $project, User $user)
     {
-        //Todo verify member is requesting to be a member
-        $this->authorize('userIsAdmin', $project);
-
-        if (Auth::guest())
-            return abort(403);
+        $this->authorize('authToAddDeny', [$project, $user->id]);
 
         $project->deleteMembershipRequest($user->id);
         //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
@@ -84,8 +76,8 @@ class ProjectMembersController extends Controller
      */
     public function promoteToAdmin(Project $project, ProjectMember $member)
     {
-        //Todo verify member is a member and not an admin
         $this->authorize('userIsAdmin', $project);
+        $this->authorize('userIsNotAdmin', [$project, $member]);
 
         $member->admin = true;
         $member->save();
@@ -102,8 +94,8 @@ class ProjectMembersController extends Controller
      */
     public function demoteFromAdmin(Project $project, ProjectMember $member)
     {
-        //Todo maybe verify member is member of project
         $this->authorize('userIsOwner', $project);
+        $this->authorize('userIsMember', [$project, $member]);
 
         $member->admin = false;
         $member->save();
