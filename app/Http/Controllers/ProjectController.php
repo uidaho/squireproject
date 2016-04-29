@@ -82,6 +82,8 @@ class ProjectController extends Controller
 
         //Add creator as a member and make admin of the project
         $newEntry->addMember(true);
+        //Add creator as a follower of the project
+        $newEntry->addFollower();
 
         return redirect('/project/'.$newEntry->title);
     }
