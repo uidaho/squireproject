@@ -44,6 +44,7 @@
                                     <td>
                                         <form action="project/request/denied/{{ $project->getSlugFriendlyTitle() }}/{{ $joinRequest->user->id }}" method="POST">
                                             {!! csrf_field() !!}
+                                            {!! method_field('DELETE') !!}
                                             <button name="request-denied" type="submit" class="btn btn-xxs btn-danger" value="Deny User">
                                                 Deny
                                             </button>
@@ -131,6 +132,8 @@
                                             @if (!$project->isUserAuthor($member) && Auth::user()->id != $member->user_id)
                                                 <form action="/project/kick/{{ $project->title }}/{{ $member->id }}" method="POST">
                                                     {!! csrf_field() !!}
+                                                    {!! method_field('DELETE') !!}
+
                                                     <button name="kick-member" type="submit" class="btn btn-xxs btn-danger pull-right">
                                                         Kick Member
                                                     </button>
@@ -139,6 +142,8 @@
                                             @if (!$member->admin)
                                                 <form action="/project/promote/{{ $project->title }}/{{ $member->id }}" method="POST">
                                                     {!! csrf_field() !!}
+                                                    {!! method_field('PATCH') !!}
+
                                                     <button name="make-admin" type="submit" class="btn btn-xxs btn-primary pull-right">
                                                         Make Admin
                                                     </button>
@@ -147,6 +152,8 @@
                                             @if ($project->isUserAuthor(Auth::user()) && $member->admin && Auth::user()->id != $member->user_id)
                                                 <form action="/project/demote/{{ $project->title }}/{{ $member->id }}" method="POST">
                                                     {!! csrf_field() !!}
+                                                    {!! method_field('PATCH') !!}
+
                                                     <button name="remove-admin" type="submit" class="btn btn-xxs btn-warning pull-right">
                                                         Demote Admin
                                                     </button>

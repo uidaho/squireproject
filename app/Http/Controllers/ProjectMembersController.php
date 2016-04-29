@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Session;
 class ProjectMembersController extends Controller
 {
     /**
-     * Renders the Project Member View for the given project
+     * Renders the Project Member view for the given project
      *
      * @param Project $project
      * @return The project members page view

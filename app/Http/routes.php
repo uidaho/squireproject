@@ -53,10 +53,10 @@ Route::get('project/leave/{project}', 'ProjectController@leaveProject');
  *------------------------------*/
 Route::get('project/private/{project}', 'ProjectMembersController@view');
 Route::post('project/request/accepted/{project}/{user}', 'ProjectMembersController@acceptMembershipRequest');
-Route::post('project/request/denied/{project}/{user}', 'ProjectMembersController@denyMembershipRequest');
-Route::post('project/promote/{project}/{member}', 'ProjectMembersController@promoteToAdmin');
-Route::post('project/demote/{project}/{member}', 'ProjectMembersController@demoteFromAdmin');
-Route::post('project/kick/{project}/{member}', 'ProjectMembersController@kickMember');
+Route::delete('project/request/denied/{project}/{user}', 'ProjectMembersController@denyMembershipRequest');
+Route::patch('project/promote/{project}/{member}', 'ProjectMembersController@promoteToAdmin');
+Route::patch('project/demote/{project}/{member}', 'ProjectMembersController@demoteFromAdmin');
+Route::delete('project/kick/{project}/{member}', 'ProjectMembersController@kickMember');
 Route::patch('project/edit/banner/{project}', 'ProjectMembersController@editBanner');
 Route::patch('project/edit/statement/{project}', 'ProjectMembersController@editStatement');
 Route::patch('project/edit/customtab/{project}', 'ProjectMembersController@editCustomTab');
@@ -95,7 +95,11 @@ Route::get('editor', 'EditorController@index');
 /*-----------------------*
  *  Profile Controller   *
  *-----------------------*/
- 
+ //Replace when profile gets added
+Route::get('profile1', 'ProfileController@view');
+//Change user to profile object
+Route::delete('profile1/delete/{user}', 'ProfileController@deleteUser');
+
  
  /*-----------------------*
   *  Settings Controller  *

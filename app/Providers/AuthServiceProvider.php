@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+//use App\Profile;
+//use App\Policies\ProfilePolicy;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -15,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
         'App\ProjectComment' => 'App\Policies\ProjectCommentPolicy',
+        //Profile::class => ProfilePolicy::class,
     ];
 
     /**
