@@ -117,10 +117,7 @@ class ProjectController extends Controller
      */
     public function follow(Project $project)
     {
-        //Todo verify user isnt already following the project
-
-        if (Auth::guest())
-            return abort(403);
+        $this->authorize('userIsNotFollowing', $project);
 
         $project->addFollower();
         Session::flash('follower_success', 'You are now following this project.');
@@ -136,10 +133,7 @@ class ProjectController extends Controller
      */
     public function unFollow(Project $project)
     {
-        //Todo verify user is a follower of the project
-
-        if (Auth::guest())
-            return abort(403);
+        $this->authorize('userIsFollower', $project);
 
         $project->deleteFollower();
         Session::flash('follower_success', 'You are now not following this project.');
@@ -155,10 +149,7 @@ class ProjectController extends Controller
      */
     public function requestMembership(Project $project)
     {
-        //Todo verify user isnt already a member
-
-        if (Auth::guest())
-            return abort(403);
+        $this->authorize('userIsNotMember', $project);
 
         $project->addMembershipRequest();
         Session::flash('membership_request_success', 'Your request is waiting approval from a project admin.');
@@ -174,10 +165,7 @@ class ProjectController extends Controller
      */
     public function cancelMembershipRequest(Project $project)
     {
-        //Todo verify user has a pending join request
-
-        if (Auth::guest())
-            return abort(403);
+        $this->authorize('verifyPendingRequest', $project);
 
         $project->deleteMembershipRequest();
         Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
@@ -186,17 +174,14 @@ class ProjectController extends Controller
     }
 
     /**
-     * Remove member from project
+     * Remove current user from project
      *
      * @param Project $project
      * @return current view
      */
     public function leaveProject(Project $project)
     {
-        //Todo verify user is already a member of the project
-
-        if (Auth::guest())
-            return abort(403);
+        $this->authorize('userIsMember', $project);
 
         $project->deleteMember();
         Session::flash('member_success', 'You are now not a member of project.');

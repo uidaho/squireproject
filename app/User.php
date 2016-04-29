@@ -20,31 +20,51 @@ class User extends Authenticatable
      */
     protected $hidden = ['password', 'remember_token',];
 
-    //Lets Laravel know the user has many comments
+    /**
+     * Get all comments by this user
+     *
+     * @return comments
+     */
     public function comments()
     {
         return $this->hasMany(ProjectComment::class);
     }
 
-    //Lets Laravel know the user has many projects
+    /**
+     * Get all projects created by this user
+     *
+     * @return projects
+     */
     public function projects()
     {
         return $this->hasMany(Project::class);
     }
 
-    //Lets Laravel know the user has many projects
+    /**
+     * Get all memberships to projects by this user
+     *
+     * @return members
+     */
     public function projectMemberships()
     {
         return $this->hasMany(ProjectMember::class);
     }
 
-    //Lets Laravel know the user has many projects
+    /**
+     * Get the membership requests by this user
+     *
+     * @return requests
+     */
     public function projectRequests()
     {
         return $this->hasMany(ProjectRequest::class);
     }
 
-    //Lets Laravel know the user has many projects
+    /**
+     * Get all follows by this user
+     *
+     * @return followers
+     */
     public function projectFollows()
     {
         return $this->hasMany(ProjectFollower::class);
@@ -53,8 +73,6 @@ class User extends Authenticatable
     /**
      * Deletes everything connected to this user
      *
-     * @param
-     * @return
      */
     public function deleteUser()
     {

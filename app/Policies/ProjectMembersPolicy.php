@@ -68,6 +68,55 @@ class ProjectMembersPolicy
     }
 
     /**
+     * Determine if the given user is not a member of the given project
+     *
+     * @param  User $user
+     * @param  Project $project
+     * @return bool
+     */
+    public function userIsNotMember(User $user, Project $project)
+    {
+
+        return !$project->isUserMember($user->id);
+    }
+
+    /**
+     * Determine if the given user is a follower of the given project
+     *
+     * @param  User $user
+     * @param  Project $project
+     * @return bool
+     */
+    public function userIsFollower(User $user, Project $project)
+    {
+        return $project->isUserFollower($user->id);
+    }
+
+    /**
+     * Determine if the given user is not a follower of the given project
+     *
+     * @param  User $user
+     * @param  Project $project
+     * @return bool
+     */
+    public function userIsNotFollower(User $user, Project $project)
+    {
+        return !$project->isUserFollower($user->id);
+    }
+
+    /**
+     * Determine if the given user has a pending request to join the project given project
+     *
+     * @param  User $user
+     * @param  Project $project
+     * @return bool
+     */
+    public function verifyPendingRequest(User $user, Project $project)
+    {
+        return $project->isMembershipPending($user->id);
+    }
+
+    /**
      * Determine if the given user has appropriate privileges to add or deny a user from a project
      * Checks if the user making the request is a admin for the project and the user being added or denied is actually requesting access to the project
      *

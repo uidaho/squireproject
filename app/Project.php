@@ -142,18 +142,32 @@ class Project extends Model
         ];
     }
 
-    //Lets Laravel know the comment belongs to a user
+    /**
+     * Get the user of this project
+     *
+     * @return user
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    //Used for fetching the project's comments
+    /**
+     * Get the comments of this project
+     *
+     * @return comments
+     */
     public function comments()
     {
         return $this->hasMany(ProjectComment::class);
     }
-    //Adds a comment to the project
+
+    /**
+     * Create a new comment for this project
+     *
+     * @param ProjectComment $comment
+     * @return new comment
+     */
     public function addComment(ProjectComment $comment)
     {
         $comment->user_id = Auth::id();
@@ -161,9 +175,9 @@ class Project extends Model
     }
 
     /**
+     * Get the followers of this project
      *
-     *
-     * @return 
+     * @return followers
      */
     public function followers()
     {
@@ -171,9 +185,9 @@ class Project extends Model
     }
 
     /**
+     * Gets the requests for this project
      *
-     *
-     * @return
+     * @return requests
      */
     public function requests()
     {
@@ -181,9 +195,9 @@ class Project extends Model
     }
 
     /**
+     * Gets members connected to this project
      *
-     *
-     * @return
+     * @return members
      */
     public function members()
     {
@@ -193,7 +207,7 @@ class Project extends Model
     /**
      * Get the count of followers for the project
      *
-     * @return
+     * @return int follower count
      */
     public function getFollowerCount()
     {
@@ -203,12 +217,11 @@ class Project extends Model
     /**
      * Check if user is a follower of this project
      *
-     * @return
+     * @param Int $user_id
+     * @return boolean
      */
     public function isUserFollower($user_id = null)
     {
-        //Todo authentication checking
-
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -218,12 +231,11 @@ class Project extends Model
     /**
      * Adds a follower to the project
      *
-     * @return
+     * @param Int user_id
+     * @return new follower object
      */
     public function addFollower($user_id = null)
     {
-        //Todo authentication checking
-
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -238,7 +250,7 @@ class Project extends Model
     /**
      * Deletes a follower from the project
      *
-     * @return
+     *  @param Int user_id
      */
     public function deleteFollower($user_id = null)
     {
@@ -251,7 +263,7 @@ class Project extends Model
     /**
      * Get the count of followers for the project
      *
-     * @return
+     * @return count of members
      */
     public function getMemberCount()
     {
@@ -261,12 +273,12 @@ class Project extends Model
     /**
      * Adds a member to the project
      *
-     * @return
+     * @param boolean $admin
+     * @param Int user_id
+     * @return new member
      */
     public function addMember($admin = false, $user_id = null)
     {
-        //Todo authentication checking
-
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -282,12 +294,10 @@ class Project extends Model
     /**
      * Deletes a member from the project
      *
-     * @return
+     * @param Int $user_id
      */
     public function deleteMember($user_id = null)
     {
-        //Todo authentication checking
-
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -297,12 +307,10 @@ class Project extends Model
     /**
      * Check if user is a member of this project
      *
-     * @return
+     * @return boolean
      */
     public function isUserMember($user_id = null)
     {
-        //Todo authentication checking
-
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -310,14 +318,12 @@ class Project extends Model
     }
 
     /**
-     * Adds a follower to the project
+     * Adds a membership request by the given user to this project
      *
-     * @return
+     * @return new request
      */
     public function addMembershipRequest($user_id = null)
     {
-        //Todo authentication checking
-
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -330,14 +336,12 @@ class Project extends Model
     }
 
     /**
-     * Check if user is a follower of this project
+     * Check if a given user has a membership request pending for this project
      *
-     * @return
+     * @return boolean
      */
     public function isMembershipPending($user_id = null)
     {
-        //Todo authentication checking
-
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
@@ -345,13 +349,11 @@ class Project extends Model
     }
 
     /**
-     * Deletes a follower to the project
+     * Deletes a membership request to this project
      *
-     * @return
      */
     public function deleteMembershipRequest($user_id = null)
     {
-        //Todo authentication checking
         //Todo send email to denied user
 
         if ($user_id == null)
@@ -363,7 +365,7 @@ class Project extends Model
     /**
      * Gets all admins of this project
      *
-     * @return
+     * @return admins
      */
     public function getAdmins()
     {
@@ -373,14 +375,12 @@ class Project extends Model
     /**
      * Check if user is an admin of this project
      *
-     * @return
+     * @return boolean
      */
     public function isProjectAdmin($user_id = null)
     {
         if ($user_id == null)
             $user_id = Auth::user()->id;
-
-        //Todo authentication checking
 
         return $this->members()->where('user_id', $user_id)->first()->admin;
     }
@@ -388,7 +388,7 @@ class Project extends Model
     /**
      * Get the count of admins for the project
      *
-     * @return
+     * @return int admin count
      */
     public function getAdminCount()
     {
