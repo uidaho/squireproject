@@ -43,7 +43,7 @@ class StatementRequest extends Request
     public function rules()
     {
         return [
-            'statement-title' => 'min:1|max:20|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
+            'statement-title' => 'required|min:1|max:20|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
             'statement-body' => 'max:100|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
         ];
     }

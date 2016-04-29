@@ -19,7 +19,7 @@
 
             <label for="statement-body" class="col-lg-2 control-label">Body Text</label>
             <div class="col-lg-10">
-                <input class="form-control" type="text" id="statement-body" name="statement-body" rows="10" value="{{old('statement_body')}}">
+                <textarea class="form-control" id="statement-body" name="statement-body" rows="5">{{old('statement_body')}}</textarea>
             </div>
 
             @if ($errors->has('statement_body'))

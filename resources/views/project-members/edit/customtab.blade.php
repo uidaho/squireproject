@@ -19,7 +19,7 @@
 
             <label for="tab-body" class="col-lg-2 control-label">Body Text</label>
             <div class="col-lg-10">
-                <input class="form-control" type="text" id="tab-body" name="tab-body" rows="10" value="{{old('tab_body')}}">
+                <textarea class="form-control" id="tab-body" name="tab-body" rows="10">{{old('tab_body')}}</textarea>
             </div>
 
             @if ($errors->has('tab_body'))

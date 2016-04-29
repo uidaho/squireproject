@@ -314,6 +314,11 @@ Project Members Modal
     padding: 10px 0 0 25px;
 }
 
+.r-modal-input textarea
+{
+    margin-top: 20px;
+}
+
 .r-modal-buttons
 {
     padding: 20px 0 0 25px;

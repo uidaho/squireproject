@@ -43,7 +43,7 @@ class CustomTabRequest extends Request
     public function rules()
     {
         return [
-            'tab-title' => 'min:1|max:20|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
+            'tab-title' => 'required|min:1|max:20|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
             'tab-body' => 'max:65000|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
         ];
     }

@@ -24,7 +24,7 @@ class ProjectMembersController extends Controller
      */
     public function view(Project $project)
     {
-        //Todo verify user is a member of the project
+        $this->authorize('userIsMember', $project);
 
         $userid = Auth::user()->id;
         $files = File::forProject($project)->get();
@@ -35,12 +35,14 @@ class ProjectMembersController extends Controller
     /**
      * Add a user to this project
      *
-     * @param Project $project, User $user
+     * @param Project $project
+     * @param User $user
      * @return current view
      */
     public function acceptMembershipRequest(Project $project, User $user)
     {
-        //Todo verify user is an admin and can add users to the project
+        //Todo verify member is requesting access to be a member
+        $this->authorize('userIsAdmin', $project);
 
         if (Auth::guest() || !$project->isProjectAdmin())
             return abort(403);
@@ -55,12 +57,14 @@ class ProjectMembersController extends Controller
     /**
      * Deny a users request to join this project
      *
-     * @param Project $project, User $user
+     * @param Project $project
+     * @param User $user
      * @return current view
      */
     public function denyMembershipRequest(Project $project, User $user)
     {
-        //Todo verify user is an admin and can deny others
+        //Todo verify member is requesting to be a member
+        $this->authorize('userIsAdmin', $project);
 
         if (Auth::guest())
             return abort(403);
@@ -72,14 +76,16 @@ class ProjectMembersController extends Controller
     }
 
     /**
+     * Promote the given user to admin
      *
-     *
-     * @param
-     * @return
+     * @param Project $project
+     * @param ProjectMember $member
+     * @return current view
      */
     public function promoteToAdmin(Project $project, ProjectMember $member)
     {
-        //Todo verify user is an admin and can promote others
+        //Todo verify member is a member and not an admin
+        $this->authorize('userIsAdmin', $project);
 
         $member->admin = true;
         $member->save();
@@ -88,14 +94,16 @@ class ProjectMembersController extends Controller
     }
 
     /**
+     * Demote the given admin to member
      *
-     *
-     * @param
-     * @return
+     * @param Project $project
+     * @param ProjectMember $member
+     * @return current view
      */
     public function demoteFromAdmin(Project $project, ProjectMember $member)
     {
-        //Todo verify user is the owner of the project
+        //Todo maybe verify member is member of project
+        $this->authorize('userIsOwner', $project);
 
         $member->admin = false;
         $member->save();
@@ -106,15 +114,13 @@ class ProjectMembersController extends Controller
     /**
      * Kick member from project
      *
-     * @param Project $project, User $user
+     * @param Project $project
+     * @param ProjectMember $member
      * @return current view
      */
     public function kickMember(Project $project, ProjectMember $member)
     {
-        //Todo verify user is an admin and can promote others and the member is not a admin or owner
-
-        if (Auth::guest())
-            return abort(403);
+        $this->authorize('authToKick', [$project, $member]);
 
         $project->deleteMember($member->user_id);
         //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
@@ -125,12 +131,13 @@ class ProjectMembersController extends Controller
     /**
      * Updates the banner with the one supplied by the user
      *
-     * @param BannerRequest $request, Project $project
+     * @param BannerRequest $request
+     * @param Project $project
      * @return current view
      */
     public function editBanner(BannerRequest $request, Project $project)
     {
-        //Todo verify user is an admin
+        $this->authorize('userIsAdmin', $project);
 
         $banner = $request->file('banner');
         $banner->move(base_path() . '/public/images/projects',  'banner' . $project->id . '.jpg');
@@ -141,12 +148,13 @@ class ProjectMembersController extends Controller
     /**
      * Updates the statement title and body with what the user supplied
      *
-     * @param StatementRequest $request, Project $project
+     * @param StatementRequest $request
+     * @param Project $project
      * @return current view
      */
     public function editStatement(StatementRequest $request, Project $project)
     {
-        //Todo verify user is an admin
+        $this->authorize('userIsAdmin', $project);
 
         $project->statement_title = $request->getStatementTitle();
         $project->statement_body = $request->getStatementBody();
@@ -158,12 +166,13 @@ class ProjectMembersController extends Controller
     /**
      * Updates the custom tab title and body with what the user supplied
      *
-     * @param CustomTabRequest $request, Project $project
+     * @param CustomTabRequest $request
+     * @param Project $project
      * @return current view
      */
     public function editCustomTab(CustomTabRequest $request, Project $project)
     {
-        //Todo verify user is an admin
+        $this->authorize('userIsAdmin', $project);
 
         $project->tab_title = $request->getTabTitle();
         $project->tab_body = $request->getTabBody();
