@@ -197,7 +197,7 @@ class Project extends Model
      */
     public function getFollowerCount()
     {
-        return count($this->followers());
+        return count($this->followers);
     }
 
     /**
@@ -353,6 +353,9 @@ class Project extends Model
     {
         //Todo authentication checking
         //Todo send email to denied user
+
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
 
         $this->requests()->where('user_id', $user_id)->first()->delete();
     }

@@ -5,13 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
 use App\Http\Requests\ProjectListRequest;
-use App\Http\Requests\BannerRequest;
-use App\Http\Requests\StatementRequest;
-use App\Http\Requests\CustomTabRequest;
 use App\Project;
-use App\User;
-use App\File;
-use App\ProjectMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -115,8 +109,10 @@ class ProjectController extends Controller
      * @param Project $project
      * @return current view
      */
-    public function addFollower(Project $project)
+    public function follow(Project $project)
     {
+        //Todo verify user isnt already following the project
+
         if (Auth::guest())
             return abort(403);
 
@@ -132,8 +128,10 @@ class ProjectController extends Controller
      * @param Project $project
      * @return current view
      */
-    public function removeFollower(Project $project)
+    public function unFollow(Project $project)
     {
+        //Todo verify user is a follower of the project
+
         if (Auth::guest())
             return abort(403);
 
@@ -144,30 +142,15 @@ class ProjectController extends Controller
     }
 
     /**
-     * Remove a follower from this project
-     *
-     * @param Project $project
-     * @return current view
-     */
-    public function removeMember(Project $project)
-    {
-        if (Auth::guest())
-            return abort(403);
-
-        $project->deleteMember();
-        Session::flash('member_success', 'You are now not a member of project.');
-
-        return back();
-    }
-
-    /**
-     * Add a follower to the project
+     * Put a request in to join the project
      *
      * @param Project $project
      * @return current view
      */
     public function requestMembership(Project $project)
     {
+        //Todo verify user isnt already a member
+
         if (Auth::guest())
             return abort(403);
 
@@ -178,13 +161,15 @@ class ProjectController extends Controller
     }
 
     /**
-     * Remove a follower from this project
+     * Cancel request to join project
      *
      * @param Project $project
      * @return current view
      */
-    public function removeMembershipRequest(Project $project)
+    public function cancelMembershipRequest(Project $project)
     {
+        //Todo verify user has a pending join request
+
         if (Auth::guest())
             return abort(403);
 
@@ -195,122 +180,20 @@ class ProjectController extends Controller
     }
 
     /**
-     * Remove a follower from this project
+     * Remove member from project
      *
      * @param Project $project
      * @return current view
      */
-    public function acceptMembershipRequest(Project $project, User $user)
+    public function leaveProject(Project $project)
     {
-        if (Auth::guest() || !$project->isProjectAdmin())
-            return abort(403);
+        //Todo verify user is already a member of the project
 
-        $project->addMember(false, $user->id);
-        $project->deleteMembershipRequest($user->id);
-        //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
-
-        return back();
-    }
-
-    /**
-     * Remove a follower from this project
-     *
-     * @param Project $project
-     * @return current view
-     */
-    public function denyMembershipRequest(Project $project, User $user)
-    {
         if (Auth::guest())
             return abort(403);
 
-        $project->deleteMembershipRequest($user->id);
-        //Session::flash('membership_request_success', 'You are no longer requesting membership to this project.');
-
-        return back();
-    }
-
-    /**
-     *
-     *
-     * @param
-     * @return
-     */
-    public function membersHome(Project $project)
-    {
-        $userid = Auth::user()->id;
-        $files = File::forProject($project)->get();
-
-        return view('project-members.view', ['project' => $project, 'files' => $files, 'userid' => $userid]);
-    }
-
-    /**
-     *
-     *
-     * @param
-     * @return
-     */
-    public function promoteToAdmin(Project $project, ProjectMember $member)
-    {
-        $member->admin = true;
-        $member->save();
-
-        return back();
-    }
-
-    /**
-     *
-     *
-     * @param
-     * @return
-     */
-    public function demoteFromAdmin(Project $project, ProjectMember $member)
-    {
-        $member->admin = false;
-        $member->save();
-
-        return back();
-    }
-
-    /**
-     * Creates a new project using the input from the form
-     *
-     * @param CreateProjectRequest $request The validated request
-     * @return mixed
-     */
-    public function editBanner(BannerRequest $request, Project $project)
-    {
-        $banner = $request->file('banner');
-        $banner->move(base_path() . '/public/images/projects',  'banner' . $project->id . '.jpg');
-
-        return back();
-    }
-
-    /**
-     * Creates a new project using the input from the form
-     *
-     * @param CreateProjectRequest $request The validated request
-     * @return mixed
-     */
-    public function editStatement(StatementRequest $request, Project $project)
-    {
-        $project->statement_title = $request->getStatementTitle();
-        $project->statement_body = $request->getStatementBody();
-        $project->save();
-
-        return back();
-    }
-
-    /**
-     * Creates a new project using the input from the form
-     *
-     * @param CreateProjectRequest $request The validated request
-     * @return mixed
-     */
-    public function editCustomTab(CustomTabRequest $request, Project $project)
-    {
-        $project->tab_title = $request->getTabTitle();
-        $project->tab_body = $request->getTabBody();
-        $project->save();
+        $project->deleteMember();
+        Session::flash('member_success', 'You are now not a member of project.');
 
         return back();
     }

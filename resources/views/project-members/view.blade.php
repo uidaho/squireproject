@@ -116,8 +116,8 @@
                     </section>
 
                     <!-- Members Tab -->
-                    <section class="col-md-3 tab-pane fade" id="members">
-                        <table class="table table-striped table-hover r-member-table">
+                    <section class="tab-pane fade r-tab-inside-body" id="members">
+                        <table class="table table-striped table-hover">
                             <thead>
                                 <h1>Members</h1>
                             </thead>
@@ -128,19 +128,27 @@
                                     <td><a href="">{{ $member->user->username }}</a></td>
                                     @if ($project->isProjectAdmin())
                                         <td>
-                                            @if (!$member->admin)
-                                                <form action="/project/promote/{{ $project->getSlugFriendlyTitle() }}/{{ $member->id }}" method="POST">
+                                            @if (!$project->isUserAuthor($member) && Auth::user()->id != $member->user_id)
+                                                <form action="/project/kick/{{ $project->title }}/{{ $member->id }}" method="POST">
                                                     {!! csrf_field() !!}
-                                                    <button name="make-admin" type="submit" class="btn btn-xxs btn-primary pull-right" value="make-admin">
+                                                    <button name="kick-member" type="submit" class="btn btn-xxs btn-danger pull-right">
+                                                        Kick Member
+                                                    </button>
+                                                </form>
+                                            @endif
+                                            @if (!$member->admin)
+                                                <form action="/project/promote/{{ $project->title }}/{{ $member->id }}" method="POST">
+                                                    {!! csrf_field() !!}
+                                                    <button name="make-admin" type="submit" class="btn btn-xxs btn-primary pull-right">
                                                         Make Admin
                                                     </button>
                                                 </form>
                                             @endif
                                             @if ($project->isUserAuthor(Auth::user()) && $member->admin && Auth::user()->id != $member->user_id)
-                                                <form action="/project/demote/{{ $project->getSlugFriendlyTitle() }}/{{ $member->id }}" method="POST">
+                                                <form action="/project/demote/{{ $project->title }}/{{ $member->id }}" method="POST">
                                                     {!! csrf_field() !!}
-                                                    <button name="remove-admin" type="submit" class="btn btn-xxs btn-danger pull-right" value="remove-admin">
-                                                        Remove Admin
+                                                    <button name="remove-admin" type="submit" class="btn btn-xxs btn-warning pull-right">
+                                                        Demote Admin
                                                     </button>
                                                 </form>
                                             @endif
@@ -153,7 +161,25 @@
                     </section>
 
                     <!-- Files Tab -->
-                    <section class="tab-pane fade" id="files">
+                    <section class="tab-pane fade r-tab-inside-body" id="files">
+                        <div class="r-files-nav">
+                            <!-- Search Bar -->
+                            <form class="navbar-form navbar-right" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
+                            <!-- Toolbar -->
+                            <div class="btn-toolbar" role="toolbar" aria-label="File list toolbar">
+                                <div class="btn-group" role="group" aria-label="File command group">
+                                    <a href="/editor/create/{{ $project->title }}" class="btn btn-default btn-sm">
+                                        <em class="glyphicon glyphicon-plus"></em> Create
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Files -->
                         @include('editor.filelist')
                     </section>
 

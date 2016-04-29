@@ -28,25 +28,25 @@
                         @if (Auth::check() && Auth::user()->username != $project->author)
 
                             @if ($project->isUserMember())
-                                <form class="r-inline" action="/project/leave/{{ $project->getSlugFriendlyTitle() }}" method="GET">
+                                <form class="r-inline" action="/project/leave/{{ $project->title }}" method="GET">
                                     <button name="member-remove" class="btn btn-danger">Leave Project</button>
                                 </form>
                             @elseif ($project->isMembershipPending())
-                                <form class="r-inline" action="/project/request/cancel/{{ $project->getSlugFriendlyTitle() }}" method="GET">
+                                <form class="r-inline" action="/project/request/cancel/{{ $project->title }}" method="GET">
                                     <button name="member-add" class="btn btn-warning">Cancel Join Request</button>
                                 </form>
                             @else
-                                <form class="r-inline" action="/project/request/join/{{ $project->getSlugFriendlyTitle() }}" method="GET">
+                                <form class="r-inline" action="/project/request/join/{{ $project->title }}" method="GET">
                                     <button name="member-add" class="btn btn-default">Join Project</button>
                                 </form>
                             @endif
 
                             @if ($project->isUserFollower())
-                                <form class="r-inline" action="/project/unfollow/{{ $project->getSlugFriendlyTitle() }}" method="GET">
+                                <form class="r-inline" action="/project/unfollow/{{ $project->title }}" method="GET">
                                     <button name="follow-remove" class="btn btn-danger">Unfollow</button>
                                 </form>
                             @else
-                                <form class="r-inline" action="/project/follow/{{ $project->getSlugFriendlyTitle() }}" method="GET">
+                                <form class="r-inline" action="/project/follow/{{ $project->title }}" method="GET">
                                     <button name="follow-add" class="btn btn-default">Follow</button>
                                 </form>
                             @endif
@@ -80,12 +80,12 @@
             <div class="col-md-6 col-md-offset-3">
                 @if (Auth::check())
                     @if ($project->isUserMember())
-                        <a href="/project/private/{{ $project->getSlugFriendlyTitle() }}">
+                        <a href="/project/private/{{ $project->title }}">
                             <button class="btn btn-default" id="members-button">Members Page</button>
                         </a>
                     @endif
                     @if (Auth::user()->username == $project->author)
-                        <a href="/project/delete/{{ $project->getSlugFriendlyTitle() }}">
+                        <a href="/project/delete/{{ $project->title }}">
                             <button class="btn btn-danger" id="delete">Delete</button>
                         </a>
                     @endif

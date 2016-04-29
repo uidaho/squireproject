@@ -236,13 +236,13 @@ Project Members Page Custom Tab
 
 /*
 ======================================
-Project Members Page Members Tab
+Project Members Page File Tab
 ======================================
 */
 
-.r-member-table
+.r-files-nav
 {
-    min-width: 910px;
+    padding-top: 20px;
 }
 
 /*
@@ -259,7 +259,6 @@ Project Members Page Edit
 .r-edit-container h1
 {
     display: inline-block;
-    /*padding-left: 40%;*/
     padding-right: 10px;
 }
 

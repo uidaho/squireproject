@@ -42,26 +42,24 @@ Route::get('project', 'ProjectController@listProjects');
 Route::get('projects', 'ProjectController@listProjects');
 Route::get('project/view/{project}', 'ProjectController@view');
 Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
-
-Route::get('project/follow/{project}', 'ProjectController@addFollower');
-Route::get('project/unfollow/{project}', 'ProjectController@removeFollower');
-
+Route::get('project/follow/{project}', 'ProjectController@follow');
+Route::get('project/unfollow/{project}', 'ProjectController@unFollow');
 Route::get('project/request/join/{project}', 'ProjectController@requestMembership');
-Route::get('project/request/cancel/{project}', 'ProjectController@removeMembershipRequest');
-Route::post('project/request/accepted/{project}/{user}', 'ProjectController@acceptMembershipRequest');
-Route::post('project/request/denied/{project}/{user}', 'ProjectController@denyMembershipRequest');
-Route::post('project/promote/{project}/{member}', 'ProjectController@promoteToAdmin');
-Route::post('project/demote/{project}/{member}', 'ProjectController@demoteFromAdmin');
+Route::get('project/request/cancel/{project}', 'ProjectController@cancelMembershipRequest');
+Route::get('project/leave/{project}', 'ProjectController@leaveProject');
 
 /*------------------------------*
  *  Project Member Controller   *
  *------------------------------*/
-Route::post('project/edit/banner/{project}', 'ProjectController@editBanner');
-Route::post('project/edit/statement/{project}', 'ProjectController@editStatement');
-Route::post('project/edit/customtab/{project}', 'ProjectController@editCustomTab');
-
-Route::get('project/leave/{project}', 'ProjectController@removeMember');
-Route::get('project/private/{project}', 'ProjectController@membersHome');
+Route::get('project/private/{project}', 'ProjectMembersController@view');
+Route::post('project/request/accepted/{project}/{user}', 'ProjectMembersController@acceptMembershipRequest');
+Route::post('project/request/denied/{project}/{user}', 'ProjectMembersController@denyMembershipRequest');
+Route::post('project/promote/{project}/{member}', 'ProjectMembersController@promoteToAdmin');
+Route::post('project/demote/{project}/{member}', 'ProjectMembersController@demoteFromAdmin');
+Route::post('project/kick/{project}/{member}', 'ProjectMembersController@kickMember');
+Route::patch('project/edit/banner/{project}', 'ProjectMembersController@editBanner');
+Route::patch('project/edit/statement/{project}', 'ProjectMembersController@editStatement');
+Route::patch('project/edit/customtab/{project}', 'ProjectMembersController@editCustomTab');
 
 
 /*--------------------------------*

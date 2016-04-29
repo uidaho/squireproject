@@ -3,6 +3,7 @@
     <legend class="r-legend-sub">Edit Side Box</legend>
     <form name="banner-form" class="form-horizontal" action="/project/edit/statement/{{ $project->getSlugFriendlyTitle() }}" method="POST" enctype="multipart/form-data">
         {!! csrf_field() !!}
+        {!! method_field('PATCH') !!}
 
         <!-- Statement Area -->
         <fieldset class="r-modal-input">

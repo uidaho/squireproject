@@ -45,6 +45,7 @@
                         <div class="col-lg-10 col-lg-offset-2">
                             <button type="submit" id="submit" class="btn btn-primary">Login</button>
                             <a class="small col-xs-offset-1" href="{{ url('/password/reset') }}">Forgot your password?</a>
+                            <a class="small col-xs-offset-1" href="{{ url('/register') }}">Not Registered?</a>
                         </div>
                         <div class="checkbox col-lg-10 col-lg-offset-2">
                             <label><input type="checkbox" name="remember">Remember Me</label>

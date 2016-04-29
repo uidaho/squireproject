@@ -3,6 +3,7 @@
     <legend class="r-legend-sub">Import Banner <small>Recommended size: 1920x550</small></legend>
     <form name="banner-form" class="form-horizontal" action="/project/edit/banner/{{ $project->getSlugFriendlyTitle() }}" method="POST" enctype="multipart/form-data">
         {!! csrf_field() !!}
+        {!! method_field('PATCH') !!}
 
         <!-- Banner Area -->
         <fieldset class="r-modal-input">

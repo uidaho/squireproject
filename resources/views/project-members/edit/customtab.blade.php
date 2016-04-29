@@ -3,6 +3,7 @@
     <legend class="r-legend-sub">Edit Tab</legend>
     <form name="banner-form" class="form-horizontal" action="/project/edit/customtab/{{ $project->getSlugFriendlyTitle() }}" method="POST" enctype="multipart/form-data">
         {!! csrf_field() !!}
+        {!! method_field('PATCH') !!}
 
         <!-- Tab Area -->
         <fieldset class="r-modal-input">
