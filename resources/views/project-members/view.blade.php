@@ -129,7 +129,7 @@
                                     <td><a href="">{{ $member->user->username }}</a></td>
                                     @if ($project->isProjectAdmin())
                                         <td>
-                                            @if (!$project->isUserAuthor($member) && Auth::user()->id != $member->user_id)
+                                            @if (!$project->isUserAuthor($member->user) && Auth::user()->id != $member->user_id && (!$member->admin || $project->isUserAuthor(Auth::user())))
                                                 <form action="/project/kick/{{ $project->title }}/{{ $member->id }}" method="POST">
                                                     {!! csrf_field() !!}
                                                     {!! method_field('DELETE') !!}

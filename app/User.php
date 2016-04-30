@@ -82,7 +82,7 @@ class User extends Authenticatable
         $this->projectFollows()->delete();
 
         //$this->profile()->delete();
-        //$this->projects()->delete();
+        $this->projects()->delete();
         $this->delete();
     }
 }

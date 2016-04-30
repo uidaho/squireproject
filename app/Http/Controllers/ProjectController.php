@@ -117,7 +117,7 @@ class ProjectController extends Controller
      */
     public function follow(Project $project)
     {
-        $this->authorize('userIsNotFollowing', $project);
+        $this->authorize('userIsNotFollower', $project);
 
         $project->addFollower();
         Session::flash('follower_success', 'You are now following this project.');

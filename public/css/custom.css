@@ -213,7 +213,7 @@ Project Members Page Tab Column
 
 .r-tab-body
 {
-    min-height: 522px;
+    height: 522px;
     background-color: #fafafa;
     border: 1px solid #e8e8e8;
     overflow: hidden;
@@ -229,6 +229,7 @@ Project Members Page Custom Tab
 {
     padding-left: 40px;
     padding-right: 40px;
+    max-height: 522px;
     word-wrap: break-word;
     overflow-x: hidden;
     overflow-y: auto;

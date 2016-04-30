@@ -90,18 +90,29 @@ class Project extends Model
     }
 
     /**
-     * Override the default model delete method to include deleting the image.
+     * Override the default model delete method to include all connected data to the project including comments, requests, members, followers, project image, and banner.
      *
      * @return bool|null
      * @throws \Exception
      */
     public function delete()
     {
+        $this->comments()->delete();
+        $this->members()->delete();
+        $this->requests()->delete();
+        $this->followers()->delete();
+        $this->files()->delete();
+
         $res = parent::delete();
 
         $imagePath = base_path() . '/public' .$this->getProjectImagePath();
         if (file_exists($imagePath)) {  // Shouldn't be null, let's check for sanity
             unlink($imagePath);
+        }
+
+        $bannerPath = base_path() . '/public' .$this->getBannerImagePath();
+        if (file_exists($bannerPath)) {  // Shouldn't be null, let's check for sanity
+            unlink($bannerPath);
         }
 
         return $res;
@@ -153,6 +164,16 @@ class Project extends Model
     }
 
     /**
+     * Get the files of this project
+     *
+     * @return files
+     */
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
+
+    /**
      * Get the comments of this project
      *
      * @return comments
@@ -160,18 +181,6 @@ class Project extends Model
     public function comments()
     {
         return $this->hasMany(ProjectComment::class);
-    }
-
-    /**
-     * Create a new comment for this project
-     *
-     * @param ProjectComment $comment
-     * @return new comment
-     */
-    public function addComment(ProjectComment $comment)
-    {
-        $comment->user_id = Auth::id();
-        return $this->comments()->save($comment);
     }
 
     /**
@@ -205,6 +214,18 @@ class Project extends Model
     }
 
     /**
+     * Create a new comment for this project
+     *
+     * @param ProjectComment $comment
+     * @return new comment
+     */
+    public function addComment(ProjectComment $comment)
+    {
+        $comment->user_id = Auth::id();
+        return $this->comments()->save($comment);
+    }
+
+    /**
      * Get the count of followers for the project
      *
      * @return int follower count
@@ -222,10 +243,15 @@ class Project extends Model
      */
     public function isUserFollower($user_id = null)
     {
+        $isFollower = false;
+
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
-        return $this->followers()->where('user_id', $user_id)->first();
+        if ($this->followers()->where('user_id', $user_id)->first() != null)
+            $isFollower = true;
+
+        return $isFollower;
     }
 
     /**
