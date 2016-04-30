@@ -45,16 +45,6 @@ class EditorController extends Controller
         return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username, 'project' => $project]);
     }
     
-    public function createFirebaseAuthToken($userid, $username) {
-        $generator = new TokenGenerator(env('FIREBASE_TOKEN'));
-        return $generator
-            ->setData(array(
-                'uid' => (string) $userid,
-                'displayName' => $username
-            ))
-            ->create();
-    }
-    
     /**
      * Creates a Firebase Auth Token used for advanced firebase manipulation.
      *
