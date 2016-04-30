@@ -53,6 +53,7 @@ class EditorController extends Controller
     public function listFiles($projectname)
     {
         $userid = Auth::user()->id;
+        $username = Auth::user()->username;
         $project = Project::where('title', $projectname)->firstOrFail();
         $files = File::forProject($project)->get();
 
@@ -60,7 +61,7 @@ class EditorController extends Controller
             return redirect('/editor/create/'.$projectname);
         }
 
-        return view('editor.list', ['files' => $files, 'userid' => $userid]);
+        return view('editor.list', ['files' => $files, 'userid' => $userid, 'username' => $username, 'project' => $project]);
     }
 
     /**

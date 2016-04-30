@@ -100,6 +100,7 @@
         // connect to firebase
         var firebaseUrl = '{{ env('FIREBASE_URL') }}';
         var userName = '{{ $username }}';
+        var projectId = '{{ $file->project_id }}';
         var chatRef = new Firebase(firebaseUrl + projectId + '/chat');
         // get DOM elements
         var messageField = $('#messageInput');
