@@ -60,31 +60,73 @@
         <div id="userlist"></div>
         <div id="firepad"></div>
     </div>
-
+    
+    <div class="project-chat">
+        <ul id='project-messages' class="project-chat-messages"></ul>
+        
+        <footer>
+        <input type='text' id='messageInput'  placeholder='Type a message...'>
+        </footer>
+    </div>
+    
+    
     <script>
-        function init() {
-            var userId = '{{ $userid }}';
-            var userName = '{{ $username }}';
-            var fileId = '{{ $file->id }}';
-            var projectId = '{{ $file->project_id }}';
-            var firepadRef = new Firebase('https://radiant-torch-8044.firebaseio.com/' + projectId + '/' + fileId);
-            var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
-                indentUnit: 2,
-                smartIndent: true,
-                tabSize: 4,
-                readOnly: false,
-                lineNumbers: true,
-                lineWrapping: true,
-                theme: 'base16-light',
-                mode: 'text/x-java'});
-            var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-                userId: userId});
-            var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId, userName);
-            firepad.on('ready', function() {
-                if (firepad.isHistoryEmpty()) {
-                    firepad.setText('{{$file->contents}}');
-                }});
-        }
-        init();
+        var userId = '{{ $userid }}';
+        var userName = '{{ $username }}';
+        var fileId = '{{ $file->id }}';
+        var projectId = '{{ $file->project_id }}';
+        var firebaseUrl = '{{ env('FIREBASE_URL') }}';
+        var firepadRef = new Firebase(firebaseUrl + projectId + '/' + fileId);
+        var codeMirror = CodeMirror(document.getElementById('firepad-container'), {
+                                    indentUnit: 2,
+                                    smartIndent: true,
+                                    tabSize: 4,
+                                    readOnly: false,
+                                    lineNumbers: true,
+                                    lineWrapping: true,
+                                    theme: 'base16-light',
+                                    mode: 'text/x-java'});
+        var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+                                    userId: userId});
+        var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId, userName);
+        firepad.on('ready', function() {
+            if (firepad.isHistoryEmpty()) {
+                firepad.setText('{{$file->contents}}');
+            }
+        });
+    </script>
+    
+    <script>
+        // connect to firebase
+        var firebaseUrl = '{{ env('FIREBASE_URL') }}';
+        var userName = '{{ $username }}';
+        var chatRef = new Firebase(firebaseUrl + projectId + '/chat');
+        // get DOM elements
+        var messageField = $('#messageInput');
+        var messageList = $('#project-messages');
+        // listen for key event
+        messageField.keypress(function (e) {
+            if (e.keyCode == 13) {
+                var username = userName;
+                var message = messageField.val();
+                chatRef.push({name:username, text:message});
+                messageField.val('');
+            }
+        });
+        // add callback that is triggered for each chat message
+        chatRef.limitToLast(10).on('child_added', function (snapshot) {
+            // get message data
+            var data = snapshot.val();
+            var username = data.name || "anonymous";
+            var message = data.text;
+            // create message elements
+            var messageElement = $("<li>");
+            var nameElement = $("<strong class='project-chat-username'></strong>")
+            nameElement.text(username);
+            messageElement.text(message).prepend(nameElement);
+            messageList.append(messageElement)
+            // scroll to bottom of list
+            messageList[0].scrollTop = messageList[0].scrollHeight;
+        });
     </script>
 @stop
