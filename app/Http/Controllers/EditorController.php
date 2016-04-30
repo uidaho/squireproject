@@ -8,6 +8,7 @@ use App\Project;
 use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
+use Firebase\Token\TokenGenerator;
 
 class EditorController extends Controller
 {
@@ -41,7 +42,17 @@ class EditorController extends Controller
                     ->where('filename', $filename)
                     ->firstOrFail();
 
-        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username, 'project' => $project]);
+        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username, 'project' => $project, 'authtoken' => $this->createFirebaseAuthToken($userid, $username)]);
+    }
+    
+    public function createFirebaseAuthToken($userid, $username) {
+        $generator = new TokenGenerator(env('FIREBASE_TOKEN'));
+        return $generator
+            ->setData(array(
+                'uid' => (string) $userid,
+                'displayName' => $username
+            ))
+            ->create();
     }
 
     /**
