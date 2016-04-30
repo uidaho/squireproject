@@ -64,24 +64,8 @@ var FirepadUserList = (function() {
         colorDiv.style.backgroundColor = color;
       }
     });
-
-    var nameInput = elt('input', null, { type: 'text', 'class': 'firepad-userlist-name-input'} );
-    nameInput.value = this.displayName_;
-      
-    var nameHint = elt('div', 'ENTER YOUR NAME', { 'class': 'firepad-userlist-name-hint'} );
-      nameHint.style.display = 'none'; // hide hint
-
-    // Update Firebase when name changes.
-    on(nameInput, 'change', function(e) {
-      var name = nameInput.value || "Guest " + Math.floor(Math.random() * 1000);
-      myUserRef.child('name').onDisconnect().remove();
-      myUserRef.child('name').set(name);
-      nameHint.style.display = 'none';
-      nameInput.blur();
-      stopEvent(e);
-    });
-
-    var nameDiv = elt('div', [nameInput, nameHint]);
+    
+    var nameDiv = elt('div', this.displayName_ || 'Guest', { 'class': 'firepad-userlist-name' });
 
     return elt('div', [ colorDiv, nameDiv ], { 'class': 'firepad-userlist-user' });
   };
