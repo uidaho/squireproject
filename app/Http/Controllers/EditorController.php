@@ -42,7 +42,7 @@ class EditorController extends Controller
                     ->where('filename', $filename)
                     ->firstOrFail();
 
-        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username, 'project' => $project, 'authtoken' => $this->createFirebaseAuthToken($userid, $username)]);
+        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username, 'project' => $project]);
     }
     
     public function createFirebaseAuthToken($userid, $username) {
