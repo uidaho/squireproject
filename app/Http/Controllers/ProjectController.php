@@ -35,9 +35,8 @@ class ProjectController extends Controller
      * @return The project page view
      * @internal param Project $id id for lookup
      */
-    public function view($projectname)
+    public function view(Project $project)
     {
-        $project = Project::where('title', $projectname)->firstOrFail();
         
         return view('project.view', ['project' => $project]);
     }
@@ -106,7 +105,7 @@ class ProjectController extends Controller
         $project->delete();
 
         Session::flash('delete-success', 'Successfully deleted the project "' . $title .'"');
-        return redirect()->action('ProjectController@listProjects');
+        return redirect('/projects');
     }
 
     /**
