@@ -54,6 +54,6 @@ class LoginTest extends TestCase
             ->type('test_user', 'username')
             ->type('test_secret', 'password')
             ->press('submit')
-            ->seePageIs('/project/create');
+            ->seePageIs('/projects');
     }
 }
