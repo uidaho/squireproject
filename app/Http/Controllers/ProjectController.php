@@ -79,8 +79,8 @@ class ProjectController extends Controller
         $thumbnail->move(base_path() . '/public/images/projects',  'product' . $newEntry->id . '.jpg');
 
         //Sets banner image to a random pre-made banner
-        $images = glob("images/banners/*");
-        $imagePath = 'images/projects/' . 'banner' . $newEntry->id . '.jpg';
+        $images = glob(base_path() . "/public/images/banners/*");
+        $imagePath = base_path() . '/public/images/projects/' . 'banner' . $newEntry->id . '.jpg';
         $rand = random_int(0, count($images) - 1);
         \File::copy($images[$rand], $imagePath);
 

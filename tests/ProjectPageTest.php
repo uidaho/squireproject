@@ -8,6 +8,7 @@ class ProjectPageTest extends TestCase
 {
     private $user = null;
     private $entry = null;
+    private $member = null;
 
     /**
      * Prepare for the test, creating a user and entry to work with during the test.
@@ -18,15 +19,29 @@ class ProjectPageTest extends TestCase
         // Ensure that the entry was deleted in the case of a failed test.
         $this->beforeApplicationDestroyed(function() {
             $this->entry->delete();
+            $this->user->delete();
         });
 
-        $this->user = factory(App\User::class)->make(['username' => 'test_user']);
+        $this->user = factory(App\User::class)->create([
+            'username' => 'test_user',
+            'email' => 'temp117@temp.com',
+            'password' => 'password'
+        ]);
+
         $this->entry = \App\Project::create([
             'author' => $this->user->username,
+            'user_id' => $this->user->id,
             'title' => 'Test Project',
             'description' => 'For testing',
             'body' => 'This is a simple test body'
         ]);
+
+        $this->member = \App\ProjectMember::create([
+            'user_id' => $this->user->id,
+            'project_id' => $this->entry->id,
+            'admin' => true
+        ]);
+        $this->entry->members()->save($this->member);
     }
 
     /**
@@ -37,12 +52,12 @@ class ProjectPageTest extends TestCase
     public function testUserPermissions()
     {
         $this->visit($this->entry->getSlug())
-            ->dontSeeLink('View Files')
+            ->dontSeeLink('Members Page')
             ->dontSeeLink('Delete');
 
         $this->actingAs($this->user)
             ->visit($this->entry->getSlug())
-            //->seeLink('View Files')                                                   //Must be a member to see
+            ->seeLink('Members Page')
             ->seeLink('Delete');
     }
 
@@ -54,11 +69,7 @@ class ProjectPageTest extends TestCase
         $this->actingAs($this->user)
             ->visit($this->entry->getSlug())
             ->click('Delete')
-<<<<<<< HEAD
-            //->seePageIs('/projects')
-=======
-            ->seePageIs('/projects')                                                    //Depends if there is projects remaining
->>>>>>> Added basic accepting and denying of project requests
+            ->seePageIs('/projects')
             ->dontSeeInDatabase('projects', ['title' => 'Test Project']);
     }
 
@@ -70,16 +81,15 @@ class ProjectPageTest extends TestCase
         $this->actingAs(factory(App\User::class)->make(['username' => 'other_user']))
             ->get('/project/delete/' . $this->entry->getSlugFriendlyTitle())
             ->see('403');
-            //->assertResponseStatus(403);
     }
 
     /**
-     * Test view files button.
+     * Test members page button.
      */
-    public function testViewFilesLink()
+    public function testMembersPageLink()
     {
         $this->actingAs($this->user)
-            ->visit($this->entry->getSlug());
-            //->click('View Files');                                                    //Todo find out how to make user a member of the project first
+            ->visit($this->entry->getSlug())
+            ->click('Members Page');
     }
 }

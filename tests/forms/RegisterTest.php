@@ -49,7 +49,7 @@ class RegisterTest extends TestCase
         // Submit a good form
         $this->tryRegister('test_user', 'ok@email.com', 'test_secret', 'test_secret')
             ->seeInDatabase('users', ['username' => 'test_user'])
-            ->seePageIs('/projects');
+            ->seePageIs('/project/create');
 
         // Delete user created from success
         DB::table('users')
