@@ -10,21 +10,21 @@
 
             <label for="statement-title" class="col-lg-2 control-label">Title</label>
             <div class="col-lg-10">
-                <input class="form-control" type="text" id="statement-title" name="statement-title" value="{{ old('statement_title') }}">
+                <input class="form-control" type="text" id="statement-title" name="statement-title" value="{{ old('statement-title') }}" minlength="{{ \App\ProjectMember::attributeLengths()['statement-title']['min'] }}" maxlength="{{ \App\ProjectMember::attributeLengths()['statement-title']['max'] }}" onkeyup="writeCharCount('statement-title')">
+                <p id="statement-title-count"></p>
+                @if ($errors->has('statement-title'))
+                    <span class="error-auth has-error">{{ $errors->first('statement-title') }}</span>
+                @endif
             </div>
-
-            @if ($errors->has('statement_title'))
-                <span class="error-auth">{{ $errors->first('statement_title') }}</span>
-            @endif
 
             <label for="statement-body" class="col-lg-2 control-label">Body Text</label>
             <div class="col-lg-10">
-                <textarea class="form-control" id="statement-body" name="statement-body" rows="5">{{old('statement_body')}}</textarea>
+                <textarea class="form-control" id="statement-body" name="statement-body" rows="5" minlength="{{ \App\ProjectMember::attributeLengths()['statement-body']['min'] }}" maxlength="{{ \App\ProjectMember::attributeLengths()['statement-body']['max'] }}" onkeyup="writeCharCount('statement-body')">{{old('statement-body')}}</textarea>
+                <p id="statement-body-count"></p>
+                @if ($errors->has('statement-body'))
+                    <span class="error-auth has-error">{{ $errors->first('statement-body') }}</span>
+                @endif
             </div>
-
-            @if ($errors->has('statement_body'))
-                <span class="error-auth">{{ $errors->first('statement_body') }}</span>
-            @endif
 
         </fieldset>
 

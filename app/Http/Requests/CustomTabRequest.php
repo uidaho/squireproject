@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\ProjectMember;
+
 class CustomTabRequest extends Request
 {
     /**
@@ -43,9 +45,20 @@ class CustomTabRequest extends Request
     public function rules()
     {
         return [
-            'tab-title' => 'required|min:1|max:20|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
-            'tab-body' => 'max:65000|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
+            'tab-title' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('tab-title'),
+            'tab-body' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('tab-body'),
         ];
+    }
+
+    /**
+     * Helper function to format the min/max rules
+     *
+     * @param $field
+     * @return string formatted (i.e. "min:2|max:20")
+     */
+    private function betweenFormatter($field)
+    {
+        return 'between:' . ProjectMember::attributeLengths()[$field]['min'] . ',' . ProjectMember::attributeLengths()[$field]['max'];
     }
 
     /**

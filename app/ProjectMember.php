@@ -20,19 +20,26 @@ class ProjectMember extends Model
         return $this->belongsTo(User::class);
     }
 
-    //Todo user defined timezone
-    public function getCreatedAt()
+    /**
+     * Returns the array of lengths required for the attributes.
+     *
+     * @return array
+     */
+    public static function attributeLengths()
     {
-        $time = Carbon::createFromTimestamp(strtotime($this->created_at))->timezone('America/Los_Angeles');
-
-        return $time->format('F j\\, Y \\a\\t g:i A');
+        return [
+            'statement-title' => ProjectMember::minMaxHelper(1, 20),
+            'statement-body' => ProjectMember::minMaxHelper(1, 100),
+            'tab-title' => ProjectMember::minMaxHelper(1, 20),
+            'tab-body' => ProjectMember::minMaxHelper(1, 65000),
+        ];
     }
 
-    public function getUpdatedAt()
-    {
-        $time = Carbon::createFromTimestamp(strtotime($this->updated_at))->timezone('America/Los_Angeles');
-
-        return $time->format('F j\\, Y \\a\\t g:i A');
+    private static function minMaxHelper($min, $max) {
+        return [
+            'min' => $min,
+            'max' => $max
+        ];
     }
 
     /**

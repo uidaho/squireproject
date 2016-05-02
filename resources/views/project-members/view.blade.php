@@ -4,6 +4,7 @@
     <title>{{ $project->title }} | The Squire Project</title>
 
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+    {{ Html::script('js/jsmain.js') }}
 @stop
 
 @section('mainBody')

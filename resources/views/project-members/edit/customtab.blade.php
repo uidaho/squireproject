@@ -8,23 +8,23 @@
         <!-- Tab Area -->
         <fieldset class="r-modal-input">
 
-            <label for="tab-title" class="col-lg-2 control-label">Title</label>
+            <label class="col-lg-2 control-label">Title</label>
             <div class="col-lg-10">
-                <input class="form-control" type="text" id="tab-title" name="tab-title" value="{{ old('tab_title') }}">
+                <input class="form-control" type="text" id="tab-title" name="tab-title" value="{{ old('tab-title') }}" minlength="{{ \App\ProjectMember::attributeLengths()['tab-title']['min'] }}" maxlength="{{ \App\ProjectMember::attributeLengths()['tab-title']['max'] }}" onkeyup="writeCharCount('tab-title')">
+                <p id="tab-title-count"></p>
+                @if ($errors->has('tab-title'))
+                    <span class="error-auth has-error">{{ $errors->first('tab-title') }}</span>
+                @endif
             </div>
 
-            @if ($errors->has('tab_title'))
-                <span class="error-auth">{{ $errors->first('tab_title') }}</span>
-            @endif
-
-            <label for="tab-body" class="col-lg-2 control-label">Body Text</label>
+            <label class="col-lg-2 control-label">Body Text</label>
             <div class="col-lg-10">
-                <textarea class="form-control" id="tab-body" name="tab-body" rows="10">{{old('tab_body')}}</textarea>
+                <textarea class="form-control" id="tab-body" name="tab-body" rows="10" minlength="{{ \App\ProjectMember::attributeLengths()['tab-body']['min'] }}" maxlength="{{ \App\ProjectMember::attributeLengths()['tab-body']['max'] }}" onkeyup="writeCharCount('tab-body')">{{old('tab-body')}}</textarea>
+                <p id="tab-body-count"></p>
+                @if ($errors->has('tab-body'))
+                    <span class="error-auth has-error">{{ $errors->first('tab-body') }}</span>
+                @endif
             </div>
-
-            @if ($errors->has('tab_body'))
-                <span class="error-auth">{{ $errors->first('tab_body') }}</span>
-            @endif
 
         </fieldset>
 

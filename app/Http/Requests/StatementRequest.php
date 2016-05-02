@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\ProjectMember;
+
 class StatementRequest extends Request
 {
     /**
@@ -43,9 +45,20 @@ class StatementRequest extends Request
     public function rules()
     {
         return [
-            'statement-title' => 'required|min:1|max:20|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
-            'statement-body' => 'max:100|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|',
+            'statement-title' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('statement-title'),
+            'statement-body' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('statement-body'),
         ];
+    }
+
+    /**
+     * Helper function to format the min/max rules
+     *
+     * @param $field
+     * @return string formatted (i.e. "min:2|max:20")
+     */
+    private function betweenFormatter($field)
+    {
+        return 'between:' . ProjectMember::attributeLengths()[$field]['min'] . ',' . ProjectMember::attributeLengths()[$field]['max'];
     }
 
     /**

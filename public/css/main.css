@@ -532,6 +532,17 @@ Errors
 	letter-spacing: .1px;
 }
 
+.error-auth #body-error
+{
+	color: darkred;
+	font-weight: 600;
+	font-size: 13px;
+	letter-spacing: .1px;
+}
+.modal-body {
+	background-color: blue;
+}
+
 /*
 ======================================
 Animations

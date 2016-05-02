@@ -143,7 +143,7 @@
 .project-chat ul {
     list-style: none;
     margin: 0px;
-    padding: 20px;
+    padding: 20px 20px 5px 20px;
     height: 200px;
     word-wrap: break-word;
     overflow-x: hidden;
@@ -165,7 +165,7 @@
 
 .project-chat footer {
     display: block;
-    padding: 10px;
+    padding: 0 10px 10px 10px;
 }
 
 .project-chat footer input {

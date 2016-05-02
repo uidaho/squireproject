@@ -54,7 +54,8 @@
                             Title
                         </label>
                         <div class="col-lg-10">
-                            <input class="form-control" type="text" id="title" name="title" value="{{old('title')}}">
+                            <input class="form-control" type="text" id="title" name="title" value="{{old('title')}}" minlength="{{ \App\Project::attributeLengths()['title']['min'] }}" maxlength="{{ \App\Project::attributeLengths()['title']['max'] }}" onkeyup="writeCharCount('title')">
+                            <p id="title-count"></p>
                         </div>
                         @if($errors->has('title'))
                             <label class="control-label col-lg-10">
@@ -74,7 +75,9 @@
                             Description
                         </label>
                         <div class="col-lg-10">
-                            <input class="form-control" type="text" id="description" name="description" value="{{ old('description') }}">
+                            <input class="form-control" type="text" id="description" name="description" value="{{ old('description') }}" size="88" height="2"
+                                   minlength="{{ \App\Project::attributeLengths()['description']['min'] }}" maxlength="{{ \App\Project::attributeLengths()['description']['max'] }}" onkeyup="writeCharCount('description')">
+                            <p id="description-count"></p>
                         </div>
 
                         @if($errors->has('description'))
@@ -94,7 +97,8 @@
                             About The Project
                         </label>
                         <div class="col-lg-10">
-                            <textarea class="form-control" id="project-body" name="project-body" rows="10">{{ old('project-body') }}</textarea>
+                            <textarea class="form-control" id="project-body" name="project-body" rows="10" minlength="{{ \App\Project::attributeLengths()['project-body']['min'] }}" maxlength="{{ \App\Project::attributeLengths()['project-body']['max'] }}" onkeyup="writeCharCount('project-body')">{{old('project-body')}}</textarea>
+                            <p id="project-body-count"></p>
                         </div>
 
                         @if($errors->has('project-body'))
