@@ -12,7 +12,7 @@ class CreateSettingsTable extends Migration
     public function up()
     {
 
-        
+
         Schema::create('user_settings', function (Blueprint $table)
         {
             $table->increments('id');
@@ -20,6 +20,7 @@ class CreateSettingsTable extends Migration
             $table->boolean('enable_chat')->default(1); //enabled by default
 
         });
+        return view('settings.settings');
     }
 
     public function down()

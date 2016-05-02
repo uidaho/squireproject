@@ -17,11 +17,11 @@ class SettingsController extends Controller
 
 
     //DO we need this? What's the difference between this and the next function?
-    protected function create(array $data)
+    public static function create(array $data)
     {
         return Settings::create([
-            'user_id' => $data['user_id'],
-            'nickname' => $data['nickname'],
+            'user_id' => Auth::user()->id,
+            'nickname' => $data['username'],
             'enable_chat' => 1,
 
         ]);
@@ -61,15 +61,21 @@ class SettingsController extends Controller
 
     public function view()
     {
-        if (Auth::guest())
-        {
+        if (Auth::guest()) {
             return redirect('auth.login');
         }
 
-        return view('settings.settings', ['enable_chat' => 1]);
+        if (Settings::where('user_id', '=', Auth::user()->id) === 0) {
+            return Settings::create([
+                'nickname' => Auth::user()->username,
+                'enable_chat' => 1,
+            ]);
+            
+        } else {
+            return view('settings.settings', ['enable_chat' => 1]);
+
+        }
     }
-
-
 }
 
 
