@@ -70,6 +70,7 @@
 
 .project-chat {
     position: absolute;
+    right: 72%;
     bottom: 0;
     font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     border-radius: 3px;
@@ -186,5 +187,15 @@
     width: 80%;
     position: absolute;
     bottom: 0;
+    right: -45%;
+    height: 0px;
+}
+
+.chat-container-right
+{
+    width: 15%;
+    position: absolute;
+    bottom: 0;
+    right: -10%;
     height: 0px;
 }

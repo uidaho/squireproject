@@ -200,7 +200,7 @@
             <div class="col-md-2 project-chat-col">
                 <!-- Chat -->
                 <div class="chat-container">
-                    <div id="demo" class="collapse project-chat">
+                    <div id="demo" class="collapse in project-chat">
                         <ul id='project-messages' class="project-chat-messages"></ul>
 
                         <footer>

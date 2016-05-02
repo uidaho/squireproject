@@ -1,9 +1,6 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-          <th>id</th>
-          <th>project_id</th>
-          <th>projectname</th>
           <th>Filename</th>
           <th>Type</th>
           <th>Description</th>
@@ -16,9 +13,6 @@
     <tbody>
         @foreach($files as $file)
             <tr>
-                <td>{{ $file->id }}</td>
-                <td>{{ $file->project_id }}</td>
-                <td><a href="/editor/{{ $file->projectname }}">{{ $file->projectname }}</a></td>
                 <td><a href="/editor/edit/{{ $file->projectname }}/{{ $file->filename }}">{{ $file->filename }}</a></td>
                 <td>{{ $file->type }}</td>
                 <td>{{ $file->description }}</td>
