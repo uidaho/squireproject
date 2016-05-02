@@ -1,13 +1,9 @@
 @extends('layouts.main_layout')
 
 @section('head')
-<<<<<<< HEAD
     <title>{{ $project->title }} Project Files | The Squire Project</title>
     
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-=======
-    <title>{{$project->title}} Project Files | The Squire Project</title>
->>>>>>> Added basic accepting and denying of project requests
 @endsection
 
 @section('mainBody')
