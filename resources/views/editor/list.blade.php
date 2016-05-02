@@ -4,6 +4,7 @@
     <title>{{ $project->title }} Project Files | The Squire Project</title>
     
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firepad/1.3.0/firepad.min.js"></script>
 @endsection
 
 @section('mainBody')
@@ -25,6 +26,11 @@
                 </a>
                 <a href="/editor/create/{{ $project->title }}" class="btn btn-default btn-sm">
                     <em class="glyphicon glyphicon-plus"></em> Create
+                </a>
+                <a onclick="compileProject()">
+                    <button id="compile-button" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-flash"></em> Compile
+                    </button>
                 </a>
             </div>
         </div>
@@ -84,5 +90,14 @@
         // scroll to bottom of list
         messageList[0].scrollTop = messageList[0].scrollHeight;
     });
+
+
+    function compileProject() {
+        $('#compile-button').prop('disabled', true);
+
+        $.get('/editor/compile/{{ $files[0]->projectname }}', function (data, status) {
+
+        });
+    }
 </script>
 @stop

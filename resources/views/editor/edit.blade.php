@@ -97,9 +97,13 @@
             }
         });
 
+        firepad.on('synced', function() {
+            firepad.firebaseAdapter_.saveCheckpoint_();
+        });
+
         function submitForm() {
             if (firepad != null) {
-                firepad.firebaseAdapter_.saveCheckpoint_();
+//                firepad.firebaseAdapter_.saveCheckpoint_();
                 document.getElementById('contents-form').submit()
             } else {
                 {{ Session::flash('error', 'Firepad not ready yet.') }}
@@ -108,7 +112,6 @@
     </script>
 
     <script>
-<<<<<<< HEAD
         // connect to firebase
         var firebaseUrl = '{{ env('FIREBASE_URL') }}';
         var userName = '{{ $username }}';

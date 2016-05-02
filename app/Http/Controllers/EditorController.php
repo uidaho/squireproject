@@ -175,14 +175,69 @@ class EditorController extends Controller
             return abort(404);
         }
     }
-    
+
+    public function compileProject($projectname) {
+        $files = File::where('projectname', $projectname)->get();
+
+        if (count($files) == 0) {
+            return null;
+        }
+
+        $firebase = new \Firebase\FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
+
+        $compilationPath = $this->makeCompilationDirectory($projectname);
+
+        $num = 0;
+        foreach ($files as $file) {
+            $contents = $this->getFirebaseFileContents($file, $firebase);
+            $filePath = $compilationPath . '/' . $file->filename;
+
+            file_put_contents($filePath, $contents);
+
+            if (strrpos($file->filename, '.java') !== FALSE) {
+                $command = 'javac "' . $filePath . '" 2>&1';
+                $output = shell_exec($command);
+
+                if ($output == null) {
+                    $num++;
+                } else {
+                    return 'Failed on ' . $file->filename . ' after ' . $num . ' files were compiled';
+                }
+            }
+        }
+
+        $jarOutput = shell_exec('cd ' . $compilationPath . '; jar cvfe "' . $projectname . '.jar" Main *.class');
+
+        if ($jarOutput == null) {
+            return $jarOutput;
+        }
+
+        return 'Successfully compiled ' . $num . ' files for project ' . $projectname . '.';
+    }
+
+    public function makeCompilationDirectory($projectname) {
+        $key = $projectname . '_' . time();
+        $path = base_path('compile/' . $key);
+        mkdir($path);
+        return $path;
+    }
+
+    public function getFirebaseFileContents(File $file, \Firebase\FirebaseLib $firebase) {
+        $firebaseFilePath = '/' . $file->project_id . '/' . $file->id;
+        return json_decode(
+            utf8_encode(
+                $firebase->get($firebaseFilePath)
+            )
+        )->checkpoint->o[0];
+    }
+
+
     public function compile($projectname, $filename)
     {
         $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
         $firebase_path = '/' . $file->project_id . '/' . $file->id;
 
         $firebase = new \Firebase\FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
-
 
         $contents = json_decode(utf8_encode($firebase->get($firebase_path)))->checkpoint->o[0];
 
@@ -193,7 +248,8 @@ class EditorController extends Controller
         $filePath = $path . '/' . $filename;
 
         file_put_contents($filePath, $contents);
-        $output = shell_exec('javac ' . $filePath . ' 2>&1');
+        $command = 'javac "' . $filePath . '" 2>&1';
+        $output = shell_exec($command);
 
         return view('editor.compile', compact(['file', 'output', 'key']));
     }
