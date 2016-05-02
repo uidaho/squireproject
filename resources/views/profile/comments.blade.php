@@ -6,8 +6,6 @@
 
 @section('mainBody')
     <div>
-	<p> Testing </p>
-
-	<!-- Template: http://wrapbootstrap.com/preview/WB09JXK43 -->
+	<p> Comments </p>
     </div>
 @stop

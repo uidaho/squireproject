@@ -19,7 +19,9 @@ class CreateUserProfileTable extends Migration
 	    	$table->longText('biography');
 	    	$table->string ('first_name');
 	    	$table->string('last_name');
-			$table->binary('profile_photo');
+			$table->string('profile_url');
+			$table->longText('address');
+			$table->string('phone');
             $table->timestamps();
         });
     }

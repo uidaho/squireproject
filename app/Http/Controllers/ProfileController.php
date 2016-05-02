@@ -10,7 +10,8 @@ class ProfileController extends Controller
 {
     public function profileView($username)
     {
-        return view('profile.view', ['username' => $username]);
+		$user = User::where('username', $username)->firstOrFail();
+        return view('profile.view', ['user' => $user]);
     }
 
     public function profileViewDefault()
@@ -19,13 +20,14 @@ class ProfileController extends Controller
             return redirect('/login');
         }
 
-        return view('profile.view', ['username' => Auth::user()->username]);
+        return view('profile.view', ['user' => Auth::user()]);
     }
 
 
     public function friendView($username)
     {
-        return view('profile.friends', ['username' => $username]);
+		$user = User::where('username', $username)->firstOrFail();
+        return view('profile.friends', ['user' => $user]);
     }
 
     public function friendViewDefault()
@@ -34,12 +36,13 @@ class ProfileController extends Controller
             return redirect('/login');
         }
 
-        return view('profile.friends', ['username' => Auth::user()->username]);
+        return view('profile.friends', ['username' => Auth::user()]);
     }
 
     public function projectView($username)
     {
-        return view('profile.projects', ['username' => $username]);
+		$user = User::where('username', $username)->firstOrFail();
+        return view('profile.projects', ['user' => $user]);
     }
 
     public function projectViewDefault()
@@ -48,12 +51,13 @@ class ProfileController extends Controller
             return redirect('/login');
         }
 
-        return view('profile.projects', ['username' => Auth::user()->username]);
+        return view('profile.projects', ['username' => Auth::user()]);
     }
 
     public function commentsView($username)
     {
-        return view('profile.comments', ['username' => $username]);
+		$user = User::where('username', $username)->firstOrFail();
+        return view('profile.comments', ['user' => $user]);
     }
 
     public function commentsViewDefault()
@@ -62,6 +66,6 @@ class ProfileController extends Controller
             return redirect('/login');
         }
 
-        return view('profile.comments', ['username' => Auth::user()->username]);
+        return view('profile.comments', ['username' => Auth::user()]);
     }
 }
