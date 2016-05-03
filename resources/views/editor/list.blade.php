@@ -30,24 +30,28 @@
 <div class="row">
 
 
-    <section class="col-md-8">
+    <section class="col-md-12">
         <!-- Files -->
         @include('editor.filelist')
     </section>
 </div>
 
-<div class="project-chat">
-    <ul id='project-messages' class="project-chat-messages"></ul>
-    
-    <footer>
-    <input type='text' id='messageInput'  placeholder='Type a message...'>
-    </footer>
+<!-- Chat -->
+<div class="chat-container-right">
+    <div id="demo" class="collapse project-chat">
+        <ul id='project-messages' class="project-chat-messages"></ul>
+
+        <footer>
+            <input type='text' id='messageInput'  placeholder='Type a message...'>
+        </footer>
+    </div>
+    <button class="project-button btn btn-default" data-toggle="collapse" data-target="#demo">Chat <span class="glyphicon glyphicon-comment"></span></button>
 </div>
     
 <script>
     // connect to firebase
     var firebaseUrl = '{{ env('FIREBASE_URL') }}';
-    var userName = '{{ $username }}';
+    var userName = '{{ Auth::user()->username }}';
     var projectId = '{{ $project->id }}';
     var chatRef = new Firebase(firebaseUrl + projectId + '/chat');
     // get DOM elements

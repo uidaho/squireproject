@@ -16,13 +16,8 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('author');
-            $table->integer('user_id')->unsigned()->index();
             $table->string('description');
             $table->text('body');
-            $table->text('statement_title');
-            $table->text('statement_body');
-            $table->text('tab_title');
-            $table->text('tab_body');
             $table->timestamps();
         });
     }
