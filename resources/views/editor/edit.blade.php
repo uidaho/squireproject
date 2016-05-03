@@ -74,7 +74,7 @@
         </div>
         <button class="project-button btn btn-default" data-toggle="collapse" data-target="#demo">Chat <span class="glyphicon glyphicon-comment"></span></button>
     </div>
-    
+
     <script>
         var userId = '{{ $userid }}';
         var userName = '{{ $username }}';
@@ -100,7 +100,7 @@
             }
         });
     </script>
-    
+
     <script>
         // connect to firebase
         var firebaseUrl = '{{ env('FIREBASE_URL') }}';

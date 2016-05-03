@@ -155,7 +155,7 @@ pre.firepad-lt-o, pre.firepad-lt-u, pre.firepad-lt-t, pre.firepad-lt-tc {
 }
 
 a.firepad-btn, a.firepad-btn:visited, a.firepad-btn:active {
-    font-family: "Arial" sans-serif;
+    font-family: "Arial", sans-serif;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
