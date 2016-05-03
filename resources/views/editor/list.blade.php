@@ -11,13 +11,6 @@
 @include('inserts.breadcrumb')
 <div class="row">
     <div class="col-md-12">
-        <!-- Search -->
-        <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
         <!-- Toolbar -->
         <div class="btn-toolbar" role="toolbar" aria-label="File list toolbar">
             <div class="btn-group r-dual-buttons" role="group" aria-label="File command group">
@@ -30,6 +23,12 @@
                 <a onclick="compileProject()">
                     <button id="compile-button" class="btn btn-default btn-sm">
                         <em class="glyphicon glyphicon-flash"></em> Compile
+                    </button>
+                </a>
+
+                <a id="download-link" onclick="downloadCompilation()">
+                    <button id="download-compilation" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-download"></em> Download
                     </button>
                 </a>
             </div>
@@ -58,6 +57,9 @@
 </div>
     
 <script>
+    var key = '';
+    $('#download-compilation').prop('disabled', true);
+
     // connect to firebase
     var firebaseUrl = '{{ env('FIREBASE_URL') }}';
     var userName = '{{ Auth::user()->username }}';
@@ -94,10 +96,21 @@
 
     function compileProject() {
         $('#compile-button').prop('disabled', true);
+        $('#download-compilationc').prop('disabled', true);
 
         $.get('/editor/compile/{{ $files[0]->projectname }}', function (data, status) {
-
+            if (status == 'success') {
+                $('#compile-button').prop('disabled', false);
+                $('#download-compilation').prop('disabled', false);
+                key = data;
+            }
         });
+    }
+
+    function downloadCompilation() {
+        var link = $('#download-link');
+        link.attr('href', '/editor/downloadCompilation/{{ $files[0]->projectname }}/' + key);
+        link.click();
     }
 </script>
 @stop

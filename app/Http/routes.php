@@ -89,6 +89,7 @@ Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete')
 Route::get('editor/compile/{projectname}/{filename}', 'EditorController@compile');
 Route::get('editor/compile/{projectname}', 'EditorController@compileProject');
 Route::get('editor/downloadCompilation/{projectname}/{filename}/{key}', 'EditorController@downloadCompilation');
+Route::get('editor/downloadCompilation/{projectname}/{key}', 'EditorController@downloadProjectCompilation');
 Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/edit/{project}', 'EditorController@listFiles');
 Route::get('editor/edit', 'EditorController@index');

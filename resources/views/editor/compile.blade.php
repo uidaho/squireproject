@@ -19,7 +19,7 @@
                     <button type="button" class="btn btn-success">Download</button>
                 </a>
                 <a href="{{ back()->getTargetUrl() }}">
-                    <button type="button" class="btn btn-danger">Return</button>
+                    <button type="button" class="btn btn-default">Return</button>
                 </a>
             </div>
         @endif

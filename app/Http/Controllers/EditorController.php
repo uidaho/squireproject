@@ -102,14 +102,13 @@ class EditorController extends Controller
         $this->validate($request, [
             'filename'      => 'required|unique:files,filename,NULL,id,project_id,'.$project->id.'|max:255|regex:/([A-Za-z0-9_.-]+)/',
             'description'   => 'required',
-            'type'          => 'required',
         ]);
 
         $newEntry = File::create([
             'project_id'    => $project->id,
             'projectname'   => $project->title,
             'filename'      => $request->input('filename'),
-            'type'          => $request->input('type'),
+            'type'          => 'File',
             'description'   => $request->input('description'),
             'contents'      => "/* ".EditorController::quoteOfTheDay()." */",
             'user_id'       => Auth::user()->id,
@@ -205,32 +204,35 @@ class EditorController extends Controller
 
         $compilationPath = $this->makeCompilationDirectory($projectname);
 
-        $num = 0;
+        $fileNames = [];
+
         foreach ($files as $file) {
             $contents = $this->getFirebaseFileContents($file, $firebase);
             $filePath = $compilationPath . '/' . $file->filename;
 
+            array_push($fileNames, $filePath);
             file_put_contents($filePath, $contents);
-
-            if (strrpos($file->filename, '.java') !== FALSE) {
-                $command = 'javac "' . $filePath . '" 2>&1';
-                $output = shell_exec($command);
-
-                if ($output == null) {
-                    $num++;
-                } else {
-                    return 'Failed on ' . $file->filename . ' after ' . $num . ' files were compiled';
-                }
-            }
         }
 
-        $jarOutput = shell_exec('cd "' . $compilationPath . '"; jar cvfe "' . $projectname . '.jar" Main *.class');
+        $output = shell_exec('cd "' . $compilationPath . '"; javac *.java 2>&1');
+
+        if ($output != null) {
+            return $output;
+        }
+
+        array_walk($fileNames, function($path) {
+            if (strpos($path, '.java') !== FALSE) {
+                unlink($path);
+            }
+        });
+
+        $jarOutput = shell_exec('cd "' . $compilationPath . '"; jar cvfe "' . $projectname . '.jar" Main *');
 
         if ($jarOutput == null) {
             return $jarOutput;
         }
 
-        return 'Successfully compiled ' . $num . ' files for project ' . $projectname . '.';
+        return substr($compilationPath, strpos($compilationPath, '_') + 1);
     }
 
     public function makeCompilationDirectory($projectname) {
@@ -282,6 +284,16 @@ class EditorController extends Controller
         );
 
         return \Illuminate\Support\Facades\Response::download($path, $compiledName, $headers);
+    }
+
+    public function downloadProjectCompilation($projectname, $key) {
+        $path = base_path('compile/' . $projectname . '_' . $key . '/' . $projectname . '.jar');
+
+        $headers = array (
+            'Content-Type: application/java-vm',
+        );
+
+        return \Illuminate\Support\Facades\Response::download($path, $projectname . '.jar', $headers);
     }
 }
 
