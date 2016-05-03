@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Http\Request;
+
 class ProfileController extends Controller
 {
     public function profileView($username)
@@ -95,19 +97,9 @@ class ProfileController extends Controller
             return redirect('/login');
         }
 
-        $user = Auth::user();
+		Auth::user()->profile->update($request->all());
 
-		$user->profile->first_name = $request['first_name'];
-		$user->profile->last_name = $request['last_name'];
-		$user->profile->date_of_birth = $request['date_of_birth'];
-		$user->email = $request['email'];
-		$user->profile->phone = $request['phone'];
-		$user->profile->address = $request['address'];
-		$user->profile->gender = $request['gender'];
-		$user->profile->gender = $request['biography'];
-
-		$user->save();
-		$user->profile()->save();
+		return back();
 
     }
 

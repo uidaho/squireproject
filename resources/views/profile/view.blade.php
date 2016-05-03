@@ -46,7 +46,12 @@
 				<div/>
 			<div/>
 		<div/>
-			<a href="profile/edit/{{$user->username}}">Edit Profile</a>
-            <a href="/profile/projects/{{$user->username}}">User Projects</a>
+			<div>
+				@if ($user->username == Auth::user()->username)
+					<a href="profile/edit/{{$user->username}}">Edit</a>
+				@endif
+				<a href="/profile/projects/{{$user->username}}">User Projects</a>
+			<div/>
+			
     </div>
 @stop
