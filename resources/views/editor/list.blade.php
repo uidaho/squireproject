@@ -113,8 +113,8 @@
         downloadButton.prop('disabled', true);
 
         $.get('/editor/compile/{{ $files[0]->projectname }}', function (data, status) {
+            console.log(data);
             var result = JSON.parse(data);
-            console.log(result);
             if (result.status == 'failed') {
                 if (result.redirect) {
                     window.location.href = result.redirect;
