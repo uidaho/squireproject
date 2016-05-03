@@ -1,8 +1,3 @@
-.container-fluid
-{
- 
-}
-
 /*
 ======================================
 Project list
@@ -322,4 +317,18 @@ Project Members Modal
 .r-modal-buttons
 {
     padding: 20px 0 0 25px;
+}
+
+/*
+======================================
+Extra
+======================================
+*/
+
+.r-bound
+{
+    
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
 }

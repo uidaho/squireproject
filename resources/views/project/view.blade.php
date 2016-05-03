@@ -95,7 +95,7 @@
         <br>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="jumbotron">
+                <div class="jumbotron r-bound">
                     <h2>
                         Description
                     </h2>

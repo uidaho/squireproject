@@ -82,7 +82,7 @@
     font-size: 12px;
     line-height: 22px;
     color: #666;
-    max-width: 290px;
+    width: 290px;
 }
 
 .project-chat header {
