@@ -14,7 +14,7 @@
             <div class="form-group">
               <label for="filename" class="col-lg-2 control-label">File name</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" id="filename" name="filename" placeholder="filename.txt">
+                <input type="text" class="form-control" id="filename" name="filename" placeholder="filename.txt" value="{{ old('filename') }}">
                 @foreach ($errors->get('filename') as $error)
                     <div class="alert alert-danger" role="alert">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -27,7 +27,7 @@
             <div class="form-group">
               <label for="description" class="col-lg-2 control-label">Description</label>
               <div class="col-lg-10">
-                <textarea class="form-control" rows="3" id="description" name="description" maxlength="255"></textarea>
+                <textarea class="form-control" rows="3" id="description" name="description" maxlength="255">{{ old('description') }}</textarea>
                 @foreach ($errors->get('description') as $error)
                     <div class="alert alert-danger" role="alert">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>

@@ -155,7 +155,7 @@ pre.firepad-lt-o, pre.firepad-lt-u, pre.firepad-lt-t, pre.firepad-lt-tc {
 }
 
 a.firepad-btn, a.firepad-btn:visited, a.firepad-btn:active {
-    font-family: "Arial" sans-serif;
+    font-family: "Arial", sans-serif;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
@@ -417,9 +417,12 @@ a.powered-by-firepad {
 }
 
 #firepad-container {
-    position: relative;
-    width: 100%;
-    height: 800px;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    bottom: 0;
     background: white;
 }
 

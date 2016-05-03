@@ -21,6 +21,9 @@
         <div class="col-md-12">
             <div class="btn-toolbar" role="toolbar" aria-label="Editor toolbar">
                 <div class="btn-group" role="group" aria-label="File button group">
+                    <a href="/project/private/{{ $project->title }}" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-home"></em> Project Home
+                    </a>
                     <a href="/editor/list/{{$file->projectname}}" class="btn btn-default btn-sm">
                         <em class="glyphicon glyphicon-open-file"></em> Open
                     </a>
@@ -60,16 +63,18 @@
         <div id="userlist"></div>
         <div id="firepad"></div>
     </div>
-    
-    <div class="project-chat">
-        <ul id='project-messages' class="project-chat-messages"></ul>
-        
-        <footer>
-        <input type='text' id='messageInput'  placeholder='Type a message...'>
-        </footer>
+    <!-- Chat -->
+    <div class="chat-container-right">
+        <div id="demo" class="collapse project-chat">
+            <ul id='project-messages' class="project-chat-messages"></ul>
+
+            <footer>
+                <input type='text' id='messageInput'  placeholder='Type a message...'>
+            </footer>
+        </div>
+        <button class="project-button btn btn-default" data-toggle="collapse" data-target="#demo">Chat <span class="glyphicon glyphicon-comment"></span></button>
     </div>
-    
-    
+
     <script>
         var userId = '{{ $userid }}';
         var userName = '{{ $username }}';
@@ -95,7 +100,7 @@
             }
         });
     </script>
-    
+
     <script>
         // connect to firebase
         var firebaseUrl = '{{ env('FIREBASE_URL') }}';

@@ -3,41 +3,24 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
-class ProjectComment extends Model
+class ProjectRequest extends Model
 {
-    protected $table = 'project_comments';               //Set table name
-    protected $fillable = ['comment_body'];             //Set what can be mass assigned
+    protected $table = 'project_requests';                          //Set table name
+    protected $fillable = ['user_id', 'project_id'];                //Set what can be mass assigned
 
-    /**
-     * Get project for this comment
-     *
-     *
-     * @return project
-     */
+    //Lets Laravel know the comment belongs to a project
     public function project()
     {
         return $this->belongsTo(Project::class);
     }
-
-    /**
-     * Get user for this comment
-     *
-     *
-     * @return user
-     */
+    //Lets Laravel know the comment belongs to a user
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Get created at timestamp for this comment
-     *
-     *
-     * @return timestamp
-     */
+    //Todo user defined timezone
     public function getCreatedAt()
     {
         $time = Carbon::createFromTimestamp(strtotime($this->created_at))->timezone('America/Los_Angeles');
@@ -45,12 +28,6 @@ class ProjectComment extends Model
         return $time->format('F j\\, Y \\a\\t g:i A');
     }
 
-    /**
-     * Get updated at timestamp for this comment
-     *
-     *
-     * @return timestamp
-     */
     public function getUpdatedAt()
     {
         $time = Carbon::createFromTimestamp(strtotime($this->updated_at))->timezone('America/Los_Angeles');

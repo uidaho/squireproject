@@ -50,18 +50,12 @@ class EditorController extends Controller
      * @param string $projectname project name
      * @return mixed
      */
-    public function listFiles($projectname)
+    public function listFiles(Project $project)
     {
         $userid = Auth::user()->id;
-        $username = Auth::user()->username;
-        $project = Project::where('title', $projectname)->firstOrFail();
         $files = File::forProject($project)->get();
 
-        if (empty($files[0])) {
-            return redirect('/editor/create/'.$projectname);
-        }
-
-        return view('editor.list', ['files' => $files, 'userid' => $userid, 'username' => $username, 'project' => $project]);
+        return view('editor.list', ['project' => $project, 'files' => $files, 'userid' => $userid]);
     }
 
     /**

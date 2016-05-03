@@ -19,8 +19,11 @@
         </form>
         <!-- Toolbar -->
         <div class="btn-toolbar" role="toolbar" aria-label="File list toolbar">
-            <div class="btn-group" role="group" aria-label="File command group">
-                <a href="/editor/create/{{ $files[0]->projectname }}" class="btn btn-default btn-sm">
+            <div class="btn-group r-dual-buttons" role="group" aria-label="File command group">
+                <a href="/project/private/{{ $project->title }}" class="btn btn-default btn-sm">
+                    <em class="glyphicon glyphicon-home"></em> Project Home
+                </a>
+                <a href="/editor/create/{{ $project->title }}" class="btn btn-default btn-sm">
                     <em class="glyphicon glyphicon-plus"></em> Create
                 </a>
             </div>
@@ -28,24 +31,30 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+
+
+    <section class="col-md-12">
         <!-- Files -->
         @include('editor.filelist')
-    </div>
+    </section>
 </div>
 
-<div class="project-chat">
-    <ul id='project-messages' class="project-chat-messages"></ul>
-    
-    <footer>
-    <input type='text' id='messageInput'  placeholder='Type a message...'>
-    </footer>
+<!-- Chat -->
+<div class="chat-container-right">
+    <div id="demo" class="collapse project-chat">
+        <ul id='project-messages' class="project-chat-messages"></ul>
+
+        <footer>
+            <input type='text' id='messageInput'  placeholder='Type a message...'>
+        </footer>
+    </div>
+    <button class="project-button btn btn-default" data-toggle="collapse" data-target="#demo">Chat <span class="glyphicon glyphicon-comment"></span></button>
 </div>
     
 <script>
     // connect to firebase
     var firebaseUrl = '{{ env('FIREBASE_URL') }}';
-    var userName = '{{ $username }}';
+    var userName = '{{ Auth::user()->username }}';
     var projectId = '{{ $project->id }}';
     var chatRef = new Firebase(firebaseUrl + projectId + '/chat');
     // get DOM elements

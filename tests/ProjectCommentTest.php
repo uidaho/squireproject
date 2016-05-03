@@ -8,7 +8,7 @@ class ProjectCommentTest extends TestCase
 {
 
     private $user = null;
-    private $entry = null;
+    private $project = null;
 
     /**
      * Prepare for the test, creating a user and entry to work with during the test.
@@ -19,7 +19,7 @@ class ProjectCommentTest extends TestCase
 
         // Ensure that the entry was deleted in the case of a failed test.
         $this->beforeApplicationDestroyed(function() {
-            $this->entry->delete();
+            $this->project->delete();
             $this->user->delete();
         });
 
@@ -29,7 +29,7 @@ class ProjectCommentTest extends TestCase
             'password' => 'password'
         ]);
 
-        $this->entry = \App\Project::create([
+        $this->project = \App\Project::create([
             'author' => $this->user->username,
             'title' => 'Test Project',
             'description' => 'For testing',
@@ -44,13 +44,13 @@ class ProjectCommentTest extends TestCase
      */
     public function testUserPermissions()
     {
-        $this->visit($this->entry->getSlug())
+        $this->visit($this->project->getSlug())
             ->see('Warning')
             ->see('comment-login')
             ->dontSeeLink('Send');
 
         $this->actingAs($this->user)
-            ->visit($this->entry->getSlug())
+            ->visit($this->project->getSlug())
             ->dontSee('Warning')
             ->see('submit-comment');
     }
@@ -61,10 +61,10 @@ class ProjectCommentTest extends TestCase
     public function testCreate()
     {
         $this->actingAs($this->user)
-            ->visit($this->entry->getSlug())
+            ->visit($this->project->getSlug())
             ->type('Please, can we just go back and get the Toshiba Handibook?', 'comment_body')
             ->press('submit-comment')
-            ->seePageIs($this->entry->getSlug())
+            ->seePageIs($this->project->getSlug())
             ->seeInDatabase('project_comments', ['comment_body' => 'Please, can we just go back and get the Toshiba Handibook?'])
             ->see('Comment submitted')
             ->see('Please, can we just go back and get the Toshiba Handibook?')
@@ -73,7 +73,7 @@ class ProjectCommentTest extends TestCase
             ->see('submit-comment');
 
         //Delete comment
-        $this->entry->comments()->delete();
+        $this->project->comments()->delete();
     }
 
     /**
@@ -82,11 +82,11 @@ class ProjectCommentTest extends TestCase
     public function testNonUserCommentView()
     {
         $this->actingAs($this->user)
-            ->visit($this->entry->getSlug())
+            ->visit($this->project->getSlug())
             ->type('The most rewarding part was when he gave me my money.', 'comment_body')
             ->press('submit-comment')
             ->click('Sign out')
-            ->visit($this->entry->getSlug())
+            ->visit($this->project->getSlug())
             ->see('The most rewarding part was when he gave me my money.')
             ->dontSee('comment-edit')
             ->dontSee('comment-delete')
@@ -94,7 +94,7 @@ class ProjectCommentTest extends TestCase
             ->see('comment-login');
 
         //Delete comment
-        $this->entry->comments()->delete();
+        $this->project->comments()->delete();
     }
 
     /**
@@ -103,7 +103,7 @@ class ProjectCommentTest extends TestCase
     public function testDelete()
     {
         $this->actingAs($this->user)
-            ->visit($this->entry->getSlug())
+            ->visit($this->project->getSlug())
             ->type('Screw you guys I\'m going home.', 'comment_body')
             ->press('submit-comment')
             ->press('comment-delete')
@@ -117,7 +117,7 @@ class ProjectCommentTest extends TestCase
     public function testEdit()
     {
         $this->actingAs($this->user)
-            ->visit($this->entry->getSlug())
+            ->visit($this->project->getSlug())
             ->type('Join the dark side.', 'comment_body')
             ->press('submit-comment')
             ->press('comment-edit')
@@ -125,12 +125,12 @@ class ProjectCommentTest extends TestCase
             ->see('Join the dark side.')
             ->type('No join the light side.', 'comment_body')
             ->press('submit-comment')
-            ->seePageIs($this->entry->getSlug())
+            ->seePageIs($this->project->getSlug())
             ->seeInDatabase('project_comments', ['comment_body' => 'No join the light side.'])
             ->dontSeeInDatabase('project_comments', ['comment_body' => 'Join the dark side.'])
             ->see('No join the light side.');
 
         //Delete comment
-        $this->entry->comments()->delete();
+        $this->project->comments()->delete();
     }
 }

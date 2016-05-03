@@ -40,10 +40,27 @@ Route::post('project/create', 'ProjectController@create');
 Route::get('project/delete/{project}', 'ProjectController@delete');
 Route::get('project', 'ProjectController@listProjects');
 Route::get('projects', 'ProjectController@listProjects');
-Route::get('project/view/{projectname}', 'ProjectController@view');
-Route::get('project/{projectname}', 'ProjectController@view'); // overloads go last.
-Route::get('project/follow/{project}', 'ProjectController@addFollower');
-Route::get('project/unfollow/{project}', 'ProjectController@removeFollower');
+Route::get('project/view/{project}', 'ProjectController@view');
+Route::get('project/{project}', 'ProjectController@view'); // overloads go last.
+Route::get('project/follow/{project}', 'ProjectController@follow');
+Route::get('project/unfollow/{project}', 'ProjectController@unFollow');
+Route::get('project/request/join/{project}', 'ProjectController@requestMembership');
+Route::get('project/request/cancel/{project}', 'ProjectController@cancelMembershipRequest');
+Route::get('project/leave/{project}', 'ProjectController@leaveProject');
+
+/*------------------------------*
+ *  Project Member Controller   *
+ *------------------------------*/
+Route::get('project/private/{project}', 'ProjectMembersController@view');
+Route::post('project/request/accepted/{project}/{user}', 'ProjectMembersController@acceptMembershipRequest');
+Route::delete('project/request/denied/{project}/{user}', 'ProjectMembersController@denyMembershipRequest');
+Route::patch('project/promote/{project}/{member}', 'ProjectMembersController@promoteToAdmin');
+Route::patch('project/demote/{project}/{member}', 'ProjectMembersController@demoteFromAdmin');
+Route::delete('project/kick/{project}/{member}', 'ProjectMembersController@kickMember');
+Route::patch('project/edit/banner/{project}', 'ProjectMembersController@editBanner');
+Route::patch('project/edit/statement/{project}', 'ProjectMembersController@editStatement');
+Route::patch('project/edit/customtab/{project}', 'ProjectMembersController@editCustomTab');
+
 
 /*--------------------------------*
  *  Project Comments Controller   *
@@ -67,10 +84,10 @@ Route::post('editor/rename/{projectname}/{filename}', 'EditorController@rename')
 Route::get('editor/delete/{projectname}/{filename}', 'EditorController@deleteView');
 Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete');
 Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
-Route::get('editor/edit/{projectname}', 'EditorController@listFiles');
-Route::get('editor/edit', 'ProjectController@listProjects');
-Route::get('editor/list/{projectname}', 'EditorController@listFiles');
-Route::get('editor/list', 'ProjectController@listProjects');
+Route::get('editor/edit/{project}', 'EditorController@listFiles');
+Route::get('editor/edit', 'EditorController@index');
+Route::get('editor/list/{project}', 'EditorController@listFiles');
+Route::get('editor/list', 'EditorController@index');
 Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/{projectname}', 'EditorController@listFiles');
 Route::get('editor', 'EditorController@index');
@@ -78,7 +95,11 @@ Route::get('editor', 'EditorController@index');
 /*-----------------------*
  *  Profile Controller   *
  *-----------------------*/
- 
+ //Replace when profile gets added
+Route::get('profile1', 'ProfileController@view');
+//Change user to profile object
+Route::delete('profile1/delete/{user}', 'ProfileController@deleteUser');
+
  
  /*-----------------------*
   *  Settings Controller  *
