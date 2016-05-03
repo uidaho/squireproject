@@ -68,4 +68,20 @@ class ProfileController extends Controller
 
         return view('profile.comments', ['username' => Auth::user()]);
     }
+
+	public function editView($username)
+    {
+		$user = User::where('username', $username)->firstOrFail();
+        return view('profile.edit', ['user' => $user]);
+    }
+
+    public function editViewDefault()
+    {
+	if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        return view('profile.edit', ['username' => Auth::user()]);
+    }
+
 }
