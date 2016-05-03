@@ -93,7 +93,9 @@
         var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId, userName);
         firepad.on('ready', function() {
             if (firepad.isHistoryEmpty()) {
-                firepad.setText('{{$file->contents}}');
+                var contents = '{{$file->contents}}';
+                firepad.setText(contents);
+                firepad.firebaseAdapter_.saveCheckpoint_();
             }
         });
 
@@ -103,7 +105,6 @@
 
         function submitForm() {
             if (firepad != null) {
-//                firepad.firebaseAdapter_.saveCheckpoint_();
                 document.getElementById('contents-form').submit()
             } else {
                 {{ Session::flash('error', 'Firepad not ready yet.') }}
@@ -140,7 +141,7 @@
             var nameElement = $("<strong class='project-chat-username'></strong>")
             nameElement.text(username);
             messageElement.text(message).prepend(nameElement);
-            messageList.append(messageElement)
+            messageList.append(messageElement);
             // scroll to bottom of list
             messageList[0].scrollTop = messageList[0].scrollHeight;
         });

@@ -56,7 +56,25 @@ class EditorController extends Controller
         $userid = Auth::user()->id;
         $files = File::forProject($project)->get();
 
+<<<<<<< HEAD
         return view('editor.list', ['project' => $project, 'files' => $files, 'userid' => $userid]);
+=======
+        if (empty($files[0])) {
+            File::create([
+                'project_id'    => $project->id,
+                'projectname'   => $project->title,
+                'filename'      => 'Main.java',
+                'type'          => 'File',
+                'description'   => 'Entry point of the project',
+                'contents'      => '/* Program starts here. */\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\n\t}\n}',
+                'user_id'       => Auth::user()->id,
+                'parent'        => 0
+            ]);
+            $files = File::forProject($project)->get();
+        }
+
+        return view('editor.list', ['files' => $files, 'userid' => $userid, 'username' => $username, 'project' => $project]);
+>>>>>>> Implemented default entry point in Main.java
     }
 
     /**
@@ -206,7 +224,7 @@ class EditorController extends Controller
             }
         }
 
-        $jarOutput = shell_exec('cd ' . $compilationPath . '; jar cvfe "' . $projectname . '.jar" Main *.class');
+        $jarOutput = shell_exec('cd "' . $compilationPath . '"; jar cvfe "' . $projectname . '.jar" Main *.class');
 
         if ($jarOutput == null) {
             return $jarOutput;
