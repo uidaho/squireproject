@@ -12,7 +12,9 @@
     <section class="r-banner">
         <img class="" src="{{ $project->getBannerImagePath() }}" alt="Banner Image">
         <!-- Trigger banner edit modal -->
-        <button name="banner-edit" type="submit" class="btn btn-default admin-only" data-toggle="modal" data-target="#edit-banner">Edit</button>
+        @if ($project->isProjectAdmin())
+            <button name="banner-edit" type="submit" class="btn btn-default admin-only" data-toggle="modal" data-target="#edit-banner">Edit</button>
+        @endif
     </section>
 
     <section class="row r-hide-links">
@@ -21,7 +23,7 @@
             <!-- Left Gap -->
             <div class="col-md-2">
                 <!-- Pending Users-->
-                @if ($project->requests != null && $project->isProjectAdmin())
+                @if (count($project->requests) > 0 && $project->isProjectAdmin())
                     <div class="well r-pending-users">
                         <h4>Requests to Join the Project</h4>
                         <table class="table table-striped table-hover ">
@@ -67,9 +69,10 @@
                 <div class="well r-description">
                     <div class="r-edit-container">
                         <h4>{{ $project->statement_title }}</h4>
-                        <button name="statement-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-statement">Edit</button>
+                        @if ($project->isProjectAdmin())
+                            <button name="statement-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-statement">Edit</button>
+                        @endif
                     </div>
-                    <!-- Todo display actual user input here -->
                     <p>{{ $project->statement_body }}</p>
                 </div>
 
@@ -114,7 +117,9 @@
                     <section class="tab-pane fade active in r-tab-inside-body" id="custom-tab">
                         <div class="r-edit-container">
                             <h1>{{ $project->tab_title }}</h1>
-                            <button name="customtab-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-customtab">Edit</button>
+                            @if ($project->isProjectAdmin())
+                                <button name="customtab-edit" type="submit" class="btn btn-xs btn-default admin-only" data-toggle="modal" data-target="#edit-customtab">Edit</button>
+                            @endif
                         </div>
                         <p>{{ $project->tab_body }}</p>
                     </section>
@@ -242,25 +247,6 @@
         </div>
 
     </section>
-
-    <!-- Edit Button Hiding -->
-    <script>
-        var isAdmin = "<?php echo $project->isProjectAdmin(); ?>";
-
-        //Hide edit buttons from non-admins
-        function hideEditButtons() {
-            if (!isAdmin) {
-                var items = document.getElementsByClassName('admin-only');
-
-                for (var i = 0; i < items.length; i++)
-                {
-                    items[i].style.visibility = 'hidden';
-                }
-            }
-        }
-
-        window.onload = hideEditButtons();
-    </script>
 
     <!-- Chat -->
     <script>
