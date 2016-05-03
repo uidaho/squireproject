@@ -32,11 +32,12 @@ class ProfileController extends Controller
 
     public function friendViewDefault()
     {
-	if (Auth::guest()) {
+		if (Auth::guest())
+		{
             return redirect('/login');
         }
 
-        return view('profile.friends', ['username' => Auth::user()]);
+        return view('profile.friends', ['user' => Auth::user()]);
     }
 
     public function projectView($username)
@@ -47,11 +48,12 @@ class ProfileController extends Controller
 
     public function projectViewDefault()
     {
-	if (Auth::guest()) {
+		if (Auth::guest())
+		{
             return redirect('/login');
         }
 
-        return view('profile.projects', ['username' => Auth::user()]);
+        return view('profile.projects', ['user' => Auth::user()]);
     }
 
     public function commentsView($username)
@@ -62,11 +64,12 @@ class ProfileController extends Controller
 
     public function commentsViewDefault()
     {
-	if (Auth::guest()) {
+		if (Auth::guest())
+		{
             return redirect('/login');
         }
 
-        return view('profile.comments', ['username' => Auth::user()]);
+        return view('profile.comments', ['user' => Auth::user()]);
     }
 
 	public function editView($username)
@@ -77,11 +80,35 @@ class ProfileController extends Controller
 
     public function editViewDefault()
     {
-	if (Auth::guest()) {
+		if (Auth::guest())
+		{
             return redirect('/login');
         }
 
-        return view('profile.edit', ['username' => Auth::user()]);
+        return view('profile.edit', ['user' => Auth::user()]);
+    }
+
+	public function updateProfile(Request $request)
+    {
+		if (Auth::guest())
+		{
+            return redirect('/login');
+        }
+
+        $user = Auth::user();
+
+		$user->profile->first_name = $request['first_name'];
+		$user->profile->last_name = $request['last_name'];
+		$user->profile->date_of_birth = $request['date_of_birth'];
+		$user->email = $request['email'];
+		$user->profile->phone = $request['phone'];
+		$user->profile->address = $request['address'];
+		$user->profile->gender = $request['gender'];
+		$user->profile->gender = $request['biography'];
+
+		$user->save();
+		$user->profile()->save();
+
     }
 
 }

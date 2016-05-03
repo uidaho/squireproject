@@ -102,6 +102,7 @@ Route::get('editor/list', 'EditorController@index');
 /*-----------------------*
  *  Profile Controller   *
  *-----------------------*/
+Route::post('profile/update', 'ProfileController@updateProfile');
 Route::get('profile/edit/{username}','ProfileController@editView');//Implemented
 Route::get('profile/edit/{username}','ProfileController@editViewDefault');//Implemented
 Route::get('profile/view/{username}','ProfileController@profileView');//Implemented

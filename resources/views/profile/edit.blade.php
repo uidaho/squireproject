@@ -12,26 +12,26 @@
             <div class="form-group">
                 <label for="inputEmail" class="col-lg-2 control-label">First Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="first_name" placeholder="First Name" >
+                    <input type="text" class="form-control" id="first_name" placeholder="First Name" value="{{$user->profile->first_name}}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="col-lg-2 control-label">Last Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="last_name" placeholder="Last Name" >
+                    <input type="text" class="form-control" id="last_name" placeholder="Last Name" value="{{$user->profile->last_name}}">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Birth Date</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="date_of_birth" placeholder="Birth Date" value="{{old('date_of_birth')}}">
+                    <input type="text" class="form-control" id="date_of_birth" placeholder="Birth Date" value="{{$user->profile->date_of_birth}}">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Email</label>
                 <div class="col-lg-10">
-                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <input type="email" class="form-control" id="email" placeholder="Email" value="{{$user->email}}">
                 </div>
             </div>
             <div class="form-group">
@@ -51,13 +51,13 @@
                 <div class="col-lg-10">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" checked="">
                             Male
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="1">
                             Femail
                         </label>
                     </div>
