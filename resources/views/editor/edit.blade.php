@@ -43,14 +43,6 @@
                             <em class="glyphicon glyphicon-trash"></em> Delete
                     </a>
                 </div>
-                <div class="btn-group" role="group" aria-label="Compiler button group">
-                    <a href="/editor/compile/{{$file->projectname}}/{{$file->filename}}" type="submit" onclick="submitForm()" class="btn btn-default btn-sm">
-                        <em class="glyphicon glyphicon-flash"></em> Compile
-                    </a>
-                    <a href="#" class="btn btn-default btn-sm">
-                        <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
-                    </a>
-                </div>
             </div>
         </div>
     </div>
@@ -102,14 +94,6 @@
         firepad.on('synced', function() {
             firepad.firebaseAdapter_.saveCheckpoint_();
         });
-
-        function submitForm() {
-            if (firepad != null) {
-                document.getElementById('contents-form').submit()
-            } else {
-                {{ Session::flash('error', 'Firepad not ready yet.') }}
-            }
-        }
     </script>
 
     <script>

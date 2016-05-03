@@ -10,6 +10,12 @@
 @section('mainBody')
 @include('inserts.breadcrumb')
 <div class="row">
+    <div class="col-md-offset-3 col-md-6">
+        <div id="compilation-message-banner" class="alert alert-info alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <p id="compilation-message"></p>
+        </div>
+    </div>
     <div class="col-md-12">
         <!-- Toolbar -->
         <div class="btn-toolbar" role="toolbar" aria-label="File list toolbar">
@@ -26,7 +32,7 @@
                     </button>
                 </a>
 
-                <a id="download-link" onclick="downloadCompilation()">
+                <a id="download-link">
                     <button id="download-compilation" class="btn btn-default btn-sm">
                         <em class="glyphicon glyphicon-download"></em> Download
                     </button>
@@ -57,8 +63,11 @@
 </div>
     
 <script>
-    var key = '';
     $('#download-compilation').prop('disabled', true);
+    var compilationMessageBanner = $('#compilation-message-banner');
+    var compilationMessage = $('#compilation-message');
+    compilationMessageBanner.hide();
+
 
     // connect to firebase
     var firebaseUrl = '{{ env('FIREBASE_URL') }}';
@@ -93,24 +102,31 @@
         messageList[0].scrollTop = messageList[0].scrollHeight;
     });
 
+    function displayCompilationMessage(message) {
+        compilationMessage.text(message);
+        compilationMessageBanner.show();
+    }
 
     function compileProject() {
         $('#compile-button').prop('disabled', true);
-        $('#download-compilationc').prop('disabled', true);
+        var downloadButton = $('#download-compilation');
+        downloadButton.prop('disabled', true);
 
         $.get('/editor/compile/{{ $files[0]->projectname }}', function (data, status) {
-            if (status == 'success') {
-                $('#compile-button').prop('disabled', false);
-                $('#download-compilation').prop('disabled', false);
-                key = data;
+            var result = JSON.parse(data);
+            console.log(result);
+            if (result.status == 'failed') {
+                if (result.redirect) {
+                    window.location.href = result.redirect;
+                }
+            } else {
+                displayCompilationMessage('Successfully compiled.');
+                $('#download-link').attr('href', result.downloadUrl);
+                downloadButton.prop('disabled', false);
             }
-        });
-    }
 
-    function downloadCompilation() {
-        var link = $('#download-link');
-        link.attr('href', '/editor/downloadCompilation/{{ $files[0]->projectname }}/' + key);
-        link.click();
+            $('#compile-button').prop('disabled', false);
+        });
     }
 </script>
 @stop

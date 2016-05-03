@@ -9,6 +9,7 @@ use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class EditorController extends Controller
 {
@@ -203,7 +204,6 @@ class EditorController extends Controller
         $firebase = new \Firebase\FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
 
         $compilationPath = $this->makeCompilationDirectory($projectname);
-
         $fileNames = [];
 
         foreach ($files as $file) {
@@ -214,10 +214,18 @@ class EditorController extends Controller
             file_put_contents($filePath, $contents);
         }
 
-        $output = shell_exec('cd "' . $compilationPath . '"; javac *.java 2>&1');
+        $key = substr($compilationPath, strpos($compilationPath, '_') + 1);
 
+        $failRedirect = '/editor/compilation/' . $projectname . '/' . $key;
+
+        $output = shell_exec('cd "' . $compilationPath . '"; javac *.java 2>&1');
         if ($output != null) {
-            return $output;
+            file_put_contents($compilationPath . '/result', $output);
+            return json_encode([
+                'status' => 'failed',
+                'message' => 'Failed in compilation phase.',
+                'redirect' => $failRedirect
+            ]);
         }
 
         array_walk($fileNames, function($path) {
@@ -229,10 +237,18 @@ class EditorController extends Controller
         $jarOutput = shell_exec('cd "' . $compilationPath . '"; jar cvfe "' . $projectname . '.jar" Main *');
 
         if ($jarOutput == null) {
-            return $jarOutput;
+            file_put_contents($compilationPath . '/result', $jarOutput);
+            return json_encode([
+                'status' => 'failed',
+                'message' => 'Failed in jar packaging phase.',
+                'redirect' => $failRedirect
+            ]);
         }
 
-        return substr($compilationPath, strpos($compilationPath, '_') + 1);
+        return json_encode([
+            'status' => 'success',
+            'downloadUrl' =>  '/editor/downloadCompilation/' . $projectname . '/' . $key
+        ]);
     }
 
     public function makeCompilationDirectory($projectname) {
@@ -294,6 +310,12 @@ class EditorController extends Controller
         );
 
         return \Illuminate\Support\Facades\Response::download($path, $projectname . '.jar', $headers);
+    }
+
+    public function viewCompilation($projectname, $key) {
+        $contents = file_get_contents(base_path('compile/' . $projectname . '_' . $key . '/result'));
+
+        return view('editor.compilation', compact(['key', 'contents']));
     }
 }
 
