@@ -1,13 +1,11 @@
 @extends('layouts.main_layout')
 
 @section('head')
-    <title>{{$username}}s Projects</title>
-@stop
+    <title>User Profile</title>
+@endsection
 
 @section('mainBody')
-    <div>
-	<p> Projects </p>
-
-	<!-- Template: http://wrapbootstrap.com/preview/WB09JXK43 -->
-    </div>
+    @include('inserts.breadcrumb')
+    {{Auth::user()->username }}
+    {{Auth::user()->id}}
 @stop

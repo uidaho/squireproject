@@ -46,5 +46,7 @@
 				<div/>
 			<div/>
 		<div/>
+				<a href="/editprofile/{{$user->id}}">Edit Profile</a>
+                    		<a href="/profileprojects">User Projects</a>
     </div>
 @stop
