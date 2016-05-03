@@ -19,7 +19,10 @@
         </form>
         <!-- Toolbar -->
         <div class="btn-toolbar" role="toolbar" aria-label="File list toolbar">
-            <div class="btn-group" role="group" aria-label="File command group">
+            <div class="btn-group r-dual-buttons" role="group" aria-label="File command group">
+                <a href="/project/private/{{ $project->title }}" class="btn btn-default btn-sm">
+                    <em class="glyphicon glyphicon-home"></em> Project Home
+                </a>
                 <a href="/editor/create/{{ $project->title }}" class="btn btn-default btn-sm">
                     <em class="glyphicon glyphicon-plus"></em> Create
                 </a>

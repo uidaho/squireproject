@@ -327,8 +327,11 @@ Extra
 
 .r-bound
 {
-    
     word-wrap: break-word;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.r-dual-buttons a, .r-dual-buttons button {
+    margin-right: 10px;
 }

@@ -21,6 +21,9 @@
         <div class="col-md-12">
             <div class="btn-toolbar" role="toolbar" aria-label="Editor toolbar">
                 <div class="btn-group" role="group" aria-label="File button group">
+                    <a href="/project/private/{{ $project->title }}" class="btn btn-default btn-sm">
+                        <em class="glyphicon glyphicon-home"></em> Project Home
+                    </a>
                     <a href="/editor/list/{{$file->projectname}}" class="btn btn-default btn-sm">
                         <em class="glyphicon glyphicon-open-file"></em> Open
                     </a>
