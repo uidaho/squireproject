@@ -12,13 +12,13 @@ class ProfileController extends Controller
 {
     public function profileView($username)
     {
-		$user = User::where('username', $username)->firstOrFail();
+        $user = User::where('username', $username)->firstOrFail();
         return view('profile.view', ['user' => $user]);
     }
 
     public function profileViewDefault()
     {
-	if (Auth::guest()) {
+        if (Auth::guest()) {
             return redirect('/login');
         }
 
@@ -28,14 +28,13 @@ class ProfileController extends Controller
 
     public function friendView($username)
     {
-		$user = User::where('username', $username)->firstOrFail();
+        $user = User::where('username', $username)->firstOrFail();
         return view('profile.friends', ['user' => $user]);
     }
 
     public function friendViewDefault()
     {
-		if (Auth::guest())
-		{
+        if (Auth::guest()) {
             return redirect('/login');
         }
 
@@ -44,14 +43,13 @@ class ProfileController extends Controller
 
     public function projectView($username)
     {
-		$user = User::where('username', $username)->firstOrFail();
+        $user = User::where('username', $username)->firstOrFail();
         return view('profile.projects', ['user' => $user]);
     }
 
     public function projectViewDefault()
     {
-		if (Auth::guest())
-		{
+        if (Auth::guest()) {
             return redirect('/login');
         }
 
@@ -60,48 +58,45 @@ class ProfileController extends Controller
 
     public function commentsView($username)
     {
-		$user = User::where('username', $username)->firstOrFail();
+        $user = User::where('username', $username)->firstOrFail();
         return view('profile.comments', ['user' => $user]);
     }
 
     public function commentsViewDefault()
     {
-		if (Auth::guest())
-		{
+        if (Auth::guest()) {
             return redirect('/login');
         }
 
         return view('profile.comments', ['user' => Auth::user()]);
     }
 
-	public function editView($username)
+    public function editView($username)
     {
-		$user = User::where('username', $username)->firstOrFail();
+        $user = User::where('username', $username)->firstOrFail();
         return view('profile.edit', ['user' => $user]);
     }
 
     public function editViewDefault()
     {
-		if (Auth::guest())
-		{
+        if (Auth::guest()) {
             return redirect('/login');
         }
 
         return view('profile.edit', ['user' => Auth::user()]);
     }
 
-	public function updateProfile(Request $request)
+    public function updateProfile(Request $request)
     {
-		if (Auth::guest())
-		{
+        if (Auth::guest()) {
             return redirect('/login');
         }
 
-		$user = Auth::user();
+        $user = Auth::user();
 
-		$user->profile->update($request->all());
+        $user->profile->update($request->all());
 
-        return redirect('/profile/'.$user->username);
+        return redirect('/profile/' . $user->username);
     }
 
 }
