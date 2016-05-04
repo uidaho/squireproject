@@ -9,3 +9,4 @@ Homestead.json
 composer.lock
 /compile/*
 /tmp/*
+composer.ol
