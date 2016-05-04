@@ -29,6 +29,7 @@ class SettingsController extends Controller
 
     public function update(Request $request)
     {
+        return redirect('/settings');
         $settings = Settings::where('user_id', Auth::user()->id)->first();
         $settings->nickname = $request->get('nickname');
 
@@ -64,17 +65,7 @@ class SettingsController extends Controller
         if (Auth::guest()) {
             return redirect('auth.login');
         }
-
-        if (Settings::where('user_id', '=', Auth::user()->id) === 0) {
-            return Settings::create([
-                'nickname' => Auth::user()->username,
-                'enable_chat' => 1,
-            ]);
-            
-        } else {
-            return view('settings.settings', ['enable_chat' => 1]);
-
-        }
+        return view('settings.settings');
     }
 }
 

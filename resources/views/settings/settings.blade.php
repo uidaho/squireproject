@@ -15,7 +15,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <fieldset>
                     <legend>Settings</legend>
-                    <!--
+
                     <div class="form-group">
                         <label for="Nickname" class="col-lg-2 control-label">Nickname</label>
                         <div class="col-lg-10">
@@ -27,17 +27,8 @@
                                 </div>
                             </div>
                         </div>
-
-
                     <div class="form-group">
-                        <label for="Bio" class="col-lg-2 control-label">Bio</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="3" id="textArea"></textarea>
-                            <span class="help-block">Write a bio for yourself!</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        -->
+
 
                         <label class="col-lg-2 control-label">Chat Options</label>
                         <div class="col-lg-10">
@@ -55,25 +46,38 @@
                             </div>
                         </div>
                     </div>
-                    <!--
                     <div class="form-group">
-                        <label for="select" class="col-lg-2 control-label">Font/color choices</label>
+                        <label for="select" class="col-lg-2 control-label">Color of editor font</label>
                         <div class="col-lg-10">
                             <select class="form-control" id="select">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option>Red</option>
+                                <option>Orange</option>
+                                <option>Yellow</option>
+                                <option>Green</option>
+                                <option>Blue</option>
+                                <option>Purple</option>
                             </select>
                             <br>
                         </div>
                     </div>
-                    -->
+                    <div class="form-group">
+                        <label for="select" class="col-lg-2 control-label">Font of editor</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" id="select">
+                                <option>Times New Roman</option>
+                                <option>Sans Serif</option>
+                                <option>Comic Sans</option>
+                                <option>Helvetica</option>
+                                <option>Calibre</option>
+                                <option>Ariel</option>
+                            </select>
+                            <br>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             <button type="reset" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Apply</button>
+                            <button  class="btn btn-primary">Apply</button>
                         </div>
                     </div>
 
