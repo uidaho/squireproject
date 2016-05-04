@@ -1,7 +1,7 @@
 @extends('layouts.main_layout')
 
 @section('head')
-    <title>{{$user->username}}s Profile</title>
+    <title>{{$user->username}}&apos;s Profile</title>
 @endsection
 
 @section('mainBody')
@@ -19,7 +19,7 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-md-2">
-						<img class="center-block" scr="{{$user->profile->profile_url}}">
+						<div class="center-block project-image" style="background-image: url({{$user->profile->getProfileImagePath()}});"></div>
 						<div class="">
 							<h2 class="center"> {{$user->username}}</h2>
 							@if ($user->username != Auth::user()->username)

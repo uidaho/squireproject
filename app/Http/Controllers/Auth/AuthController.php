@@ -75,9 +75,7 @@ class AuthController extends Controller
 
 		$profile = Profile::create([
 			'user_id' => $user->id,
-			'date_of_birth' => "01/01/2016",
-			'first_name' => "Joe",
-			'last_name' => "Blow"
+			'picture' => "default-avatar.jpg"
 		]);
 
 		$user->profile()->save($profile);

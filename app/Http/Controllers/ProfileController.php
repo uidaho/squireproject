@@ -97,10 +97,11 @@ class ProfileController extends Controller
             return redirect('/login');
         }
 
-		Auth::user()->profile->update($request->all());
+		$user = Auth::user();
 
-		return back();
+		$user->profile->update($request->all());
 
+        return redirect('/profile/'.$user->username);
     }
 
 }
