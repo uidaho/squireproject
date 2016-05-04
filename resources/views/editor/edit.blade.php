@@ -43,6 +43,18 @@
                             <em class="glyphicon glyphicon-trash"></em> Delete
                     </a>
                 </div>
+                <div class="btn-group" role="group">
+                    <a onclick="compileProject()">
+                        <button id="compile-button" class="btn btn-default btn-sm">
+                            <em class="glyphicon glyphicon-flash"></em> Compile
+                        </button>
+                    </a>
+                    <a id="download-link">
+                        <button id="download-compilation" class="btn btn-default btn-sm">
+                            <em class="glyphicon glyphicon-download"></em> Download
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -97,6 +109,12 @@
     </script>
 
     <script>
+        $('#download-compilation').prop('disabled', true);
+        var compilationMessageBanner = $('#compilation-message-banner');
+        var compilationMessage = $('#compilation-message');
+        compilationMessageBanner.hide();
+
+
         // connect to firebase
         var firebaseUrl = '{{ env('FIREBASE_URL') }}';
         var userName = '{{ $username }}';
@@ -129,5 +147,33 @@
             // scroll to bottom of list
             messageList[0].scrollTop = messageList[0].scrollHeight;
         });
+
+
+        function displayCompilationMessage(message) {
+            compilationMessage.text(message);
+            compilationMessageBanner.show();
+        }
+
+        function compileProject() {
+            $('#compile-button').prop('disabled', true);
+            var downloadButton = $('#download-compilation');
+            downloadButton.prop('disabled', true);
+
+            $.get('/editor/compile/{{ $file->projectname }}', function (data, status) {
+                console.log(data);
+                var result = JSON.parse(data);
+                if (result.status == 'failed') {
+                    if (result.redirect) {
+                        window.location.href = result.redirect;
+                    }
+                } else {
+                    displayCompilationMessage('Successfully compiled.');
+                    $('#download-link').attr('href', result.downloadUrl);
+                    downloadButton.prop('disabled', false);
+                }
+
+                $('#compile-button').prop('disabled', false);
+            });
+        }
     </script>
 @stop
