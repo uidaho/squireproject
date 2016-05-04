@@ -7,4 +7,6 @@ Homestead.json
 .env
 /.c9
 composer.lock
+/compile/*
+/tmp/*
 composer.ol

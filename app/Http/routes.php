@@ -78,22 +78,26 @@ Route::delete('project/comments/{projectComment}', 'ProjectCommentsController@de
  *-----------------------*/
 Route::get('editor/create/{projectname}', 'EditorController@createView');
 Route::post('editor/create/{projectname}', 'EditorController@create');
-Route::get('editor/import/{projectname}', 'EditorController@importView');
-Route::post('editor/import/{projectname}', 'EditorController@import');
-Route::get('editor/export/{projectname}', 'EditorController@exportView');
-Route::post('editor/export/{projectname}', 'EditorController@export');
 Route::get('editor/rename/{projectname}/{filename}', 'EditorController@renameView');
 Route::post('editor/rename/{projectname}/{filename}', 'EditorController@rename');
 Route::get('editor/delete/{projectname}/{filename}', 'EditorController@deleteView');
 Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete');
+
+/*-----------------------*
+ *  Compile Controller   *
+ *-----------------------*/
+Route::get('editor/compile/{project}', 'CompileController@compile');
+Route::get('editor/downloadCompilation/{project}/{key}', 'CompileController@downloadProjectCompilation');
+Route::get('editor/compilation/{project}/{key}', 'CompileController@viewCompilation');
+Route::get('editor/export/{project}/{filename}', 'CompileController@exportFile');
+Route::get('editor/import/{project}', 'CompileController@importView');
+Route::post('editor/import/{project}', 'CompileController@import');
+
 Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/edit/{project}', 'EditorController@listFiles');
 Route::get('editor/edit', 'EditorController@index');
 Route::get('editor/list/{project}', 'EditorController@listFiles');
 Route::get('editor/list', 'EditorController@index');
-Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
-Route::get('editor/{projectname}', 'EditorController@listFiles');
-Route::get('editor', 'EditorController@index');
 
 /*-----------------------*
  *  Profile Controller   *

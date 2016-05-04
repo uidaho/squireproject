@@ -6,12 +6,10 @@ use Cache;
 use App\File;
 use App\Project;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
 
 class EditorController extends Controller
 {
-    
     /**
      * Runs before every method in the class, useful for what's below.
      */
@@ -47,8 +45,9 @@ class EditorController extends Controller
     /**
      * Renders the file list view for the given project
      *
-     * @param string $projectname project name
+     * @param Project $project
      * @return mixed
+     * @internal param string $projectname project name
      */
     public function listFiles(Project $project)
     {
@@ -82,15 +81,13 @@ class EditorController extends Controller
 
         $this->validate($request, [
             'filename'      => 'required|unique:files,filename,NULL,id,project_id,'.$project->id.'|max:255|regex:/([A-Za-z0-9_.-]+)/',
-            'description'   => 'required',
-            'type'          => 'required',
         ]);
 
         $newEntry = File::create([
             'project_id'    => $project->id,
             'projectname'   => $project->title,
             'filename'      => $request->input('filename'),
-            'type'          => $request->input('type'),
+            'type'          => 'File',
             'description'   => $request->input('description'),
             'contents'      => "/* ".EditorController::quoteOfTheDay()." */",
             'user_id'       => Auth::user()->id,
@@ -147,9 +144,10 @@ class EditorController extends Controller
         if ($file->user_id == Auth::user()->id) { // for now, only allow creator user_id to delete their file
             // delete file from firebase
             $firebase_path = '/' + $file->project_id + '/' + $file->id;
+
             $firebase = new \Firebase\FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
             $firebase->delete($firebase_path);
-            
+
             // delete file record from database
             File::where('projectname', $projectname)->where('filename', $filename)->delete();
         }
@@ -217,3 +215,4 @@ class EditorController extends Controller
         }
     }
 }
+

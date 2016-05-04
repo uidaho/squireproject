@@ -39,23 +39,6 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-lg-2 control-label">Type</label>
-              <div class="col-lg-10">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="type" id="type" value="file" checked="">
-                    File
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="type" id="type2" value="directory">
-                    Directory
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
                 <a href="{{ back()->getTargetUrl() }}">
                     <button type="button" class="btn btn-danger">Cancel</button>
