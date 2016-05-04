@@ -4,11 +4,39 @@
 [![Total Downloads](https://poser.pugx.org/uidaho/squireproject/d/total.svg)](https://packagist.org/packages/uidaho/squireproject)
 [![Latest Stable Version](https://poser.pugx.org/uidaho/squireproject/v/stable.svg)](https://packagist.org/packages/uidaho/squireproject)
 [![Latest Unstable Version](https://poser.pugx.org/uidaho/squireproject/v/unstable.svg)](https://packagist.org/packages/uidaho/squireproject)
-[![License](https://poser.pugx.org/uidaho/squireproject/license.svg)](https://packagist.org/packages/uidaho/squireproject)
+[![License](https://poser.pugx.org/uidaho/squireproject/license.svg)](https://packagist.org/packages/uidaho/squireproject).
 
 Squire is a web-based collaborative software development environment with a project development center. Squire will allow multiple users to edit files and communicate in real time. Projects can be stubbed out and then other users can join and/or vote to support for their favorite projects. After a certain amount of support, planning, and documentation is reached for a project, the project becomes a fully fledged project and then community development can start. Think "kickstarter for code" where people pledge their help with the project and not just financial support.
 
+Table of Contents
+=================
+
+  * [The Squire Project](#the-squire-project)
+    * [Squire Requirements](#squire-requirements)
+      * [Obtaining a VPS](#obtaining-a-vps)
+      * [Securing your VPS](#securing-your-vps)
+      * [Create User](#create-user)
+      * [Install Composer](#install-composer)
+      * [Install Java](#install-java)
+      * [Install MySQL, Nginx and PHP5-FPM](#install-mysql-nginx-and-php5-fpm)
+    * [Configuration](#configuration)
+      * [Create Self-Signed SSL Certificate](#create-self-signed-ssl-certificate)
+      * [Configure Nginx](#configure-nginx)
+      * [Configure PHP5-FPM](#configure-php5-fpm)
+    * [Squire Installation](#squire-installation)
+      * [Create MySQL Database and User](#create-mysql-database-and-user)
+      * [Create Firebase Database](#create-firebase-database)
+      * [Install Squire](#install-squire)
+      * [Install phpMyAdmin (optional)](#install-phpmyadmin-optional)
+
 ## Squire Requirements
+Squire is easy to install if you have a webserver with the following pre-requises available you can skip ahead to [Squire Installation](#squire-installation).
+- Apache/NGINX Webserver pointing to the squireproject/public folder
+- PHP 5.6 or greater
+- Composer v1.0.0 or greater
+
+Otherwise, start with [Obtaining a VPS](#obtaining-a-vps) to create your hosting envionment.
+
 ### Obtaining a VPS
 ### Securing your VPS
 ```
