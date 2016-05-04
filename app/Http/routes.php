@@ -78,6 +78,7 @@ Route::delete('project/comments/{projectComment}', 'ProjectCommentsController@de
  *-----------------------*/
 Route::get('editor/create/{projectname}', 'EditorController@createView');
 Route::post('editor/create/{projectname}', 'EditorController@create');
+Route::get('editor/rename/{projectname}/{filename}', 'EditorController@renameView');
 Route::post('editor/rename/{projectname}/{filename}', 'EditorController@rename');
 Route::get('editor/delete/{projectname}/{filename}', 'EditorController@deleteView');
 Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete');

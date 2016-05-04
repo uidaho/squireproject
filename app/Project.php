@@ -11,6 +11,25 @@ class Project extends Model
         'title', 'author', 'user_id', 'description', 'body', 'statement_title', 'statement_body', 'tab_title', 'tab_body', 'created_at', 'updated_at'
     ];
 
+    public static function create(array $attributes = [])
+    {
+        $new = parent::create($attributes);
+
+        File::create([
+            'project_id'    => $new->id,
+            'projectname'   => $new->title,
+            'filename'      => 'Main.java',
+            'type'          => 'File',
+            'description'   => 'Entry point of ' . $new->title . '.',
+            'contents'      => '/* Program starts here. */\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\n\t}\n}',
+            'user_id'       => Auth::user()->id,
+            'parent'        => 0 // TODO: no parent for now, flat file system
+        ]);
+
+        return $new;
+    }
+
+
     protected $perPage = 16;
 
     /**

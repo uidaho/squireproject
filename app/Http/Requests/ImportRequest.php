@@ -20,7 +20,8 @@ class ImportRequest extends Request
 
     public function project() {
         if ($this->project == null) {
-            $this->project = Project::fromName(substr($this->url(), strrpos($this->url(), '/') + 1))->firstOrFail();
+            $title = urldecode(substr($this->url(), strrpos($this->url(), '/') + 1));
+            $this->project = Project::fromName($title)->firstOrFail();
         }
         return $this->project;
     }

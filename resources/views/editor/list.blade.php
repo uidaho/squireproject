@@ -42,8 +42,6 @@
     </div>
 </div>
 <div class="row">
-
-
     <section class="col-md-12">
         <!-- Files -->
         @include('editor.filelist')

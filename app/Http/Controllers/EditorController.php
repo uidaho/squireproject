@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 
 class EditorController extends Controller
 {
-    
     /**
      * Runs before every method in the class, useful for what's below.
      */
@@ -46,33 +45,16 @@ class EditorController extends Controller
     /**
      * Renders the file list view for the given project
      *
-     * @param string $projectname project name
+     * @param Project $project
      * @return mixed
+     * @internal param string $projectname project name
      */
     public function listFiles(Project $project)
     {
         $userid = Auth::user()->id;
         $files = File::forProject($project)->get();
 
-<<<<<<< HEAD
         return view('editor.list', ['project' => $project, 'files' => $files, 'userid' => $userid]);
-=======
-        if (empty($files[0])) {
-            File::create([
-                'project_id'    => $project->id,
-                'projectname'   => $project->title,
-                'filename'      => 'Main.java',
-                'type'          => 'File',
-                'description'   => 'Entry point of the project',
-                'contents'      => '/* Program starts here. */\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\n\t}\n}',
-                'user_id'       => Auth::user()->id,
-                'parent'        => 0
-            ]);
-            $files = File::forProject($project)->get();
-        }
-
-        return view('editor.list', ['files' => $files, 'userid' => $userid, 'username' => $username, 'project' => $project]);
->>>>>>> Implemented default entry point in Main.java
     }
 
     /**
@@ -99,7 +81,6 @@ class EditorController extends Controller
 
         $this->validate($request, [
             'filename'      => 'required|unique:files,filename,NULL,id,project_id,'.$project->id.'|max:255|regex:/([A-Za-z0-9_.-]+)/',
-            'description'   => 'required',
         ]);
 
         $newEntry = File::create([
@@ -189,16 +170,6 @@ class EditorController extends Controller
         } else {
             return abort(404);
         }
-    }
-
-    public function rename($projectname, $filename)
-    {
-        $newName = \Illuminate\Support\Facades\Request::input('newName');
-        $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
-        $file->filename = $newName;
-        $file->save();
-
-        return redirect('/editor/edit/' . $projectname . '/' . $newName);
     }
 }
 
