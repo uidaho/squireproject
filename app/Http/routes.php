@@ -47,6 +47,9 @@ Route::get('project/unfollow/{project}', 'ProjectController@unFollow');
 Route::get('project/request/join/{project}', 'ProjectController@requestMembership');
 Route::get('project/request/cancel/{project}', 'ProjectController@cancelMembershipRequest');
 Route::get('project/leave/{project}', 'ProjectController@leaveProject');
+Route::patch('project/edit/image/{project}', 'ProjectController@editImage');
+Route::patch('project/edit/title/{project}', 'ProjectController@editTitle');
+Route::patch('project/edit/body/{project}', 'ProjectController@editBody');
 
 /*------------------------------*
  *  Project Member Controller   *
