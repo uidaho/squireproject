@@ -29,16 +29,17 @@ class ProjectMembersController extends Controller
         $userid = Auth::user()->id;
         $files = File::forProject($project)->get();
 
-        if(count($files) == 0) {
+        if (count($files) == 0) {
+
             File::create([
-                'project_id'    => $project->id,
-                'projectname'   => $project->title,
-                'filename'      => 'Main.java',
-                'type'          => 'File',
-                'description'   => 'Entry point of ' . $project->title . '.',
-                'contents'      => '/* Program starts here. */\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\n\t}\n}',
-                'user_id'       => Auth::user()->id,
-                'parent'        => 0 // TODO: no parent for now, flat file system
+                'project_id' => $project->id,
+                'projectname' => $project->title,
+                'filename' => 'Main.java',
+                'type' => 'File',
+                'description' => 'Entry point of ' . $project->title . '.',
+                'contents' => '/* Program starts here. */\npublic class Main {\n\tpublic static void main(String[] args) {\n\t\n\t}\n}',
+                'user_id' => Auth::user()->id,
+                'parent' => 0 // TODO: no parent for now, flat file system
             ]);
         }
         $files = File::forProject($project)->get();
