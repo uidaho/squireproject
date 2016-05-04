@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class App\Http\Controllers\ProjectCommentsController</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-App.html">
+						App<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-App.Console.html">
+						Console					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Events.html">
+						Events					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Exceptions.html">
+						Exceptions					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-App.Http.html">
+						Http<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-App.Http.Controllers.html">
+						Controllers<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-App.Http.Controllers.Auth.html">
+						Auth					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-App.Http.Middleware.html">
+						Middleware					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Http.Requests.html">
+						Requests					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-App.Jobs.html">
+						Jobs					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Policies.html">
+						Policies					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Providers.html">
+						Providers					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-App.Http.Controllers.Controller.html">Controller</a></li>
+				<li><a href="class-App.Http.Controllers.EditorController.html">EditorController</a></li>
+				<li><a href="class-App.Http.Controllers.PagesController.html">PagesController</a></li>
+				<li><a href="class-App.Http.Controllers.ProfileController.html">ProfileController</a></li>
+				<li class="active"><a href="class-App.Http.Controllers.ProjectCommentsController.html">ProjectCommentsController</a></li>
+				<li><a href="class-App.Http.Controllers.ProjectController.html">ProjectController</a></li>
+				<li><a href="class-App.Http.Controllers.ProjectMembersController.html">ProjectMembersController</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-App.Http.Controllers.html" title="Summary of App\Http\Controllers"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class ProjectCommentsController</h1>
+
+
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+Illuminate\Routing\Controller
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+			<a href="class-App.Http.Controllers.Controller.html"><span>App\Http\Controllers\Controller</span></a>
+			
+			
+			 uses 
+					Illuminate\Foundation\Auth\Access\AuthorizesRequests (not available)
+
+			
+					Illuminate\Foundation\Bus\DispatchesJobs (not available)
+
+			
+					Illuminate\Foundation\Validation\ValidatesRequests (not available)
+
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>App\Http\Controllers\ProjectCommentsController</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-App.html">App</a>\<a href="namespace-App.Http.html">Http</a>\<a href="namespace-App.Http.Controllers.html">Controllers</a><br>
+		
+
+			<b>Located at</b> Http/Controllers/ProjectCommentsController.php		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="addComment" id="_addComment">
+
+		<td class="attributes"><code>
+			 public 
+
+			back
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addComment">#</a>
+		<code>addComment( <span><code><a href="class-App.Http.Requests.CreateCommentRequest.html">App\Http\Requests\CreateCommentRequest</a></code> <var>$request</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span> )</code>
+
+		<div class="description short">
+			<p>Adds the comment to the given project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Adds the comment to the given project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$request</var></dt>
+					<dd>user entered text, $project data</dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					back<br>to same page
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="deleteComment" id="_deleteComment">
+
+		<td class="attributes"><code>
+			 public 
+
+			back
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteComment">#</a>
+		<code>deleteComment( <span>Illuminate\Http\Request <var>$request</var></span>, <span><code><a href="class-App.ProjectComment.html">App\ProjectComment</a></code> <var>$projectComment</var></span> )</code>
+
+		<div class="description short">
+			<p>Destroy the given project comment</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Destroy the given project comment</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$request</var></dt>
+					<dd>user entered data, $projectComment = data</dd>
+					<dt><var>$projectComment</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					back<br>to same page
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="editComment" id="_editComment">
+
+		<td class="attributes"><code>
+			 public 
+
+			to
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_editComment">#</a>
+		<code>editComment( <span><code><a href="class-App.ProjectComment.html">App\ProjectComment</a></code> <var>$projectComment</var></span> )</code>
+
+		<div class="description short">
+			<p>Goes to a page to edit the given project comment</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Goes to a page to edit the given project comment</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$projectComment</var></dt>
+					<dd>data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					to<br>edit comment page
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="updateComment" id="_updateComment">
+
+		<td class="attributes"><code>
+			 public 
+
+			back
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateComment">#</a>
+		<code>updateComment( <span><code><a href="class-App.Http.Requests.CreateCommentRequest.html">App\Http\Requests\CreateCommentRequest</a></code> <var>$request</var></span>, <span><code><a href="class-App.ProjectComment.html">App\ProjectComment</a></code> <var>$projectComment</var></span> )</code>
+
+		<div class="description short">
+			<p>Updates the comment for the given project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Updates the comment for the given project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$request</var></dt>
+					<dd>user entered text, $projectComment = data</dd>
+					<dt><var>$projectComment</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					back<br>to same page
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class Project extends Model
 {
     protected $fillable = [
-        'title', 'author', 'description', 'body', 'created_at', 'updated_at'
+        'title', 'author', 'user_id', 'description', 'body', 'statement_title', 'statement_body', 'tab_title', 'tab_body', 'created_at', 'updated_at'
     ];
 
     protected $perPage = 16;
@@ -20,7 +20,7 @@ class Project extends Model
      */
     public function getSlug()
     {
-        return '/project/' . $this->getSlugFriendlyTitle();
+        return '/project/' . $this->title;
     }
 
     /**
@@ -30,7 +30,8 @@ class Project extends Model
      */
     public function getSlugFriendlyTitle()
     {
-        return str_replace(' ', '-', $this->title);
+        //return str_replace(' ', '-', $this->title);  //deprecated
+        return $this->title;
     }
 
     /**
@@ -41,7 +42,8 @@ class Project extends Model
      */
     public static function getTitleFromSlug($slug)
     {
-        return str_replace('-', ' ', $slug);
+        //return str_replace('-', ' ', $slug);
+        return $slug;
     }
 
 
@@ -54,7 +56,7 @@ class Project extends Model
      */
     public static function fromSlug($slug)
     {
-        return (new static)->where('title', str_replace('-', ' ', $slug));
+        return (new static)->where('title', $slug);
     }
 
     /**
@@ -68,28 +70,49 @@ class Project extends Model
     }
 
     /**
-     * Get the path to the image for this project.
+     * Get the path to the project main image for this project.
      *
      * @return string the path
      */
-    public function getImagePath()
+    public function getProjectImagePath()
     {
         return '/images/projects/product' . $this->id . '.jpg';
     }
 
     /**
-     * Override the default model delete method to include deleting the image.
+     * Get the path to the banner image for this project.
+     *
+     * @return string the path
+     */
+    public function getBannerImagePath()
+    {
+        return '/images/projects/banner' . $this->id . '.jpg';
+    }
+
+    /**
+     * Override the default model delete method to include all connected data to the project including comments, requests, members, followers, project image, and banner.
      *
      * @return bool|null
      * @throws \Exception
      */
     public function delete()
     {
+        $this->comments()->delete();
+        $this->members()->delete();
+        $this->requests()->delete();
+        $this->followers()->delete();
+        $this->files()->delete();
+
         $res = parent::delete();
 
-        $imagePath = base_path() . '/public' .$this->getImagePath();
+        $imagePath = base_path() . '/public' .$this->getProjectImagePath();
         if (file_exists($imagePath)) {  // Shouldn't be null, let's check for sanity
             unlink($imagePath);
+        }
+
+        $bannerPath = base_path() . '/public' .$this->getBannerImagePath();
+        if (file_exists($bannerPath)) {  // Shouldn't be null, let's check for sanity
+            unlink($bannerPath);
         }
 
         return $res;
@@ -119,7 +142,7 @@ class Project extends Model
         return [
             'title' => Project::minMaxHelper(2, 32),
             'description' => Project::minMaxHelper(10, 75),
-            'project-body' => Project::minMaxHelper(100, 65535)
+            'project-body' => Project::minMaxHelper(100, 65535),
         ];
     }
 
@@ -130,28 +153,40 @@ class Project extends Model
         ];
     }
 
-    //Used for fetching the project's comments
-    public function comments()
-    {
-        return $this->hasMany(ProjectComment::class);
-    }
-    //Adds a comment to the project
-    public function addComment(ProjectComment $comment)
-    {
-        $comment->user_id = Auth::id();
-        return $this->comments()->save($comment);
-    }
-
-    //Lets Laravel know the project belongs to a user
+    /**
+     * Get the user of this project
+     *
+     * @return user
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
     /**
+     * Get the files of this project
      *
+     * @return files
+     */
+    public function files()
+    {
+        return $this->hasMany(File::class);
+    }
+
+    /**
+     * Get the comments of this project
      *
-     * @return 
+     * @return comments
+     */
+    public function comments()
+    {
+        return $this->hasMany(ProjectComment::class);
+    }
+
+    /**
+     * Get the followers of this project
+     *
+     * @return followers
      */
     public function followers()
     {
@@ -159,42 +194,71 @@ class Project extends Model
     }
 
     /**
+     * Gets the requests for this project
+     *
+     * @return requests
+     */
+    public function requests()
+    {
+        return $this->hasMany(ProjectRequest::class);
+    }
+
+    /**
+     * Gets members connected to this project
+     *
+     * @return members
+     */
+    public function members()
+    {
+        return $this->hasMany(ProjectMember::class);
+    }
+
+    /**
+     * Create a new comment for this project
+     *
+     * @param ProjectComment $comment
+     * @return new comment
+     */
+    public function addComment(ProjectComment $comment)
+    {
+        $comment->user_id = Auth::id();
+        return $this->comments()->save($comment);
+    }
+
+    /**
      * Get the count of followers for the project
      *
-     * @return
+     * @return int follower count
      */
     public function getFollowerCount()
     {
-        return count(ProjectFollower::where('project_id', '=', $this->id)->get());
+        return count($this->followers);
     }
 
     /**
      * Check if user is a follower of this project
      *
-     * @return
+     * @param Int $user_id
+     * @return boolean
      */
     public function isUserFollower($user_id = null)
     {
-        if (!Auth::guest()) {
-            if ($user_id == null)
-                $user_id = Auth::user()->id;
+        $isFollower = false;
 
-            $isUserFollower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
-            if ($isUserFollower != null)
-                $isUserFollower = true;
-            else
-                $isUserFollower = false;
-        }
-        else
-            $isUserFollower = false;
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
 
-        return $isUserFollower;
+        if ($this->followers()->where('user_id', $user_id)->first() != null)
+            $isFollower = true;
+
+        return $isFollower;
     }
 
     /**
      * Adds a follower to the project
      *
-     * @return
+     * @param Int user_id
+     * @return new follower object
      */
     public function addFollower($user_id = null)
     {
@@ -210,18 +274,150 @@ class Project extends Model
     }
 
     /**
-     * Deletes a follower to the project
+     * Deletes a follower from the project
      *
-     * @return
+     *  @param Int user_id
      */
     public function deleteFollower($user_id = null)
     {
         if ($user_id == null)
             $user_id = Auth::user()->id;
 
-        $follower = ProjectFollower::where('user_id', '=', $user_id)->where('project_id', '=', $this->id)->first();
+        $this->followers()->where('user_id', $user_id)->first()->delete();
+    }
 
-        if ($follower != null)
-            $follower->delete();
+    /**
+     * Get the count of followers for the project
+     *
+     * @return count of members
+     */
+    public function getMemberCount()
+    {
+        return count($this->members);
+    }
+
+    /**
+     * Adds a member to the project
+     *
+     * @param boolean $admin
+     * @param Int user_id
+     * @return new member
+     */
+    public function addMember($admin = false, $user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $member = ProjectMember::create([
+            'user_id' => $user_id,
+            'project_id' => $this->id,
+            'admin' => $admin
+        ]);
+
+        return $this->members()->save($member);
+    }
+
+    /**
+     * Deletes a member from the project
+     *
+     * @param Int $user_id
+     */
+    public function deleteMember($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $this->members()->where('user_id', $user_id)->first()->delete();
+    }
+
+    /**
+     * Check if user is a member of this project
+     *
+     * @return boolean
+     */
+    public function isUserMember($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        return $this->members()->where('user_id', $user_id)->first();
+    }
+
+    /**
+     * Adds a membership request by the given user to this project
+     *
+     * @return new request
+     */
+    public function addMembershipRequest($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $membershipRequest = ProjectRequest::create([
+            'user_id' => $user_id,
+            'project_id' => $this->id
+        ]);
+
+        return $this->requests()->save($membershipRequest);
+    }
+
+    /**
+     * Check if a given user has a membership request pending for this project
+     *
+     * @return boolean
+     */
+    public function isMembershipPending($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        return $this->requests()->where('user_id', $user_id)->first();
+    }
+
+    /**
+     * Deletes a membership request to this project
+     *
+     */
+    public function deleteMembershipRequest($user_id = null)
+    {
+        //Todo send email to denied user
+
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        $this->requests()->where('user_id', $user_id)->first()->delete();
+    }
+
+    /**
+     * Gets all admins of this project
+     *
+     * @return admins
+     */
+    public function getAdmins()
+    {
+        return $this->members()->where('admin', 1)->get();
+    }
+
+    /**
+     * Check if user is an admin of this project
+     *
+     * @return boolean
+     */
+    public function isProjectAdmin($user_id = null)
+    {
+        if ($user_id == null)
+            $user_id = Auth::user()->id;
+
+        return $this->members()->where('user_id', $user_id)->first()->admin;
+    }
+
+    /**
+     * Get the count of admins for the project
+     *
+     * @return int admin count
+     */
+    public function getAdminCount()
+    {
+        return count($this->members()->where('admin', 1)->get());
     }
 }

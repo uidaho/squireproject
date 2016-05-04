@@ -63,7 +63,7 @@ class ProjectCommentsController extends Controller
         $this->authorize('userIsOwner', $projectComment);
 
         $projectComment->update($request->all());
-        $projectPath = 'project/' . str_replace(' ', '-', $projectComment->project->title);
+        $projectPath = 'project/' . $projectComment->project->title;
 
         return redirect($projectPath);
     }

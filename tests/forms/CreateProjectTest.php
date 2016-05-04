@@ -16,16 +16,21 @@ class CreateProjectTest extends TestCase  // disable bad failing test, confirmed
         parent::setUp();
 
         $callback = function() {
+            $this->user->delete();
             $entry = App\Project::where('author', '=', 'test_user');
             if (isset($entry)) {
                 $entry->delete();
             }
         };
 
-        $this->afterApplicationCreated($callback);
         $this->beforeApplicationDestroyed($callback);
 
-        $this->user = factory(App\User::class)->make(['username' => 'test_user']);
+        $this->user = factory(App\User::class)->create([
+            'username' => 'test_user',
+            'email' => 'temp117@temp.com',
+            'password' => 'password'
+        ]);
+
         $this->baseImagePath = base_path() . '/public/images';
 
         $this->testImage = base_path() . '/public/images/test-project-image.jpg';
@@ -48,7 +53,7 @@ class CreateProjectTest extends TestCase  // disable bad failing test, confirmed
             'Create test please work',
             'This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. This is not the body you are looking for. ',
             $this->testImage
-        )->seePageIs('/project/Test-Project');
+        )->seePageIs('/project/Test Project');
         $entry = App\Project::where('title', '=', 'Test Project')->first();
         $this->assertTrue($entry != null);
         $this->seePageIs($entry->getSlug());

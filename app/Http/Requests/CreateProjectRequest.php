@@ -57,7 +57,7 @@ class CreateProjectRequest extends Request
             'title' => 'required|unique:projects|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('title'),
             'description' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('description'),
             'project-body' => 'required|regex:/(?=.*[a-zA-Z0-9])([A-Za-z0-9_ .]+)/|' . $this->betweenFormatter('project-body'),
-            'thumbnail' => 'required|image|max:2048'    // max image size 2mb
+            'thumbnail' => 'required|image|max:2048',    // max image size 2mb
         ];
     }
 

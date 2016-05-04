@@ -35,12 +35,13 @@ class EditorController extends Controller
     {
         $userid = Auth::user()->id;
         $username = Auth::user()->username;
+        $project = Project::where('title', $projectname)->firstOrFail();
 
-        $file = File::where('projectname', Project::getTitleFromSlug($projectname))
+        $file = File::where('project_id', $project->id)
                     ->where('filename', $filename)
                     ->firstOrFail();
 
-        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username]);
+        return view('editor.edit', ['file' => $file, 'userid' => $userid, 'username' => $username, 'project' => $project]);
     }
 
     /**
@@ -49,17 +50,12 @@ class EditorController extends Controller
      * @param string $projectname project name
      * @return mixed
      */
-    public function listFiles($projectname)
+    public function listFiles(Project $project)
     {
         $userid = Auth::user()->id;
-        $project = Project::fromSlug($projectname)->get()->first();
         $files = File::forProject($project)->get();
 
-        if (empty($files[0])) {
-            return redirect('/editor/create/'.$projectname);
-        }
-
-        return view('editor.list', ['files' => $files, 'userid' => $userid]);
+        return view('editor.list', ['project' => $project, 'files' => $files, 'userid' => $userid]);
     }
 
     /**
@@ -173,6 +169,49 @@ class EditorController extends Controller
     {
         if ($projectname && $filename) {
             return view('editor.delete', ['projectname' => $projectname, 'filename' => $filename]);
+        } else {
+            return abort(404);
+        }
+    }
+    
+    /**
+     * Renames an existing file using the input from the form
+     *
+     * @param Request  $request
+     * @param String $projectname project name
+     * @param String $filename file name
+     * @return mixed
+     */
+    public function rename(Request $request, $projectname, $filename)
+    {
+        $project = Project::where('title', $projectname)->firstOrFail();
+        
+        $this->validate($request, [
+            'filename'      => 'required|unique:files,filename,NULL,id,project_id,'.$project->id.'|max:255|regex:/([A-Za-z0-9_.-]+)/',
+            'description'   => 'required'
+        ]);
+        
+        $file = File::where('filename', $filename)->where('project_id', $project->id)->firstOrFail();
+        
+        File::where('id', $file->id)->update(['filename' => $request->input('filename'), 
+                                              'description' => $request->input('description'),
+                                              'user_id' => Auth::user()->id]);
+
+        return redirect('/editor/edit/' . $projectname . '/' . $request->input('filename'));
+    }
+    
+    /**
+     * Displays the form to rename a file for the given project.
+     *
+     * @param string $projectname project name 
+     * @return mixed
+     */
+    public function renameView($projectname, $filename)
+    {
+        if ($projectname && $filename) {
+            $project = Project::where('title', $projectname)->firstOrFail();
+            $file = File::where('filename', $filename)->where('project_id', $project->id)->firstOrFail();
+            return view('editor.rename', ['projectname' => $projectname, 'filename' => $filename, 'description' => $file->description]);
         } else {
             return abort(404);
         }

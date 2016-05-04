@@ -1,6 +1,6 @@
 <h4>Comments</h4>
 
-<ul class="list-group">
+<ul class="list-group r-bound">
     @foreach($project->comments as $comment)
         <li class="list-group-item">
 
