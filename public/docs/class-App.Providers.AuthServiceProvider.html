@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class App\Providers\AuthServiceProvider</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-App.html">
+						App<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-App.Console.html">
+						Console					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Events.html">
+						Events					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Exceptions.html">
+						Exceptions					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Http.html">
+						Http<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-App.Http.Controllers.html">
+						Controllers<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-App.Http.Controllers.Auth.html">
+						Auth					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-App.Http.Middleware.html">
+						Middleware					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Http.Requests.html">
+						Requests					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-App.Jobs.html">
+						Jobs					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Policies.html">
+						Policies					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-App.Providers.html">
+						Providers					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-App.Providers.AppServiceProvider.html">AppServiceProvider</a></li>
+				<li class="active"><a href="class-App.Providers.AuthServiceProvider.html">AuthServiceProvider</a></li>
+				<li><a href="class-App.Providers.EventServiceProvider.html">EventServiceProvider</a></li>
+				<li><a href="class-App.Providers.RouteServiceProvider.html">RouteServiceProvider</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-App.Providers.html" title="Summary of App\Providers"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class AuthServiceProvider</h1>
+
+
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+Illuminate\Foundation\Support\Providers\AuthServiceProvider
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>App\Providers\AuthServiceProvider</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-App.html">App</a>\<a href="namespace-App.Providers.html">Providers</a><br>
+		
+
+			<b>Located at</b> Providers/AuthServiceProvider.php		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="boot" id="_boot">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_boot">#</a>
+		<code>boot( <span>Illuminate\Contracts\Auth\Access\Gate <var>$gate</var></span> )</code>
+
+		<div class="description short">
+			<p>Register any application authentication / authorization services.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Register any application authentication / authorization services.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$gate</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="policies" id="$policies">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+<var>$policies</var>
+			<div class="description short">
+				<p>The policy mappings for the application.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>The policy mappings for the application.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$policies" class="anchor">#</a>
+				<code>[
+    <span class="php-quote">'App\Model'</span> =&gt; <span class="php-quote">'App\Policies\ModelPolicy'</span>,
+    <span class="php-quote">'App\ProjectComment'</span> =&gt; <span class="php-quote">'App\Policies\ProjectCommentPolicy'</span>,
+    Project::<span class="php-keyword1">class</span> =&gt; ProjectMembersPolicy::<span class="php-keyword1">class</span>,
+    <span class="php-comment">//Profile::class =&gt; ProfilePolicy::class,</span>
+]</code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

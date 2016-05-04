@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class App\Policies\ProjectMembersPolicy</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-App.html">
+						App<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-App.Console.html">
+						Console					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Events.html">
+						Events					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Exceptions.html">
+						Exceptions					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Http.html">
+						Http<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-App.Http.Controllers.html">
+						Controllers<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-App.Http.Controllers.Auth.html">
+						Auth					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-App.Http.Middleware.html">
+						Middleware					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Http.Requests.html">
+						Requests					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-App.Jobs.html">
+						Jobs					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-App.Policies.html">
+						Policies					</a>
+
+						</li>
+				<li>
+					<a href="namespace-App.Providers.html">
+						Providers					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-App.Policies.ProfilePolicy.html">ProfilePolicy</a></li>
+				<li><a href="class-App.Policies.ProjectCommentPolicy.html">ProjectCommentPolicy</a></li>
+				<li class="active"><a href="class-App.Policies.ProjectMembersPolicy.html">ProjectMembersPolicy</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-App.Policies.html" title="Summary of App\Policies"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class ProjectMembersPolicy</h1>
+
+
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>App\Policies\ProjectMembersPolicy</span></b>			
+			
+			 uses 
+					Illuminate\Auth\Access\HandlesAuthorization (not available)
+
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-App.html">App</a>\<a href="namespace-App.Policies.html">Policies</a><br>
+		
+
+			<b>Located at</b> Policies/ProjectMembersPolicy.php		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="userIsAdmin" id="_userIsAdmin">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_userIsAdmin">#</a>
+		<code>userIsAdmin( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user is an admin of the project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user is an admin of the project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="userIsNotAdmin" id="_userIsNotAdmin">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_userIsNotAdmin">#</a>
+		<code>userIsNotAdmin( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span>, <span><code><a href="class-App.ProjectMember.html">App\ProjectMember</a></code> <var>$member</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user is not an admin of the project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user is not an admin of the project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+					<dt><var>$member</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="userIsOwner" id="_userIsOwner">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_userIsOwner">#</a>
+		<code>userIsOwner( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user is the owner of the given project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user is the owner of the given project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="userIsMember" id="_userIsMember">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_userIsMember">#</a>
+		<code>userIsMember( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span>, <span><code><a href="class-App.ProjectMember.html">App\ProjectMember</a></code> <var>$member</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user is a member of the given project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user is a member of the given project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+					<dt><var>$member</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="userIsNotMember" id="_userIsNotMember">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_userIsNotMember">#</a>
+		<code>userIsNotMember( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user is not a member of the given project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user is not a member of the given project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="userIsFollower" id="_userIsFollower">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_userIsFollower">#</a>
+		<code>userIsFollower( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user is a follower of the given project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user is a follower of the given project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="userIsNotFollower" id="_userIsNotFollower">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_userIsNotFollower">#</a>
+		<code>userIsNotFollower( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user is not a follower of the given project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user is not a follower of the given project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="verifyPendingRequest" id="_verifyPendingRequest">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_verifyPendingRequest">#</a>
+		<code>verifyPendingRequest( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user has a pending request to join the project given project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user has a pending request to join the project given project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="authToAddDeny" id="_authToAddDeny">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_authToAddDeny">#</a>
+		<code>authToAddDeny( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span>, <span> <var>$userID</var></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user has appropriate privileges to add or deny a user from a project
+Checks if the user making the request is a admin for the project and the user being added or denied is actually requesting access to the project</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user has appropriate privileges to add or deny a user from a project
+Checks if the user making the request is a admin for the project and the user being added or denied is actually requesting access to the project</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+					<dt><var>$userID</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="authToKick" id="_authToKick">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_authToKick">#</a>
+		<code>authToKick( <span><code><a href="class-App.User.html">App\User</a></code> <var>$user</var></span>, <span><code><a href="class-App.Project.html">App\Project</a></code> <var>$project</var></span>, <span><code><a href="class-App.ProjectMember.html">App\ProjectMember</a></code> <var>$member</var></span> )</code>
+
+		<div class="description short">
+			<p>Determine if the given user has appropriate privileges to kick a user from a project
+Checks if user is a admin for the project and the user to be kicked is not a admin or the project owner</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Determine if the given user has appropriate privileges to kick a user from a project
+Checks if user is a admin for the project and the user to be kicked is not a admin or the project owner</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$user</var></dt>
+					<dd></dd>
+					<dt><var>$project</var></dt>
+					<dd></dd>
+					<dt><var>$member</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
