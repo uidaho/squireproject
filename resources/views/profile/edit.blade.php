@@ -11,6 +11,7 @@
         <ul class="nav nav-tabs r-tab-bottom">
             <li><a href="profile/{{$user->username}}">Profile</a></li>
             <li><a href="/profile/projects/{{$user->username}}">Projects</a></li>
+            <li><a href="/profile/comments/{{$user->username}}">Comments</a></li>
             <li class="active"><a href="profile/edit/{{$user->username}}">Edit</a></li>
         </ul>
         <div class="panel panel-default">
