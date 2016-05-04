@@ -94,7 +94,40 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
-        $user->profile->update($request->all());
+		$picture = $request->file('picture');
+
+		if ($picture)
+		{
+			$newEntry = [
+				'date_of_birth' => $request['date_of_birth'],
+				'first_name' => $request['first_name'], 
+				'last_name' => $request['last_name'], 
+				'picture' => $user->username . '.jpg', 
+				'phone' => $request['phone'],
+				'address' => $request['address'],
+				'gender' => $request['gender'], 
+				'biography' => $request['biography']
+		    ];
+
+        
+			$picture->move(base_path() . '/public/images/users',  $user->username . '.jpg');
+		}
+
+		else
+		{
+			$newEntry = [
+				'date_of_birth' => $request['date_of_birth'],
+				'first_name' => $request['first_name'], 
+				'last_name' => $request['last_name'], 
+				'picture' => $user->profile->picture, 
+				'phone' => $request['phone'],
+				'address' => $request['address'],
+				'gender' => $request['gender'], 
+				'biography' => $request['biography']
+		    ];
+		}
+	
+        $user->profile->update($newEntry);
 
         return redirect('/profile/' . $user->username);
     }
