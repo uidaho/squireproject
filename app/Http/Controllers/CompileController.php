@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\ImportRequest;
 use App\Project;
 use Firebase\FirebaseLib;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Response;
 
 class CompileController extends Controller
@@ -94,6 +95,14 @@ class CompileController extends Controller
         return Response::download($path, $title . '.jar', $headers);
     }
 
+    /**
+     * Handles an incoming import request. Takes the uploaded file, creates
+     * a new entry in the database for it with its contents, and relies on the fact that the
+     * Editor will create a new file in Firebase out of the contents of the entry.
+     *
+     * @param ImportRequest $request
+     * @return mixed
+     */
     public function import(ImportRequest $request) {
         $project = $request->project();
 
@@ -118,10 +127,24 @@ class CompileController extends Controller
         return redirect('/editor/edit/' . $newEntry->projectname . '/' . $newEntry->filename);
     }
 
+    /**
+     * Renders the Import page for a project.
+     *
+     * @param Project $project
+     * @return mixed
+     */
     public function importView(Project $project) {
         return view('editor.import', ['project' => $project]);
     }
 
+    /**
+     * Takes an incoming export request and returns a download of the
+     * file associated with it from Firebase.
+     *
+     * @param Project $project
+     * @param $fileName
+     * @return null
+     */
     public function exportFile(Project $project, $fileName) {
         $file = File::forProject($project)->where('filename', $fileName)->first();
         if (!$file) {
@@ -148,6 +171,15 @@ class CompileController extends Controller
         return view('editor.compilation', compact(['key', 'contents']));
     }
 
+    /**
+     * Creates a temporary directory to be used during some process. Used by
+     * Export to cache the file and by Compile to stage the project for
+     * compilation. Uses the timestamp concatenated to the project title to create uniqueness
+     *
+     * @param string $directoryName The base name of the directory in the app directory.
+     * @param string $projectTitle The title of the project
+     * @return string $path The path of the newly generated temporary directory
+     */
     private function makeTempDirectory($directoryName, $projectTitle) {
         $key = $projectTitle . '_' . time();
         $path = base_path($directoryName . '/' . $key);
@@ -155,6 +187,14 @@ class CompileController extends Controller
         return $path;
     }
 
+    /**
+     * Downloads a collection of Files from Firebase to the directory
+     * given.
+     *
+     * @param Collection $files The Files
+     * @param string $toPath The path of the directory to populate.
+     * @return array $filesDownloaded The list of the paths to the downloaded files
+     */
     public function getFirebaseFiles($files, $toPath) {
         $filesDownloaded = [];
         $connector = $this->getFirebaseConnector();
@@ -166,7 +206,15 @@ class CompileController extends Controller
         return $filesDownloaded;
     }
 
-    public function getFirebaseFile($file, $toPath, FirebaseLib $connector) {
+    /**
+     * Downloads a single file from Firebase to a given directory.
+     *
+     * @param File $file The file to download
+     * @param string $toPath The path to download the file to
+     * @param FirebaseLib $connector An isntance of a Firebase connector
+     * @return string $filePath the path to the file downloaded
+     */
+    public function getFirebaseFile(File $file, $toPath, FirebaseLib $connector) {
         $contents = $this->getFirebaseFileContents($file, $connector);
         $filePath = $toPath . '/' . $file->filename;
 
@@ -175,6 +223,15 @@ class CompileController extends Controller
         return $filePath;
     }
 
+    /**
+     * Gets the contents of a file from Firebase using the last checkpoint
+     * recorded for the file. The Editor is configured to checkpoint on every
+     * change, for ease of compilation.
+     *
+     * @param File $file
+     * @param FirebaseLib $firebase
+     * @return mixed
+     */
     public function getFirebaseFileContents(File $file, FirebaseLib $firebase) {
         $firebaseFilePath = '/' . $file->project_id . '/' . $file->id;
         return json_decode(
@@ -184,6 +241,12 @@ class CompileController extends Controller
         )->checkpoint->o[0];
     }
 
+    /**
+     * Get an instance of the Firebase connector using the url and token
+     * from the environment variables.
+     *
+     * @return FirebaseLib
+     */
     public function getFirebaseConnector() {
         return new FirebaseLib(env('FIREBASE_URL'), env('FIREBASE_TOKEN'));
     }
