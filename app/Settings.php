@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class Settings extends Model
 {
     protected $table = 'user_settings';
-    protected $fillable = [
-            'nickname', 'enable_comments',
-    ];
+    protected $fillable = ['nickname', 'enable_chat',];
     /**
      * Retrieve user settings
      */
@@ -26,7 +24,7 @@ class Settings extends Model
     }    
 
     
-    
+    /*
     //ensure that a user has settings (for when we add more settings), otherwise initialize to default settings
     public function confirmSettings()
     {
@@ -37,5 +35,5 @@ class Settings extends Model
         
         //Add more checks and default values as we add more settings
     }
-    
+    */
 }
