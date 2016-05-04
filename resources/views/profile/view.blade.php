@@ -67,10 +67,10 @@
                                 <div class="panel-heading">About Me</div>
                                 <div class="panel-body"><p>{{$user->profile->biography}}</p></div>
                             </div>
-                            <div/>
-                            <div/>
-                            <div/>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 @stop
