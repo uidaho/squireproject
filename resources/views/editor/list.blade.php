@@ -62,6 +62,11 @@
     
 <script>
     $('#download-compilation').prop('disabled', true);
+    var compileButton = $('#compile-button');
+    @if(count($files) == 0)
+        compileButton.prop('disabled', true);
+    @endif
+
     var compilationMessageBanner = $('#compilation-message-banner');
     var compilationMessage = $('#compilation-message');
     compilationMessageBanner.hide();
@@ -106,12 +111,11 @@
     }
 
     function compileProject() {
-        $('#compile-button').prop('disabled', true);
         var downloadButton = $('#download-compilation');
         downloadButton.prop('disabled', true);
+        compileButton.prop('disabled', true);
 
-        $.get('/editor/compile/{{ $files[0]->projectname }}', function (data, status) {
-            console.log(data);
+        $.get('/editor/compile/{{ $project->title }}', function (data, status) {
             var result = JSON.parse(data);
             if (result.status == 'failed') {
                 if (result.redirect) {

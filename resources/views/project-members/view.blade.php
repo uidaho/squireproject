@@ -318,7 +318,7 @@
             var downloadButton = $('#download-compilation');
             downloadButton.prop('disabled', true);
 
-            $.get('/editor/compile/{{ $files[0]->projectname }}', function (data, status) {
+            $.get('/editor/compile/{{ $project->title }}', function (data, status) {
                 console.log(data);
                 var result = JSON.parse(data);
                 if (result.status == 'failed') {
