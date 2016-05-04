@@ -36,7 +36,7 @@
                     <a href="/editor/export/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
                             <em class="glyphicon glyphicon-export"></em> Export
                     </a>
-                    <a href="/editor/rename/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
+                    <a onclick="showRenameModal()" class="btn btn-default btn-sm">
                             <em class="glyphicon glyphicon-edit"></em> Rename
                     </a>
                     <a href="/editor/delete/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
@@ -64,6 +64,30 @@
         <button class="project-button btn btn-default" data-toggle="collapse" data-target="#demo">Chat <span class="glyphicon glyphicon-comment"></span></button>
     </div>
 
+    <div id="rename-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Rename {{ $file->filename }}</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/editor/rename/{{ $file->projectname }}/{{$file->filename}}" method="POST">
+                        {!! csrf_field() !!}
+                        <div class="form-group">
+                            <label class="control-label col-lg-2" for="newName">New Name</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" type="text" id="newName" name="newName" placeholder="NewName.ext">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
         var userId = '{{ $userid }}';
         var userName = '{{ $username }}';
@@ -129,5 +153,10 @@
             // scroll to bottom of list
             messageList[0].scrollTop = messageList[0].scrollHeight;
         });
+
+        function showRenameModal() {
+            $('#rename-modal').modal('show');
+        }
+
     </script>
 @stop

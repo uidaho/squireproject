@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use Cache;
 use App\File;
 use App\Project;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Facades\Request;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class EditorController extends Controller
 {
@@ -192,6 +189,16 @@ class EditorController extends Controller
         } else {
             return abort(404);
         }
+    }
+
+    public function rename($projectname, $filename)
+    {
+        $newName = \Illuminate\Support\Facades\Request::input('newName');
+        $file = File::where('projectname', $projectname)->where('filename', $filename)->firstOrFail();
+        $file->filename = $newName;
+        $file->save();
+
+        return redirect('/editor/edit/' . $projectname . '/' . $newName);
     }
 }
 
