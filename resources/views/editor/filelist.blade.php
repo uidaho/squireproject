@@ -3,7 +3,7 @@
         <tr>
           <th>File Name</th>
           <th>Description</th>
-          <th>Creator</th>wq
+          <th>Creator</th>
           <th>Created at</th>
           <th>Updated at</th>
           <th></th>
