@@ -3,39 +3,100 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Http\Request;
+
 class ProfileController extends Controller
 {
-    /**
-     * Renders the Profile view for the given project
-     *
-     *
-     * @return The user's profile page view
-     */
-    public function view()
+    public function profileView($username)
     {
-        return view('profile.view');
+        $user = User::where('username', $username)->firstOrFail();
+        return view('profile.view', ['user' => $user]);
     }
 
-    /**
-     * Deletes the given user and all their connected data
-     *
-     *
-     * @return The index page
-     */
-    public function deleteUser(User $user)
+    public function profileViewDefault()
     {
-        //Check if user to be deleted is actually the user that is signed in
-        /*$this->authorize('userIsOwner', $profile);
-        $profile->user->deleteUser();
-        */
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
 
-        $user->deleteUser();
-
-        return view('pages.index');
+        return view('profile.view', ['user' => Auth::user()]);
     }
+
+
+    public function friendView($username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        return view('profile.friends', ['user' => $user]);
+    }
+
+    public function friendViewDefault()
+    {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        return view('profile.friends', ['user' => Auth::user()]);
+    }
+
+    public function projectView($username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        return view('profile.projects', ['user' => $user]);
+    }
+
+    public function projectViewDefault()
+    {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        return view('profile.projects', ['user' => Auth::user()]);
+    }
+
+    public function commentsView($username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        return view('profile.comments', ['user' => $user]);
+    }
+
+    public function commentsViewDefault()
+    {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        return view('profile.comments', ['user' => Auth::user()]);
+    }
+
+    public function editView($username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        return view('profile.edit', ['user' => $user]);
+    }
+
+    public function editViewDefault()
+    {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        return view('profile.edit', ['user' => Auth::user()]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+        $user = Auth::user();
+
+        $user->profile->update($request->all());
+
+        return redirect('/profile/' . $user->username);
+    }
+
 }
-

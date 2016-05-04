@@ -85,4 +85,9 @@ class User extends Authenticatable
         $this->projects()->delete();
         $this->delete();
     }
+
+	public function profile()
+	{
+		return $this->hasOne(Profile::class);
+	}
 }

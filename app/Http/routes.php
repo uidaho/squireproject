@@ -102,12 +102,26 @@ Route::get('editor/list', 'EditorController@index');
 /*-----------------------*
  *  Profile Controller   *
  *-----------------------*/
- //Replace when profile gets added
-Route::get('profile1', 'ProfileController@view');
-//Change user to profile object
-Route::delete('profile1/delete/{user}', 'ProfileController@deleteUser');
+Route::post('profile/update', 'ProfileController@updateProfile');
+Route::get('profile/edit/{username}','ProfileController@editView');//Implemented
+Route::get('profile/edit/','ProfileController@editViewDefault');//Implemented
+Route::get('profile/view/{username}','ProfileController@profileView');//Implemented
+Route::get('profile/view/','ProfileController@profileViewDefault');	//Implemented
+Route::get('profile/delete/{username}','ProfileController@deleteView');
+Route::get('profile/friends/add/{username}','ProfileController@addfriendView');
+Route::post('profile/friends/add/{username}','ProfileController@addfriend');
+Route::get('profile/friends/remove/{username}','ProfileController@deletefriendView');
+Route::post('profile/friends/remove/{username}','ProfileController@deletefriend');
+Route::get('profile/friends/view/{username}','ProfileController@friendView'); // Implemented
+Route::get('profile/friends/{username}','ProfileController@friendView'); // Implemented
+Route::get('profile/friends/','ProfileController@friendViewDefault'); // Implemented
+Route::get('profile/projects/{username}','ProfileController@projectView');// Implemented
+Route::get('profile/projects/','ProfileController@projectViewDefault');	// Implemented
+Route::get('profile/comments/{username}','ProfileController@commentsView'); // Implemented
+Route::get('profile/comments/','ProfileController@commentsViewDefault'); // Implemented	
+Route::get('profile/{username}','ProfileController@profileView'); // Implemented
+Route::get('profile/','ProfileController@profileViewDefault'); // Implemented
 
- 
  /*-----------------------*
   *  Settings Controller  *
   *-----------------------*/
