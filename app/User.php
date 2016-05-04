@@ -85,4 +85,11 @@ class User extends Authenticatable
         $this->projects()->delete();
         $this->delete();
     }
+
+    public function settings()
+    {
+        return $this->hasMany(Settings::class, 'id');
+    }
+
 }
+

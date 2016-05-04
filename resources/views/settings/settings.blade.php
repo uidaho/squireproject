@@ -22,14 +22,14 @@
                             <input class="form-control" id="Nickname" placeholder="Nickname" type="text">
                                 <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Enable Comments
+                                <input type="checkbox"> Enable Chat
                             </label>
                                 </div>
                             </div>
                         </div>
                     <div class="form-group">
 
-
+                    <!--
                         <label class="col-lg-2 control-label">Chat Options</label>
                         <div class="col-lg-10">
                             <div class="radio">
@@ -74,6 +74,7 @@
                             <br>
                         </div>
                     </div>
+                    -->
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
                             <button type="reset" class="btn btn-default">Cancel</button>

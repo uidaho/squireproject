@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
         {
             $table->increments('id');
             $table->integer('user_id')->unique()->key();
+            //$table->string('nickname');
             $table->boolean('enable_chat')->default(1); //enabled by default
 
         });

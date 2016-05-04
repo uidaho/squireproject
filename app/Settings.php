@@ -18,6 +18,7 @@ class Settings extends Model
      */
     
 
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -25,6 +26,8 @@ class Settings extends Model
 
     
     /*
+
+
     //ensure that a user has settings (for when we add more settings), otherwise initialize to default settings
     public function confirmSettings()
     {
@@ -36,4 +39,12 @@ class Settings extends Model
         //Add more checks and default values as we add more settings
     }
     */
+
+
+
+    public function settings()
+    {
+        return $this->belongsTo(User::class,'id');
+    }
+
 }

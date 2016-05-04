@@ -11,6 +11,7 @@ use App\Settings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Builder;
+use Illuminate\Database\Schema\Blueprint;
 
 class SettingsController extends Controller
 {
@@ -29,14 +30,17 @@ class SettingsController extends Controller
 
     public function update(Request $request)
     {
+
         return redirect('/settings');
+        return redirect('/settings.settings');
+
         $settings = Settings::where('user_id', Auth::user()->id)->first();
         $settings->nickname = $request->get('nickname');
 
         DB::update('update user_settings set enable_chat = $enable_chat where user_id = ?', ['user_id']);
 
         Session::flash('success', 'Update settings');
-        return redirect('/settings');
+        #return redirect('/settings.settings');
     }
 
 
@@ -67,6 +71,23 @@ class SettingsController extends Controller
         }
         return view('settings.settings');
     }
+
+
+        //DB::update('update user_settings set enable_chat = 1 where user_id = ?', [Auth::user()->id]);
+
+        /** if (Schema::hasTable('user_settings')) {
+            if (Settings::where('user_id', '=', Auth::user()->id) === 0) {
+                return Settings::create([
+                    'user_id' => Auth::user()->id,
+                    'enable_chat' => 1,
+                ]);
+
+            }
+            return view('settings.settings');
+        }
+
+        pass;**/
+    
 }
 
 
