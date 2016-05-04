@@ -104,7 +104,7 @@ Route::get('editor/list', 'EditorController@index');
  *-----------------------*/
 Route::post('profile/update', 'ProfileController@updateProfile');
 Route::get('profile/edit/{username}','ProfileController@editView');//Implemented
-Route::get('profile/edit/{username}','ProfileController@editViewDefault');//Implemented
+Route::get('profile/edit/','ProfileController@editViewDefault');//Implemented
 Route::get('profile/view/{username}','ProfileController@profileView');//Implemented
 Route::get('profile/view/','ProfileController@profileViewDefault');	//Implemented
 Route::get('profile/delete/{username}','ProfileController@deleteView');
