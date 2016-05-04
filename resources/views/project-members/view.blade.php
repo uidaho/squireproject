@@ -80,7 +80,6 @@
                 <div class="well r-member-stats">
                     <h4>Member Statistics</h4>
                     <p>Members: {{ $project->getMemberCount() }}</p>
-                    <!-- Todo get admins count -->
                     <p>Admins: {{ $project->getAdminCount() }}</p>
                 </div>
 

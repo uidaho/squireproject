@@ -2,20 +2,29 @@
 
 @section('head')
     <title>{{ $project->title }}</title>
+    {{ Html::script('js/jsmain.js') }}
 @stop
 
 @section('mainBody')
     @include('inserts.breadcrumb')
     <div class="container-fluid">
-        <div class="row">
+        <div class="row r-edit-title">
             <h1 class="text-center">{{ $project->title }}</h1>
+            <!-- Trigger banner edit modal -->
+            @if ($project->isUserAuthor(Auth::user()))
+                <button name="title-edit" type="submit" class="btn btn-default" data-toggle="modal" data-target="#edit-title">Edit</button>
+            @endif
             <br>
             <br>
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <div class="">
+                <div class="r-project-image">
                     <img class="center-block r-image-restraint" src="{{ $project->getProjectImagePath() }}" alt="Project Image">
+                    <!-- Trigger banner edit modal -->
+                    @if ($project->isUserAuthor(Auth::user()))
+                        <button name="thumbnail-edit" type="submit" class="btn btn-default" data-toggle="modal" data-target="#edit-thumbnail">Edit</button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -95,10 +104,13 @@
         <br>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="jumbotron r-bound">
+                <div class="jumbotron r-bound r-edit-body">
                     <h2>
                         Description
                     </h2>
+                    @if ($project->isUserAuthor(Auth::user()))
+                        <button name="body-edit" type="submit" class="btn btn-default" data-toggle="modal" data-target="#edit-body">Edit</button>
+                    @endif
                     <p>
                         {{ $project->body }}
                     </p>
@@ -111,4 +123,30 @@
             </div>
         </div>
     </div>
+
+    <!-- Modals Section -->
+    <section>
+
+        <!-- Image Modal -->
+        <div class="modal fade" id="edit-thumbnail" role="dialog">
+            <div class="modal-dialog modal-lg">
+                @include('project.edit.image')
+            </div>
+        </div>
+
+        <!-- Title Modal -->
+        <div class="modal fade" id="edit-title" role="dialog">
+            <div class="modal-dialog modal-lg">
+                @include('project.edit.title')
+            </div>
+        </div>
+
+        <!-- Body Modal -->
+        <div class="modal fade" id="edit-body" role="dialog">
+            <div class="modal-dialog modal-lg">
+                @include('project.edit.body')
+            </div>
+        </div>
+
+    </section>
 @stop

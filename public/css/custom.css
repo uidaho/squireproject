@@ -85,6 +85,44 @@ Project list
 
 /*
 ======================================
+Project Page
+======================================
+*/
+
+.r-project-image
+{
+    position: relative;
+}
+
+.r-project-image button
+{
+    position: absolute;
+    bottom: 2%;
+    right: 0%;
+}
+
+.r-edit-title {
+    text-align: center;
+}
+
+.r-edit-title h1 {
+    display: inline-block;
+}
+
+.r-edit-title button {
+    margin: 0 0 1% 0;
+}
+
+.r-edit-body h2 {
+    display: inline-block;
+}
+
+.r-edit-body button {
+    margin: 0 0 1% 0;
+}
+
+/*
+======================================
 Project Member Page
 ======================================
 */

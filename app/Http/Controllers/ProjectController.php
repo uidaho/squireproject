@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\DeleteProjectRequest;
+use App\Http\Requests\ProjectBodyRequest;
 use App\Http\Requests\ProjectListRequest;
+use App\Http\Requests\ProjectThumbnailRequest;
+use App\Http\Requests\ProjectTitleRequest;
 use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -184,6 +187,60 @@ class ProjectController extends Controller
 
         $project->deleteMember();
         Session::flash('member_success', 'You are now not a member of project.');
+
+        return back();
+    }
+
+    /**
+     * Updates the project thumbnail image with the one supplied by the user
+     *
+     * @param ProjectThumbnailRequest $request
+     * @param Project $project
+     * @return current view
+     */
+    public function editImage(ProjectThumbnailRequest $request, Project $project)
+    {
+        if (!$project->isUserAuthor(Auth::user()))
+            abort(403);
+
+        $image = $request->file('thumbnail');
+        $image->move(base_path() . '/public/images/projects',  'product' . $project->id . '.jpg');
+
+        return back();
+    }
+
+    /**
+     * Updates the project title with what the user supplied
+     *
+     * @param ProjectTitleRequest $request
+     * @param Project $project
+     * @return current view
+     */
+    public function editTitle(ProjectTitleRequest $request, Project $project)
+    {
+        if (!$project->isUserAuthor(Auth::user()))
+            abort(403);
+
+        $project->title = $request->getTitle();
+        $project->save();
+
+        return redirect('projects');
+    }
+
+    /**
+     * Updates the project body with what the user supplied
+     *
+     * @param ProjectBodyRequest $request
+     * @param Project $project
+     * @return current view
+     */
+    public function editBody(ProjectBodyRequest $request, Project $project)
+    {
+        if (!$project->isUserAuthor(Auth::user()))
+            abort(403);
+
+        $project->body = $request->getBody();
+        $project->save();
 
         return back();
     }
