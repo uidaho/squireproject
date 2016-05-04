@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\File;
 use App\Http\Requests;
+use App\Http\Requests\ImportRequest;
 use App\Project;
 use Firebase\FirebaseLib;
 use Illuminate\Support\Facades\Response;
@@ -91,6 +92,34 @@ class CompileController extends Controller
         );
 
         return Response::download($path, $title . '.jar', $headers);
+    }
+
+    public function import(ImportRequest $request) {
+        $project = $request->project();
+
+        $path = $this->makeTempDirectory('tmp', $request->project()->title);
+        $fileName = $request->input('fileName');
+
+        $import = $request->file('fileImport');
+        $import->move($path, $fileName);
+        $contents = str_replace("\r\n", '\n', file_get_contents($path . '/' . $fileName));
+
+        $newEntry = File::create([
+            'project_id'    => $project->id,
+            'projectname'   => $project->title,
+            'filename'      => $request->input('fileName'),
+            'type'          => 'File',
+            'description'   => $request->input('description'),
+            'contents'      => $contents,
+            'user_id'       => $request->user()->id,
+            'parent'        => 0 // TODO: no parent for now, flat file system
+        ]);
+
+        return redirect('/editor/edit/' . $newEntry->projectname . '/' . $newEntry->filename);
+    }
+
+    public function importView(Project $project) {
+        return view('editor.import', ['project' => $project]);
     }
 
     public function exportFile(Project $project, $fileName) {

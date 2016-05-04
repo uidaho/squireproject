@@ -8,3 +8,4 @@ Homestead.json
 /.c9
 composer.lock
 /compile/*
+/tmp/*

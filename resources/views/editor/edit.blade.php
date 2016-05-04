@@ -30,7 +30,7 @@
                     <a href="/editor/create/{{$file->projectname}}" class="btn btn-default btn-sm">
                         <em class="glyphicon glyphicon-plus"></em> Create
                     </a>
-                    <a href="/editor/import/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
+                    <a href="/editor/import/{{$file->projectname}}" class="btn btn-default btn-sm">
                         <em class="glyphicon glyphicon-import"></em> Import
                     </a>
                     <a href="/editor/export/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
@@ -85,7 +85,7 @@
         var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId, userName);
         firepad.on('ready', function() {
             if (firepad.isHistoryEmpty()) {
-                var contents = '{{$file->contents}}';
+                var contents = $('<textarea/>').html('{{$file->contents}}').text();
                 firepad.setText(contents);
                 firepad.firebaseAdapter_.saveCheckpoint_();
             }
