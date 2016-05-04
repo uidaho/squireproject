@@ -33,19 +33,27 @@
 					</div>
 					<div class="col-md-10">
 						<div class="col-md-6">
-							<h4>Basic Information</h4>
-						    <label>Name:</label><p>{{$user->profile->first_name}} {{$user->profile->last_name}}</p><br/>
-						    <label>Birth Date:</label><p>{{$user->profile->date_of_birth}}</p><br/>
-						    <label>Gender:</label>
-							@if ($user->profile->gender)<p>Male</p> 
-							@else <p>Female</p> 
-							@endif<br/>
+							<div class="panel panel-default">
+ 								<div class="panel-heading">Basic Information</div>
+  								<div class="panel-body">							
+									<label>Name:</label><p>{{$user->profile->first_name}} {{$user->profile->last_name}}</p><br/>
+									<label>Birth Date:</label><p>{{$user->profile->date_of_birth}}</p><br/>
+									<label>Gender:</label>
+									@if ($user->profile->gender)<p>Male</p> 
+									@else <p>Female</p> 
+									@endif<br/>
+								</div>
+							</div>
 						</div>
 						<div class="col-md-6">
-						    <h4>Contact Information</h4>
-						    <label>Email:</label><p>{{$user->email}}</p><br/>
-						    <label>Phone:</label><p>{{$user->profile->phone}}</p><br/>
-						    <label>Address:</label><p>{{$user->profile->address}}</p><br/>
+							<div class="panel panel-default">
+ 								<div class="panel-heading">Contact Information</div>
+  								<div class="panel-body">
+									<label>Email:</label><p>{{$user->email}}</p><br/>
+									<label>Phone:</label><p>{{$user->profile->phone}}</p><br/>
+									<label>Address:</label><p>{{$user->profile->address}}</p><br/>
+								</div>
+							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="panel panel-default">
