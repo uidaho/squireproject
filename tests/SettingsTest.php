@@ -13,7 +13,7 @@ class SettingsTest extends TestCase
      */
     public function testUpdate()
     {
-        $this->assertTrue(true);
+        $this->assert(true);
     }
 
 
@@ -25,7 +25,19 @@ class SettingsTest extends TestCase
      */
     public function testView()
     {
-        $this->assertTrue(true);
+        $this->visit('/')
+            ->see('Settings')
+            ->dontSee('404');
+    }
+
+
+    public function testSettingsButtons()
+    {
+        $this->visit('/settings')
+            ->type('Taylor', 'nickname')
+            ->select(1, 'enable_chat')
+            ->select('Red', 'editor_font_color')
+            ->press('Comic Sans', 'editor_font');
     }
 
 }
