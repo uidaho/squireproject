@@ -108,5 +108,5 @@ Route::delete('profile1/delete/{user}', 'ProfileController@deleteUser');
   *  Settings Controller  *
   *-----------------------*/
 Route::get('/settings', 'SettingsController@view');
-Route::post('/settings', 'SettingsController@update');
+Route::post('/settings/update', 'SettingsController@update');
 

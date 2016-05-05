@@ -15,80 +15,40 @@ use Illuminate\Database\Schema\Blueprint;
 
 class SettingsController extends Controller
 {
-
-
-    //DO we need this? What's the difference between this and the next function?
-    public static function create(array $data)
+    /**
+     * Runs before every method in the class, useful for what's below.
+     */
+    public function __construct()
     {
-        return Settings::create([
-            'user_id' => Auth::user()->id,
-            'nickname' => $data['username'],
-            'enable_chat' => 1,
-
-        ]);
+        /**
+         * This will require login for the entire controller and then return
+         * the user back where they were going.
+         */
+        $this->middleware('auth');
     }
 
     public function update(Request $request)
     {
+        $settings = Settings::getUserSettings(Auth::user()->id);
+
+        $this->validate($request, [
+            'nickname'          => 'required',
+        ]);
+        
+        Settings::where('user_id', Auth::user()->id)
+                ->update(['nickname' => $request->input('nickname'), 
+                          'enable_chat' => $request->input('enable_chat'),
+                          'editor_font' => $request->input('editor_font'),
+                          'editor_font_color' => $request->input('editor_font_color'),
+                        ]);
 
         return redirect('/settings');
-        return redirect('/settings.settings');
-
-        $settings = Settings::where('user_id', Auth::user()->id)->first();
-        $settings->nickname = $request->get('nickname');
-
-        DB::update('update user_settings set enable_chat = $enable_chat where user_id = ?', ['user_id']);
-
-        Session::flash('success', 'Update settings');
-        #return redirect('/settings.settings');
     }
-
-
-    //Check all settings are enabled using a loop when a user logs on
-    public function getSetting($setting)
-    {
-        switch ($setting) {
-            case 'enable_chat':
-                $this->getEnableChat();
-                break;
-            default:
-                pass;
-        }
-    }
-
-
-    //Paired with the getSetting() function to set settings to the given value
-    public function setSetting($user_id, $enable_chat)
-    {
-        DB::update('update user_settings set enable_chat = $enable_chat where user_id = ?', [$user_id]);
-    }
-
 
     public function view()
     {
-        if (Auth::guest()) {
-            return redirect('auth.login');
-        }
-        return view('settings.settings');
+        $settings = Settings::getUserSettings(Auth::user()->id);
+        
+        return view('settings.settings', ['settings' => $settings]);
     }
-
-
-        //DB::update('update user_settings set enable_chat = 1 where user_id = ?', [Auth::user()->id]);
-
-        /** if (Schema::hasTable('user_settings')) {
-            if (Settings::where('user_id', '=', Auth::user()->id) === 0) {
-                return Settings::create([
-                    'user_id' => Auth::user()->id,
-                    'enable_chat' => 1,
-                ]);
-
-            }
-            return view('settings.settings');
-        }
-
-        pass;**/
-    
 }
-
-
-

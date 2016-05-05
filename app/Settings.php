@@ -2,49 +2,29 @@
 
 namespace App;
 
-use App\Http\Controllers\SettingsController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-
-
-
 
 class Settings extends Model
 {
     protected $table = 'user_settings';
-    protected $fillable = ['nickname', 'enable_chat',];
-    /**
-     * Retrieve user settings
-     */
+    protected $fillable = ['nickname', 'enable_chat', 'editor_font_color', 'editor_font', 'user_id'];
     
-
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }    
-
-    
-    /*
-
-
-    //ensure that a user has settings (for when we add more settings), otherwise initialize to default settings
-    public function confirmSettings()
-    {
-        if (SettingsController::getSetting('enable_chat') == null)
-        {
-            SettingsController::setSetting('enable_chat', 1);
+    public static function getUserSettings($user_id) {
+        $default_settings = [
+                       'user_id' => $user_id,
+                       'nickname' => Auth::user()->username, 
+                       'enable_chat' => 1, 
+                       'editor_font' => 'Consolas', 
+                       'editor_font_color' => 'Black',
+                      ];
+                      
+        if (!Settings::where('user_id', $user_id)->exists()) {
+            $settings = Settings::create($default_settings);
+        } else {
+            $settings = Settings::where('user_id', $user_id)->first();
         }
         
-        //Add more checks and default values as we add more settings
+        return $settings;
     }
-    */
-
-
-
-    public function settings()
-    {
-        return $this->belongsTo(User::class,'id');
-    }
-
 }
