@@ -25,6 +25,7 @@ class SettingsTest extends TestCase
      */
     public function testView()
     {
+        $this->assertTrue(true);
         $this->visit('settings')
             ->see('Settings')
             ->dontSee('404');
@@ -33,6 +34,7 @@ class SettingsTest extends TestCase
 
     public function testSettingsButtons()
     {
+        $this->assertTrue(true);
         $this->visit('/settings')
             ->type('Taylor', 'nickname')
             ->select(1, 'enable_chat')
