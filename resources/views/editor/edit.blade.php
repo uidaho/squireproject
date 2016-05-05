@@ -30,7 +30,7 @@
                     <a href="/editor/create/{{$file->projectname}}" class="btn btn-default btn-sm">
                         <em class="glyphicon glyphicon-plus"></em> Create
                     </a>
-                    <a href="/editor/import/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
+                    <a href="/editor/import/{{$file->projectname}}" class="btn btn-default btn-sm">
                         <em class="glyphicon glyphicon-import"></em> Import
                     </a>
                     <a href="/editor/export/{{$file->projectname}}/{{$file->filename}}" class="btn btn-default btn-sm">
@@ -43,15 +43,16 @@
                             <em class="glyphicon glyphicon-trash"></em> Delete
                     </a>
                 </div>
-                <div class="btn-group" role="group" aria-label="Compiler button group">
-                    <a href="#" class="btn btn-default btn-sm">
-                        <em class="glyphicon glyphicon-flash"></em> Compile
+                <div class="btn-group" role="group">
+                    <a onclick="compileProject()">
+                        <button id="compile-button" class="btn btn-default btn-sm">
+                            <em class="glyphicon glyphicon-flash"></em> Compile
+                        </button>
                     </a>
-                    <a href="#" class="btn btn-default btn-sm">
-                        <em class="glyphicon glyphicon-flash"></em> Run
-                    </a>
-                    <a href="#" class="btn btn-default btn-sm">
-                        <em class="glyphicon glyphicon-indent-right"></em> Syntax Check
+                    <a id="download-link">
+                        <button id="download-compilation" class="btn btn-default btn-sm">
+                            <em class="glyphicon glyphicon-download"></em> Download
+                        </button>
                     </a>
                 </div>
             </div>
@@ -96,12 +97,24 @@
         var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'), document.getElementById('userlist'), userId, userName);
         firepad.on('ready', function() {
             if (firepad.isHistoryEmpty()) {
-                firepad.setText('{{$file->contents}}');
+                var contents = $('<textarea/>').html('{{$file->contents}}').text();
+                firepad.setText(contents);
+                firepad.firebaseAdapter_.saveCheckpoint_();
             }
+        });
+
+        firepad.on('synced', function() {
+            firepad.firebaseAdapter_.saveCheckpoint_();
         });
     </script>
 
     <script>
+        $('#download-compilation').prop('disabled', true);
+        var compilationMessageBanner = $('#compilation-message-banner');
+        var compilationMessage = $('#compilation-message');
+        compilationMessageBanner.hide();
+
+
         // connect to firebase
         var firebaseUrl = '{{ env('FIREBASE_URL') }}';
         var userName = '{{ $username }}';
@@ -130,9 +143,37 @@
             var nameElement = $("<strong class='project-chat-username'></strong>")
             nameElement.text(username);
             messageElement.text(message).prepend(nameElement);
-            messageList.append(messageElement)
+            messageList.append(messageElement);
             // scroll to bottom of list
             messageList[0].scrollTop = messageList[0].scrollHeight;
         });
+
+
+        function displayCompilationMessage(message) {
+            compilationMessage.text(message);
+            compilationMessageBanner.show();
+        }
+
+        function compileProject() {
+            $('#compile-button').prop('disabled', true);
+            var downloadButton = $('#download-compilation');
+            downloadButton.prop('disabled', true);
+
+            $.get('/editor/compile/{{ $file->projectname }}', function (data, status) {
+                console.log(data);
+                var result = JSON.parse(data);
+                if (result.status == 'failed') {
+                    if (result.redirect) {
+                        window.location.href = result.redirect;
+                    }
+                } else {
+                    displayCompilationMessage('Successfully compiled.');
+                    $('#download-link').attr('href', result.downloadUrl);
+                    downloadButton.prop('disabled', false);
+                }
+
+                $('#compile-button').prop('disabled', false);
+            });
+        }
     </script>
 @stop
