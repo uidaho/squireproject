@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Profile;
+
 use Validator;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\SettingsController;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -46,7 +47,7 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -61,16 +62,24 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)
-{
+    {
+        $user = User::create([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
 
-    return User::create([
-        'username' => $data['username'],
-        'email' => $data['email'],
-        'password' => bcrypt($data['password']),
-    ]);
-}
+        $profile = Profile::create([
+            'user_id' => $user->id,
+            'picture' => "default-avatar.jpg"
+        ]);
+
+        $user->profile()->save($profile);
+
+        return $user;
+    }
 }

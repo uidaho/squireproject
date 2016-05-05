@@ -61,8 +61,8 @@
                             <li class="{{ Request::is('contact') ? 'active' : '' }}">
                                 <a href="#">Contact</a>
                             </li>
-                            <li class="{{ Request::is('settings') ? 'active' : '' }}">
-                                <a href = "/settings">Settings </a>
+                            <li class="{{ Request::is('profile') ? 'active' : '' }}">
+                                <a href="/profile">Profile</a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id="bs-example-navbar-collapse-1">
@@ -83,14 +83,14 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}<strong class="caret"></strong></a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Your Profile</a>
+                                            <a href="/profile">Your Profile</a>
                                         </li>
                                         <li>
                                             <a href="#">Help</a>
                                         </li>
                                         <li class="divider"> </li>
                                         <li>
-                                            <a href="/settings">Settings</a>
+                                            <a href="#">Settings</a>
                                         </li>
                                         <li>
                                             <a href="/logout">Sign out</a>

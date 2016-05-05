@@ -86,10 +86,8 @@ class User extends Authenticatable
         $this->delete();
     }
 
-    public function settings()
-    {
-        return $this->hasMany(Settings::class, 'id');
-    }
-
+	public function profile()
+	{
+		return $this->hasOne(Profile::class);
+	}
 }
-

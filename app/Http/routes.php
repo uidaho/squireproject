@@ -78,35 +78,52 @@ Route::delete('project/comments/{projectComment}', 'ProjectCommentsController@de
  *-----------------------*/
 Route::get('editor/create/{projectname}', 'EditorController@createView');
 Route::post('editor/create/{projectname}', 'EditorController@create');
-Route::get('editor/import/{projectname}', 'EditorController@importView');
-Route::post('editor/import/{projectname}', 'EditorController@import');
-Route::get('editor/export/{projectname}', 'EditorController@exportView');
-Route::post('editor/export/{projectname}', 'EditorController@export');
 Route::get('editor/rename/{projectname}/{filename}', 'EditorController@renameView');
 Route::post('editor/rename/{projectname}/{filename}', 'EditorController@rename');
 Route::get('editor/delete/{projectname}/{filename}', 'EditorController@deleteView');
 Route::post('editor/delete/{projectname}/{filename}', 'EditorController@delete');
+
+/*-----------------------*
+ *  Compile Controller   *
+ *-----------------------*/
+Route::get('editor/compile/{project}', 'CompileController@compile');
+Route::get('editor/downloadCompilation/{project}/{key}', 'CompileController@downloadProjectCompilation');
+Route::get('editor/compilation/{project}/{key}', 'CompileController@viewCompilation');
+Route::get('editor/export/{project}/{filename}', 'CompileController@exportFile');
+Route::get('editor/import/{project}', 'CompileController@importView');
+Route::post('editor/import/{project}', 'CompileController@import');
+
 Route::get('editor/edit/{projectname}/{filename}', 'EditorController@editFile');
 Route::get('editor/edit/{project}', 'EditorController@listFiles');
 Route::get('editor/edit', 'EditorController@index');
 Route::get('editor/list/{project}', 'EditorController@listFiles');
 Route::get('editor/list', 'EditorController@index');
-Route::get('editor/{projectname}/{filename}', 'EditorController@editFile');
-Route::get('editor/{projectname}', 'EditorController@listFiles');
-Route::get('editor', 'EditorController@index');
 
 /*-----------------------*
  *  Profile Controller   *
  *-----------------------*/
- //Replace when profile gets added
-Route::get('profile1', 'ProfileController@view');
-//Change user to profile object
-Route::delete('profile1/delete/{user}', 'ProfileController@deleteUser');
+Route::post('profile/update', 'ProfileController@updateProfile');
+Route::get('profile/edit/{username}','ProfileController@editView');//Implemented
+Route::get('profile/edit/','ProfileController@editViewDefault');//Implemented
+Route::get('profile/view/{username}','ProfileController@profileView');//Implemented
+Route::get('profile/view/','ProfileController@profileViewDefault');	//Implemented
+Route::get('profile/delete/{username}','ProfileController@deleteView');
+Route::get('profile/friends/add/{username}','ProfileController@addfriendView');
+Route::post('profile/friends/add/{username}','ProfileController@addfriend');
+Route::get('profile/friends/remove/{username}','ProfileController@deletefriendView');
+Route::post('profile/friends/remove/{username}','ProfileController@deletefriend');
+Route::get('profile/friends/view/{username}','ProfileController@friendView'); // Implemented
+Route::get('profile/friends/{username}','ProfileController@friendView'); // Implemented
+Route::get('profile/friends/','ProfileController@friendViewDefault'); // Implemented
+Route::get('profile/projects/{username}','ProfileController@projectView');// Implemented
+Route::get('profile/projects/','ProfileController@projectViewDefault');	// Implemented
+Route::get('profile/comments/{username}','ProfileController@commentsView'); // Implemented
+Route::get('profile/comments/','ProfileController@commentsViewDefault'); // Implemented	
+Route::get('profile/{username}','ProfileController@profileView'); // Implemented
+Route::get('profile/','ProfileController@profileViewDefault'); // Implemented
 
- 
  /*-----------------------*
   *  Settings Controller  *
   *-----------------------*/
-Route::get('/settings', 'SettingsController@view');
-Route::post('/settings/update', 'SettingsController@update');
-
+ 
+ 

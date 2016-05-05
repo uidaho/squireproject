@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Project;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
@@ -21,10 +19,4 @@ class PagesController extends Controller
 	{
 		return view('pages.about');                 //resources/views/pages/about.blade.php
 	}
-
-	public function settings()
-	{
-		return view('settings.settings');
-	}
-	
 }
