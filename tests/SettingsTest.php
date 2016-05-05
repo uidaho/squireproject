@@ -25,7 +25,7 @@ class SettingsTest extends TestCase
      */
     public function testView()
     {
-        $this->visit('/settings')
+        $this->visit('settings')
             ->see('Settings')
             ->dontSee('404');
     }
