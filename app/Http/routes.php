@@ -125,5 +125,5 @@ Route::get('profile/','ProfileController@profileViewDefault'); // Implemented
  /*-----------------------*
   *  Settings Controller  *
   *-----------------------*/
- 
- 
+Route::get('/settings', 'SettingsController@view');
+Route::post('/settings/update', 'SettingsController@update');
