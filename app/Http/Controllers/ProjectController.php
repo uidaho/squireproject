@@ -13,11 +13,23 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Class ProjectController
+ *
+ * The controller responsible for handling all incoming
+ * project related requests.
+ *
+ * @author Rick Boss (original)
+ * @author Robert Breckenridge (editor)
+ * @package App\Http\Controllers
+ */
 class ProjectController extends Controller
 {
     /**
      * The view for /projects. Lists all the projects taking into
      * account the active page and the sorting of the projects.
+     *
+     * @see \App\Http\Requests\PaginatedRequest::getPaginatedEntries
      *
      * @param ProjectListRequest $request
      * @return mixed
@@ -35,7 +47,7 @@ class ProjectController extends Controller
      * Renders the Project View for the given id
      *
      * @param Project $project
-     * @return The project page view
+     * @return view The project page view
      * @internal param Project $id id for lookup
      */
     public function view(Project $project)
@@ -95,7 +107,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Deletes the project give by the id, only if the user
+     * Deletes the project given by the id if the user
      * is authenticated and is the author.
      *
      * @param DeleteProjectRequest $request
@@ -112,10 +124,10 @@ class ProjectController extends Controller
     }
 
     /**
-     * Add a follower to the project
+     * Adds the current user as a follower of the project
      *
      * @param Project $project
-     * @return current view
+     * @return view Previous view (project view)
      */
     public function follow(Project $project)
     {
@@ -131,7 +143,7 @@ class ProjectController extends Controller
      * Remove a follower from this project
      *
      * @param Project $project
-     * @return current view
+     * @return view Previous view (project view)
      */
     public function unFollow(Project $project)
     {
@@ -147,7 +159,7 @@ class ProjectController extends Controller
      * Put a request in to join the project
      *
      * @param Project $project
-     * @return current view
+     * @return view Previous view (project view)
      */
     public function requestMembership(Project $project)
     {
@@ -163,7 +175,7 @@ class ProjectController extends Controller
      * Cancel request to join project
      *
      * @param Project $project
-     * @return current view
+     * @return view Previous view (project view)
      */
     public function cancelMembershipRequest(Project $project)
     {
@@ -179,7 +191,7 @@ class ProjectController extends Controller
      * Remove current user from project
      *
      * @param Project $project
-     * @return current view
+     * @return view Previous view (project view)
      */
     public function leaveProject(Project $project)
     {
@@ -196,7 +208,7 @@ class ProjectController extends Controller
      *
      * @param ProjectThumbnailRequest $request
      * @param Project $project
-     * @return current view
+     * @return view Previous view (project view)
      */
     public function editImage(ProjectThumbnailRequest $request, Project $project)
     {
@@ -214,7 +226,7 @@ class ProjectController extends Controller
      *
      * @param ProjectTitleRequest $request
      * @param Project $project
-     * @return current view
+     * @return view Previous view (project view)
      */
     public function editTitle(ProjectTitleRequest $request, Project $project)
     {
@@ -232,7 +244,7 @@ class ProjectController extends Controller
      *
      * @param ProjectBodyRequest $request
      * @param Project $project
-     * @return current view
+     * @return view Previous view (project view)
      */
     public function editBody(ProjectBodyRequest $request, Project $project)
     {

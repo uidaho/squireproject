@@ -5,24 +5,39 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class Project
+ *
+ * Defines the model for the projects table. Provides many helper
+ * functions for accessing and handling project information.
+ *
+ * @author Rick Boss (original)
+ * @author Robert Breckenridge (editor)
+ * @author Brandon Jank (editor)
+ * @package App
+ */
 class Project extends Model
 {
+    /**
+     * Attributes that are modifiable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'title', 'author', 'user_id', 'description', 'body', 'statement_title', 'statement_body', 'tab_title', 'tab_body', 'created_at', 'updated_at'
     ];
 
-    public static function create(array $attributes = [])
-    {
-        $new = parent::create($attributes);
-
-        return $new;
-    }
-
-
+    /**
+     * The number of projects to show per page, used during pagination.
+     *
+     * @see \App\Http\Requests\PaginatedRequest::getPaginatedEntries
+     *
+     * @var int
+     */
     protected $perPage = 16;
 
     /**
-     * Gets this projects url
+     * Builds a url for the project.
      *
      * @return string
      */
@@ -34,11 +49,10 @@ class Project extends Model
     /**
      * Converts this projects title to a slug friendly version
      *
-     * @return mixed
+     * @return string
      */
     public function getSlugFriendlyTitle()
     {
-        //return str_replace(' ', '-', $this->title);  //deprecated
         return $this->title;
     }
 
@@ -46,21 +60,19 @@ class Project extends Model
      * Converts the given slug for a project to its title.
      *
      * @param $slug
-     * @return mixed
+     * @return string
      */
     public static function getTitleFromSlug($slug)
     {
-        //return str_replace('-', ' ', $slug);
         return $slug;
     }
 
 
     /**
-     * Retrieve the project from the database with the given slug, converting
-     * it to its proper title for lookup.
+     * Retrieve the project from the database with the given slug
      *
      * @param $slug
-     * @return mixed
+     * @return Project
      */
     public static function fromSlug($slug)
     {
@@ -71,14 +83,14 @@ class Project extends Model
      * Retrieves the project from the database with the given <strong>title</strong>.
      *
      * @param $name
-     * @return mixed
+     * @return Project
      */
     public static function fromName($name) {
         return (new static)->where('title', $name);
     }
 
     /**
-     * Get the path to the project main image for this project.
+     * Gets the path to the main image for the project.
      *
      * @return string the path
      */
@@ -127,9 +139,9 @@ class Project extends Model
     }
 
     /**
-     * Checks if the provided is non-null and authored this project
+     * Checks if the provided user is non-null and authored this project
      *
-     * @param $user The user to check (nullable)
+     * @param \App\User $user The user to check (nullable)
      * @return bool if the provided user authored this project
      */
     public function isUserAuthor($user)
@@ -154,6 +166,13 @@ class Project extends Model
         ];
     }
 
+    /**
+     * Helper function to build min/max requirements array.
+     *
+     * @param int $min
+     * @param int $max
+     * @return array
+     */
     private static function minMaxHelper($min, $max) {
         return [
             'min' => $min,

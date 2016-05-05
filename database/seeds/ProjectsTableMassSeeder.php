@@ -4,7 +4,13 @@ use App\Project;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Authors: Robert Breckenridge (original), Rick Boss (updater)
+ * Class ProjectsTableMassSeeder
+ *
+ * Puts many randomly generated projects into the database
+ * for testing.
+ *
+ * @author Robert Breckenridge (original)
+ * @author Rick Boss (updater)
  */
 class ProjectsTableMassSeeder extends MassSeeder
 {

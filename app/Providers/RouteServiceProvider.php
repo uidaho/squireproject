@@ -6,6 +6,14 @@ use App\Project;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+/**
+ * Class RouteServiceProvider
+ *
+ * Automatically generated route provider.
+ *
+ * @author Rick Boss (editor)
+ * @package App\Providers
+ */
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -27,6 +35,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
 
+        // Inject project resolution closure
         $router->bind('project', function($slug) {
             return Project::fromSlug($slug)->first();
         });
@@ -41,8 +50,6 @@ class RouteServiceProvider extends ServiceProvider
     public function map(Router $router)
     {
         $this->mapWebRoutes($router);
-
-        //
     }
 
     /**

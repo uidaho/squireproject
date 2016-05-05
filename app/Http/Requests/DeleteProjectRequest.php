@@ -2,6 +2,17 @@
 
 namespace App\Http\Requests;
 
+/**
+ * Class DeleteProjectRequest
+ *
+ * Validates that the user is allowed to delete
+ * a project.
+ *
+ * @see \App\Http\Controllers\ProjectController::delete
+ *
+ * @author Rick Boss
+ * @package App\Http\Requests
+ */
 class DeleteProjectRequest extends Request
 {
     /**

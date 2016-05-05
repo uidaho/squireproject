@@ -5,6 +5,14 @@ namespace App\Http\Requests;
 use App\Project;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Class ProjectListRequest
+ *
+ * Request for listing projects with pagination.
+ *
+ * @author Rick Boss
+ * @package App\Http\Requests
+ */
 class ProjectListRequest extends PaginatedRequest
 {
     /**
@@ -68,5 +76,3 @@ class ProjectListRequest extends PaginatedRequest
         return [];
     }
 }
-
-
