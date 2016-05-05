@@ -13,7 +13,7 @@ class SettingsTest extends TestCase
      */
     public function testUpdate()
     {
-        $this->assert(true);
+        $this->assertTrue(true);
     }
 
 
