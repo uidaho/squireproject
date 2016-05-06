@@ -27,6 +27,13 @@ class SettingsController extends Controller
         $this->middleware('auth');
     }
 
+
+    /**
+     * Sets up a variable to hold user settings
+     * requests information from the settings.blade.php page
+     * creates defaults if none exist
+     * @return mixed
+     */
     public function update(Request $request)
     {
         $settings = Settings::getUserSettings(Auth::user()->id);
@@ -44,6 +51,13 @@ class SettingsController extends Controller
 
         return redirect('/settings');
     }
+
+    /**
+     *
+     * Simply gets the user settings to fill the settings page with pre-set settings
+     * @return mixed
+     *
+     */
 
     public function view()
     {

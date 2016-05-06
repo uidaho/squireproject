@@ -9,7 +9,13 @@ class Settings extends Model
 {
     protected $table = 'user_settings';
     protected $fillable = ['nickname', 'enable_chat', 'editor_font_color', 'editor_font', 'user_id'];
-    
+
+    /**
+     * @param $user_id
+     * makes sure user is authenticated, then if user exists, retrives settings,
+     * otherwise it sets default values
+     * @return mixed
+     */
     public static function getUserSettings($user_id) {
         $default_settings = [
                        'user_id' => $user_id,
