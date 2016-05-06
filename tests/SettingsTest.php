@@ -27,7 +27,7 @@ class SettingsTest extends TestCase
     {
         //$this->assertTrue(true);
         $this->visit('settings')
-            ->see('Settings');
+            ->see('Nickname');
     }
 
 
