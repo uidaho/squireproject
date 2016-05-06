@@ -26,7 +26,7 @@ class SettingsTest extends TestCase
     public function testView()
     {
         //$this->assertTrue(true);
-        $this->visit('settings')
+        $this->visit('/settings')
             ->see('Nickname');
     }
 
