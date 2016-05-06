@@ -27,8 +27,7 @@ class SettingsTest extends TestCase
     {
         //$this->assertTrue(true);
         $this->visit('settings')
-            ->see('Settings')
-            ->dontSee('404');
+            ->see('Settings');
     }
 
 
