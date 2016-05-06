@@ -25,10 +25,10 @@ class SettingsTest extends TestCase
      */
     public function testView()
     {
-        $this->assertTrue(true);/*
+        //$this->assertTrue(true);
         $this->visit('settings')
             ->see('Settings')
-            ->dontSee('404');*/
+            ->dontSee('404');
     }
 
 
