@@ -90,7 +90,7 @@
                                         </li>
                                         <li class="divider"> </li>
                                         <li>
-                                            <a href="#">Settings</a>
+                                            <a href="/settings">Settings</a>
                                         </li>
                                         <li>
                                             <a href="/logout">Sign out</a>
