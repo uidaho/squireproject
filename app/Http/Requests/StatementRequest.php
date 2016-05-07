@@ -4,6 +4,15 @@ namespace App\Http\Requests;
 
 use App\ProjectMember;
 
+/**
+ * Class StatementRequest
+ *
+ * Provides helper functions and validation for a edit statement request
+ *
+ * @author Robert Breckenridge (original)
+ * @author Rick Boss (editor)
+ * @package App\Http\Requests
+ */
 class StatementRequest extends Request
 {
     /**

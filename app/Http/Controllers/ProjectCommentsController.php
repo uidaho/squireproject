@@ -9,13 +9,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Class ProjectCommentsController
+ *
+ * The controller responsible for handling all incoming
+ * project comments related requests.
+ *
+ * @author Robert Breckenridge (original)
+ * @author Brandon Jank (editor)
+ *
+ * @package App\Http\Controllers
+ */
 class ProjectCommentsController extends Controller
 {
     /**
      * Adds the comment to the given project
      *
      * @param $request = user entered text, $project data
-     * @return back to same page
+     * @return view Back to same page
      */
     public function addComment(CreateCommentRequest $request, Project $project)
     {
@@ -29,7 +40,7 @@ class ProjectCommentsController extends Controller
      * Destroy the given project comment
      *
      * @param $request = user entered data, $projectComment = data
-     * @return back to same page
+     * @return view Back to same page
      */
     public function deleteComment(Request $request, ProjectComment $projectComment)
     {
@@ -44,7 +55,7 @@ class ProjectCommentsController extends Controller
      * Goes to a page to edit the given project comment
      *
      * @param $projectComment = data
-     * @return to edit comment page
+     * @return view Edit comment page
      */
     public function editComment(ProjectComment $projectComment)
     {
@@ -52,11 +63,12 @@ class ProjectCommentsController extends Controller
 
         return view('project.editcomment', ['comment' => $projectComment]);
     }
+
     /**
      * Updates the comment for the given project
      *
      * @param $request = user entered text, $projectComment = data
-     * @return back to same page
+     * @return view Back to the same page
      */
     public function updateComment(CreateCommentRequest $request, ProjectComment $projectComment)
     {
@@ -68,3 +80,4 @@ class ProjectCommentsController extends Controller
         return redirect($projectPath);
     }
 }
+

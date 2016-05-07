@@ -3,6 +3,13 @@
 use App\User;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class UsersTableSeeder
+ *
+ * Seeder for creating users
+ *
+ * @author Robert Breckenridge (original)
+ */
 class UsersTableSeeder extends Seeder
 {
     /**

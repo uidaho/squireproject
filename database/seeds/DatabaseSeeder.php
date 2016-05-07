@@ -2,6 +2,13 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class DatabaseSeeder
+ *
+ * Calls the different seeders of the project
+ *
+ * @author Robert Breckenridge (original)
+ */
 class DatabaseSeeder extends Seeder
 {
     /**

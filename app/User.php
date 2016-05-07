@@ -4,6 +4,17 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Class User
+ *
+ * Defines the model for the users table. Provides many helper
+ * functions for accessing and handling user and connected user information.
+ *
+ * @author Robert Breckenridge (original)
+ * @author Ben Bolton (editor)
+ *
+ * @package App
+ */
 class User extends Authenticatable
 {
     /**
@@ -86,6 +97,11 @@ class User extends Authenticatable
         $this->delete();
     }
 
+    /**
+     * Get the profile table for this user
+     *
+     * @return profile
+     */
 	public function profile()
 	{
 		return $this->hasOne(Profile::class);

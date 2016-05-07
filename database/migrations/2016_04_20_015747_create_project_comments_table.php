@@ -3,6 +3,13 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateProjectCommentsTable
+ *
+ * Migration for making the project comments table.
+ *
+ * @author Robert Breckenridge
+ */
 class CreateProjectCommentsTable extends Migration
 {
     /**

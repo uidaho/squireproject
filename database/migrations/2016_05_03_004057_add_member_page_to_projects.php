@@ -3,6 +3,13 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class AddMemberPageToProjects
+ *
+ * Migration for adding the members page data to the project table.
+ *
+ * @author Robert Breckenridge
+ */
 class AddMemberPageToProjects extends Migration
 {
     /**

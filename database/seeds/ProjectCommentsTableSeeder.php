@@ -4,6 +4,13 @@ use App\ProjectComment;
 use Faker\Generator;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class ProjectCommentsTableSeeder
+ *
+ * Calls the factory to create project comments
+ *
+ * @author Robert Breckenridge (original)
+ */
 class ProjectCommentsTableSeeder extends Seeder
 {
     /**

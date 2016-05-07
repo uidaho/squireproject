@@ -4,6 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class CreateCommentRequest
+ *
+ * Provides helper functions and validation for a create comment request
+ *
+ * @author Robert Breckenridge
+ * @package App\Http\Requests
+ */
 class CreateCommentRequest extends Request
 {
     /**

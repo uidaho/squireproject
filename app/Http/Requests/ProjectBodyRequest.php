@@ -4,6 +4,15 @@ namespace App\Http\Requests;
 
 use App\Project;
 
+/**
+ * Class ProjectBodyRequest
+ *
+ * Provides helper functions and validation for a edit project body request
+ *
+ * @author Robert Breckenridge (original)
+ * @author Rick Boss (editor)
+ * @package App\Http\Requests
+ */
 class ProjectBodyRequest extends Request
 {
     /**
