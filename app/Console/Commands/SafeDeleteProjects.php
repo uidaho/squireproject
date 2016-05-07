@@ -5,6 +5,16 @@ namespace App\Console\Commands;
 use App\Project;
 use Illuminate\Console\Command;
 
+/**
+ * Class SafeDeleteProjects
+ *
+ * Command to delete some projects from the database. Allows
+ * for mass deletion of projects including all related files
+ * and entries in other tables.
+ *
+ * @author Rick Boss
+ * @package App\Console\Commands
+ */
 class SafeDeleteProjects extends Command
 {
     /**
@@ -39,6 +49,11 @@ class SafeDeleteProjects extends Command
         }
     }
 
+    /**
+     * Deletes a $num project(s).
+     *
+     * @param $num
+     */
     private function deleteProjects($num)
     {
         $entries = Project::all();

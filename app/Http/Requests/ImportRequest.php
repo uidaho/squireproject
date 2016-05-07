@@ -4,6 +4,17 @@ namespace App\Http\Requests;
 
 use App\Project;
 
+/**
+ * Class ImportRequest
+ *
+ * Validation and helper functions for the file import request.
+ *
+ * @see App\Http\Controllers\CompileController::import
+ *
+ * @author Rick Boss
+ *
+ * @package App\Http\Requests
+ */
 class ImportRequest extends Request
 {
     private $project = null;
@@ -18,6 +29,11 @@ class ImportRequest extends Request
         return $this->user() != null;
     }
 
+    /**
+     * Gets the project associated with this request.
+     *
+     * @return \App\Project project
+     */
     public function project() {
         if ($this->project == null) {
             $title = urldecode(substr($this->url(), strrpos($this->url(), '/') + 1));

@@ -5,6 +5,17 @@ namespace App\Http\Requests;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 
+/**
+ * Class PaginatedRequest
+ *
+ * A base class for requests that return a collection
+ * of models, but should be paginated and can be sorted.
+ *
+ * @see \App\Http\Requests\ProjectListRequest for an example implementation
+ *
+ * @author Rick Boss
+ * @package App\Http\Requests
+ */
 abstract class PaginatedRequest extends Request
 {
     use SortableRequest, SortableEntries;
@@ -12,7 +23,7 @@ abstract class PaginatedRequest extends Request
     /**
      * Returns the entries for the current page for this view.
      *
-     * @return LengthAwarePaginator containing the entries for the page, sorted/ordered or not.
+     * @return \Illuminate\Pagination\LengthAwarePaginator paginator containing the entries for the page, sorted/ordered or not.
      */
     public function getPaginatedEntries()
     {
@@ -33,10 +44,16 @@ abstract class PaginatedRequest extends Request
         $entriesForPage = $allEntries->splice(($page - 1) * $perPage, $perPage);
 
         // Return the paginator for this subset.
-        $entriesPaginator = new LengthAwarePaginator($entriesForPage, $this->getEntries()->first()->toBase()->getCountForPagination(), $perPage, $page, [
-            'path' => Paginator::resolveCurrentPath(),
-            'pageName' => 'page'
-        ]);
+        $entriesPaginator = new LengthAwarePaginator(
+            $entriesForPage,
+            $this->getEntries()->first()->toBase()->getCountForPagination(),
+            $perPage,
+            $page,
+            [
+                'path' => Paginator::resolveCurrentPath(),
+                'pageName' => 'page'
+            ]
+        );
 
         // If we're ordering, append that to the links
         if ($this->getSortOrder()) {
@@ -53,9 +70,9 @@ abstract class PaginatedRequest extends Request
     /**
      * Renders the view with the collection bound to $varname and the
      * given variables, or, if there are no entries, falls back to the
-     * behavior described by the subclass' whenEmpty() function
+     * behavior described by the subclass' whenEmpty() implementation.
      *
-     * @param $varname
+     * @param string $varname
      * @param array $variables
      * @return mixed
      */

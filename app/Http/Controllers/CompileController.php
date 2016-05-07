@@ -10,11 +10,20 @@ use Firebase\FirebaseLib;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Response;
 
+/**
+ * Class CompileController
+ *
+ * The controller responsible for handling all incoming
+ * compile requests.
+ *
+ * @author Rick Boss
+ * @package App\Http\Controllers
+ */
 class CompileController extends Controller
 {
     /**
      * Compiles an entire Project by downloading the files
-     * from firebase, compiling them, and packaging them in
+     * from Firebase, compiling them, and packaging them in
      * an executable jar with Main#main being the entry point.
      *
      * @param Project $project the project to compile
@@ -22,7 +31,7 @@ class CompileController extends Controller
      *          On Success:
      *              result => 'success'
      *              downloadUrl => <some url for jar download>
-     *          on Failure:
+     *          On Failure:
      *              result => 'failed'
      *              message => <a brief message>
      *              redirect => <some redirect url to handle the failure>
@@ -77,8 +86,8 @@ class CompileController extends Controller
 
     /**
      * Download the compilation for this project with this key,
-     * referring to the timestamp of compilation - used
-     * internally and only exposed in the url.
+     * referring to the timestamp of compilation - used internally
+     * and only exposed in the url.
      *
      * @param Project $project
      * @param integer $key timestamp

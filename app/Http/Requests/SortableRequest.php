@@ -2,6 +2,14 @@
 
 namespace App\Http\Requests;
 
+/**
+ * Trait SortableRequest
+ *
+ * Defines behavior for sorting.
+ *
+ * @author Rick Boss
+ * @package App\Http\Requests
+ */
 trait SortableRequest
 {
     /**
@@ -54,6 +62,13 @@ trait SortableRequest
     }
 }
 
+/**
+ * Trait SortableEntries
+ *
+ * Allows for sorting of Eloquent models.
+ *
+ * @package App\Http\Requests
+ */
 trait SortableEntries
 {
     /**
@@ -124,7 +139,9 @@ trait SortableEntries
 }
 
 /**
- * Class SortOrder playing the role of an Enum
+ * Class SortOrder
+ *
+ * Plays the role of an Enum
  *
  * @package App\Http\Requests
  */

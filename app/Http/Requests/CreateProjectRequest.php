@@ -4,6 +4,17 @@ namespace App\Http\Requests;
 
 use App\Project;
 
+/**
+ * Class CreateProjectRequest
+ *
+ * Provides helper functions and validation for a create
+ * project request.
+ *
+ * @see \App\Http\Controllers\ProjectController::create
+ *
+ * @author Rick Boss
+ * @package App\Http\Requests
+ */
 class CreateProjectRequest extends Request
 {
     /**
