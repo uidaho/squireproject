@@ -8,6 +8,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+/**
+ * Class AuthControllerEmail
+ *
+ * The controller responsible for handling all incoming
+ * authentication using email requests.
+ *
+ * @author Robert Breckenridge (editor)
+ * @author Brandon Jank (editor)
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class AuthControllerEmail extends Controller
 {
     /*

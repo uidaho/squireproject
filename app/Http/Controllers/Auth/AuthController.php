@@ -10,6 +10,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+/**
+ * Class AuthController
+ *
+ * The controller responsible for handling all incoming
+ * authentication related requests.
+ *
+ * @author Robert Breckenridge (editor)
+ * @author Ben Bolton (editor)
+ * @author Brandon Jank (editor)
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class AuthController extends Controller
 {
     /*
@@ -60,7 +72,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Create a new user and connected profile instance after a valid registration.
      *
      * @param  array $data
      * @return User

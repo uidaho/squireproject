@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+/**
+ * Class ProjectMembersController
+ *
+ * The controller responsible for handling all incoming
+ * project member related requests.
+ *
+ * @author Robert Breckenridge (original)
+ * @author Rick Boss (editor)
+ *
+ * @package App\Http\Controllers
+ */
 class ProjectMembersController extends Controller
 {
     /**
@@ -52,7 +63,7 @@ class ProjectMembersController extends Controller
      *
      * @param Project $project
      * @param User $user
-     * @return current view
+     * @return view Back to same view
      */
     public function acceptMembershipRequest(Project $project, User $user)
     {
@@ -70,7 +81,7 @@ class ProjectMembersController extends Controller
      *
      * @param Project $project
      * @param User $user
-     * @return current view
+     * @return view Back to same view
      */
     public function denyMembershipRequest(Project $project, User $user)
     {
@@ -87,7 +98,7 @@ class ProjectMembersController extends Controller
      *
      * @param Project $project
      * @param ProjectMember $member
-     * @return current view
+     * @return view Back to same view
      */
     public function promoteToAdmin(Project $project, ProjectMember $member)
     {
@@ -105,7 +116,7 @@ class ProjectMembersController extends Controller
      *
      * @param Project $project
      * @param ProjectMember $member
-     * @return current view
+     * @return view Back to same view
      */
     public function demoteFromAdmin(Project $project, ProjectMember $member)
     {
@@ -123,7 +134,7 @@ class ProjectMembersController extends Controller
      *
      * @param Project $project
      * @param ProjectMember $member
-     * @return current view
+     * @return view Back to same view
      */
     public function kickMember(Project $project, ProjectMember $member)
     {
@@ -140,7 +151,7 @@ class ProjectMembersController extends Controller
      *
      * @param BannerRequest $request
      * @param Project $project
-     * @return current view
+     * @return view Back to same view
      */
     public function editBanner(BannerRequest $request, Project $project)
     {
@@ -157,7 +168,7 @@ class ProjectMembersController extends Controller
      *
      * @param StatementRequest $request
      * @param Project $project
-     * @return current view
+     * @return view Back to same view
      */
     public function editStatement(StatementRequest $request, Project $project)
     {
@@ -175,7 +186,7 @@ class ProjectMembersController extends Controller
      *
      * @param CustomTabRequest $request
      * @param Project $project
-     * @return current view
+     * @return view Back to same view
      */
     public function editCustomTab(CustomTabRequest $request, Project $project)
     {

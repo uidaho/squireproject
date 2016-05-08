@@ -2,8 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Project;
-
+/**
+ * Class ProjectThumbnailRequest
+ *
+ * Provides helper functions and validation for a edit project thumbnail request
+ *
+ * @author Robert Breckenridge (original)
+ * @package App\Http\Requests
+ */
 class ProjectThumbnailRequest extends Request
 {
     /**

@@ -3,6 +3,13 @@
 use Illuminate\Database\Seeder;
 use App\ProjectRequest;
 
+/**
+ * Class ProjectRequestTableSeeder
+ *
+ * Calls the factory to create project requests
+ *
+ * @author Robert Breckenridge (original)
+ */
 class ProjectRequestTableSeeder extends Seeder
 {
     /**

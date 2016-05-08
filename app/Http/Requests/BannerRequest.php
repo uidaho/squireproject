@@ -2,6 +2,14 @@
 
 namespace App\Http\Requests;
 
+/**
+ * Class BannerRequest
+ *
+ * Provides helper functions and validation for a edit banner request
+ *
+ * @author Robert Breckenridge
+ * @package App\Http\Requests
+ */
 class BannerRequest extends Request
 {
     /**

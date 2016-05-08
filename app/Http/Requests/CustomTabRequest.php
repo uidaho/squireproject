@@ -4,6 +4,15 @@ namespace App\Http\Requests;
 
 use App\ProjectMember;
 
+/**
+ * Class CustomTabRequest
+ *
+ * Provides helper functions and validation for a edit tab request
+ *
+ * @author Robert Breckenridge (original)
+ * @author Rick Boss (editor)
+ * @package App\Http\Requests
+ */
 class CustomTabRequest extends Request
 {
     /**

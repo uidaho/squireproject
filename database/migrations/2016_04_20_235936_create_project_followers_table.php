@@ -3,6 +3,13 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateProjectFollowersTable
+ *
+ * Migration for making the project follower table.
+ *
+ * @author Robert Breckenridge
+ */
 class CreateProjectFollowersTable extends Migration
 {
     /**

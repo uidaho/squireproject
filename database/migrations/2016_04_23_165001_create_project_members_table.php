@@ -3,6 +3,13 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateProjectMembersTable
+ *
+ * Migration for making the project members table.
+ *
+ * @author Robert Breckenridge
+ */
 class CreateProjectMembersTable extends Migration
 {
     /**

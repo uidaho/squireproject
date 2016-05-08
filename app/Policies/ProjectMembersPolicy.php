@@ -7,6 +7,15 @@ use App\User;
 use App\Project;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * Class ProjectMembersPolicy
+ *
+ * Policies for the project members class
+ *
+ * @author Robert Breckenridge (original)
+ *
+ * @package App\Policies
+ */
 class ProjectMembersPolicy
 {
     use HandlesAuthorization;

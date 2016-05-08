@@ -5,10 +5,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
+/**
+ * Class ProjectComment
+ *
+ * Defines the model for the project comments table. Provides helper
+ * functions for accessing other tables connected to the given comment.
+ *
+ * @author Robert Breckenridge
+ *
+ * @package App
+ */
 class ProjectComment extends Model
 {
-    protected $table = 'project_comments';               //Set table name
-    protected $fillable = ['comment_body'];             //Set what can be mass assigned
+    protected $table = 'project_comments';                  //Set table name
+    protected $fillable = ['comment_body'];                 //Set what can be mass assigned
 
     /**
      * Get project for this comment

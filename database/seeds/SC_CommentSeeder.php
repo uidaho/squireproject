@@ -4,6 +4,13 @@ use App\ProjectComment;
 use Faker\Generator;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class SC_CommentSeeder
+ *
+ * Self contained comment seeder
+ *
+ * @author Robert Breckenridge (original)
+ */
 class SC_CommentSeeder extends Seeder
 {
     /**

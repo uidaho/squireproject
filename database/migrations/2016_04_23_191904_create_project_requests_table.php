@@ -3,6 +3,13 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateProjectRequestsTable
+ *
+ * Migration for making the project requests table.
+ *
+ * @author Robert Breckenridge
+ */
 class CreateProjectRequestsTable extends Migration
 {
     /**

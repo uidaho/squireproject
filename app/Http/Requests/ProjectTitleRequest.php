@@ -4,6 +4,15 @@ namespace App\Http\Requests;
 
 use App\Project;
 
+/**
+ * Class ProjectTitleRequest
+ *
+ * Provides helper functions and validation for a edit project title request
+ *
+ * @author Robert Breckenridge (original)
+ * @author Rick Boss (editor)
+ * @package App\Http\Requests
+ */
 class ProjectTitleRequest extends Request
 {
     /**

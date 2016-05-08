@@ -5,6 +5,16 @@ use App\User;
 use App\ProjectComment;
 use Log;
 use Illuminate\Auth\Access\HandlesAuthorization;
+
+/**
+ * Class ProjectCommentPolicy
+ *
+ * Policies for the project comments class
+ *
+ * @author Robert Breckenridge (original)
+ *
+ * @package App\Policies
+ */
 class ProjectCommentPolicy
 {
     use HandlesAuthorization;
